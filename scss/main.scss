@@ -1,0 +1,12 @@
+$color-dark: #555;
+$color-white: #fff;
+
+p {
+  color: $color-dark;
+}
+
+h1 {
+  color: $color-white;
+  background: $color-dark;
+  padding: 1em;
+}
