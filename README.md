@@ -16,7 +16,7 @@ Clone this repo:
 $ git clone git@github.com:slatron/gulp-setup.git
 ```
 
-Install gulp and all required plugins, with <code>npm install</code>:
+Install gulp and all required plugins, with `npm install`:
 
 ```sh
 $ npm install gulp gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
@@ -35,19 +35,19 @@ Run gulp:
 $ gulp
 ```
 
-gulp will compile all <code>/js</code>, <code>/scss</code> and <code>/images</code> files to the <code>/dist</code> folder.
+gulp will compile all `/js`, `/scss` and `/images` files to the `/dist` folder.
 
 ### Tasks
 
-#### <code>gulp watch</code>
+#### `gulp watch`
 
-To watch for file changes on all <code>/js</code>, <code>/scss</code> and <code>/images</code> files:
+To watch for file changes on all `/js`, `/scss` and `/images` files:
 
 ```sh
 $ gulp watch
 ```
 
-#### <code>gulp clean</code>
+#### `gulp clean`
 
 To clean the /dist folder:
 
@@ -55,7 +55,7 @@ To clean the /dist folder:
 $ gulp clean
 ```
 
-#### <code>gulp lint</code>
+#### `gulp lint`
 
 To lint user js files:
 
@@ -63,7 +63,7 @@ To lint user js files:
 $ gulp lint
 ```
 
-#### <code>gulp lint-all</code>
+#### `gulp lint-all`
 
 To lint user and vendor js files (not part of default or watch tasks):
 
@@ -81,7 +81,7 @@ $ gulp images
 
 ### Scripts compilation order
 
-Scripts will all be compiled into one file under <code>/dist/js/main.min.js</code>. It will first contain all files in <code>/js/vendor</code>, followed by user scripts in <code>/js</code>
+Scripts will all be compiled into one file under `/dist/js/main.min.js`. It will first contain all files in `/js/vendor`, followed by user scripts in `/js`
 
 ### Plugin Docs:
 
