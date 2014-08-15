@@ -39,11 +39,15 @@ gulp will compile all <code>/js</code>, <code>/scss</code> and <code>/images</co
 
 ### Tasks
 
+#### <code>gulp watch</code>
+
 To watch for file changes on all <code>/js</code>, <code>/scss</code> and <code>/images</code> files:
 
 ```sh
 $ gulp watch
 ```
+
+#### <code>gulp clean</code>
 
 To clean the /dist folder:
 
@@ -51,11 +55,15 @@ To clean the /dist folder:
 $ gulp clean
 ```
 
+#### <code>gulp lint</code>
+
 To lint user js files:
 
 ```sh
 $ gulp lint
 ```
+
+#### <code>gulp lint-all</code>
 
 To lint user and vendor js files (not part of default or watch tasks):
 
@@ -70,6 +78,10 @@ $ gulp scripts
 $ gulp styles
 $ gulp images
 ```
+
+### Scripts compilation order
+
+Scripts will all be compiled into one file under <code>/dist/js/main.min.js</code>. It will first contain all files in <code>/js/vendor</code>, followed by user scripts in <code>/js</code>
 
 ### Plugin Docs:
 
