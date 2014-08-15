@@ -54,13 +54,13 @@ $ gulp images
 
 ### Plugin Docs:
 
-[Sass compile | gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass)
-[Autoprefixer | gulp-autoprefixer](https://github.com/Metrime/gulp-autoprefixer)
-[Minify CSS | gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css)
-[JSHint | gulp-jshint](https://github.com/wearefractal/gulp-jshint)
-[Concatenation | gulp-concat](https://github.com/wearefractal/gulp-concat)
-[Uglify | gulp-uglify](https://github.com/terinjokes/gulp-uglify)
-[Compress images | gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
-[Caching of images so only changed images are compressed | gulp-cache](https://github.com/jgable/gulp-cache)
-[Clean files for a clean build | del](https://www.npmjs.org/package/del)
+- [Sass compile | gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass)
+- [Autoprefixer | gulp-autoprefixer](https://github.com/Metrime/gulp-autoprefixer)
+- [Minify CSS | gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css)
+- [JSHint | gulp-jshint](https://github.com/wearefractal/gulp-jshint)
+- [Concatenation | gulp-concat](https://github.com/wearefractal/gulp-concat)
+- [Uglify | gulp-uglify](https://github.com/terinjokes/gulp-uglify)
+- [Compress images | gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
+- [Caching of images so only changed images are compressed | gulp-cache](https://github.com/jgable/gulp-cache)
+- [Clean files for a clean build | del](https://www.npmjs.org/package/del)
 
