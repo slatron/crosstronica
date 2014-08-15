@@ -1,7 +1,17 @@
+// ===========================================
+// Importing all compass libraries as default
+// This can be cleaned up to include specific
+// dependencies depending on the project
+// ===========================================
+@import 'compass';
+
 // Base Stylesheets
 @import 'base/mixins';
 @import 'base/settings';
 @import 'base/base';
 @import 'base/typography';
+
+// Layout Stylesheets
+@import 'layout/layout';
 
 // CSS Modules
