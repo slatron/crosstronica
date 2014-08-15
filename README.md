@@ -2,7 +2,7 @@
 
 ## What is this?
 
-My default gulp task runner setup for HTML projects. Should be occasionaly updated as I use it. 
+My default gulp task runner setup for HTML projects. Should be occasionaly updated as I use it.
 
 ### Credit due
 
@@ -16,13 +16,20 @@ Clone this repo:
 $ git clone git@github.com:slatron/gulp-setup.git
 ```
 
-Install all required gulp plugins, with <code>npm install</code>: 
+Install gulp and all required plugins, with <code>npm install</code>:
 
 ```sh
 $ npm install gulp gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
 ```
 
-Run gulp
+Since we are using the compass library to help with scss, be sure the compass gem is installed on your system:
+
+```sh
+$ gem update --system
+$ gem install compass
+```
+
+Run gulp:
 
 ```sh
 $ gulp
@@ -42,6 +49,18 @@ To clean the /dist folder:
 
 ```sh
 $ gulp clean
+```
+
+To lint user js files:
+
+```sh
+$ gulp lint
+```
+
+To lint user and vendor js files (not part of default or watch tasks):
+
+```sh
+$ gulp lint-all
 ```
 
 To run individual tasks manually:
