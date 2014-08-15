@@ -19,7 +19,7 @@ $ git clone git@github.com:slatron/gulp-setup.git
 Install all required gulp plugins, with <code>npm install</code>: 
 
 ```sh
-$ npm install gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
+$ npm install gulp gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
 ```
 
 Run gulp
