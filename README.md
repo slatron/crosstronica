@@ -28,11 +28,11 @@ Run gulp
 $ gulp
 ```
 
-gulp will compile all /js, /scss and /images files to the /dist folder.
+gulp will compile all <code>/js</code>, <code>/scss</code> and <code>/images</code> files to the <code>/dist</code> folder.
 
 ### Tasks
 
-To watch for file changes on all /js, /scss and /images files:
+To watch for file changes on all <code>/js</code>, <code>/scss</code> and <code>/images</code> files:
 
 ```sh
 $ gulp watch
