@@ -54,7 +54,7 @@ $ gulp images
 
 ### Plugin Docs:
 
-- [Sass compile | gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass)
+- [Compass | gulp-compass](https://github.com/appleboy/gulp-compass)
 - [Autoprefixer | gulp-autoprefixer](https://github.com/Metrime/gulp-autoprefixer)
 - [Minify CSS | gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css)
 - [JSHint | gulp-jshint](https://github.com/wearefractal/gulp-jshint)
