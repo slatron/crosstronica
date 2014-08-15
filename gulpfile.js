@@ -53,7 +53,7 @@ gulp.task('clean', function(cb) {
     del(['dist/css', 'dist/js', 'dist/images'], cb)
 });
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
   gulp.start('styles', 'scripts', 'images');
 });
 
