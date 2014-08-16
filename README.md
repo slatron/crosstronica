@@ -2,7 +2,7 @@
 
 ## What is this?
 
-My default gulp task runner setup for HTML projects. Should be occasionaly updated as I use it. 
+My default gulp task runner setup for HTML projects. Should be occasionaly updated as I use it.
 
 ### Credit due
 
@@ -16,32 +16,59 @@ Clone this repo:
 $ git clone git@github.com:slatron/gulp-setup.git
 ```
 
-Install all required gulp plugins, with <code>npm install</code>: 
+Install gulp and all required plugins, with `npm install`:
 
 ```sh
 $ npm install gulp gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
 ```
 
-Run gulp
+Since we are using the compass library to help with scss, be sure the compass gem is installed on your system:
+
+```sh
+$ gem update --system
+$ gem install compass
+```
+
+Run gulp:
 
 ```sh
 $ gulp
 ```
 
-gulp will compile all <code>/js</code>, <code>/scss</code> and <code>/images</code> files to the <code>/dist</code> folder.
+gulp will compile all `/js`, `/scss` and `/images` files to the `/dist` folder.
 
 ### Tasks
 
-To watch for file changes on all <code>/js</code>, <code>/scss</code> and <code>/images</code> files:
+#### `gulp watch`
+
+To watch for file changes on all `/js`, `/scss` and `/images` files:
 
 ```sh
 $ gulp watch
 ```
 
+#### `gulp clean`
+
 To clean the /dist folder:
 
 ```sh
 $ gulp clean
+```
+
+#### `gulp lint`
+
+To lint user js files:
+
+```sh
+$ gulp lint
+```
+
+#### `gulp lint-all`
+
+To lint user and vendor js files (not part of default or watch tasks):
+
+```sh
+$ gulp lint-all
 ```
 
 To run individual tasks manually:
@@ -51,6 +78,10 @@ $ gulp scripts
 $ gulp styles
 $ gulp images
 ```
+
+### Scripts compilation order
+
+Scripts will all be compiled into one file under `/dist/js/main.min.js`. It will first contain all files in `/js/vendor`, followed by user scripts in `/js`
 
 ### Plugin Docs:
 
