@@ -26,9 +26,10 @@ gulp.task('styles', function() {
       css: 'dist/assets/css',
       sass: 'scss',
       image: 'dist/assets/images'
-    })).on('error', function(err) {
-      console.log(err.message);
-    })
+    }))
+      .on('error', function(err) {
+        console.log(err.message);
+      })
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(rename({suffix: '.min'}))
@@ -75,7 +76,7 @@ gulp.task('clean', function(cb) {
     del(['dist/assets/css', 'dist/assets/js', 'dist/assets/images'], cb)
 });
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', ['clean', 'lint'], function() {
   gulp.start('styles', 'lint', 'scripts', 'images');
 });
 

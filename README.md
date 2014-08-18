@@ -37,6 +37,8 @@ $ gulp
 
 gulp will compile all `/js`, `/scss` and `/images` files to the `/dist` folder.
 
+Then, open `/dist/index.html` in a browser.
+
 ### Tasks
 
 #### `gulp watch`
