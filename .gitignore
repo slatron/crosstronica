@@ -1,5 +1,8 @@
 # node files
 /node_modules/*
- 
+
+#bower components
+/bower_components/*
+
 # sass cache files
 .sass-cache

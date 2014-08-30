@@ -4,25 +4,21 @@
 
 My default gulp task runner setup for HTML projects. Should be occasionaly updated as I use it.
 
-### Credit due
-
-Most of this comes from [Mark Goodyear's blog](http://markgoodyear.com/2014/01/getting-started-with-gulp/). I highly recommend it for anyone starting out with gulp.
-
 ### Installation
 
 Clone this repo:
 
 ```sh
-$ git clone git@github.com:slatron/gulp-setup.git
+$ git clone git@github.com:slatron/gulp-setup.git foo
 ```
 
-Install gulp and all required plugins, with `npm install`:
+From the new `/foo` directory, install gulp and all required plugins, with `npm install`:
 
 ```sh
-$ npm install gulp gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
+$ npm install gulp gulp-compass gulp-connect gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-connect gulp-cache del --save-dev
 ```
 
-Since we are using the compass library to help with scss, be sure the compass gem is installed on your system:
+Since we are using the [compass library](http://compass-style.org/) to help with scss, be sure the compass gem is installed on your system:
 
 ```sh
 $ gem update --system
@@ -35,15 +31,18 @@ Run gulp:
 $ gulp
 ```
 
-gulp will compile all `/js`, `/scss` and `/images` files to the `/dist` folder.
+gulp will compile everything in to the `/app` folder and open a local node server at localhost:8080/.
 
-Then, open `/dist/index.html` in a browser.
+Open [localhost:8080](http://localhost:8080) in your browser to view the style guide.
+
+---
+
 
 ### Tasks
 
 #### `gulp watch`
 
-To watch for file changes on all `/js`, `/scss` and `/images` files:
+To watch for file changes on all `/dev/js`, `/dev/scss`, `/dev/*.html` and `/dev/images` files:
 
 ```sh
 $ gulp watch
@@ -51,7 +50,7 @@ $ gulp watch
 
 #### `gulp clean`
 
-To clean the /dist folder:
+To clean the compiled `/app` folders:
 
 ```sh
 $ gulp clean
@@ -79,15 +78,19 @@ To run individual tasks manually:
 $ gulp scripts
 $ gulp styles
 $ gulp images
+$ gulp html
 ```
 
 ### Scripts compilation order
 
-Scripts will all be compiled into one file under `/dist/js/main.min.js`. It will first contain all files in `/js/vendor`, followed by user scripts in `/js`
+Scripts will all be compiled into one file under `/app/js/main.min.js`. It will first contain all files in `/js/vendor`, followed by user scripts in `/js`
+
+---
 
 ### Plugin Docs:
 
 - [Compass | gulp-compass](https://github.com/appleboy/gulp-compass)
+- [gulp http-connect](https://www.npmjs.org/package/gulp-connect)
 - [Autoprefixer | gulp-autoprefixer](https://github.com/Metrime/gulp-autoprefixer)
 - [Minify CSS | gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css)
 - [JSHint | gulp-jshint](https://github.com/wearefractal/gulp-jshint)
@@ -97,3 +100,6 @@ Scripts will all be compiled into one file under `/dist/js/main.min.js`. It will
 - [Caching of images so only changed images are compressed | gulp-cache](https://github.com/jgable/gulp-cache)
 - [Clean files for a clean build | del](https://www.npmjs.org/package/del)
 
+### Credit due
+
+Special thanks to [Mark Goodyear's blog](http://markgoodyear.com/2014/01/getting-started-with-gulp/) for helping me get started with gulp. I highly recommend it for anyone looking for an effective crash course.

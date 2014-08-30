@@ -1,0 +1,59 @@
+// Improved method of handling box sizing
+// Aug '14
+// http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+  color: $color-black;
+}
+
+a {
+  -webkit-transition: $link-transition-property $link-transition-speed $link-transition-type;
+  -moz-transition: $link-transition-property $link-transition-speed $link-transition-type;
+  -o-transition: $link-transition-property $link-transition-speed $link-transition-type;
+  transition: $link-transition-property $link-transition-speed $link-transition-type;
+  color: $color-black;
+}
+
+
+
+// IMO top margins are annoying - MS
+// Standard block text lements should push the one below away
+h1, h2, h3, h4, h5, h6, p, ul, dl, ol, table {
+  margin-top: 0;
+  margin-bottom: $base-unit;
+}
+
+dd {
+  margin-left: 0;
+}
+
+// Clean UL spacing
+ul {
+  padding-left: $base-unit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  @extend %text-normal;
+}
+
+thead tr {
+  background: $color-agua;
+}
+
+tbody tr:nth-child(even) {
+  background-color: $color-ltltgrey;
+}
+
+td,
+th {
+  padding: $base-unit-quarter;
+  border: 1px solid $color-ltgrey
+}

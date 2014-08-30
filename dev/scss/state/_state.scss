@@ -1,0 +1,48 @@
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.indented {
+  margin-left: 32px;
+}
+
+.vertical-align-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// color classes
+.color-black       {color: $color-black;}
+.color-white       {color: $color-white;}
+.color-royal       {color: $color-royal;}
+.colorgold         {color: $color-gold;}
+.color-pool        {color: $color-pool;}
+.color-agua        {color: $color-agua;}
+.color-dkdkblue    {color: $color-dkdkblue;}
+.color-ltgrey      {color: $color-ltgrey;}
+.color-dkgrey      {color: $color-dkgrey;}
+.color-ltltgrey    {color: $color-ltltgrey;}
+.color-medgrey     {color: $color-medgrey;}
+.color-description {color: $color-description}
+
+.bg-black          {background-color: $color-black;}
+.bg-white          {background-color: $color-white;}
+.bg-royal          {background-color: $color-royal;}
+.bg-gold           {background-color: $color-gold;}
+.bg-pool           {background-color: $color-pool;}
+.bg-agua           {background-color: $color-agua;}
+.bg-dkdkblue       {background-color: $color-dkdkblue;}
+.bg-ltgrey         {background-color: $color-ltgrey;}
+.bg-dkgrey         {background-color: $color-dkgrey;}
+.bg-ltltgrey       {background-color: $color-ltltgrey;}
+.bg-medgrey        {background-color: $color-medgrey;}
+.bg-description    {background-color: $color-description}

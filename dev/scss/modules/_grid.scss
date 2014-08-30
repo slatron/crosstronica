@@ -1,0 +1,9 @@
+// Base grid class
+// ======================
+.grid {
+  display: flex;
+
+  &.padded-grid {
+    margin: $grid-padding;
+  }
+}

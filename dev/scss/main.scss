@@ -4,11 +4,11 @@
 // dependencies depending on the project
 // ===========================================
 @import 'compass';
-@import 'compass/layout';
 
 // Base Stylesheets
 @import 'base/mixins';
 @import 'base/settings';
+@import 'base/normalize';
 @import 'base/base';
 @import 'base/typography';
 
@@ -16,3 +16,7 @@
 @import 'layout/layout';
 
 // CSS Modules
+@import 'modules/grid';
+
+// State Stylesheets
+@import 'state/state';

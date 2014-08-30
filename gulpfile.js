@@ -1,10 +1,8 @@
-// To install gulp:
-// $ npm install gulp --save-dev
-
-// To install all required gulp plugins, run:
-// $ npm install gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
-
+// ======================================
+// Dependencies
+// ======================================
 var gulp         = require('gulp'),
+    connect      = require('gulp-connect'),
     compass      = require('gulp-compass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss    = require('gulp-minify-css'),
@@ -16,37 +14,63 @@ var gulp         = require('gulp'),
     cache        = require('gulp-cache'),
     del          = require('del');
 
-// I'm not a fan of livereload, but might try it again someday
-// var livereload   = require('gulp-livereload');
+// ======================================
+// A display error function. Use in pipeline
+//   for dependencies that don't include
+//   error handling
+// ======================================
+var displayError = function(error) {
 
-// Use compass to process .scss files
+    var errorString = '[' + error.plugin + ']';
+    errorString += ' ' + error.message.replace("\n",''); // Removes new line at the end
+
+    if(error.fileName)
+        errorString += ' in ' + error.fileName;
+
+    if(error.lineNumber)
+        errorString += ' on line ' + error.lineNumber;
+
+    console.error(errorString);
+}
+
+// ======================================
+// Styles
+// ======================================
 gulp.task('styles', function() {
-  return gulp.src('scss/main.scss')
+  return gulp.src('dev/scss/main.scss')
     .pipe(compass({
-      css: 'dist/assets/css',
-      sass: 'scss',
-      image: 'dist/assets/images'
+      css: 'app/assets/css',
+      sass: 'dev/scss',
+      image: 'app/assets/images'
     }))
-      .on('error', function(err) {
-        console.log(err.message);
-      })
+    .on('error', function(err) {
+      displayError(err);
+    })
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('dist/assets/css'))
+    .on('error', function(err){
+        displayError(err);
+    })
+    .pipe(gulp.dest('app/assets/css'))
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(gulp.dest('dist/assets/css'));
+    .pipe(gulp.dest('app/assets/css'));
 });
+
+// ======================================
+// Scripts
+// ======================================
 
 // Run Lint on non-vendor js
 gulp.task('lint', function() {
-  return gulp.src('js/*.js')
+  return gulp.src('dev/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'))
 });
 
 // Run Lint on all js
 gulp.task('lint-all', function() {
-  return gulp.src('js/**/*.js')
+  return gulp.src('dev/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
 });
@@ -54,37 +78,87 @@ gulp.task('lint-all', function() {
 // concatenate and minify scripts
 gulp.task('scripts', function() {
   return gulp.src(
-      ['js/vendor/**/*.js', 'js/*.js'],
-      {base: 'js'}
+      /**
+      * Gather vendor first
+      */
+      [
+        'dev/js/vendor/**/*.js',
+        'dev/js/*.js'
+      ],
+      {base: 'dev/js'}
     )
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('dist/assets/js'))
+    .pipe(gulp.dest('app/assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/assets/js'))
+    .on('error', function(err){
+        displayError(err);
+    })
+    .pipe(gulp.dest('app/assets/js'))
 });
+
+// ======================================
+// Images
+// ======================================
 
 // optimize images
 gulp.task('images', function() {
-  return gulp.src('images/**/*')
+  return gulp.src(['dev/images/**/*', '!dev/images/*.md'])
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('dist/assets/images'));
+    .pipe(gulp.dest('app/assets/images'));
 });
 
-// Delete everything in /dist/assets folder
+// ======================================
+// HTML
+// ======================================
+
+// Smiply moves over the html, so we can develop
+// in the same folder as the js /sass
+gulp.task('html', function() {
+  return gulp.src('dev/**/*.html')
+    .pipe(gulp.dest('app'));
+});
+
+// ======================================
+// Cleanup
+// ======================================
+
+// Delete everything in /app/assets folder
 gulp.task('clean', function(cb) {
-    del(['dist/assets/css', 'dist/assets/js', 'dist/assets/images'], cb)
+    del(
+      ['app/assets/css',
+       'app/assets/js',
+       'app/assets/images',
+       'app/index.html',
+       'app/templates',
+       ], cb)
 });
 
-gulp.task('default', ['clean', 'lint'], function() {
-  gulp.start('styles', 'lint', 'scripts', 'images');
-});
+// ======================================
+// Watch
+// ======================================
 
-// Keeping watch as non-default task
-// I like to run this in a seperate window
 gulp.task('watch', function() {
-  gulp.watch('js/*.js', ['lint']);
-  gulp.watch('js/**/*.js', ['scripts']);
-  gulp.watch('scss/**/*.scss', ['styles']);
-  gulp.watch('images/**/*', ['images']);
+  gulp.watch(['dev/js/*.js', 'dev/js/angular_app/**/*.js'], ['lint']);
+  gulp.watch('dev/js/**/*.js', ['scripts']);
+  gulp.watch('dev/scss/**/*.scss', ['styles']);
+  gulp.watch('dev/images/**/*', ['images']);
+  gulp.watch('dev/**/*.html', ['html']);
+});
+
+// ======================================
+// Local Server
+// ======================================
+gulp.task('connect', function() {
+  connect.server({
+    root: 'app/'
+  });
+});
+
+// ======================================
+// Default ($ gulp)
+// ======================================
+
+gulp.task('default', ['clean'], function() {
+  gulp.start('styles', 'lint', 'scripts', 'images', 'html', 'connect', 'watch');
 });

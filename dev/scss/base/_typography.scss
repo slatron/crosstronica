@@ -1,0 +1,71 @@
+body, html {
+  font-size: $base-font-size;
+  font-family: $base-font-family;}
+
+// Text sizing classes
+// =============================
+.text-small,
+%text-small {
+  font-size: $base-font-size * 0.75;} // 12px / .75em
+
+.text-normal,
+%text-normal {
+  font-size: $base-content-font;} // 14px / .875em
+
+.text-medlg,
+%text-medlg {
+  font-size: $base-font-size;} // 16px / 1em
+
+.text-large,
+%text-large {
+  font-size: $base-font-size * 1.125;} // 18px / 1.125em
+
+.text-largemed,
+%text-largemed {
+  font-size: $base-font-size * 1.25;} // 20px / 1.25em
+
+.text-extralg,
+%text-extralg {
+  font-size: $base-font-size * 1.5;} // 24px / 1.5em
+
+.text-verylarge,
+%text-verylarge {
+  font-size: $base-font-size * 2;} // 32px / 2em
+
+.text-superlarge,
+%text-superlarge {
+  font-size: $base-font-size * 2.25;} // 36px / 2.25em
+
+// Headings
+// =======================
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;}
+
+h1 {
+  color: $color-royal;
+  @extend %text-verylarge}
+
+h2 {
+  color: $color-medgrey;
+  @extend %text-extralg}
+
+h3 {
+  color: $color-medgrey;
+  @extend %text-large}
+
+
+h4 {
+  color: $color-dkdkblue;
+  @extend %text-large}
+
+h5 {
+  color: $color-royal;
+  @extend %text-medlg}
+
+h6 {
+  color: $color-royal;
+  @extend %text-medlg}
+
+p {
+  @extend %text-normal}
+
