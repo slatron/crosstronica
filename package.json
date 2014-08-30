@@ -1,0 +1,42 @@
+{
+  "name": "gulp-setup",
+  "version": "1.2.0",
+  "description": "Base gulp setup with watch, server and lint | compass | autoprefixer | min | concat built into asset pipeline",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-cache": "^0.2.1",
+    "del": "^0.1.2",
+    "gulp-compass": "^1.3.1",
+    "gulp": "^3.8.7",
+    "gulp-autoprefixer": "^0.0.10",
+    "gulp-concat": "^2.3.4",
+    "gulp-jshint": "^1.8.4",
+    "gulp-connect": "^2.0.6",
+    "gulp-imagemin": "^1.0.1",
+    "gulp-livereload": "^2.1.1",
+    "gulp-minify-css": "^0.3.7",
+    "gulp-notify": "^1.5.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified - see /package.json\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slatron/gulp-setup.git"
+  },
+  "keywords": [
+    "gulp",
+    "npm",
+    "FED base",
+    "web app base"
+  ],
+  "author": "Slatron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/slatron/gulp-setup/issues"
+  },
+  "homepage": "https://github.com/slatron/gulp-setup"
+}

@@ -15,7 +15,7 @@ $ git clone git@github.com:slatron/gulp-setup.git foo
 From the new `/foo` directory, install gulp and all required plugins, with `npm install`:
 
 ```sh
-$ npm install gulp gulp-compass gulp-connect gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-connect gulp-cache del --save-dev
+$ npm install
 ```
 
 Since we are using the [compass library](http://compass-style.org/) to help with scss, be sure the compass gem is installed on your system:
