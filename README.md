@@ -4,4 +4,4 @@
 
 This is my default gulp task runner setup for HTML projects.
 
-Go to [Installation](https://github.com/slatron/gulp-setup/wiki/Installation) to begin.
+Go to [Installation](https://github.com/slatron/gulp-setup/wiki/2)-Installation) to begin.
