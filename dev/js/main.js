@@ -1,1 +1,2 @@
-var test = [1, 2, 3];
+window.testing = [1, 2, 3];
+

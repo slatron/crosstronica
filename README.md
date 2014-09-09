@@ -33,12 +33,14 @@ $ gulp
 
 gulp will compile everything in to the `/app` folder and open a local node server at localhost:8080/.
 
-Open [localhost:8080](http://localhost:8080) in your browser to view the style guide.
+Open [localhost:8080](http://localhost:2701) in your browser to view the initial page. It should be blank. To see if all is well, type <code>testing</code> into the console.
 
 ---
 
 
 ### Tasks
+
+All tasks are individual .js files within the `gulp/tasks` directory
 
 #### `gulp watch`
 
@@ -64,12 +66,12 @@ To lint user js files:
 $ gulp lint
 ```
 
-#### `gulp lint-all`
+#### `gulp lintAll`
 
 To lint user and vendor js files (not part of default or watch tasks):
 
 ```sh
-$ gulp lint-all
+$ gulp lintAll
 ```
 
 To run individual tasks manually:
@@ -83,7 +85,7 @@ $ gulp html
 
 ### Scripts compilation order
 
-Scripts will all be compiled into one file under `/app/js/main.min.js`. It will first contain all files in `/js/vendor`, followed by user scripts in `/js`
+Scripts will all be compiled into one file under `/app/js/main.min.js`. I'm using browserify to require() js files during development.
 
 ---
 
@@ -94,10 +96,10 @@ Scripts will all be compiled into one file under `/app/js/main.min.js`. It will 
 - [Autoprefixer | gulp-autoprefixer](https://github.com/Metrime/gulp-autoprefixer)
 - [Minify CSS | gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css)
 - [JSHint | gulp-jshint](https://github.com/wearefractal/gulp-jshint)
-- [Concatenation | gulp-concat](https://github.com/wearefractal/gulp-concat)
+- [Browserify](http://browserify.org/)
 - [Uglify | gulp-uglify](https://github.com/terinjokes/gulp-uglify)
 - [Compress images | gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
-- [Caching of images so only changed images are compressed | gulp-cache](https://github.com/jgable/gulp-cache)
+- [Caching of images | gulp-changed](https://www.npmjs.org/package/gulp-changed)
 - [Clean files for a clean build | del](https://www.npmjs.org/package/del)
 
 ### Credit due
