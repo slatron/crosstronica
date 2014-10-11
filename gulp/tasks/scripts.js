@@ -1,19 +1,31 @@
 var gulp         = require('gulp'),
-    browserify   = require('browserify'),
     uglify       = require('gulp-uglify'),
     rename       = require('gulp-rename'),
-    source       = require('vinyl-source-stream'),
-    buffer       = require('vinyl-buffer'),
+    concat       = require('gulp-concat'),
+    ngAnnotate   = require('gulp-ng-annotate'),
     handleErrors = require('../util/handleErrors');
 
 gulp.task('scripts', function() {
-  return browserify('./dev/js/main.js')
-    .bundle()
+  return gulp.src(
+      /**
+      * Gather angular-base first,
+      * then vendor files,
+      * then main angular app declaration,
+      * then all angular modules
+      */
+      [
+        'dev/js/angular_base/angular.js',
+        'dev/js/vendor/**/*.js',
+        'dev/js/main.js',
+        'dev/js/angular_app/**/*.js'
+      ],
+      {base: 'dev/js'}
+    )
     .on('error', handleErrors)
-    .pipe(source('main.js'))
+    .pipe(concat('main.js'))
+    .pipe(ngAnnotate())
     .pipe(gulp.dest('app/assets/js'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(buffer()) // Preps for ugilfy
     .pipe(uglify())
     .pipe(gulp.dest('app/assets/js'))
 });
