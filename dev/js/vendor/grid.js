@@ -1,21 +1,30 @@
-var grid = function(size) {
+var Grid = function(size) {
 
   grid = new Array(size);
 
+  // Insert row arrays in grid array
   for(i=0; i < size; i++) {
     var thisRow = new Array(size);
-    console.log(thisRow);
     grid[i] = thisRow;
   }
 
-  for (i=0; i < size; i++) { grid[0][i] = i + (size * 0); }   // number the row 1 through 5
-  for (i=0; i < size; i++) { grid[1][i] = i + (size * 1); }   // number the next row of row 6 through 10
-  for (i=0; i < size; i++) { grid[2][i] = i + (size * 2); }   // and so on
-  for (i=0; i < size; i++) { grid[3][i] = i + (size * 3); }
-  for (i=0; i < size; i++) { grid[4][i] = i + (size * 4); }
+  // Fill grid with numbers 0 to grid size
+  for(i=0; i < size; i++) {
+    for(j=0; j < size; j++) {
+      grid[i][j] = j + (size * i);
+    }  
+  }
 
   return grid;
 
 };
 
-console.log(grid(5));
+// Make new grid of size x
+grid = new Grid(2);
+
+// Show grid in console
+for(i=0; i < grid[0].length; i++) {
+  for(j=0; j < grid[i].length; j++) {
+    console.log(i + ', ' + j + ': ', grid[i][j]);
+  }  
+}
