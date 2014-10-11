@@ -1,7 +1,9 @@
-# gulp-setup
+# Crosstronica
 
 ## What is this?
 
-This is my default gulp task runner setup for HTML projects.
+This is a cross stitch pattern creation app.
 
-Go to [Installation](https://github.com/slatron/gulp-setup/wiki/2\)-Installation) to begin.
+The Wiki for this repository is not ready. However, it is a fork of my gulp-setup repository. The installation commands should be the exact same.
+
+Go to [Installation](https://github.com/slatron/gulp-setup/wiki/2\)-Installation) in the gulp-setup wiki  to begin.
