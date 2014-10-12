@@ -1,0 +1,29 @@
+.pattern-grid {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+}
+
+.pattern-cel {
+
+  @extend %text-small;
+
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  opacity: 1;
+  padding: .25em;
+  text-align: center;
+  width: 30px;
+
+  transition: all 500ms $link-transition-type;
+
+  &.active,
+  &:hover {
+    background: tomato;
+    color: $color-black;
+    opacity: 0.5;
+  }
+}

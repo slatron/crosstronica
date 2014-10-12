@@ -21953,37 +21953,6 @@ var styleDirective = valueFn({
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
 
-var Grid = function(size) {
-
-  grid = new Array(size);
-
-  // Insert row arrays in grid array
-  for(i=0; i < size; i++) {
-    var thisRow = new Array(size);
-    grid[i] = thisRow;
-  }
-
-  // Fill grid with numbers 0 to grid size
-  for(i=0; i < size; i++) {
-    for(j=0; j < size; j++) {
-      grid[i][j] = j + (size * i);
-    }  
-  }
-
-  return grid;
-
-};
-
-// Make new grid of size x
-grid = new Grid(2);
-
-// Show grid in console
-for(i=0; i < grid[0].length; i++) {
-  for(j=0; j < grid[i].length; j++) {
-    console.log(i + ', ' + j + ': ', grid[i][j]);
-  }  
-}
-
 /**
  * @license
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -28771,3 +28740,60 @@ for(i=0; i < grid[0].length; i++) {
 }.call(this));
 
 angular.module('Crosstronica', []);
+
+function gridCtrl($scope, gridFactory) {
+
+  $scope.rows = 210;
+  $scope.cols = 80;
+
+  $scope.grid = gridFactory.initGrid($scope.rows, $scope.cols);
+}
+gridCtrl.$inject = ["$scope", "gridFactory"];
+
+angular.module('Crosstronica').
+controller('GridCtrl', gridCtrl);
+
+function gridFactory() {
+
+  grid = [];
+
+  var gridFactoryMethods = {};
+
+  gridFactoryMethods.initGrid = function(rows, cols) {
+
+    // Insert row arrays in grid array
+
+    console.time('testing-lodash');
+    _.each(new Array(rows), function(i){
+      var thisRow = new Array(cols);
+      grid[i] = thisRow;
+    });
+    console.timeEnd('testing-lodash');
+
+    console.time('testing-native');
+    for(i=0; i < rows; i++) {
+      var thisRow = new Array(cols);
+      grid[i] = thisRow;
+    }
+    console.timeEnd('testing-native');
+
+    // Fill grid with numbers 0 to grid size
+    for(i=0; i < rows; i++) {
+
+      var start = cols * i,
+          end   = (cols * i) + cols;
+
+      grid[i] = _.range(start, end);
+
+    }
+
+    return grid;
+
+  };
+
+  return gridFactoryMethods;
+
+}
+
+angular.module('Crosstronica').
+factory('gridFactory', gridFactory);

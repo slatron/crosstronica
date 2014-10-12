@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="Crosstronica">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +7,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
   </head>
-  <body ng-app="Crosstronica">
+  <body ng-controller="GridCtrl">
 
     <header></header>
 
     <nav></nav>
 
-    <main>
-      {{grid}}
+    <main class="pattern-grid">
+      <div ng-repeat="row in grid" class="grid pattern-row">
+        <div ng-repeat="col in row" class="grid pattern-cel">
+          {{col}}
+        </div>
+      </div>
     </main>
 
     <footer></footer>
 
-    <script src="assets/js/main.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
   </body>
 </html>
