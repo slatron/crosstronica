@@ -6,17 +6,17 @@
 
 .pattern-cel {
 
-  @extend %text-small;
+  @extend %text-tiny;
 
   border-top: 1px solid #000;
   border-left: 1px solid #000;
   cursor: pointer;
-  height: 30px;
-  line-height: 30px;
+  height: 15px;
+  line-height: 15px;
   opacity: 1;
-  padding: .25em;
+  padding-left: $base-unit-quarter;
   text-align: center;
-  width: 30px;
+  width: 15px;
 
   transition: all 500ms $link-transition-type;
 

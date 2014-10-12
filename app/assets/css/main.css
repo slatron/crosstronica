@@ -475,13 +475,13 @@ body, html {
 }
 
 /* line 8, ../../../dev/scss/base/_typography.scss */
-.text-tiny {
+.text-tiny,
+.pattern-cel {
   font-size: 10.4px;
 }
 
 /* line 12, ../../../dev/scss/base/_typography.scss */
-.text-small,
-.pattern-cel {
+.text-small {
   font-size: 12px;
 }
 
@@ -587,12 +587,12 @@ h6 {
   border-top: 1px solid #000;
   border-left: 1px solid #000;
   cursor: pointer;
-  height: 30px;
-  line-height: 30px;
+  height: 15px;
+  line-height: 15px;
   opacity: 1;
-  padding: .25em;
+  padding-left: 0.25em;
   text-align: center;
-  width: 30px;
+  width: 15px;
   -webkit-transition: all 500ms ease-out;
           transition: all 500ms ease-out;
 }

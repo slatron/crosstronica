@@ -28743,48 +28743,57 @@ angular.module('Crosstronica', []);
 
 function gridCtrl($scope, gridFactory) {
 
-  $scope.rows = 210;
-  $scope.cols = 80;
+  $scope.rows     = 5;
+  $scope.cols     = 5;
+  $scope.selected = {};
 
-  $scope.grid = gridFactory.initGrid($scope.rows, $scope.cols);
+  $scope.pallete = gridFactory.getPallete();
+  $scope.grid = gridFactory.makeGrid($scope.rows, $scope.cols);
+
+  $scope.selectColor = function(colorId) {
+    $scope.selected = $scope.pallete[colorId];
+  };
+
+  $scope.paintCel = function(row, col, Color) {
+    $scope.grid[row][col] = Color;
+  };
+
 }
 gridCtrl.$inject = ["$scope", "gridFactory"];
 
 angular.module('Crosstronica').
 controller('GridCtrl', gridCtrl);
 
-function gridFactory() {
-
-  grid = [];
+function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
 
-  gridFactoryMethods.initGrid = function(rows, cols) {
+  var pallete = [];
+
+  var initPallete = $http.get('/json/pallete.json').success(function(data){
+    pallete = data;
+  });
+
+  gridFactoryMethods.getPallete = function() {
+    return pallete;
+  };
+
+  gridFactoryMethods.makeGrid = function(rows, cols) {
+
+    var grid = [];
 
     // Insert row arrays in grid array
-
-    console.time('testing-lodash');
-    _.each(new Array(rows), function(i){
-      var thisRow = new Array(cols);
-      grid[i] = thisRow;
-    });
-    console.timeEnd('testing-lodash');
-
-    console.time('testing-native');
     for(i=0; i < rows; i++) {
       var thisRow = new Array(cols);
       grid[i] = thisRow;
     }
-    console.timeEnd('testing-native');
 
     // Fill grid with numbers 0 to grid size
     for(i=0; i < rows; i++) {
-
       var start = cols * i,
           end   = (cols * i) + cols;
 
       grid[i] = _.range(start, end);
-
     }
 
     return grid;
@@ -28794,6 +28803,7 @@ function gridFactory() {
   return gridFactoryMethods;
 
 }
+gridFactory.$inject = ["$http", "$q"];
 
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);

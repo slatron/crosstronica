@@ -11,14 +11,22 @@
   </head>
   <body ng-controller="GridCtrl">
 
-    <header></header>
+    <header>
+      <h3>Selected: {{selected.name}}</h3>
+    </header>
 
-    <nav></nav>
+    <nav class="grid">
+      <div ng-repeat="color in pallete">
+        <div ng-click="selectColor(color.id)" style="background-color: #{{color.rgb}};">
+          {{color.symbol}}
+        </div>
+      </div>
+    </nav>
 
     <main class="pattern-grid">
       <div ng-repeat="row in grid" class="grid pattern-row">
         <div ng-repeat="col in row" class="grid pattern-cel">
-          {{col}}
+          {{col + '' | limitTo : 1}}
         </div>
       </div>
     </main>
