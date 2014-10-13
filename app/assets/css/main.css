@@ -476,7 +476,8 @@ body, html {
 
 /* line 8, ../../../dev/scss/base/_typography.scss */
 .text-tiny,
-.pattern-cel {
+.pattern-cel,
+.square {
   font-size: 10.4px;
 }
 
@@ -563,6 +564,30 @@ h6 {
   color: #005cb8;
 }
 
+/* line 2, ../../../dev/scss/modules/_square.scss */
+.pattern-cel,
+.square {
+  border: 1px solid #000;
+  height: 15px;
+  line-height: 15px;
+  padding-left: 0.25em;
+  text-align: center;
+  width: 15px;
+}
+
+/* line 1, ../../../dev/scss/modules/_color-pallete.scss */
+.color-pallete {
+  margin-bottom: 1em;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+/* line 6, ../../../dev/scss/modules/_color-pallete.scss */
+.color-pallete .square {
+  border-right: none;
+  border-bottom: none;
+  cursor: pointer;
+}
+
 /* line 3, ../../../dev/scss/modules/_grid.scss */
 .grid {
   display: -webkit-box;
@@ -584,23 +609,15 @@ h6 {
 
 /* line 7, ../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-cel {
-  border-top: 1px solid #000;
-  border-left: 1px solid #000;
+  border-bottom: none;
+  border-right: none;
   cursor: pointer;
-  height: 15px;
-  line-height: 15px;
-  opacity: 1;
-  padding-left: 0.25em;
-  text-align: center;
-  width: 15px;
   -webkit-transition: all 500ms ease-out;
           transition: all 500ms ease-out;
 }
-/* line 24, ../../../dev/scss/modules/_pattern-grid.scss */
+/* line 18, ../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-cel.active, .pattern-cel:hover {
-  background: tomato;
   color: #222222;
-  opacity: 0.5;
 }
 
 /* line 1, ../../../dev/scss/state/_state.scss */

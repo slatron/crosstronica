@@ -6,24 +6,16 @@
 
 .pattern-cel {
 
-  @extend %text-tiny;
+  @extend %square;
 
-  border-top: 1px solid #000;
-  border-left: 1px solid #000;
+  border-bottom: none;
+  border-right: none;
   cursor: pointer;
-  height: 15px;
-  line-height: 15px;
-  opacity: 1;
-  padding-left: $base-unit-quarter;
-  text-align: center;
-  width: 15px;
 
   transition: all 500ms $link-transition-type;
 
   &.active,
   &:hover {
-    background: tomato;
     color: $color-black;
-    opacity: 0.5;
   }
 }

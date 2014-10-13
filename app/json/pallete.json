@@ -1,10 +1,12 @@
 [
   {
+    "c_id": 0,
     "name": "Wacky Purple",
     "rgb": "ab22c7",
     "symbol": "w"
   },
   {
+    "c_id": 1,
     "name": "Tomato",
     "rgb": "e63740",
     "symbol": "t"

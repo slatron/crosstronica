@@ -2,14 +2,20 @@ function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
 
-  var pallete = [];
-
   var initPallete = $http.get('/json/pallete.json').success(function(data){
     pallete = data;
   });
 
   gridFactoryMethods.getPallete = function() {
-    return pallete;
+    var deferred = $q.defer();
+
+    $http.get('/json/pallete.json').success(function(data){
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject('There was an error getting pallete.json');
+    });
+
+    return deferred.promise;
   };
 
   gridFactoryMethods.makeGrid = function(rows, cols) {
@@ -22,12 +28,18 @@ function gridFactory($http, $q) {
       grid[i] = thisRow;
     }
 
+    var aRow = [];
+
+    for(i=0;i<cols;i++) {
+      aRow[i] = {};
+    }
+
     // Fill grid with numbers 0 to grid size
     for(i=0; i < rows; i++) {
       var start = cols * i,
           end   = (cols * i) + cols;
 
-      grid[i] = _.range(start, end);
+      grid[i] = _.clone(aRow, true);
     }
 
     return grid;

@@ -12,26 +12,39 @@
   <body ng-controller="GridCtrl">
 
     <header>
-      <h3>Selected: {{selected.name}}</h3>
+      <h3>Selected: {{selected}}</h3>
     </header>
 
     <nav class="grid">
-      <div ng-repeat="color in pallete">
-        <div ng-click="selectColor(color.id)" style="background-color: #{{color.rgb}};">
+      <div ng-repeat="color in pallete" class="color-pallete">
+        <div
+          ng-click="selectColor(color.c_id)"
+          class="square"
+          style="background-color: #{{color.rgb}};"
+        >
           {{color.symbol}}
         </div>
       </div>
     </nav>
 
     <main class="pattern-grid">
-      <div ng-repeat="row in grid" class="grid pattern-row">
-        <div ng-repeat="col in row" class="grid pattern-cel">
-          {{col + '' | limitTo : 1}}
+      <div ng-repeat="row in grid track by $index" class="grid pattern-row">
+        <div ng-repeat="col in row track by $index" class="grid">
+          <div
+            class="pattern-cel square"
+            ng-click="paintCel($parent.$index, $index)"
+            style="background-color: #{{col.rgb}};"
+          >
+            {{col.symbol}}
+          </div>
         </div>
       </div>
     </main>
 
-    <footer></footer>
+    <footer>
+      <button ng-click="showGrid = !showGrid">toggle show grid data</button>
+      <h3 ng-show="showGrid">Grid: {{grid}}</h3>
+    </footer>
 
     <script src="assets/js/main.js"></script>
 

@@ -28743,20 +28743,36 @@ angular.module('Crosstronica', []);
 
 function gridCtrl($scope, gridFactory) {
 
-  $scope.rows     = 5;
-  $scope.cols     = 5;
+  var rows     = 15;
+  var cols     = 15;
   $scope.selected = {};
+  $scope.pallete  = [];
+  $scope.grid     = [];
 
-  $scope.pallete = gridFactory.getPallete();
-  $scope.grid = gridFactory.makeGrid($scope.rows, $scope.cols);
+  $scope.showGrid = false;
 
   $scope.selectColor = function(colorId) {
     $scope.selected = $scope.pallete[colorId];
   };
 
-  $scope.paintCel = function(row, col, Color) {
-    $scope.grid[row][col] = Color;
+  $scope.paintCel = function(row, col) {
+    console.log('Paint Cel At: ', row, col);
+    $scope.grid[row][col] = $scope.selected;
   };
+
+  var _init = function() {
+
+    $scope.grid = gridFactory.makeGrid(rows, cols);
+
+    gridFactory.getPallete()
+      .then(function(data){
+        $scope.pallete = data;
+      }, function(data){
+        console.error('error resolving getPallete promise: ', data);
+      });
+  };
+
+  _init();
 
 }
 gridCtrl.$inject = ["$scope", "gridFactory"];
@@ -28768,14 +28784,20 @@ function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
 
-  var pallete = [];
-
   var initPallete = $http.get('/json/pallete.json').success(function(data){
     pallete = data;
   });
 
   gridFactoryMethods.getPallete = function() {
-    return pallete;
+    var deferred = $q.defer();
+
+    $http.get('/json/pallete.json').success(function(data){
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject('There was an error getting pallete.json');
+    });
+
+    return deferred.promise;
   };
 
   gridFactoryMethods.makeGrid = function(rows, cols) {
@@ -28788,12 +28810,18 @@ function gridFactory($http, $q) {
       grid[i] = thisRow;
     }
 
+    var aRow = [];
+
+    for(i=0;i<cols;i++) {
+      aRow[i] = {};
+    }
+
     // Fill grid with numbers 0 to grid size
     for(i=0; i < rows; i++) {
       var start = cols * i,
           end   = (cols * i) + cols;
 
-      grid[i] = _.range(start, end);
+      grid[i] = _.clone(aRow, true);
     }
 
     return grid;

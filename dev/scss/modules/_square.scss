@@ -1,0 +1,11 @@
+%square,
+.square {
+  @extend %text-tiny;
+
+  border: 1px solid #000;
+  height: 15px;
+  line-height: 15px;
+  padding-left: $base-unit-quarter;
+  text-align: center;
+  width: 15px;
+}

@@ -1,0 +1,11 @@
+.color-pallete {
+  margin-bottom: $base-unit;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  .square {
+    border-right: none;
+    border-bottom: none;
+    cursor: pointer;
+  }
+}
