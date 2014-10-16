@@ -572,6 +572,10 @@ h6 {
   line-height: 15px;
   padding-left: 0.25em;
   text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   width: 15px;
 }
 

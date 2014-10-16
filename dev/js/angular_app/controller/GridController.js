@@ -1,7 +1,7 @@
 function gridCtrl($scope, gridFactory) {
 
-  var rows     = 15;
-  var cols     = 15;
+  var rows     = 10;
+  var cols     = 10;
   $scope.selected = {};
   $scope.pallete  = [];
   $scope.grid     = [];
@@ -12,9 +12,14 @@ function gridCtrl($scope, gridFactory) {
     $scope.selected = $scope.pallete[colorId];
   };
 
-  $scope.paintCel = function(row, col) {
+  $scope.paintCel = function(row, col, triggerDigest) {
     console.log('Paint Cel At: ', row, col);
+
+    triggerDigest = triggerDigest || false;
+
     $scope.grid[row][col] = $scope.selected;
+
+    if(triggerDigest) $scope.$digest();
   };
 
   var _init = function() {

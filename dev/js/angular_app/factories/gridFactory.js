@@ -2,10 +2,6 @@ function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
 
-  var initPallete = $http.get('/json/pallete.json').success(function(data){
-    pallete = data;
-  });
-
   gridFactoryMethods.getPallete = function() {
     var deferred = $q.defer();
 

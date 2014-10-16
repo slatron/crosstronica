@@ -28743,8 +28743,8 @@ angular.module('Crosstronica', []);
 
 function gridCtrl($scope, gridFactory) {
 
-  var rows     = 15;
-  var cols     = 15;
+  var rows     = 10;
+  var cols     = 10;
   $scope.selected = {};
   $scope.pallete  = [];
   $scope.grid     = [];
@@ -28755,9 +28755,14 @@ function gridCtrl($scope, gridFactory) {
     $scope.selected = $scope.pallete[colorId];
   };
 
-  $scope.paintCel = function(row, col) {
+  $scope.paintCel = function(row, col, triggerDigest) {
     console.log('Paint Cel At: ', row, col);
+
+    triggerDigest = triggerDigest || false;
+
     $scope.grid[row][col] = $scope.selected;
+
+    if(triggerDigest) $scope.$digest();
   };
 
   var _init = function() {
@@ -28783,10 +28788,6 @@ controller('GridCtrl', gridCtrl);
 function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
-
-  var initPallete = $http.get('/json/pallete.json').success(function(data){
-    pallete = data;
-  });
 
   gridFactoryMethods.getPallete = function() {
     var deferred = $q.defer();
@@ -28835,3 +28836,44 @@ gridFactory.$inject = ["$http", "$q"];
 
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
+
+function gridSquare() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      color: '@',
+      symbol: '@',
+      paint: '&'
+    },
+    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
+    link: function (scope, elem, attrs) {
+      elem.on('mousedown', function() {
+        scope.paint(attrs.row, attrs.col);
+      });
+
+      function detectLeftButton(e) {
+        if ('buttons' in e) {
+          return e.buttons === 1;
+        } else if ('which' in e) {
+          return e.which === 1;
+        } else {
+          return e.button === 1;
+        }
+      }
+
+      elem.on('mouseover', function(e) {
+        if(detectLeftButton(e)) {
+          elem.on('mouseup mousemove', function handler(e) {
+            scope.paint(attrs.row, attrs.col);
+            elem.off('mouseup mousemove', handler);
+          });
+        }
+      });
+    }
+  };
+}
+
+angular.module('Crosstronica').
+directive('gridSquare', gridSquare);
