@@ -57,3 +57,20 @@ th {
   padding: $base-unit-quarter;
   border: 1px solid $color-ltgrey
 }
+
+
+form {
+  border: 1px solid $color-black;
+  display: block;
+  padding: $base-unit;
+}
+
+label {
+  display: block;
+  margin: $base-unit-quarter 0;
+}
+
+button {
+  display: block;
+  margin: $base-unit 0;
+}

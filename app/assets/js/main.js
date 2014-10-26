@@ -28739,17 +28739,60 @@ var styleDirective = valueFn({
   }
 }.call(this));
 
+var ms_utils = {
+
+  detectLeftButton: function (e) {
+    if ('buttons' in e) {
+      return e.buttons === 1;
+    } else if ('which' in e) {
+      return e.which === 1;
+    } else {
+      return e.button === 1;
+    }
+  }
+
+};
+
 angular.module('Crosstronica', []);
 
-function gridCtrl($scope, gridFactory) {
+function gridCtrl($scope, $http, gridFactory, connection) {
 
-  var rows     = 10;
-  var cols     = 10;
+  var rows     = 30;
+  var cols     = 20;
+
   $scope.selected = {};
   $scope.pallete  = [];
   $scope.grid     = [];
 
   $scope.showGrid = false;
+
+  function postColor(colorObj) {
+    // send post request
+    $http.post(connection.pallete, colorObj)
+      .success(function () {
+        console.log('successful color post');
+      // Update Current Pallete with new color
+      gridFactory.getPallete()
+        .then(function(data){
+          $scope.pallete = data;
+        }, function(data){
+          console.error('error resolving getPallete promise: ', data);
+        });
+      }).error(function (err) {
+        console.log('Error: ' + err);
+      });
+  }
+
+  $scope.addColor = function() {
+    var colorObj = {
+      data: {
+        name: $scope.newname,
+        rgb: $scope.newrgb,
+        symbol: $scope.newsymbol
+      }
+    };
+    postColor(colorObj);
+  };
 
   $scope.selectColor = function(colorId) {
     $scope.selected = $scope.pallete[colorId];
@@ -28780,25 +28823,43 @@ function gridCtrl($scope, gridFactory) {
   _init();
 
 }
-gridCtrl.$inject = ["$scope", "gridFactory"];
+gridCtrl.$inject = ["$scope", "$http", "gridFactory", "connection"];
 
 angular.module('Crosstronica').
 controller('GridCtrl', gridCtrl);
 
-function gridFactory($http, $q) {
+function gridFactory($http, $q, connection) {
 
   var gridFactoryMethods = {};
 
   gridFactoryMethods.getPallete = function() {
+
     var deferred = $q.defer();
 
-    $http.get('/json/pallete.json').success(function(data){
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject('There was an error getting pallete.json');
+    $http.get(connection.pallete + '/_design/pallete/_view/getAll')
+      .success(function(data) {
+        for(var i = 0;i < data.rows.length; i++) {
+          data.rows[i] = data.rows[i].value;
+          data.rows[i].c_id = i;
+        }
+        deferred.resolve(data.rows);
+      }).error(function(e) {
+        deferred.reject('There was an error getting pallete data');
+        console.error('error with GET pallete', e);
     });
 
     return deferred.promise;
+
+    // FROM JSON FILE
+    // var deferred = $q.defer();
+
+    // $http.get('/json/pallete.json').success(function(data){
+    //   deferred.resolve(data);
+    // }).error(function() {
+    //   deferred.reject('There was an error getting pallete.json');
+    // });
+
+    // return deferred.promise;
   };
 
   gridFactoryMethods.makeGrid = function(rows, cols) {
@@ -28832,10 +28893,16 @@ function gridFactory($http, $q) {
   return gridFactoryMethods;
 
 }
-gridFactory.$inject = ["$http", "$q"];
+gridFactory.$inject = ["$http", "$q", "connection"];
 
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
+
+angular.module('Crosstronica').
+constant('connection', {
+  pallete: 'http://localhost:5984/pallete',
+  patterns: 'http://localhost:5984/patterns'
+});
 
 function gridSquare() {
 
@@ -28843,9 +28910,9 @@ function gridSquare() {
     restrict: 'E',
     replace: true,
     scope: {
-      color: '@',
-      symbol: '@',
-      paint: '&'
+      color:  '@', // 6-digit RGB color
+      symbol: '@', // string to display in square
+      paint:  '&'  // ref to parent paint function
     },
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
     link: function (scope, elem, attrs) {
@@ -28853,18 +28920,8 @@ function gridSquare() {
         scope.paint(attrs.row, attrs.col);
       });
 
-      function detectLeftButton(e) {
-        if ('buttons' in e) {
-          return e.buttons === 1;
-        } else if ('which' in e) {
-          return e.which === 1;
-        } else {
-          return e.button === 1;
-        }
-      }
-
       elem.on('mouseover', function(e) {
-        if(detectLeftButton(e)) {
+        if(ms_utils.detectLeftButton(e)) {
           elem.on('mouseup mousemove', function handler(e) {
             scope.paint(attrs.row, attrs.col);
             elem.off('mouseup mousemove', handler);

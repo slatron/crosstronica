@@ -4,9 +4,9 @@ function gridSquare() {
     restrict: 'E',
     replace: true,
     scope: {
-      color: '@',
-      symbol: '@',
-      paint: '&'
+      color:  '@', // 6-digit RGB color
+      symbol: '@', // string to display in square
+      paint:  '&'  // ref to parent paint function
     },
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
     link: function (scope, elem, attrs) {
@@ -14,18 +14,8 @@ function gridSquare() {
         scope.paint(attrs.row, attrs.col);
       });
 
-      function detectLeftButton(e) {
-        if ('buttons' in e) {
-          return e.buttons === 1;
-        } else if ('which' in e) {
-          return e.which === 1;
-        } else {
-          return e.button === 1;
-        }
-      }
-
       elem.on('mouseover', function(e) {
-        if(detectLeftButton(e)) {
+        if(ms_utils.detectLeftButton(e)) {
           elem.on('mouseup mousemove', function handler(e) {
             scope.paint(attrs.row, attrs.col);
             elem.off('mouseup mousemove', handler);

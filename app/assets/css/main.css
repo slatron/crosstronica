@@ -468,6 +468,25 @@ th {
   border: 1px solid #f0eeee;
 }
 
+/* line 62, ../../../dev/scss/base/_base.scss */
+form {
+  border: 1px solid #222222;
+  display: block;
+  padding: 1em;
+}
+
+/* line 68, ../../../dev/scss/base/_base.scss */
+label {
+  display: block;
+  margin: 0.25em 0;
+}
+
+/* line 73, ../../../dev/scss/base/_base.scss */
+button {
+  display: block;
+  margin: 1em 0;
+}
+
 /* line 1, ../../../dev/scss/base/_typography.scss */
 body, html {
   font-size: 16px;

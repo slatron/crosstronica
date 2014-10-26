@@ -12,20 +12,26 @@
   <body ng-controller="GridCtrl">
 
     <header>
-      <h3>Selected: {{selected}}</h3>
+      <h1>Welcome to Crosstronica</h1>
     </header>
 
     <nav class="grid">
       <div ng-repeat="color in pallete" class="color-pallete">
-        <div
+        <grid-square
           ng-click="selectColor(color.c_id)"
-          class="square"
-          style="background-color: #{{color.rgb}};"
-        >
-          {{color.symbol}}
-        </div>
+          color="{{color.rgb}}"
+          symbol="{{color.symbol}}"
+        ></grid-square>
       </div>
     </nav>
+
+    <span ng-show="selected.name">
+      <grid-square color="{{selected.rgb}}" symbol="{{selected.symbol}}"></grid-square>
+    </span>
+
+    <h3>
+      Draw Color: <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
+    </h3>
 
     <main class="pattern-grid">
       <div ng-repeat="row in grid track by $index" class="grid pattern-row">
@@ -37,6 +43,32 @@
           ></grid-square>
       </div>
     </main>
+
+    <form novalidate ng-submit="addColor()">
+      <h4>Add New Color: </h4>
+      <label for="newname">Color Name: </label>
+      <input
+        type="text"
+        id="newname"
+        name="newname"
+        ng-model="newname"
+      >
+      <label for="newrgb">Color RGB: </label>
+      <input
+        type="text"
+        id="newrgb"
+        name="newrgb"
+        ng-model="newrgb"
+      >
+      <label for="newsymbol">Color Symbol: </label>
+      <input
+        type="text"
+        id="newsymbol"
+        name="newsymbol"
+        ng-model="newsymbol"
+      >
+      <button type="submit">Save New Color</button>
+    </form>
 
     <footer>
       <button ng-click="showGrid = !showGrid">toggle show grid data</button>

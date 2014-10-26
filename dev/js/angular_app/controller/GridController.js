@@ -1,12 +1,41 @@
-function gridCtrl($scope, gridFactory) {
+function gridCtrl($scope, $http, gridFactory, connection) {
 
-  var rows     = 10;
-  var cols     = 10;
+  var rows     = 30;
+  var cols     = 20;
+
   $scope.selected = {};
   $scope.pallete  = [];
   $scope.grid     = [];
 
   $scope.showGrid = false;
+
+  function postColor(colorObj) {
+    // send post request
+    $http.post(connection.pallete, colorObj)
+      .success(function () {
+        console.log('successful color post');
+      // Update Current Pallete with new color
+      gridFactory.getPallete()
+        .then(function(data){
+          $scope.pallete = data;
+        }, function(data){
+          console.error('error resolving getPallete promise: ', data);
+        });
+      }).error(function (err) {
+        console.log('Error: ' + err);
+      });
+  }
+
+  $scope.addColor = function() {
+    var colorObj = {
+      data: {
+        name: $scope.newname,
+        rgb: $scope.newrgb,
+        symbol: $scope.newsymbol
+      }
+    };
+    postColor(colorObj);
+  };
 
   $scope.selectColor = function(colorId) {
     $scope.selected = $scope.pallete[colorId];
