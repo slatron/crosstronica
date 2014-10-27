@@ -10,6 +10,8 @@ function gridFactory($http, $q, connection) {
       .success(function(data) {
         for(var i = 0;i < data.rows.length; i++) {
           data.rows[i] = data.rows[i].value;
+
+          // c_id helps to index the pallete array
           data.rows[i].c_id = i;
         }
         deferred.resolve(data.rows);

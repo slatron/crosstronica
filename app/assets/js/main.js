@@ -28757,8 +28757,8 @@ angular.module('Crosstronica', []);
 
 function gridCtrl($scope, $http, gridFactory, connection) {
 
-  var rows     = 30;
-  var cols     = 20;
+  var rows = 10;
+  var cols = 10;
 
   $scope.selected = {};
   $scope.pallete  = [];
@@ -28771,6 +28771,13 @@ function gridCtrl($scope, $http, gridFactory, connection) {
     $http.post(connection.pallete, colorObj)
       .success(function () {
         console.log('successful color post');
+
+      // Clear New Color Form
+      $scope.newname   = '';
+      $scope.newrgb    = '';
+      $scope.newsymbol = '';
+      $scope.newdmc    = '';
+
       // Update Current Pallete with new color
       gridFactory.getPallete()
         .then(function(data){
@@ -28788,7 +28795,8 @@ function gridCtrl($scope, $http, gridFactory, connection) {
       data: {
         name: $scope.newname,
         rgb: $scope.newrgb,
-        symbol: $scope.newsymbol
+        symbol: $scope.newsymbol,
+        dmc: $scope.newdmc
       }
     };
     postColor(colorObj);
@@ -28840,6 +28848,8 @@ function gridFactory($http, $q, connection) {
       .success(function(data) {
         for(var i = 0;i < data.rows.length; i++) {
           data.rows[i] = data.rows[i].value;
+
+          // c_id helps to index the pallete array
           data.rows[i].c_id = i;
         }
         deferred.resolve(data.rows);

@@ -44,7 +44,7 @@
       </div>
     </main>
 
-    <form novalidate ng-submit="addColor()">
+    <form novalidate ng-submit="addColor()" name="addcolor">
       <h4>Add New Color: </h4>
       <label for="newname">Color Name: </label>
       <input
@@ -52,6 +52,8 @@
         id="newname"
         name="newname"
         ng-model="newname"
+        maxlength="30"
+        required
       >
       <label for="newrgb">Color RGB: </label>
       <input
@@ -59,6 +61,9 @@
         id="newrgb"
         name="newrgb"
         ng-model="newrgb"
+        required
+        maxlength="6"
+        ng-pattern="/[A-Fa-f0-9]{6}/"
       >
       <label for="newsymbol">Color Symbol: </label>
       <input
@@ -66,8 +71,18 @@
         id="newsymbol"
         name="newsymbol"
         ng-model="newsymbol"
+        required
+        maxlength="2"
       >
-      <button type="submit">Save New Color</button>
+      <label for="newdmc">DMC#: </label>
+      <input
+        type="text"
+        id="newdmc"
+        name="newdmc"
+        ng-model="newdmc"
+        maxlength="10"
+      >
+      <button type="submit" ng-disabled="addcolor.$invalid">Save New Color</button>
     </form>
 
     <footer>
