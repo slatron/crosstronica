@@ -28914,6 +28914,15 @@ constant('connection', {
   patterns: 'http://localhost:5984/patterns'
 });
 
+function pattern($scope, $http, gridFactory, connection) {
+
+
+}
+pattern.$inject = ["$scope", "$http", "gridFactory", "connection"];
+
+angular.module('Crosstronica').
+directive('pattern', pattern);
+
 function gridSquare() {
 
   return {
