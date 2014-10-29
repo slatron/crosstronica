@@ -28761,87 +28761,6 @@ constant('connection', {
   patterns: 'http://localhost:5984/patterns'
 });
 
-function gridCtrl($scope, $http, gridFactory, connection) {
-
-  var rows = 10;
-  var cols = 10;
-
-  $scope.selected = {};
-  $scope.pallete  = [];
-  $scope.grid     = [];
-
-  $scope.showGrid = false;
-
-  function postColor(colorObj) {
-    // send post request
-    $http.post(connection.pallete, colorObj)
-      .success(function () {
-        console.log('successful color post');
-
-      // Clear New Color Form
-      $scope.newname   = '';
-      $scope.newrgb    = '';
-      $scope.newsymbol = '';
-      $scope.newdmc    = '';
-
-      // Update Current Pallete with new color
-      gridFactory.getPallete()
-        .then(function(data){
-          $scope.pallete = data;
-        }, function(data){
-          console.error('error resolving getPallete promise: ', data);
-        });
-      }).error(function (err) {
-        console.log('Error: ' + err);
-      });
-  }
-
-  $scope.addColor = function() {
-    var colorObj = {
-      data: {
-        name: $scope.newname,
-        rgb: $scope.newrgb,
-        symbol: $scope.newsymbol,
-        dmc: $scope.newdmc
-      }
-    };
-    postColor(colorObj);
-  };
-
-  $scope.selectColor = function(colorId) {
-    $scope.selected = $scope.pallete[colorId];
-  };
-
-  $scope.paintCel = function(row, col, triggerDigest) {
-    console.log('Paint Cel At: ', row, col);
-
-    triggerDigest = triggerDigest || false;
-
-    $scope.grid[row][col] = $scope.selected;
-
-    if(triggerDigest) $scope.$digest();
-  };
-
-  var _init = function() {
-
-    $scope.grid = gridFactory.makeGrid(rows, cols);
-
-    gridFactory.getPallete()
-      .then(function(data){
-        $scope.pallete = data;
-      }, function(data){
-        console.error('error resolving getPallete promise: ', data);
-      });
-  };
-
-  _init();
-
-}
-gridCtrl.$inject = ["$scope", "$http", "gridFactory", "connection"];
-
-angular.module('Crosstronica').
-controller('GridCtrl', gridCtrl);
-
 function gridFactory($http, $q, connection) {
 
   var gridFactoryMethods = {};
@@ -28914,19 +28833,48 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
-function pattern($scope, $http, gridFactory, connection) {
+function gridSquare() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      color:  '@', // 6-digit RGB color
+      symbol: '@', // string to display in square
+      paint:  '&'  // ref to parent paint function
+    },
+    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
+    link: function (scope, elem, attrs) {
+      elem.on('mousedown', function() {
+        scope.paint(attrs.row, attrs.col);
+      });
+
+      elem.on('mouseover', function(e) {
+        if(ms_utils.detectLeftButton(e)) {
+          elem.on('mouseup mousemove', function handler(e) {
+            scope.paint(attrs.row, attrs.col);
+            elem.off('mouseup mousemove', handler);
+          });
+        }
+      });
+    }
+  };
+}
+
+angular.module('Crosstronica').
+directive('gridSquare', gridSquare);
+
+function pattern() {
 
   return {
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/pattern/pattern.html',
-    controller: function () {
+    controller: ["$scope", "$http", "gridFactory", "connection", function ($scope, $http, gridFactory, connection) {
 
       var rows = 10;
       var cols = 10;
 
-      $scope.selected = {};
-      $scope.pallete  = [];
       $scope.grid     = [];
 
       $scope.showGrid = false;
@@ -28967,23 +28915,49 @@ function pattern($scope, $http, gridFactory, connection) {
         postColor(colorObj);
       };
 
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
+      var _init = function() {
+        $scope.grid = gridFactory.makeGrid(rows, cols);
       };
 
-      $scope.paintCel = function(row, col, triggerDigest) {
+      _init();
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.paintCel = function(row, col, triggerDigest) {
         console.log('Paint Cel At: ', row, col);
 
         triggerDigest = triggerDigest || false;
 
-        $scope.grid[row][col] = $scope.selected;
+        scope.grid[row][col] = scope.selected;
 
-        if(triggerDigest) $scope.$digest();
+        if(triggerDigest) scope.$digest();
+      };
+
+    }
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('pattern', pattern);
+
+function pallete() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/pallete/pallete.html',
+    controller: ["$scope", "$http", "gridFactory", function ($scope, $http, gridFactory) {
+
+      $scope.pallete  = [];
+
+      $scope.selectColor = function(colorId) {
+        $scope.selected = $scope.pallete[colorId];
       };
 
       var _init = function() {
-
-        $scope.grid = gridFactory.makeGrid(rows, cols);
 
         gridFactory.getPallete()
           .then(function(data){
@@ -28995,45 +28969,32 @@ function pattern($scope, $http, gridFactory, connection) {
 
       _init();
 
-    },
-
-    link: function (scope, elem, attrs) {
-    }
+    }]
   };
 
 }
-pattern.$inject = ["$scope", "$http", "gridFactory", "connection"];
 
 angular.module('Crosstronica').
-directive('pattern', pattern);
+directive('pallete', pallete);
 
-function gridSquare() {
+function selectedColor() {
 
   return {
     restrict: 'E',
     replace: true,
-    scope: {
-      color:  '@', // 6-digit RGB color
-      symbol: '@', // string to display in square
-      paint:  '&'  // ref to parent paint function
-    },
-    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
-    link: function (scope, elem, attrs) {
-      elem.on('mousedown', function() {
-        scope.paint(attrs.row, attrs.col);
-      });
+    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
+    controller: ["$scope", function ($scope) {
 
-      elem.on('mouseover', function(e) {
-        if(ms_utils.detectLeftButton(e)) {
-          elem.on('mouseup mousemove', function handler(e) {
-            scope.paint(attrs.row, attrs.col);
-            elem.off('mouseup mousemove', handler);
-          });
-        }
-      });
-    }
+      $scope.selected = {};
+
+      $scope.selectColor = function(colorId) {
+        $scope.selected = $scope.pallete[colorId];
+      };
+
+    }]
   };
+
 }
 
 angular.module('Crosstronica').
-directive('gridSquare', gridSquare);
+directive('selectedColor', selectedColor);

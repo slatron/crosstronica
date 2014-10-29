@@ -1,0 +1,9 @@
+<nav class="grid">
+  <div ng-repeat="color in pallete" class="color-pallete">
+    <grid-square
+      ng-click="selectColor(color.c_id)"
+      color="{{color.rgb}}"
+      symbol="{{color.symbol}}"
+    ></grid-square>
+  </div>
+</nav>

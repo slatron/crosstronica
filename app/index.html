@@ -15,24 +15,8 @@
       <h1>Welcome to Crosstronica</h1>
     </header>
 
-    <nav class="grid">
-      <div ng-repeat="color in pallete" class="color-pallete">
-        <grid-square
-          ng-click="selectColor(color.c_id)"
-          color="{{color.rgb}}"
-          symbol="{{color.symbol}}"
-        ></grid-square>
-      </div>
-    </nav>
-
-    <span ng-show="selected.name">
-      <grid-square color="{{selected.rgb}}" symbol="{{selected.symbol}}"></grid-square>
-    </span>
-
-    <h3>
-      Draw Color: <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
-    </h3>
-
+    <pallete></pallete>
+    <selected-color></selected-color>
     <pattern></pattern>
 
     <form novalidate ng-submit="addColor()" name="addcolor">
