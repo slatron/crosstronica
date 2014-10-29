@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
   </head>
-  <body ng-controller="GridCtrl">
+  <body>
 
     <header>
       <h1>Welcome to Crosstronica</h1>
@@ -33,16 +33,7 @@
       Draw Color: <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
     </h3>
 
-    <main class="pattern-grid">
-      <div ng-repeat="row in grid track by $index" class="grid pattern-row">
-        <div ng-repeat="col in row track by $index" class="grid">
-          <grid-square
-            color="{{col.rgb}}"
-            symbol="{{col.symbol}}"
-            paint="paintCel($parent.$index, $index, true)"
-          ></grid-square>
-      </div>
-    </main>
+    <pattern></pattern>
 
     <form novalidate ng-submit="addColor()" name="addcolor">
       <h4>Add New Color: </h4>
