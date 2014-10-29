@@ -28833,51 +28833,13 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
-function gridSquare() {
+function addColor() {
 
   return {
     restrict: 'E',
     replace: true,
-    scope: {
-      color:  '@', // 6-digit RGB color
-      symbol: '@', // string to display in square
-      paint:  '&'  // ref to parent paint function
-    },
-    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
-    link: function (scope, elem, attrs) {
-      elem.on('mousedown', function() {
-        scope.paint(attrs.row, attrs.col);
-      });
-
-      elem.on('mouseover', function(e) {
-        if(ms_utils.detectLeftButton(e)) {
-          elem.on('mouseup mousemove', function handler(e) {
-            scope.paint(attrs.row, attrs.col);
-            elem.off('mouseup mousemove', handler);
-          });
-        }
-      });
-    }
-  };
-}
-
-angular.module('Crosstronica').
-directive('gridSquare', gridSquare);
-
-function pattern() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/pattern/pattern.html',
+    templateUrl: '/js/angular_app/directives/add_color/addColor.html',
     controller: ["$scope", "$http", "gridFactory", "connection", function ($scope, $http, gridFactory, connection) {
-
-      var rows = 10;
-      var cols = 10;
-
-      $scope.grid     = [];
-
-      $scope.showGrid = false;
 
       function postColor(colorObj) {
         // send post request
@@ -28915,33 +28877,56 @@ function pattern() {
         postColor(colorObj);
       };
 
-      var _init = function() {
-        $scope.grid = gridFactory.makeGrid(rows, cols);
-      };
+    }]
+  };
+}
 
-      _init();
+angular.module('Crosstronica').
+directive('addColor', addColor);
 
-    }],
+function gridSquare() {
 
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      color:  '@', // 6-digit RGB color
+      symbol: '@', // string to display in square
+      paint:  '&'  // ref to parent paint function
+    },
+    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
     link: function (scope, elem, attrs) {
+      elem.on('mousedown', function() {
+        scope.paint(attrs.row, attrs.col);
+      });
 
-      scope.paintCel = function(row, col, triggerDigest) {
-        console.log('Paint Cel At: ', row, col);
-
-        triggerDigest = triggerDigest || false;
-
-        scope.grid[row][col] = scope.selected;
-
-        if(triggerDigest) scope.$digest();
-      };
-
+      elem.on('mouseover', function(e) {
+        if(ms_utils.detectLeftButton(e)) {
+          elem.on('mouseup mousemove', function handler(e) {
+            scope.paint(attrs.row, attrs.col);
+            elem.off('mouseup mousemove', handler);
+          });
+        }
+      });
     }
+  };
+}
+
+angular.module('Crosstronica').
+directive('gridSquare', gridSquare);
+
+function pageState() {
+
+  return {
+    controller: ["$scope", function ($scope) {
+      $scope.showGrid = false;
+    }]
   };
 
 }
 
 angular.module('Crosstronica').
-directive('pattern', pattern);
+directive('pageState', pageState);
 
 function pallete() {
 
@@ -28998,3 +28983,43 @@ function selectedColor() {
 
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);
+
+function pattern() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/pattern/pattern.html',
+    controller: ["$scope", "gridFactory", function ($scope, gridFactory) {
+
+      var rows = 10;
+      var cols = 10;
+
+      $scope.grid  = [];
+
+      var _init = function() {
+        $scope.grid = gridFactory.makeGrid(rows, cols);
+      };
+
+      _init();
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.paintCel = function(row, col, triggerDigest) {
+
+        triggerDigest = triggerDigest || false;
+
+        scope.grid[row][col] = scope.selected;
+
+        if(triggerDigest) scope.$digest();
+      };
+
+    }
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('pattern', pattern);
