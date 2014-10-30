@@ -18,18 +18,19 @@ function gridFactory($http, $q, connection) {
       }).error(function(e) {
         deferred.reject('There was an error getting pallete data');
         console.error('error with GET pallete', e);
+
+        // GET BACKUP FROM LOCAL JSON FILE
+        $http.get('/json/pallete.json').success(function(data){
+          deferred.resolve(data);
+        }).error(function() {
+          deferred.reject('There was an error getting pallete.json');
+        });
+
     });
 
     return deferred.promise;
 
-    // FROM JSON FILE
-    // var deferred = $q.defer();
 
-    // $http.get('/json/pallete.json').success(function(data){
-    //   deferred.resolve(data);
-    // }).error(function() {
-    //   deferred.reject('There was an error getting pallete.json');
-    // });
 
     // return deferred.promise;
   };

@@ -11,14 +11,25 @@
   </head>
   <body page-state>
 
-    <header ng-include="'layout/header.html'"></header>
+    <div class="grid">
 
-    <pallete></pallete>
-    <selected-color></selected-color>
-    <pattern></pattern>
-    <add-color></add-color>
+      <aside>
 
-    <footer ng-include="'layout/footer.html'"></footer>
+        <pallete></pallete>
+        <selected-color></selected-color>
+        <add-color></add-color>
+
+      </aside>
+
+      <main>
+
+        <header ng-include="'layout/header.html'"></header>
+        <pattern></pattern>
+        <footer ng-include="'layout/footer.html'"></footer>
+
+      </main>
+
+    </div>
 
     <script src="assets/js/main.js"></script>
 
