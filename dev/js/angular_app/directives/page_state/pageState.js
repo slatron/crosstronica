@@ -3,6 +3,7 @@ function pageState() {
   return {
     controller: function ($scope) {
       $scope.showGrid = false;
+      $scope.selected = {};
     }
   };
 

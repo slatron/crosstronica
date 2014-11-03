@@ -28755,12 +28755,6 @@ var ms_utils = {
 
 angular.module('Crosstronica', []);
 
-angular.module('Crosstronica').
-constant('connection', {
-  pallete: 'http://localhost:5984/pallete',
-  patterns: 'http://localhost:5984/patterns'
-});
-
 function gridFactory($http, $q, connection) {
 
   var gridFactoryMethods = {};
@@ -28833,6 +28827,12 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
+
+angular.module('Crosstronica').
+constant('connection', {
+  pallete: 'http://localhost:5984/pallete',
+  patterns: 'http://localhost:5984/patterns'
+});
 
 function addColor() {
 
@@ -28954,6 +28954,7 @@ function pageState() {
   return {
     controller: ["$scope", function ($scope) {
       $scope.showGrid = false;
+      $scope.selected = {};
     }]
   };
 
@@ -28971,10 +28972,6 @@ function pallete() {
     controller: ["$scope", "$http", "gridFactory", function ($scope, $http, gridFactory) {
 
       $scope.pallete  = [];
-
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
-      };
 
       var _init = function() {
 
@@ -28995,28 +28992,6 @@ function pallete() {
 
 angular.module('Crosstronica').
 directive('pallete', pallete);
-
-function selectedColor() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
-    controller: ["$scope", function ($scope) {
-
-      $scope.selected = {};
-
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
-      };
-
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('selectedColor', selectedColor);
 
 function pattern() {
 
@@ -29057,3 +29032,23 @@ function pattern() {
 
 angular.module('Crosstronica').
 directive('pattern', pattern);
+
+function selectedColor() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
+    controller: ["$scope", function ($scope) {
+
+      $scope.selectColor = function(colorId) {
+        $scope.$parent.selected = $scope.pallete[colorId];
+      };
+
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('selectedColor', selectedColor);

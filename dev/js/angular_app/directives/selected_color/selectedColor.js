@@ -6,10 +6,8 @@ function selectedColor() {
     templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
     controller: function ($scope) {
 
-      $scope.selected = {};
-
       $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
+        $scope.$parent.selected = $scope.pallete[colorId];
       };
 
     }
