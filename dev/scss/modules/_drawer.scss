@@ -1,0 +1,84 @@
+$drawer-col-width: 250px;
+$drawer-width: 215px;
+$drawer-control-width: 10px;
+
+.drawer-grid {
+  overflow: hidden;
+
+  li { list-style-type: none }
+}
+
+.drawer-col {
+  width: $drawer-col-width;
+  flex-shrink: 0;
+
+  transition: all 500ms;
+
+  &.collapsed {
+    width: $drawer-control-width * 2;
+    padding: $base-unit-half 0;
+  }
+}
+
+.drawer {
+  border-right: 2px solid $color-sohi;
+  margin-left: 0;
+  overflow: hidden;
+  width: $drawer-width;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    min-height: 20px;
+  }
+
+  a {
+    color: $color-black;
+    display: block;
+    padding: 4px 11px;
+    text-decoration: none;
+
+    &:active,
+    &.active {
+      background: $color-pool;
+    }
+  }
+
+  * {
+    overflow: hidden;
+  }
+
+  transition: all 500ms;
+}
+
+.collapsed > .drawer {
+  margin-left: -$drawer-width;
+}
+
+.drawer-control {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  margin-right: $drawer-control-width;
+  margin-left: 0;
+  width: $drawer-control-width;
+}
+
+.drawer-control > div {
+  background: $color-sohi;
+  cursor: pointer;
+  display: flex;
+  height: 45px;
+  justify-content: space-around;
+  padding: 2px 0;
+  @include border-right-radius(3px);
+
+  > div {
+    background: $color-white;
+    height: 40px;
+    width: 2px;
+    @include border-right-radius(2px);
+  }
+}
