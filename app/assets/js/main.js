@@ -28996,6 +28996,28 @@ function pallete() {
 angular.module('Crosstronica').
 directive('pallete', pallete);
 
+function selectedColor() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
+    controller: ["$scope", function ($scope) {
+
+      $scope.selected = {};
+
+      $scope.selectColor = function(colorId) {
+        $scope.selected = $scope.pallete[colorId];
+      };
+
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('selectedColor', selectedColor);
+
 function pattern() {
 
   return {
@@ -29035,25 +29057,3 @@ function pattern() {
 
 angular.module('Crosstronica').
 directive('pattern', pattern);
-
-function selectedColor() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
-    controller: ["$scope", function ($scope) {
-
-      $scope.selected = {};
-
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
-      };
-
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('selectedColor', selectedColor);
