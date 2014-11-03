@@ -14,25 +14,13 @@
 
     <div class="grid drawer-grid grid-padded">
 
-      <div
-        class="grid drawer-col demo localdata"
-        ng-class="showDrawer ? '' : 'collapsed'"
-      >
+      <drawer>
 
-        <aside class="drawer" id="drawer">
+        <pallete></pallete>
+        <selected-color></selected-color>
+        <add-color></add-color>
 
-          <pallete></pallete>
-          <selected-color></selected-color>
-          <add-color></add-color>
-
-        </aside>
-
-        <div class="drawer-control" ng-init="showDrawer = true">
-          <i ng-click="showDrawer = false" ng-show="showDrawer" class="fa fa-minus"></i>
-          <i ng-click="showDrawer = true" ng-hide="showDrawer" class="fa fa-plus"></i>
-        </div>
-
-      </div>
+      </drawer>
 
       <main>
 

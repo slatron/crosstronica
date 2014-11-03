@@ -8,10 +8,6 @@ function pallete() {
 
       $scope.pallete  = [];
 
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
-      };
-
       var _init = function() {
 
         gridFactory.getPallete()

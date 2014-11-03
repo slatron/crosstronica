@@ -28954,6 +28954,7 @@ function pageState() {
   return {
     controller: ["$scope", function ($scope) {
       $scope.showGrid = false;
+      $scope.selected = {};
     }]
   };
 
@@ -28971,10 +28972,6 @@ function pallete() {
     controller: ["$scope", "$http", "gridFactory", function ($scope, $http, gridFactory) {
 
       $scope.pallete  = [];
-
-      $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
-      };
 
       var _init = function() {
 
@@ -29044,10 +29041,8 @@ function selectedColor() {
     templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
     controller: ["$scope", function ($scope) {
 
-      $scope.selected = {};
-
       $scope.selectColor = function(colorId) {
-        $scope.selected = $scope.pallete[colorId];
+        $scope.$parent.selected = $scope.pallete[colorId];
       };
 
     }]
