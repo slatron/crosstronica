@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
   <body page-state>
 
@@ -27,11 +28,8 @@
         </aside>
 
         <div class="drawer-control" ng-init="showDrawer = true">
-          <div
-            ng-click="showDrawer = !showDrawer"
-          >
-            +
-          </div>
+          <i ng-click="showDrawer = false" ng-show="showDrawer" class="fa fa-minus"></i>
+          <i ng-click="showDrawer = true" ng-hide="showDrawer" class="fa fa-plus"></i>
         </div>
 
       </div>

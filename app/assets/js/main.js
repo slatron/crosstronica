@@ -28755,6 +28755,12 @@ var ms_utils = {
 
 angular.module('Crosstronica', []);
 
+angular.module('Crosstronica').
+constant('connection', {
+  pallete: 'http://localhost:5984/pallete',
+  patterns: 'http://localhost:5984/patterns'
+});
+
 function gridFactory($http, $q, connection) {
 
   var gridFactoryMethods = {};
@@ -28828,12 +28834,6 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
-angular.module('Crosstronica').
-constant('connection', {
-  pallete: 'http://localhost:5984/pallete',
-  patterns: 'http://localhost:5984/patterns'
-});
-
 function addColor() {
 
   return {
@@ -28884,6 +28884,39 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    transclude: true,
+
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controller: ["$scope", function ($scope) {
+
+      $scope.showDrawer = true;
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.closeDrawer = function() {
+        scope.showDrawer = false;
+      };
+
+      scope.openDrawer = function() {
+        scope.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
 
 function gridSquare() {
 

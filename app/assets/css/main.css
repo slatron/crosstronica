@@ -642,7 +642,7 @@ h6 {
 }
 /* line 17, ../../../dev/scss/modules/_drawer.scss */
 .drawer-col.collapsed {
-  width: 20px;
+  width: 40px;
   padding: 0.5em 0;
 }
 
@@ -685,6 +685,9 @@ h6 {
 
 /* line 59, ../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
+  background: #569e56;
+  color: #fff;
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -697,38 +700,18 @@ h6 {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-right: 10px;
-  margin-left: 0;
-  width: 10px;
-}
-
-/* line 69, ../../../dev/scss/modules/_drawer.scss */
-.drawer-control > div {
-  background: #569e56;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 45px;
+  height: 35px;
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
-  padding: 2px 0;
+  margin-right: 20px;
+  margin-left: 0;
+  padding-left: 3px;
+  position: relative;
+  top: 50vh;
+  width: 20px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-}
-/* line 78, ../../../dev/scss/modules/_drawer.scss */
-.drawer-control > div > div {
-  background: #fff;
-  height: 40px;
-  width: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
 }
 
 /* line 1, ../../../dev/scss/modules/_pattern-grid.scss */

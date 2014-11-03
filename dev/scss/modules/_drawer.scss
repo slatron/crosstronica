@@ -1,6 +1,6 @@
 $drawer-col-width: 250px;
 $drawer-width: 215px;
-$drawer-control-width: 10px;
+$drawer-control-width: 20px;
 
 .drawer-grid {
   overflow: hidden;
@@ -57,28 +57,19 @@ $drawer-control-width: 10px;
 }
 
 .drawer-control {
+  background: $color-sohi;
+  color: $color-white;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  justify-content: center;
+  height: 35px;
+  justify-content: space-around;
   margin-right: $drawer-control-width;
   margin-left: 0;
+  padding-left: 3px;
+  position: relative;
+  top: 50vh;
   width: $drawer-control-width;
-}
-
-.drawer-control > div {
-  background: $color-sohi;
-  cursor: pointer;
-  display: flex;
-  height: 45px;
-  justify-content: space-around;
-  padding: 2px 0;
   @include border-right-radius(3px);
-
-  > div {
-    background: $color-white;
-    height: 40px;
-    width: 2px;
-    @include border-right-radius(2px);
-  }
 }

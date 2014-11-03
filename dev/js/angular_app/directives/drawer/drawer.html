@@ -1,0 +1,13 @@
+<div
+  class="grid drawer-col"
+  ng-class="showDrawer ? '' : 'collapsed'"
+>
+
+  <aside class="drawer" ng-transclude></aside>
+
+  <div class="drawer-control">
+    <i ng-click="closeDrawer()" ng-show="showDrawer" class="fa fa-minus"></i>
+    <i ng-click="openDrawer()" ng-hide="showDrawer" class="fa fa-plus"></i>
+  </div>
+
+</div>
