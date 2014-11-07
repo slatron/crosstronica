@@ -28755,6 +28755,12 @@ var ms_utils = {
 
 angular.module('Crosstronica', []);
 
+angular.module('Crosstronica').
+constant('connection', {
+  pallete: 'http://localhost:5984/pallete',
+  patterns: 'http://localhost:5984/patterns'
+});
+
 function gridFactory($http, $q, connection) {
 
   var gridFactoryMethods = {};
@@ -28827,12 +28833,6 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
-
-angular.module('Crosstronica').
-constant('connection', {
-  pallete: 'http://localhost:5984/pallete',
-  patterns: 'http://localhost:5984/patterns'
-});
 
 function addColor() {
 
