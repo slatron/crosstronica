@@ -29001,8 +29001,8 @@ function pattern() {
     templateUrl: '/js/angular_app/directives/pattern/pattern.html',
     controller: ["$scope", "gridFactory", function ($scope, gridFactory) {
 
-      var rows = 10;
-      var cols = 10;
+      var rows = 77;
+      var cols = 47;
 
       $scope.grid  = [];
 
@@ -29042,7 +29042,12 @@ function selectedColor() {
     controller: ["$scope", function ($scope) {
 
       $scope.selectColor = function(colorId) {
-        $scope.$parent.selected = $scope.pallete[colorId];
+        if (colorId !== 'erase') {
+          $scope.$parent.selected = $scope.pallete[colorId];
+        } else {
+          $scope.$parent.selected = {};
+        }
+
       };
 
     }]

@@ -7,7 +7,12 @@ function selectedColor() {
     controller: function ($scope) {
 
       $scope.selectColor = function(colorId) {
-        $scope.$parent.selected = $scope.pallete[colorId];
+        if (colorId !== 'erase') {
+          $scope.$parent.selected = $scope.pallete[colorId];
+        } else {
+          $scope.$parent.selected = {};
+        }
+
       };
 
     }
