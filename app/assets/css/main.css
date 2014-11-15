@@ -508,9 +508,7 @@ body, html {
 /* line 16, ../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
-p,
-.but-selection,
-.but {
+p {
   font-size: 14px;
 }
 
@@ -602,73 +600,50 @@ main {
 }
 
 /* line 12, ../../../dev/scss/modules/_buttons.scss */
-.but-selection,
 .but {
-  background: #f0eeee;
-  color: #569e56;
+  background: #569e56;
+  color: #222222;
   cursor: pointer;
   display: inline-block;
-  min-width: 100px;
   padding: 0.5em 1em;
   text-align: center;
   -o-border-radius: 7px;
   border-radius: 7px;
 }
-/* line 25, ../../../dev/scss/modules/_buttons.scss */
-.active.but-selection, .but-selection:active,
+/* line 23, ../../../dev/scss/modules/_buttons.scss */
 .but.active,
 .but:active {
-  background: #a1a1a1;
+  background: #222222;
   color: white;
 }
-/* line 30, ../../../dev/scss/modules/_buttons.scss */
-.but-selection:hover,
+/* line 28, ../../../dev/scss/modules/_buttons.scss */
 .but:hover {
-  background-color: #eef6f6;
-  color: #222222;
+  background-color: #edc721;
 }
 
-/* line 36, ../../../dev/scss/modules/_buttons.scss */
+/* line 33, ../../../dev/scss/modules/_buttons.scss */
 a.but-selection {
   text-decoration: none;
 }
-/* line 39, ../../../dev/scss/modules/_buttons.scss */
+/* line 36, ../../../dev/scss/modules/_buttons.scss */
 a.but-selection:active {
   background: #edc721;
   color: #569e56;
 }
 
-/* line 45, ../../../dev/scss/modules/_buttons.scss */
-.but-selection {
-  background: #569e56;
-  color: white;
-  -webkit-box-shadow: 2px 2px 1px 0px rgba(121, 121, 121, 0.65);
-  box-shadow: 2px 2px 1px 0px rgba(121, 121, 121, 0.65);
-}
-/* line 51, ../../../dev/scss/modules/_buttons.scss */
-.but-selection.active, .but-selection:active {
-  background: #edc721 !important;
-  color: #569e56 !important;
-}
-/* line 56, ../../../dev/scss/modules/_buttons.scss */
-.but-selection:hover {
-  background-color: #83c1bf;
-  color: white;
-}
-
-/* line 64, ../../../dev/scss/modules/_buttons.scss */
+/* line 43, ../../../dev/scss/modules/_buttons.scss */
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 0;
 }
-/* line 69, ../../../dev/scss/modules/_buttons.scss */
+/* line 48, ../../../dev/scss/modules/_buttons.scss */
 .but-row .but {
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-/* line 75, ../../../dev/scss/modules/_buttons.scss */
+/* line 54, ../../../dev/scss/modules/_buttons.scss */
 .but[disabled] {
   opacity: 0.2;
 }
@@ -732,6 +707,11 @@ a.but-selection:active {
   min-width: 0;
 }
 
+/* line 24, ../../../dev/scss/modules/_panel.scss */
+.panel h6 + a {
+  display: inline-block;
+}
+
 /* line 3, ../../../dev/scss/modules/_grid.scss */
 .grid {
   display: -webkit-box;
@@ -772,43 +752,44 @@ a.but-selection:active {
 /* line 24, ../../../dev/scss/modules/_drawer.scss */
 .drawer {
   background: #f5f4e2;
-  border-right: 2px solid #569e56;
-  border-bottom: 2px solid #569e56;
+  border-right: 3px solid #569e56;
+  border-bottom: 3px solid #569e56;
   margin-left: 0;
   overflow: hidden;
   width: 215px;
+  border-bottom-right-radius: 13px;
   -webkit-transition: all 500ms;
           transition: all 500ms;
 }
-/* line 32, ../../../dev/scss/modules/_drawer.scss */
+/* line 34, ../../../dev/scss/modules/_drawer.scss */
 .drawer ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   min-height: 20px;
 }
-/* line 39, ../../../dev/scss/modules/_drawer.scss */
+/* line 41, ../../../dev/scss/modules/_drawer.scss */
 .drawer a {
   color: #222222;
   display: block;
   padding: 4px 11px;
   text-decoration: none;
 }
-/* line 46, ../../../dev/scss/modules/_drawer.scss */
+/* line 48, ../../../dev/scss/modules/_drawer.scss */
 .drawer a:active, .drawer a.active {
   background: #83c1bf;
 }
-/* line 51, ../../../dev/scss/modules/_drawer.scss */
+/* line 53, ../../../dev/scss/modules/_drawer.scss */
 .drawer * {
   overflow: hidden;
 }
 
-/* line 58, ../../../dev/scss/modules/_drawer.scss */
+/* line 60, ../../../dev/scss/modules/_drawer.scss */
 .collapsed > .drawer {
   margin-left: -215px;
 }
 
-/* line 62, ../../../dev/scss/modules/_drawer.scss */
+/* line 64, ../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
   background: #569e56;
   color: white;
@@ -910,7 +891,7 @@ a.but-selection:active {
 }
 
 /* line 27, ../../../dev/scss/state/_state.scss */
-.colorgold {
+.color-gold {
   color: #edc721;
 }
 

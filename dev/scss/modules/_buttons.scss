@@ -10,26 +10,23 @@
 
 %but,
 .but {
-  background: $color-ltgrey;
-  color: $color-sohi;
+  background: $color-sohi;
+  color: $color-black;
   cursor: pointer;
   display: inline-block;
-  min-width: 100px;
   padding: $base-unit-half $base-unit;
   text-align: center;
 
-  @extend %text-normal;
   @include border-radius($base-rounded-corners);
 
   &.active,
   &:active {
-    background: $color-medgrey;
+    background: $color-black;
     color: $color-white;
   }
 
   &:hover {
-    background-color: $color-agua;
-    color: $color-black;
+    background-color: $color-gold;
   }
 }
 
@@ -42,25 +39,7 @@ a.but-selection {
   }
 }
 
-.but-selection {
-  @extend %but;
-  background: $color-sohi;
-  color: $color-white;
-
-  &.active,
-  &:active {
-    background: $color-gold !important;
-    color: $color-sohi !important;
-  }
-
-  &:hover {
-    background-color: $color-pool;
-    color: $color-white;
-  }
-
-  @include default-box-shadow();
-}
-
+// Row of inline buttons
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;

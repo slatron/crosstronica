@@ -23,11 +23,13 @@ $drawer-control-width: 20px;
 
 .drawer {
   background: $color-cream;
-  border-right: 2px solid $color-sohi;
-  border-bottom: 2px solid $color-sohi;
+  border-right: 3px solid $color-sohi;
+  border-bottom: 3px solid $color-sohi;
   margin-left: 0;
   overflow: hidden;
   width: $drawer-width;
+
+  @include border-bottom-right-radius(13px);
 
   ul {
     list-style-type: none;

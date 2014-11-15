@@ -1,20 +1,26 @@
-<div class="panel">
-  <h6>Eraser:</h6>
-  <grid-square
-    ng-click="selectColor()"
-    color="ffffff"
-    symbol="E"
-  ></grid-square>
+<div class="panel" show-hide collapsed="true">
+  <h6>Tools:</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
 
-  <h6>Mode:</h6>
-  <span
-    class="text-tiny but"
-    ng-show="pageState.paintMode"
-    ng-click="pageState.paintMode = !pageState.paintMode"
-  >Paint</span>
-  <span
-    class="text-tiny but"
-    ng-hide="pageState.paintMode"
-    ng-click="pageState.paintMode = !pageState.paintMode"
-  >Borders</span>
+  <div ng-hide="collapsed">
+    <h6>Eraser:</h6>
+    <grid-square
+      ng-click="selectColor()"
+      color="ffffff"
+      symbol="E"
+    ></grid-square>
+
+    <h6>Mode:</h6>
+    <span
+      class="text-tiny but"
+      ng-show="pageState.paintMode"
+      ng-click="pageState.paintMode = !pageState.paintMode"
+    >Paint</span>
+    <span
+      class="text-tiny but"
+      ng-hide="pageState.paintMode"
+      ng-click="pageState.paintMode = !pageState.paintMode"
+    >Borders</span>
+  </div>
 </div>

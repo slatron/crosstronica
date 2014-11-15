@@ -1,0 +1,10 @@
+<div class="showhide">
+
+  <h6>{{ ::headline }}</h6>
+  <a ng-click="toggleMe()">{{ collapsed ? 'View' : 'Hide' }}</a>
+
+  <div ng-hide="collapsed">
+    <div ng-transclude></div>
+  </div>
+
+</div>
