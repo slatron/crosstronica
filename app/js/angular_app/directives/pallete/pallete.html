@@ -1,14 +1,18 @@
-<nav class="grid">
-  <div ng-repeat="color in pallete" class="color-pallete">
-    <grid-square
-      ng-click="selectColor(color.c_id)"
-      color="{{color.rgb}}"
-      symbol="{{color.symbol}}"
-    ></grid-square>
+<div class="pallete-area">
+  <div class="grid">
+    <div ng-repeat="color in pallete" class="color-pallete">
+      <grid-square
+        ng-click="selectColor(color)"
+        color="{{color.rgb}}"
+        symbol="{{color.symbol}}"
+      ></grid-square>
+    </div>
   </div>
+
+  <h6 class="">Eraser:</h6>
   <grid-square
-    ng-click="selectColor('erase')"
+    ng-click="selectColor()"
     color="ffffff"
-    symbol=""
+    symbol="E"
   ></grid-square>
-</nav>
+</div>

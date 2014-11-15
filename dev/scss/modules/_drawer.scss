@@ -9,6 +9,7 @@ $drawer-control-width: 20px;
 }
 
 .drawer-col {
+  position: fixed;
   width: $drawer-col-width;
   flex-shrink: 0;
 
@@ -21,7 +22,9 @@ $drawer-control-width: 20px;
 }
 
 .drawer {
+  background: $color-white;
   border-right: 2px solid $color-sohi;
+  border-bottom: 2px solid $color-sohi;
   margin-left: 0;
   overflow: hidden;
   width: $drawer-width;
@@ -69,7 +72,7 @@ $drawer-control-width: 20px;
   margin-left: 0;
   padding-left: 3px;
   position: relative;
-  top: 50vh;
+  top: 10vh;
   width: $drawer-control-width;
   @include border-right-radius(3px);
 }

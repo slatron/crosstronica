@@ -1,18 +1,19 @@
 .pattern-grid {
-  border-right: 1px solid #000;
   border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+
+  // inline-block forces grid squares to push full width
   display: inline-block;
 }
 
-.pattern-cel {
+.pattern-grid .square {
 
   @extend %square;
 
   border-bottom: none;
   border-right: none;
-  cursor: pointer;
 
-  transition: all 500ms $link-transition-type;
+  transition: all 700ms $link-transition-type;
 
   &.active,
   &:hover {
