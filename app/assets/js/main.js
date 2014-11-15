@@ -28930,10 +28930,6 @@ function gridSquare() {
     },
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
 
-    controller: ["$scope", function($scope) {
-      $scope.borderClass = '';
-    }],
-
     link: function (scope, elem, attrs) {
       elem.on('mousedown', function() {
         scope.paint(attrs.row, attrs.col);
@@ -28949,8 +28945,6 @@ function gridSquare() {
       });
 
       var _init = function() {
-
-        var borderClassString = '';
 
         _.each(scope.borders, function(bold, idx) {
           switch (idx) {
@@ -28971,8 +28965,6 @@ function gridSquare() {
             break;
           }
         });
-
-        // scope.borderClass = scope.borders;
       };
 
       _init();
@@ -29092,3 +29084,16 @@ function selectedColor() {
 
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);
+
+function tools() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/tools/tools.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('tools', tools);

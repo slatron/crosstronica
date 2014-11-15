@@ -1,0 +1,20 @@
+<div class="panel">
+  <h6>Eraser:</h6>
+  <grid-square
+    ng-click="selectColor()"
+    color="ffffff"
+    symbol="E"
+  ></grid-square>
+
+  <h6>Mode:</h6>
+  <span
+    class="text-tiny but"
+    ng-show="paintMode"
+    ng-click="paintMode = !paintMode"
+  >Paint</span>
+  <span
+    class="text-tiny but"
+    ng-hide="paintMode"
+    ng-click="paintMode = !paintMode"
+  >Borders</span>
+</div>

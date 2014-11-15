@@ -1,0 +1,77 @@
+.but {
+  border: none;
+  text-decoration: none;
+
+  &:active {
+    background: $color-medgrey;
+    color: $color-white;
+  }
+}
+
+%but,
+.but {
+  background: $color-ltgrey;
+  color: $color-sohi;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100px;
+  padding: $base-unit-half $base-unit;
+  text-align: center;
+
+  @extend %text-normal;
+  @include border-radius($base-rounded-corners);
+
+  &.active,
+  &:active {
+    background: $color-medgrey;
+    color: $color-white;
+  }
+
+  &:hover {
+    background-color: $color-agua;
+    color: $color-black;
+  }
+}
+
+a.but-selection {
+  text-decoration: none;
+
+  &:active {
+    background: $color-gold;
+    color: $color-sohi;
+  }
+}
+
+.but-selection {
+  @extend %but;
+  background: $color-sohi;
+  color: $color-white;
+
+  &.active,
+  &:active {
+    background: $color-gold !important;
+    color: $color-sohi !important;
+  }
+
+  &:hover {
+    background-color: $color-pool;
+    color: $color-white;
+  }
+
+  @include default-box-shadow();
+}
+
+.but-row {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 0; // fixes inline-block childern from generating extra space
+
+  .but {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.but[disabled] {
+  opacity: 0.2;
+}

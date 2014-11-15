@@ -1,29 +1,8 @@
-<div class="pallete-area">
-  <div class="grid">
-    <div ng-repeat="color in pallete" class="color-pallete">
+<div class="panel">
       <grid-square
+        ng-repeat="color in pallete"
         ng-click="selectColor(color)"
         color="{{color.rgb}}"
         symbol="{{color.symbol}}"
       ></grid-square>
-    </div>
-  </div>
-
-  <hr>
-
-  <h6>Eraser:</h6>
-  <grid-square
-    ng-click="selectColor()"
-    color="ffffff"
-    symbol="E"
-  ></grid-square>
-
-  |
-
-  <h6>Mode:</h6>
-  <span class="text-tiny btn" ng-show="paintMode">Paint</span>
-  <span class="text-tiny btn" ng-hide="paintMode">Borders</span>
-
-  <hr>
-
 </div>
