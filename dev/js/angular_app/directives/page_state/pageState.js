@@ -5,9 +5,11 @@ function pageState() {
       $scope.showGrid = false;
       $scope.selected = {};
 
+      $scope.pageState = {};
+
       // true  = paint with clicks
       // false = add boreder with clicks
-      $scope.paintMode = true;
+      $scope.pageState.paintMode = true;
     }
   };
 

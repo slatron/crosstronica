@@ -9,12 +9,12 @@
   <h6>Mode:</h6>
   <span
     class="text-tiny but"
-    ng-show="paintMode"
-    ng-click="paintMode = !paintMode"
+    ng-show="pageState.paintMode"
+    ng-click="pageState.paintMode = !pageState.paintMode"
   >Paint</span>
   <span
     class="text-tiny but"
-    ng-hide="paintMode"
-    ng-click="paintMode = !paintMode"
+    ng-hide="pageState.paintMode"
+    ng-click="pageState.paintMode = !pageState.paintMode"
   >Borders</span>
 </div>

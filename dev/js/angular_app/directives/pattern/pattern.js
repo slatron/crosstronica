@@ -25,7 +25,14 @@ function pattern() {
 
         triggerDigest = triggerDigest || false;
 
-        scope.grid[row][col] = scope.selected;
+        if(scope.pageState.paintMode) {
+          scope.grid[row][col] = scope.selected;
+        }
+
+        if(!scope.pageState.paintMode) {
+          console.log(scope.grid[row][col]);
+          scope.grid[row][col].borders = [true, false, false, false];
+        }
 
         if(triggerDigest) scope.$digest();
       };
