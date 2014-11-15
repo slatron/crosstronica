@@ -591,7 +591,7 @@ main {
 /* line 2, ../../../dev/scss/modules/_square.scss */
 .pattern-grid .square,
 .square {
-  border: 1px solid #000;
+  border: 1px solid #222222;
   cursor: pointer;
   height: 15px;
   line-height: 15px;
@@ -602,6 +602,26 @@ main {
       -ms-user-select: none;
           user-select: none;
   width: 15px;
+}
+/* line 15, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-top.square,
+.square.border-top {
+  border-top: 2px solid #222222;
+}
+/* line 20, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-right.square,
+.square.border-right {
+  border-right: 2px solid #222222;
+}
+/* line 25, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-bottom.square,
+.square.border-bottom {
+  border-bottom: 2px solid #222222;
+}
+/* line 30, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-left.square,
+.square.border-left {
+  border-left: 2px solid #222222;
 }
 
 /* line 3, ../../../dev/scss/modules/_color-pallete.scss */

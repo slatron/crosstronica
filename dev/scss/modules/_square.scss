@@ -2,7 +2,7 @@
 .square {
   @extend %text-tiny;
 
-  border: 1px solid #000;
+  border: 1px solid $color-black;
   cursor: pointer;
   height: 15px;
   line-height: 15px;
@@ -10,4 +10,25 @@
   text-align: center;
   user-select: none;
   width: 15px;
+
+  // border[0]
+  &.border-top {
+    border-top: 2px solid $color-black;
+  }
+
+  // border[1]
+  &.border-right {
+    border-right: 2px solid $color-black;
+  }
+
+  // border[2]
+  &.border-bottom {
+    border-bottom: 2px solid $color-black;
+  }
+
+  // border[3]
+  &.border-left {
+    border-left: 2px solid $color-black;
+  }
+
 }

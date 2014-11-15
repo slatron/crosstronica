@@ -6,8 +6,8 @@ function pattern() {
     templateUrl: '/js/angular_app/directives/pattern/pattern.html',
     controller: function ($scope, gridFactory) {
 
-      var rows = 77;
-      var cols = 47;
+      var rows = 5;
+      var cols = 5;
 
       $scope.grid  = [];
 
