@@ -10,7 +10,7 @@ function drawer() {
 
     controller: function ($scope) {
 
-      $scope.showDrawer = true;
+      $scope.showDrawer = false;
 
     },
 

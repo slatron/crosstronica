@@ -1,9 +1,13 @@
-<div>
+<div class="panel">
+  <h6>Paint Color:</h6>
+  <p>
+    <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
+    <span ng-hide="selected.name">None</span>
+  </p>
+
   <span ng-show="selected.name">
-    <grid-square color="{{selected.rgb}}" symbol="{{selected.symbol}}"></grid-square>
+    <grid-square ng-show="selected" color="{{selected.rgb}}" symbol="{{selected.symbol}}"></grid-square>
+    <grid-square ng-hide="selected" color="ffffff" symbol="E"></grid-square>
   </span>
 
-  <h3>
-    Draw Color: <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
-  </h3>
 </div>

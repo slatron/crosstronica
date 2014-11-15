@@ -494,20 +494,23 @@ body, html {
 
 /* line 8, ../../../dev/scss/base/_typography.scss */
 .text-tiny,
-.pattern-cel,
+.pattern-grid .square,
 .square {
   font-size: 10.4px;
 }
 
 /* line 12, ../../../dev/scss/base/_typography.scss */
-.text-small {
+.text-small,
+.panel * {
   font-size: 12px;
 }
 
 /* line 16, ../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
-p {
+p,
+.but-selection,
+.but {
   font-size: 14px;
 }
 
@@ -582,10 +585,99 @@ h6 {
   color: #569e56;
 }
 
+/* line 2, ../../../dev/scss/layout/_layout.scss */
+main {
+  margin-left: 2em;
+}
+
+/* line 1, ../../../dev/scss/modules/_buttons.scss */
+.but {
+  border: none;
+  text-decoration: none;
+}
+/* line 5, ../../../dev/scss/modules/_buttons.scss */
+.but:active {
+  background: #a1a1a1;
+  color: white;
+}
+
+/* line 12, ../../../dev/scss/modules/_buttons.scss */
+.but-selection,
+.but {
+  background: #f0eeee;
+  color: #569e56;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100px;
+  padding: 0.5em 1em;
+  text-align: center;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+}
+/* line 25, ../../../dev/scss/modules/_buttons.scss */
+.active.but-selection, .but-selection:active,
+.but.active,
+.but:active {
+  background: #a1a1a1;
+  color: white;
+}
+/* line 30, ../../../dev/scss/modules/_buttons.scss */
+.but-selection:hover,
+.but:hover {
+  background-color: #eef6f6;
+  color: #222222;
+}
+
+/* line 36, ../../../dev/scss/modules/_buttons.scss */
+a.but-selection {
+  text-decoration: none;
+}
+/* line 39, ../../../dev/scss/modules/_buttons.scss */
+a.but-selection:active {
+  background: #edc721;
+  color: #569e56;
+}
+
+/* line 45, ../../../dev/scss/modules/_buttons.scss */
+.but-selection {
+  background: #569e56;
+  color: white;
+  -webkit-box-shadow: 2px 2px 1px 0px rgba(121, 121, 121, 0.65);
+  box-shadow: 2px 2px 1px 0px rgba(121, 121, 121, 0.65);
+}
+/* line 51, ../../../dev/scss/modules/_buttons.scss */
+.but-selection.active, .but-selection:active {
+  background: #edc721 !important;
+  color: #569e56 !important;
+}
+/* line 56, ../../../dev/scss/modules/_buttons.scss */
+.but-selection:hover {
+  background-color: #83c1bf;
+  color: white;
+}
+
+/* line 64, ../../../dev/scss/modules/_buttons.scss */
+.but-row {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 0;
+}
+/* line 69, ../../../dev/scss/modules/_buttons.scss */
+.but-row .but {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 75, ../../../dev/scss/modules/_buttons.scss */
+.but[disabled] {
+  opacity: 0.2;
+}
+
 /* line 2, ../../../dev/scss/modules/_square.scss */
-.pattern-cel,
+.pattern-grid .square,
 .square {
-  border: 1px solid #000;
+  border: 1px solid #222222;
+  cursor: pointer;
   height: 15px;
   line-height: 15px;
   padding-left: 0.25em;
@@ -596,18 +688,48 @@ h6 {
           user-select: none;
   width: 15px;
 }
-
-/* line 1, ../../../dev/scss/modules/_color-pallete.scss */
-.color-pallete {
-  margin-bottom: 1em;
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
+/* line 15, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-top.square,
+.square.border-top {
+  border-top: 2px solid #222222;
 }
-/* line 6, ../../../dev/scss/modules/_color-pallete.scss */
-.color-pallete .square {
-  border-right: none;
+/* line 20, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-right.square,
+.square.border-right {
+  border-right: 2px solid #222222;
+}
+/* line 25, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-bottom.square,
+.square.border-bottom {
+  border-bottom: 2px solid #222222;
+}
+/* line 30, ../../../dev/scss/modules/_square.scss */
+.pattern-grid .border-left.square,
+.square.border-left {
+  border-left: 2px solid #222222;
+}
+
+/* line 1, ../../../dev/scss/modules/_panel.scss */
+.panel {
+  border-bottom: 1px solid #569e56;
+  margin: 0.5em 0;
+  padding: 0.5em 0.25em;
+  vertical-align: middle;
+}
+/* line 7, ../../../dev/scss/modules/_panel.scss */
+.panel:last-child {
   border-bottom: none;
-  cursor: pointer;
+  margin-bottom: 0;
+}
+/* line 12, ../../../dev/scss/modules/_panel.scss */
+.panel * {
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 0;
+}
+/* line 19, ../../../dev/scss/modules/_panel.scss */
+.panel .but {
+  min-width: 0;
 }
 
 /* line 3, ../../../dev/scss/modules/_grid.scss */
@@ -633,6 +755,7 @@ h6 {
 
 /* line 11, ../../../dev/scss/modules/_drawer.scss */
 .drawer-col {
+  position: fixed;
   width: 250px;
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
@@ -640,50 +763,52 @@ h6 {
   -webkit-transition: all 500ms;
           transition: all 500ms;
 }
-/* line 17, ../../../dev/scss/modules/_drawer.scss */
+/* line 18, ../../../dev/scss/modules/_drawer.scss */
 .drawer-col.collapsed {
   width: 40px;
   padding: 0.5em 0;
 }
 
-/* line 23, ../../../dev/scss/modules/_drawer.scss */
+/* line 24, ../../../dev/scss/modules/_drawer.scss */
 .drawer {
+  background: white;
   border-right: 2px solid #569e56;
+  border-bottom: 2px solid #569e56;
   margin-left: 0;
   overflow: hidden;
   width: 215px;
   -webkit-transition: all 500ms;
           transition: all 500ms;
 }
-/* line 29, ../../../dev/scss/modules/_drawer.scss */
+/* line 32, ../../../dev/scss/modules/_drawer.scss */
 .drawer ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   min-height: 20px;
 }
-/* line 36, ../../../dev/scss/modules/_drawer.scss */
+/* line 39, ../../../dev/scss/modules/_drawer.scss */
 .drawer a {
   color: #222222;
   display: block;
   padding: 4px 11px;
   text-decoration: none;
 }
-/* line 43, ../../../dev/scss/modules/_drawer.scss */
+/* line 46, ../../../dev/scss/modules/_drawer.scss */
 .drawer a:active, .drawer a.active {
   background: #83c1bf;
 }
-/* line 48, ../../../dev/scss/modules/_drawer.scss */
+/* line 51, ../../../dev/scss/modules/_drawer.scss */
 .drawer * {
   overflow: hidden;
 }
 
-/* line 55, ../../../dev/scss/modules/_drawer.scss */
+/* line 58, ../../../dev/scss/modules/_drawer.scss */
 .collapsed > .drawer {
   margin-left: -215px;
 }
 
-/* line 59, ../../../dev/scss/modules/_drawer.scss */
+/* line 62, ../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
   background: #569e56;
   color: white;
@@ -708,7 +833,7 @@ h6 {
   margin-left: 0;
   padding-left: 3px;
   position: relative;
-  top: 50vh;
+  top: 10vh;
   width: 20px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -716,21 +841,20 @@ h6 {
 
 /* line 1, ../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid {
-  border-right: 1px solid #000;
   border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
   display: inline-block;
 }
 
-/* line 7, ../../../dev/scss/modules/_pattern-grid.scss */
-.pattern-cel {
+/* line 9, ../../../dev/scss/modules/_pattern-grid.scss */
+.pattern-grid .square {
   border-bottom: none;
   border-right: none;
-  cursor: pointer;
-  -webkit-transition: all 500ms ease-out;
-          transition: all 500ms ease-out;
+  -webkit-transition: all 700ms ease-out;
+          transition: all 700ms ease-out;
 }
-/* line 18, ../../../dev/scss/modules/_pattern-grid.scss */
-.pattern-cel.active, .pattern-cel:hover {
+/* line 19, ../../../dev/scss/modules/_pattern-grid.scss */
+.pattern-grid .square.active, .pattern-grid .square:hover {
   color: #222222;
 }
 
