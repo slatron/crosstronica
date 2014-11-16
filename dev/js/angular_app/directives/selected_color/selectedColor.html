@@ -1,13 +1,36 @@
 <div class="panel">
-  <h6>Paint Color:</h6>
-  <p>
-    <span ng-show="selected.name">{{selected.name}} #{{selected.rgb}}</span>
-    <span ng-hide="selected.name">Eraser</span>
-  </p>
 
-  <span ng-show="selected.name">
-    <grid-square ng-show="selected" color="{{selected.rgb}}" symbol="{{selected.symbol}}"></grid-square>
-    <grid-square ng-hide="selected" color="ffffff" symbol="E"></grid-square>
-  </span>
+  <div ng-hide="pageState.paintMode">
+    <h6>Border Side: </h6>
+    <select ng-model="pageState.borderSide">
+      <option value="top">top</option>
+      <option value="right">right</option>
+      <option value="bottom">bottom</option>
+      <option value="left">left</option>
+    </select>
+    <br>
+    <b>{{ pageState.borderSide }}</b>
+
+  </div>
+
+  <div ng-show="pageState.paintMode">
+    <h6>Paint Color:</h6>
+    <span ng-show="pageState.selected.name">
+      <grid-square
+        ng-show="pageState.selected"
+        color="pageState.selected"
+      ></grid-square>
+      <grid-square
+        ng-hide="pageState.selected"
+        color="pageState.selected"
+      ></grid-square>
+    </span>
+    <br>
+    <p>
+      <span ng-show="pageState.selected.name">{{pageState.selected.name}} #{{pageState.selected.rgb}}</span>
+      <span ng-hide="pageState.selected.name">Eraser</span>
+    </p>
+  </div>
+
 
 </div>

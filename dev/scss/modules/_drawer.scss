@@ -1,6 +1,6 @@
 $drawer-col-width: 250px;
 $drawer-width: 215px;
-$drawer-control-width: 20px;
+$drawer-control-width: 15px;
 
 .drawer-grid {
   overflow: hidden;
@@ -62,6 +62,8 @@ $drawer-control-width: 20px;
 }
 
 .drawer-control {
+  @extend %text-small;
+
   background: $color-sohi;
   color: $color-white;
   cursor: pointer;

@@ -1,10 +1,8 @@
 <div class="pattern-grid">
   <div ng-repeat="row in grid track by $index" class="grid pattern-row">
-    <div ng-repeat="col in row track by $index" class="grid">
+    <div ng-repeat="color in row track by $index" class="grid">
       <grid-square
-        borders="col.borders"
-        color="{{col.rgb}}"
-        symbol="{{col.symbol}}"
+        color="color"
         paint="paintCel($parent.$index, $index, true)"
       ></grid-square>
   </div>

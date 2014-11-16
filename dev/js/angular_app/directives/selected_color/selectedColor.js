@@ -8,7 +8,7 @@ function selectedColor() {
 
       $scope.selectColor = function(color) {
         color = color || {};
-        $scope.$parent.selected = color;
+        $scope.pageState.selected = color;
       };
 
     }

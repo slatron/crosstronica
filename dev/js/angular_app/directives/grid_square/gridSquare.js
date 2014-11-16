@@ -4,52 +4,49 @@ function gridSquare() {
     restrict: 'E',
     replace: true,
     scope: {
-      borders: '=', // {array}
-      color:  '@',  // 6-digit RGB color
-      symbol: '@',  // string to display in square
-      paint:  '&'   // ref to parent paint function
+      color: '=',     // All Data in one sane object
+      paint:   '&'   // ref to parent paint function
     },
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
 
-    link: function (scope, elem, attrs) {
+    controller: function($scope) {
+      $scope.$watch('color.borders', function(side) {
+        if(side) {
+          // console.log('in gridSquare.js controller borders watch ', side);
+          $scope.setBorders(side);
+        }
+      });
+    },
+
+    link: function (scope, elem) {
+
+      scope.setBorders = function(sides) {
+        elem.removeClass('border-top border-right border-bottom border-left');
+
+        var sidesArray = [];
+
+        if(sides[0]) sidesArray.push('border-top');
+        if(sides[1]) sidesArray.push('border-right');
+        if(sides[2]) sidesArray.push('border-bottom');
+        if(sides[3]) sidesArray.push('border-left');
+
+        sidesString = sidesArray.join(' ');
+
+        elem.addClass(sidesString);
+      };
+
       elem.on('mousedown', function() {
-        scope.paint(attrs.row, attrs.col);
+        scope.paint();
       });
 
       elem.on('mouseover', function(e) {
         if(ms_utils.detectLeftButton(e)) {
           elem.on('mouseup mousemove', function handler(e) {
-            scope.paint(attrs.row, attrs.col);
+            scope.paint();
             elem.off('mouseup mousemove', handler);
           });
         }
       });
-
-      var _init = function() {
-
-        _.each(scope.borders, function(bold, idx) {
-          switch (idx) {
-            case 0:
-              if(bold) elem.addClass('border-top');
-            break;
-            case 1:
-              if(bold) elem.addClass('border-right');
-            break;
-            case 2:
-              if(bold) elem.addClass('border-bottom');
-            break;
-            case 3:
-              if(bold) elem.addClass('border-left');
-            break;
-            default:
-              console.log('caught extra array value in borders');
-            break;
-          }
-        });
-      };
-
-      _init();
-
     }
   };
 }
