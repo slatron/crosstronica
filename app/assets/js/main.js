@@ -28845,19 +28845,6 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
-
 function addColor() {
 
   return {
@@ -28908,6 +28895,108 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
+
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    transclude: true,
+
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controller: ["$scope", function ($scope) {
+
+      $scope.showDrawer = false;
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.closeDrawer = function() {
+        scope.showDrawer = false;
+      };
+
+      scope.openDrawer = function() {
+        scope.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
+
+function gridSquare() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      color: '=',     // All Data in one sane object
+      paint:   '&'   // ref to parent paint function
+    },
+    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
+
+    controller: ["$scope", function($scope) {
+      $scope.$watch('color.borders', function(side) {
+        if(side) {
+          // console.log('in gridSquare.js controller borders watch ', side);
+          $scope.setBorders(side);
+        }
+      });
+    }],
+
+    link: function (scope, elem) {
+
+      scope.setBorders = function(sides) {
+        elem.removeClass('border-top border-right border-bottom border-left');
+
+        var sidesArray = [];
+
+        if(sides[0]) sidesArray.push('border-top');
+        if(sides[1]) sidesArray.push('border-right');
+        if(sides[2]) sidesArray.push('border-bottom');
+        if(sides[3]) sidesArray.push('border-left');
+
+        sidesString = sidesArray.join(' ');
+
+        elem.addClass(sidesString);
+      };
+
+      elem.on('mousedown', function() {
+        scope.paint();
+      });
+
+      elem.on('mouseover', function(e) {
+        if(ms_utils.detectLeftButton(e)) {
+          elem.on('mouseup mousemove', function handler(e) {
+            scope.paint();
+            elem.off('mouseup mousemove', handler);
+          });
+        }
+      });
+    }
+  };
+}
+
+angular.module('Crosstronica').
+directive('gridSquare', gridSquare);
 
 function pageState() {
 
@@ -29033,27 +29122,6 @@ function pattern() {
 angular.module('Crosstronica').
 directive('pattern', pattern);
 
-function showHide() {
-
-  return {
-    restrict: 'A',
-    link: function (scope, elem, attrs) {
-
-      scope.collapsed = attrs.collapsed;
-
-      scope.toggleMe = function() {
-        // console.log(scope.collapsed);
-        scope.collapsed = !scope.collapsed;
-      };
-
-    }
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('showHide', showHide);
-
 function selectedColor() {
 
   return {
@@ -29075,6 +29143,27 @@ function selectedColor() {
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);
 
+function showHide() {
+
+  return {
+    restrict: 'A',
+    link: function (scope, elem, attrs) {
+
+      scope.collapsed = attrs.collapsed;
+
+      scope.toggleMe = function() {
+        // console.log(scope.collapsed);
+        scope.collapsed = !scope.collapsed;
+      };
+
+    }
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('showHide', showHide);
+
 function tools() {
 
   return {
@@ -29087,92 +29176,3 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    transclude: true,
-
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controller: ["$scope", function ($scope) {
-
-      $scope.showDrawer = false;
-
-    }],
-
-    link: function (scope, elem, attrs) {
-
-      scope.closeDrawer = function() {
-        scope.showDrawer = false;
-      };
-
-      scope.openDrawer = function() {
-        scope.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
-function gridSquare() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    scope: {
-      color: '=',     // All Data in one sane object
-      paint:   '&'   // ref to parent paint function
-    },
-    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
-
-    controller: ["$scope", function($scope) {
-      $scope.$watch('color.borders', function(side) {
-        if(side) {
-          // console.log('in gridSquare.js controller borders watch ', side);
-          $scope.setBorders(side);
-        }
-      });
-    }],
-
-    link: function (scope, elem) {
-
-      scope.setBorders = function(sides) {
-        elem.removeClass('border-top border-right border-bottom border-left');
-
-        var sidesArray = [];
-
-        if(sides[0]) sidesArray.push('border-top');
-        if(sides[1]) sidesArray.push('border-right');
-        if(sides[2]) sidesArray.push('border-bottom');
-        if(sides[3]) sidesArray.push('border-left');
-
-        sidesString = sidesArray.join(' ');
-
-        elem.addClass(sidesString);
-      };
-
-      elem.on('mousedown', function() {
-        scope.paint();
-      });
-
-      elem.on('mouseover', function(e) {
-        if(ms_utils.detectLeftButton(e)) {
-          elem.on('mouseup mousemove', function handler(e) {
-            scope.paint();
-            elem.off('mouseup mousemove', handler);
-          });
-        }
-      });
-    }
-  };
-}
-
-angular.module('Crosstronica').
-directive('gridSquare', gridSquare);
