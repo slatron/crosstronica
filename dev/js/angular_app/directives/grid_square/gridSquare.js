@@ -4,8 +4,8 @@ function gridSquare() {
     restrict: 'E',
     replace: true,
     scope: {
-      color: '=',     // All Data in one sane object
-      paint:   '&'   // ref to parent paint function
+      color: '=',  // All Data in one sane object
+      paint: '&'   // ref to parent paint function
     },
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
 
