@@ -586,7 +586,8 @@ h6 {
 
 /* line 2, ../../../dev/scss/layout/_layout.scss */
 main {
-  margin-left: 2em;
+  width: 60%;
+  margin: 0 auto;
 }
 
 /* line 1, ../../../dev/scss/modules/_buttons.scss */
