@@ -27,29 +27,37 @@ function pattern() {
           var lastColor = scope.grid[row][col];
           var oldBorders = lastColor.borders;
           scope.pageState.selected.borders = oldBorders;
-          scope.grid[row][col] = scope.pageState.selected;
+          scope.grid[row][col] = angular.copy(scope.pageState.selected);
         }
 
         // Border Mode
         if(!scope.pageState.paintMode) {
-          var prevBorders = scope.grid[row][col].borders || [false, false, false, false];
 
-          // console.log(prevBorders, scope.pageState.borderSide);
+          if(!_.size(scope.pageState.selected)) {
 
-          if(scope.pageState.borderSide === 'top') prevBorders[0] = true;
-          if(scope.pageState.borderSide === 'right') prevBorders[1] = true;
-          if(scope.pageState.borderSide === 'bottom') prevBorders[2] = true;
-          if(scope.pageState.borderSide === 'left') prevBorders[3] = true;
+            scope.grid[row][col].borders = [false, false, false, false];
 
-          var newBorders = new Array([]);
+          } else {
 
-          _.each(prevBorders, function(elem, idx) {
-            newBorders[idx] = elem;
-          });
+            var prevBorders = scope.grid[row][col].borders || [false, false, false, false];
 
-          console.log('newborders in paintCel: ', newBorders);
+            // console.log(prevBorders, scope.pageState.borderSide);
 
-          scope.grid[row][col].borders = newBorders;
+            if(scope.pageState.borderSide === 'top') prevBorders[0] = true;
+            if(scope.pageState.borderSide === 'right') prevBorders[1] = true;
+            if(scope.pageState.borderSide === 'bottom') prevBorders[2] = true;
+            if(scope.pageState.borderSide === 'left') prevBorders[3] = true;
+
+            var newBorders = new Array([]);
+
+            _.each(prevBorders, function(elem, idx) {
+              newBorders[idx] = elem;
+            });
+
+            // console.log('newborders in paintCel: ', newBorders);
+
+            scope.grid[row][col].borders = newBorders;
+          }
         }
 
         if(triggerDigest) scope.$digest();
