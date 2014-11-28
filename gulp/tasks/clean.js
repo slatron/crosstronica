@@ -7,6 +7,6 @@ gulp.task('clean', function(cb) {
        'app/assets/js',
        'app/assets/images',
        'app/index.html',
-       'app/templates',
-       ], cb)
+       'app/templates'
+      ], cb)
 });

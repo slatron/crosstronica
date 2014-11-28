@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="Crosstronica">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  </head>
+  <body page-state>
+
+    <div class="drawer-grid grid-padded">
+
+      <drawer>
+
+        <pallete></pallete>
+        <selected-color></selected-color>
+        <draw-mode></draw-mode>
+        <tools></tools>
+        <add-color></add-color>
+
+      </drawer>
+
+    </div>
+
+    <main class="grid-padded">
+
+      <header ng-include="'layout/header.html'"></header>
+      <pattern></pattern>
+
+    </main>
+
+
+    <footer ng-include="'layout/footer.html'"></footer>
+
+    <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
