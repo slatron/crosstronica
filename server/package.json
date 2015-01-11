@@ -1,0 +1,15 @@
+{
+  "name": "Crosstronica_Data_Service",
+  "version": "0.0.0",
+  "description": "REst API for Crosstronica",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Slatron",
+  "license": "MIT",
+  "dependencies": {
+    "mongojs": "^0.18.0",
+    "restify": "^2.8.4"
+  }
+}

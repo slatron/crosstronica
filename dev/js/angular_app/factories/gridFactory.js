@@ -30,9 +30,6 @@ function gridFactory($http, $q, connection) {
 
     return deferred.promise;
 
-
-
-    // return deferred.promise;
   };
 
   gridFactoryMethods.makeGrid = function() {
