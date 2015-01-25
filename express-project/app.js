@@ -1,38 +1,192 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express      = require('express'),
+    path         = require('path'),
+    favicon      = require('serve-favicon'),
+    logger       = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser   = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var mongoose = require('mongoose'),
+    uriUtil  = require('mongodb-uri'),
+    Color    = require('./models/color'),
+    Pattern  = require('./models/pattern');
+
+var baseRoutes = require('./routes/index'),
+    userRoutes = require('./routes/users');
 
 var app = express();
 
+
+/**
+*  Mongolab DB Connection
+**/
+// var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+//                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } },
+//     mongodbUri = 'mongodb://slatron:eppos1@ds063160.mongolab.com:63160/crosstronica',
+//     mongooseUri = uriUtil.formatMongoose(mongodbUri);
+
+// mongoose.connect(mongooseUri, options);
+
+/**
+*  Local DB Connection
+**/
+mongoose.connect('mongodb://localhost/crosstronica');
+
+mongoose.set('debug', true);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// =================
+app.set('views', path.join(__dirname, 'views'))
+   .set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'))
+   .use(bodyParser.json())
+   .use(bodyParser.urlencoded({ extended: false }))
+   .use(cookieParser())
+   .use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+// Set Routes
+// ==========
+app.use('/', baseRoutes)
+   .use('/users', userRoutes);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+// Set API routes
+// ==============
+var apiRouter = express.Router();
+
+// Log API messages here
+apiRouter.use(function(req, res, next) {
+  console.log('API hit');
+  // Add user authentication here
+  next();
 });
 
+apiRouter.get('/', function(req, res) {
+  res.json({message: 'Welcome to the API'});
+})
+
+
+
+
+
+
+// Pallete Operations
+// ==========================================================
+
+apiRouter.route('/pallete')
+
+  .post(function(req, res) {
+    var pattern = new Pattern();
+
+    color.name   = req.body.name;
+    color.rgb    = req.body.rgb;
+    color.symbol = req.body.symbol;
+    color.c_id   = req.body.c_id;
+
+    color.save(function(err) {
+      if (err) {
+        if (err.code == 11000) {
+          return res.json({
+            success: false,
+            message: 'A color with that id already exists',
+            error: err
+          });
+        } else {
+          return res.send(err);
+        }
+      }
+      res.json({message: 'Color created!'});
+    });
+
+  })
+
+  .get(function(req, res) {
+    Color.find(function(err, colors) {
+      if (err) res.send(err);
+
+      res.json(colors);
+    });
+  });
+
+
+
+
+
+
+
+
+
+// Pattern Operations
+// ==========================================================
+
+apiRouter.route('/pattern')
+
+  .post(function(req, res) {
+    var pattern = new Pattern();
+
+    pattern.name = req.body.name;
+    pattern.grid = req.body.grid;
+
+    pattern.save(function(err) {
+      if (err) {
+        return res.send(err);
+      }
+      res.json({message: 'Pattern created!'});
+    });
+
+  })
+
+  .get(function(req, res) {
+    Pattern.find(function(err, patterns) {
+      if (err) res.send(err);
+
+      res.json(patterns);
+    });
+  });
+
+apiRouter.route('/pattern/:pattern_id')
+
+  .get(function(req, res) {
+    Pattern.findById(req.params.pattern_id, function(err, pattern) {
+      if (err) res.send(err);
+
+      res.json(pattern);
+    });
+  })
+
+  .put(function(req, res) {
+    Pattern.findById(req.params.pattern_id, function(err, pattern) {
+      if (err) res.send(err);
+
+      if (req.body.name) pattern.name = req.body.name;
+      if (req.body.grid) pattern.password = req.body.grid;
+
+      pattern.save(function(err) {
+        if (err) res.send(err);
+        res.json({ message: 'Pattern Updated!'});
+      });
+    })
+  })
+
+  .delete(function(req, res) {
+    Pattern.remove({
+      _id: req.params.pattern_id
+    }, function(err, pattern) {
+      if (err) res.send(err);
+
+      res.json({ message: 'Successfully Deleted Pattern!'});
+    });
+  });
+
+app.use('/api', apiRouter)
+
 // error handlers
+// ==============
 
 // development error handler
 // will print stacktrace
@@ -56,5 +210,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
+app.listen('2233');
 
 module.exports = app;
