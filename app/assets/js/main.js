@@ -28870,6 +28870,52 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    transclude: true,
+
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controller: ["$scope", function ($scope) {
+
+      $scope.showDrawer = false;
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.closeDrawer = function() {
+        scope.showDrawer = false;
+      };
+
+      scope.openDrawer = function() {
+        scope.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
+
 function addColor() {
 
   return {
@@ -28920,52 +28966,6 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
-
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    transclude: true,
-
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controller: ["$scope", function ($scope) {
-
-      $scope.showDrawer = false;
-
-    }],
-
-    link: function (scope, elem, attrs) {
-
-      scope.closeDrawer = function() {
-        scope.showDrawer = false;
-      };
-
-      scope.openDrawer = function() {
-        scope.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
 
 function gridSquare() {
 
