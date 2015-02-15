@@ -3,10 +3,10 @@ var gulp         = require('gulp'),
 
 gulp.task('clean', function(cb) {
     del(
-      ['app/assets/css',
-       'app/assets/js',
-       'app/assets/images',
-       'app/index.html',
-       'app/templates'
+      ['express-project/public/assets/css',
+       'express-project/public/assets/js',
+       'express-project/public/assets/images',
+       'express-project/public/index.html',
+       'express-project/public/templates'
       ], cb)
 });

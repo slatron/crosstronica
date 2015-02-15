@@ -4,7 +4,7 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
-/* line 9, ../../../dev/scss/base/_normalize.scss */
+/* line 9, ../../../../dev/scss/base/_normalize.scss */
 html {
   -ms-text-size-adjust: 100%;
   /* 2 */
@@ -15,7 +15,7 @@ html {
 /**
  * Remove default margin.
  */
-/* line 18, ../../../dev/scss/base/_normalize.scss */
+/* line 18, ../../../../dev/scss/base/_normalize.scss */
 body {
   margin: 0;
 }
@@ -27,7 +27,7 @@ body {
  * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
-/* line 42, ../../../dev/scss/base/_normalize.scss */
+/* line 42, ../../../../dev/scss/base/_normalize.scss */
 article,
 aside,
 details,
@@ -47,7 +47,7 @@ summary {
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-/* line 54, ../../../dev/scss/base/_normalize.scss */
+/* line 54, ../../../../dev/scss/base/_normalize.scss */
 audio,
 canvas,
 progress,
@@ -62,7 +62,7 @@ video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-/* line 64, ../../../dev/scss/base/_normalize.scss */
+/* line 64, ../../../../dev/scss/base/_normalize.scss */
 audio:not([controls]) {
   display: none;
   height: 0;
@@ -72,7 +72,7 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-/* line 75, ../../../dev/scss/base/_normalize.scss */
+/* line 75, ../../../../dev/scss/base/_normalize.scss */
 [hidden],
 template {
   display: none;
@@ -83,7 +83,7 @@ template {
 /**
  * Remove the gray background color from active links in IE 10.
  */
-/* line 86, ../../../dev/scss/base/_normalize.scss */
+/* line 86, ../../../../dev/scss/base/_normalize.scss */
 a {
   background: transparent;
 }
@@ -91,7 +91,7 @@ a {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-/* line 95, ../../../dev/scss/base/_normalize.scss */
+/* line 95, ../../../../dev/scss/base/_normalize.scss */
 a:active,
 a:hover {
   outline: 0;
@@ -102,7 +102,7 @@ a:hover {
 /**
  * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
  */
-/* line 106, ../../../dev/scss/base/_normalize.scss */
+/* line 106, ../../../../dev/scss/base/_normalize.scss */
 abbr[title] {
   border-bottom: 1px dotted;
 }
@@ -110,7 +110,7 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
  */
-/* line 115, ../../../dev/scss/base/_normalize.scss */
+/* line 115, ../../../../dev/scss/base/_normalize.scss */
 b,
 strong {
   font-weight: bold;
@@ -119,7 +119,7 @@ strong {
 /**
  * Address styling not present in Safari and Chrome.
  */
-/* line 123, ../../../dev/scss/base/_normalize.scss */
+/* line 123, ../../../../dev/scss/base/_normalize.scss */
 dfn {
   font-style: italic;
 }
@@ -127,7 +127,7 @@ dfn {
 /**
  * Address styling not present in IE 8/9.
  */
-/* line 131, ../../../dev/scss/base/_normalize.scss */
+/* line 131, ../../../../dev/scss/base/_normalize.scss */
 mark {
   background: #ff0;
   color: #000;
@@ -136,7 +136,7 @@ mark {
 /**
  * Address inconsistent and variable font size in all browsers.
  */
-/* line 140, ../../../dev/scss/base/_normalize.scss */
+/* line 140, ../../../../dev/scss/base/_normalize.scss */
 small {
   font-size: 80%;
 }
@@ -144,7 +144,7 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-/* line 149, ../../../dev/scss/base/_normalize.scss */
+/* line 149, ../../../../dev/scss/base/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -153,12 +153,12 @@ sup {
   vertical-align: baseline;
 }
 
-/* line 156, ../../../dev/scss/base/_normalize.scss */
+/* line 156, ../../../../dev/scss/base/_normalize.scss */
 sup {
   top: -0.5em;
 }
 
-/* line 160, ../../../dev/scss/base/_normalize.scss */
+/* line 160, ../../../../dev/scss/base/_normalize.scss */
 sub {
   bottom: -0.25em;
 }
@@ -168,7 +168,7 @@ sub {
 /**
  * Remove border when inside `a` element in IE 8/9/10.
  */
-/* line 171, ../../../dev/scss/base/_normalize.scss */
+/* line 171, ../../../../dev/scss/base/_normalize.scss */
 img {
   border: 0;
 }
@@ -176,7 +176,7 @@ img {
 /**
  * Correct overflow not hidden in IE 9/10/11.
  */
-/* line 179, ../../../dev/scss/base/_normalize.scss */
+/* line 179, ../../../../dev/scss/base/_normalize.scss */
 svg:not(:root) {
   overflow: hidden;
 }
@@ -186,7 +186,7 @@ svg:not(:root) {
 /**
  * Address margin not present in IE 8/9 and Safari.
  */
-/* line 190, ../../../dev/scss/base/_normalize.scss */
+/* line 190, ../../../../dev/scss/base/_normalize.scss */
 figure {
   margin: 1em 40px;
 }
@@ -194,17 +194,17 @@ figure {
 /**
  * Address differences between Firefox and other browsers.
  */
-/* line 198, ../../../dev/scss/base/_normalize.scss */
+/* line 198, ../../../../dev/scss/base/_normalize.scss */
 hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   height: 0;
 }
 
 /**
  * Contain overflow in all browsers.
  */
-/* line 208, ../../../dev/scss/base/_normalize.scss */
+/* line 208, ../../../../dev/scss/base/_normalize.scss */
 pre {
   overflow: auto;
 }
@@ -212,7 +212,7 @@ pre {
 /**
  * Address odd `em`-unit font size rendering in all browsers.
  */
-/* line 219, ../../../dev/scss/base/_normalize.scss */
+/* line 219, ../../../../dev/scss/base/_normalize.scss */
 code,
 kbd,
 pre,
@@ -233,7 +233,7 @@ samp {
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
  */
-/* line 243, ../../../dev/scss/base/_normalize.scss */
+/* line 243, ../../../../dev/scss/base/_normalize.scss */
 button,
 input,
 optgroup,
@@ -250,7 +250,7 @@ textarea {
 /**
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
-/* line 253, ../../../dev/scss/base/_normalize.scss */
+/* line 253, ../../../../dev/scss/base/_normalize.scss */
 button {
   overflow: visible;
 }
@@ -261,7 +261,7 @@ button {
  * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
  * Correct `select` style inheritance in Firefox.
  */
-/* line 265, ../../../dev/scss/base/_normalize.scss */
+/* line 265, ../../../../dev/scss/base/_normalize.scss */
 button,
 select {
   text-transform: none;
@@ -274,7 +274,7 @@ select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-/* line 280, ../../../dev/scss/base/_normalize.scss */
+/* line 280, ../../../../dev/scss/base/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -288,7 +288,7 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-/* line 290, ../../../dev/scss/base/_normalize.scss */
+/* line 290, ../../../../dev/scss/base/_normalize.scss */
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -297,7 +297,7 @@ html input[disabled] {
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-/* line 299, ../../../dev/scss/base/_normalize.scss */
+/* line 299, ../../../../dev/scss/base/_normalize.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -308,7 +308,7 @@ input::-moz-focus-inner {
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-/* line 309, ../../../dev/scss/base/_normalize.scss */
+/* line 309, ../../../../dev/scss/base/_normalize.scss */
 input {
   line-height: normal;
 }
@@ -320,11 +320,10 @@ input {
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
  * 2. Remove excess padding in IE 8/9/10.
  */
-/* line 322, ../../../dev/scss/base/_normalize.scss */
+/* line 322, ../../../../dev/scss/base/_normalize.scss */
 input[type="checkbox"],
 input[type="radio"] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */
@@ -335,7 +334,7 @@ input[type="radio"] {
  * `font-size` values of the `input`, it causes the cursor style of the
  * decrement button to change from `default` to `text`.
  */
-/* line 334, ../../../dev/scss/base/_normalize.scss */
+/* line 334, ../../../../dev/scss/base/_normalize.scss */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto;
@@ -346,10 +345,11 @@ input[type="number"]::-webkit-outer-spin-button {
  * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
  *    (include `-moz` to future-proof).
  */
-/* line 344, ../../../dev/scss/base/_normalize.scss */
+/* line 344, ../../../../dev/scss/base/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
+  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
@@ -360,7 +360,7 @@ input[type="search"] {
  * Safari (but not Chrome) clips the cancel button when the search input has
  * padding (and `textfield` appearance).
  */
-/* line 358, ../../../dev/scss/base/_normalize.scss */
+/* line 358, ../../../../dev/scss/base/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -369,7 +369,7 @@ input[type="search"]::-webkit-search-decoration {
 /**
  * Define consistent border, margin, and padding.
  */
-/* line 366, ../../../dev/scss/base/_normalize.scss */
+/* line 366, ../../../../dev/scss/base/_normalize.scss */
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
@@ -380,7 +380,7 @@ fieldset {
  * 1. Correct `color` not being inherited in IE 8/9/10/11.
  * 2. Remove padding so people aren't caught out if they zero out fieldsets.
  */
-/* line 377, ../../../dev/scss/base/_normalize.scss */
+/* line 377, ../../../../dev/scss/base/_normalize.scss */
 legend {
   border: 0;
   /* 1 */
@@ -391,7 +391,7 @@ legend {
 /**
  * Remove default vertical scrollbar in IE 8/9/10/11.
  */
-/* line 386, ../../../dev/scss/base/_normalize.scss */
+/* line 386, ../../../../dev/scss/base/_normalize.scss */
 textarea {
   overflow: auto;
 }
@@ -400,208 +400,208 @@ textarea {
  * Don't inherit the `font-weight` (applied by a rule above).
  * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
  */
-/* line 395, ../../../dev/scss/base/_normalize.scss */
+/* line 395, ../../../../dev/scss/base/_normalize.scss */
 optgroup {
   font-weight: bold;
 }
 
-/* line 4, ../../../dev/scss/base/_base.scss */
+/* line 4, ../../../../dev/scss/base/_base.scss */
 html {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/* line 7, ../../../dev/scss/base/_base.scss */
+/* line 7, ../../../../dev/scss/base/_base.scss */
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 
-/* line 11, ../../../dev/scss/base/_base.scss */
+/* line 11, ../../../../dev/scss/base/_base.scss */
 html, body {
   color: #222222;
 }
 
-/* line 15, ../../../dev/scss/base/_base.scss */
+/* line 15, ../../../../dev/scss/base/_base.scss */
 a {
   -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  -o-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
   color: #222222;
 }
 
-/* line 27, ../../../dev/scss/base/_base.scss */
+/* line 27, ../../../../dev/scss/base/_base.scss */
 h1, h2, h3, h4, h5, h6, p, ul, dl, ol, table {
   margin-top: 0;
   margin-bottom: 1em;
 }
 
-/* line 32, ../../../dev/scss/base/_base.scss */
+/* line 32, ../../../../dev/scss/base/_base.scss */
 dd {
   margin-left: 0;
 }
 
-/* line 37, ../../../dev/scss/base/_base.scss */
+/* line 37, ../../../../dev/scss/base/_base.scss */
 ul {
   padding-left: 1em;
 }
 
-/* line 41, ../../../dev/scss/base/_base.scss */
+/* line 41, ../../../../dev/scss/base/_base.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 47, ../../../dev/scss/base/_base.scss */
+/* line 47, ../../../../dev/scss/base/_base.scss */
 thead tr {
   background: #eef6f6;
 }
 
-/* line 51, ../../../dev/scss/base/_base.scss */
+/* line 51, ../../../../dev/scss/base/_base.scss */
 tbody tr:nth-child(even) {
   background-color: #fbf9f9;
 }
 
-/* line 56, ../../../dev/scss/base/_base.scss */
+/* line 56, ../../../../dev/scss/base/_base.scss */
 td,
 th {
   padding: 0.25em;
   border: 1px solid #f0eeee;
 }
 
-/* line 62, ../../../dev/scss/base/_base.scss */
+/* line 62, ../../../../dev/scss/base/_base.scss */
 form {
   display: block;
   padding: 1em;
 }
 
-/* line 67, ../../../dev/scss/base/_base.scss */
+/* line 67, ../../../../dev/scss/base/_base.scss */
 label {
   display: block;
   margin: 0.25em 0;
 }
 
-/* line 72, ../../../dev/scss/base/_base.scss */
+/* line 72, ../../../../dev/scss/base/_base.scss */
 button {
   display: block;
   margin: 1em 0;
 }
 
-/* line 1, ../../../dev/scss/base/_typography.scss */
+/* line 1, ../../../../dev/scss/base/_typography.scss */
 body, html {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
 }
 
-/* line 8, ../../../dev/scss/base/_typography.scss */
+/* line 8, ../../../../dev/scss/base/_typography.scss */
 .text-tiny,
 .pattern-grid .square,
 .square {
   font-size: 10.4px;
 }
 
-/* line 12, ../../../dev/scss/base/_typography.scss */
+/* line 12, ../../../../dev/scss/base/_typography.scss */
 .text-small,
 .panel *,
 .drawer-control {
   font-size: 12px;
 }
 
-/* line 16, ../../../dev/scss/base/_typography.scss */
+/* line 16, ../../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
 p {
   font-size: 14px;
 }
 
-/* line 20, ../../../dev/scss/base/_typography.scss */
+/* line 20, ../../../../dev/scss/base/_typography.scss */
 .text-medlg,
 h5,
 h6 {
   font-size: 16px;
 }
 
-/* line 24, ../../../dev/scss/base/_typography.scss */
+/* line 24, ../../../../dev/scss/base/_typography.scss */
 .text-large,
 h3,
 h4 {
   font-size: 18px;
 }
 
-/* line 28, ../../../dev/scss/base/_typography.scss */
+/* line 28, ../../../../dev/scss/base/_typography.scss */
 .text-largemed {
   font-size: 20px;
 }
 
-/* line 32, ../../../dev/scss/base/_typography.scss */
+/* line 32, ../../../../dev/scss/base/_typography.scss */
 .text-extralg,
 h2 {
   font-size: 24px;
 }
 
-/* line 36, ../../../dev/scss/base/_typography.scss */
+/* line 36, ../../../../dev/scss/base/_typography.scss */
 .text-verylarge,
 h1 {
   font-size: 32px;
 }
 
-/* line 40, ../../../dev/scss/base/_typography.scss */
+/* line 40, ../../../../dev/scss/base/_typography.scss */
 .text-superlarge {
   font-size: 36px;
 }
 
-/* line 45, ../../../dev/scss/base/_typography.scss */
+/* line 45, ../../../../dev/scss/base/_typography.scss */
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-/* line 48, ../../../dev/scss/base/_typography.scss */
+/* line 48, ../../../../dev/scss/base/_typography.scss */
 h1 {
   color: #569e56;
 }
 
-/* line 52, ../../../dev/scss/base/_typography.scss */
+/* line 52, ../../../../dev/scss/base/_typography.scss */
 h2 {
   color: #a1a1a1;
 }
 
-/* line 56, ../../../dev/scss/base/_typography.scss */
+/* line 56, ../../../../dev/scss/base/_typography.scss */
 h3 {
   color: #a1a1a1;
 }
 
-/* line 61, ../../../dev/scss/base/_typography.scss */
+/* line 61, ../../../../dev/scss/base/_typography.scss */
 h4 {
   color: #001325;
 }
 
-/* line 65, ../../../dev/scss/base/_typography.scss */
+/* line 65, ../../../../dev/scss/base/_typography.scss */
 h5 {
   color: #569e56;
 }
 
-/* line 69, ../../../dev/scss/base/_typography.scss */
+/* line 69, ../../../../dev/scss/base/_typography.scss */
 h6 {
   color: #569e56;
 }
 
-/* line 2, ../../../dev/scss/layout/_layout.scss */
+/* line 2, ../../../../dev/scss/layout/_layout.scss */
 main {
   width: 60%;
   margin: 0 auto;
 }
 
-/* line 1, ../../../dev/scss/modules/_buttons.scss */
+/* line 1, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   border: none;
   text-decoration: none;
 }
-/* line 5, ../../../dev/scss/modules/_buttons.scss */
+/* line 5, ../../../../dev/scss/modules/_buttons.scss */
 .but:active {
   background: #a1a1a1;
   color: white;
 }
 
-/* line 12, ../../../dev/scss/modules/_buttons.scss */
+/* line 12, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
   color: #222222;
@@ -609,48 +609,51 @@ main {
   display: inline-block;
   padding: 0.5em 1em;
   text-align: center;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
   -o-border-radius: 7px;
   border-radius: 7px;
 }
-/* line 23, ../../../dev/scss/modules/_buttons.scss */
+/* line 23, ../../../../dev/scss/modules/_buttons.scss */
 .but.active,
 .but:active {
   background: #222222;
   color: white;
 }
-/* line 28, ../../../dev/scss/modules/_buttons.scss */
+/* line 28, ../../../../dev/scss/modules/_buttons.scss */
 .but:hover {
   background-color: #edc721;
 }
 
-/* line 33, ../../../dev/scss/modules/_buttons.scss */
+/* line 33, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection {
   text-decoration: none;
 }
-/* line 36, ../../../dev/scss/modules/_buttons.scss */
+/* line 36, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection:active {
   background: #edc721;
   color: #569e56;
 }
 
-/* line 43, ../../../dev/scss/modules/_buttons.scss */
+/* line 43, ../../../../dev/scss/modules/_buttons.scss */
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 0;
 }
-/* line 48, ../../../dev/scss/modules/_buttons.scss */
+/* line 48, ../../../../dev/scss/modules/_buttons.scss */
 .but-row .but {
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-/* line 54, ../../../dev/scss/modules/_buttons.scss */
+/* line 54, ../../../../dev/scss/modules/_buttons.scss */
 .but[disabled] {
   opacity: 0.2;
 }
 
-/* line 2, ../../../dev/scss/modules/_square.scss */
+/* line 2, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .square,
 .square {
   border: 1px solid #222222;
@@ -659,99 +662,90 @@ a.but-selection:active {
   line-height: 15px;
   padding-left: 0.25em;
   text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   width: 15px;
 }
-/* line 15, ../../../dev/scss/modules/_square.scss */
+/* line 15, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-top.square,
 .square.border-top {
   border-top: 2px solid #222222;
 }
-/* line 20, ../../../dev/scss/modules/_square.scss */
+/* line 20, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-right.square,
 .square.border-right {
   border-right: 2px solid #222222;
 }
-/* line 25, ../../../dev/scss/modules/_square.scss */
+/* line 25, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-bottom.square,
 .square.border-bottom {
   border-bottom: 2px solid #222222;
 }
-/* line 30, ../../../dev/scss/modules/_square.scss */
+/* line 30, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-left.square,
 .square.border-left {
   border-left: 2px solid #222222;
 }
 
-/* line 1, ../../../dev/scss/modules/_panel.scss */
+/* line 1, ../../../../dev/scss/modules/_panel.scss */
 .panel {
   border-bottom: 1px solid #569e56;
   margin: 0.5em 0;
   padding: 0.5em 0.25em;
   vertical-align: middle;
 }
-/* line 7, ../../../dev/scss/modules/_panel.scss */
+/* line 7, ../../../../dev/scss/modules/_panel.scss */
 .panel:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }
-/* line 12, ../../../dev/scss/modules/_panel.scss */
+/* line 12, ../../../../dev/scss/modules/_panel.scss */
 .panel * {
   vertical-align: middle;
   display: inline-block;
   margin-bottom: 0;
 }
-/* line 19, ../../../dev/scss/modules/_panel.scss */
+/* line 19, ../../../../dev/scss/modules/_panel.scss */
 .panel .but {
   min-width: 0;
 }
 
-/* line 24, ../../../dev/scss/modules/_panel.scss */
+/* line 24, ../../../../dev/scss/modules/_panel.scss */
 .panel h6 + a {
   display: inline-block;
 }
 
-/* line 3, ../../../dev/scss/modules/_grid.scss */
+/* line 3, ../../../../dev/scss/modules/_grid.scss */
 .grid {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
-/* line 6, ../../../dev/scss/modules/_grid.scss */
+/* line 6, ../../../../dev/scss/modules/_grid.scss */
 .grid.padded-grid {
   margin: 1.25em;
 }
 
-/* line 5, ../../../dev/scss/modules/_drawer.scss */
+/* line 5, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-grid {
   overflow: hidden;
 }
-/* line 8, ../../../dev/scss/modules/_drawer.scss */
+/* line 8, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-grid li {
   list-style-type: none;
 }
 
-/* line 11, ../../../dev/scss/modules/_drawer.scss */
+/* line 11, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-col {
   position: fixed;
   width: 250px;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  -webkit-transition: all 500ms;
-          transition: all 500ms;
+  flex-shrink: 0;
+  transition: all 500ms;
 }
-/* line 18, ../../../dev/scss/modules/_drawer.scss */
+/* line 18, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-col.collapsed {
   width: 30px;
   padding: 0.5em 0;
 }
 
-/* line 24, ../../../dev/scss/modules/_drawer.scss */
+/* line 24, ../../../../dev/scss/modules/_drawer.scss */
 .drawer {
   background: #f5f4e2;
   border-right: 3px solid #569e56;
@@ -759,245 +753,229 @@ a.but-selection:active {
   margin-left: 0;
   overflow: hidden;
   width: 215px;
+  -moz-border-radius-bottomright: 13px;
+  -webkit-border-bottom-right-radius: 13px;
   border-bottom-right-radius: 13px;
-  -webkit-transition: all 500ms;
-          transition: all 500ms;
+  transition: all 500ms;
 }
-/* line 34, ../../../dev/scss/modules/_drawer.scss */
+/* line 34, ../../../../dev/scss/modules/_drawer.scss */
 .drawer ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   min-height: 20px;
 }
-/* line 41, ../../../dev/scss/modules/_drawer.scss */
+/* line 41, ../../../../dev/scss/modules/_drawer.scss */
 .drawer a {
   color: #222222;
   display: block;
   padding: 4px 11px;
   text-decoration: none;
 }
-/* line 48, ../../../dev/scss/modules/_drawer.scss */
+/* line 48, ../../../../dev/scss/modules/_drawer.scss */
 .drawer a:active, .drawer a.active {
   background: #83c1bf;
 }
-/* line 53, ../../../dev/scss/modules/_drawer.scss */
+/* line 53, ../../../../dev/scss/modules/_drawer.scss */
 .drawer * {
   overflow: hidden;
 }
 
-/* line 60, ../../../dev/scss/modules/_drawer.scss */
+/* line 60, ../../../../dev/scss/modules/_drawer.scss */
 .collapsed > .drawer {
   margin-left: -215px;
 }
 
-/* line 64, ../../../dev/scss/modules/_drawer.scss */
+/* line 64, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
   background: #569e56;
   color: white;
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
+  flex-direction: column;
+  flex-shrink: 0;
   height: 35px;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
+  justify-content: space-around;
   margin-right: 15px;
   margin-left: 0;
   padding-left: 3px;
   position: relative;
   top: 10vh;
   width: 15px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
 
-/* line 1, ../../../dev/scss/modules/_pattern-grid.scss */
+/* line 1, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;
   display: inline-block;
 }
 
-/* line 9, ../../../dev/scss/modules/_pattern-grid.scss */
+/* line 9, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid .square {
   border-bottom: none;
   border-right: none;
-  -webkit-transition: all 1200ms ease-out;
-          transition: all 1200ms ease-out;
+  transition: all 1200ms ease-out;
 }
-/* line 19, ../../../dev/scss/modules/_pattern-grid.scss */
+/* line 19, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid .square.active, .pattern-grid .square:hover {
   color: #222222;
 }
 
-/* line 1, ../../../dev/scss/state/_state.scss */
+/* line 1, ../../../../dev/scss/state/_state.scss */
 .align-right {
   text-align: right;
 }
 
-/* line 5, ../../../dev/scss/state/_state.scss */
+/* line 5, ../../../../dev/scss/state/_state.scss */
 .align-center {
   text-align: center;
 }
 
-/* line 9, ../../../dev/scss/state/_state.scss */
+/* line 9, ../../../../dev/scss/state/_state.scss */
 .align-left {
   text-align: left;
 }
 
-/* line 13, ../../../dev/scss/state/_state.scss */
+/* line 13, ../../../../dev/scss/state/_state.scss */
 .indented {
   margin-left: 32px;
 }
 
-/* line 17, ../../../dev/scss/state/_state.scss */
+/* line 17, ../../../../dev/scss/state/_state.scss */
 .vertical-align-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
-/* line 24, ../../../dev/scss/state/_state.scss */
+/* line 24, ../../../../dev/scss/state/_state.scss */
 .color-black {
   color: #222222;
 }
 
-/* line 25, ../../../dev/scss/state/_state.scss */
+/* line 25, ../../../../dev/scss/state/_state.scss */
 .color-white {
   color: white;
 }
 
-/* line 26, ../../../dev/scss/state/_state.scss */
+/* line 26, ../../../../dev/scss/state/_state.scss */
 .color-sohi {
   color: #569e56;
 }
 
-/* line 27, ../../../dev/scss/state/_state.scss */
+/* line 27, ../../../../dev/scss/state/_state.scss */
 .color-gold {
   color: #edc721;
 }
 
-/* line 28, ../../../dev/scss/state/_state.scss */
+/* line 28, ../../../../dev/scss/state/_state.scss */
 .color-pool {
   color: #83c1bf;
 }
 
-/* line 29, ../../../dev/scss/state/_state.scss */
+/* line 29, ../../../../dev/scss/state/_state.scss */
 .color-agua {
   color: #eef6f6;
 }
 
-/* line 30, ../../../dev/scss/state/_state.scss */
+/* line 30, ../../../../dev/scss/state/_state.scss */
 .color-dkdkblue {
   color: #001325;
 }
 
-/* line 31, ../../../dev/scss/state/_state.scss */
+/* line 31, ../../../../dev/scss/state/_state.scss */
 .color-ltgrey {
   color: #f0eeee;
 }
 
-/* line 32, ../../../dev/scss/state/_state.scss */
+/* line 32, ../../../../dev/scss/state/_state.scss */
 .color-dkgrey {
   color: #363636;
 }
 
-/* line 33, ../../../dev/scss/state/_state.scss */
+/* line 33, ../../../../dev/scss/state/_state.scss */
 .color-ltltgrey {
   color: #fbf9f9;
 }
 
-/* line 34, ../../../dev/scss/state/_state.scss */
+/* line 34, ../../../../dev/scss/state/_state.scss */
 .color-medgrey {
   color: #a1a1a1;
 }
 
-/* line 35, ../../../dev/scss/state/_state.scss */
+/* line 35, ../../../../dev/scss/state/_state.scss */
 .color-cream {
   color: #f5f4e2;
 }
 
-/* line 36, ../../../dev/scss/state/_state.scss */
+/* line 36, ../../../../dev/scss/state/_state.scss */
 .color-description {
   color: #666666;
 }
 
-/* line 38, ../../../dev/scss/state/_state.scss */
+/* line 38, ../../../../dev/scss/state/_state.scss */
 .bg-black {
   background-color: #222222;
 }
 
-/* line 39, ../../../dev/scss/state/_state.scss */
+/* line 39, ../../../../dev/scss/state/_state.scss */
 .bg-white {
   background-color: white;
 }
 
-/* line 40, ../../../dev/scss/state/_state.scss */
+/* line 40, ../../../../dev/scss/state/_state.scss */
 .bg-sohi {
   background-color: #569e56;
 }
 
-/* line 41, ../../../dev/scss/state/_state.scss */
+/* line 41, ../../../../dev/scss/state/_state.scss */
 .bg-gold {
   background-color: #edc721;
 }
 
-/* line 42, ../../../dev/scss/state/_state.scss */
+/* line 42, ../../../../dev/scss/state/_state.scss */
 .bg-pool {
   background-color: #83c1bf;
 }
 
-/* line 43, ../../../dev/scss/state/_state.scss */
+/* line 43, ../../../../dev/scss/state/_state.scss */
 .bg-agua {
   background-color: #eef6f6;
 }
 
-/* line 44, ../../../dev/scss/state/_state.scss */
+/* line 44, ../../../../dev/scss/state/_state.scss */
 .bg-dkdkblue {
   background-color: #001325;
 }
 
-/* line 45, ../../../dev/scss/state/_state.scss */
+/* line 45, ../../../../dev/scss/state/_state.scss */
 .bg-ltgrey {
   background-color: #f0eeee;
 }
 
-/* line 46, ../../../dev/scss/state/_state.scss */
+/* line 46, ../../../../dev/scss/state/_state.scss */
 .bg-dkgrey {
   background-color: #363636;
 }
 
-/* line 47, ../../../dev/scss/state/_state.scss */
+/* line 47, ../../../../dev/scss/state/_state.scss */
 .bg-ltltgrey {
   background-color: #fbf9f9;
 }
 
-/* line 48, ../../../dev/scss/state/_state.scss */
+/* line 48, ../../../../dev/scss/state/_state.scss */
 .bg-medgrey {
   background-color: #a1a1a1;
 }
 
-/* line 49, ../../../dev/scss/state/_state.scss */
+/* line 49, ../../../../dev/scss/state/_state.scss */
 .bg-description {
   background-color: #666666;
 }

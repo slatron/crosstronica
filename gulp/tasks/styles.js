@@ -8,17 +8,16 @@ var gulp         = require('gulp'),
 gulp.task('styles', function() {
   return gulp.src('dev/scss/main.scss')
     .pipe(compass({
-      css: 'app/assets/css',
+      css: 'express-project/public/assets/css',
       sass: 'dev/scss',
-      image: 'app/assets/images'
+      image: 'express-project/public/assets/images'
     }))
     .on('error', function(err) {
       displayError(err);
     })
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .on('error', handleErrors)
-    .pipe(gulp.dest('app/assets/css'))
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(gulp.dest('app/assets/css'));
+    .pipe(gulp.dest('express-project/public/assets/css'));
 });
