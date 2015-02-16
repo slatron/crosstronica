@@ -28870,19 +28870,6 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
-
 function addColor() {
 
   return {
@@ -28933,6 +28920,19 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
+
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
 
 function drawer() {
 
