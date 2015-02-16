@@ -28753,13 +28753,15 @@ var ms_utils = {
 
 };
 
-angular.module('Crosstronica', []);
+angular.module('Crosstronica', ['authService'])
 
-angular.module('Crosstronica').
-constant('connection', {
-  pallete: 'http://localhost:5984/pallete',
-  patterns: 'http://localhost:5984/patterns'
-});
+// application configuration to integrate token into requests
+.config(["$httpProvider", function($httpProvider) {
+
+  // attach our auth interceptor to the http requests
+  $httpProvider.interceptors.push('AuthInterceptor');
+
+}]);
 
 function gridFactory($http, $q, connection) {
 
@@ -28870,6 +28872,177 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
+angular.module('authService', [])
+
+// ===================================================
+// auth factory to login and get information
+// inject $http for communicating with the API
+// inject $q to return promise objects
+// inject AuthToken to manage tokens
+// ===================================================
+.factory('Auth', ["$http", "$q", "AuthToken", function($http, $q, AuthToken) {
+
+  // create auth factory object
+  var authFactory = {};
+
+  // log a user in
+  authFactory.login = function(username, password) {
+
+    // return the promise object and its data
+    return $http.post('/api/authenticate', {
+      username: username,
+      password: password
+    })
+      .success(function(data) {
+        AuthToken.setToken(data.token);
+            return data;
+      });
+  };
+
+  // log a user out by clearing the token
+  authFactory.logout = function() {
+    // clear the token
+    AuthToken.setToken();
+  };
+
+  // check if a user is logged in
+  // checks if there is a local token
+  authFactory.isLoggedIn = function() {
+    if (AuthToken.getToken())
+      return true;
+    else
+      return false;
+  };
+
+  // get the logged in user
+  authFactory.getUser = function() {
+    if (AuthToken.getToken())
+      return $http.get('/api/me', { cache: true });
+    else
+      return $q.reject({ message: 'User has no token.' });
+  };
+
+  // return auth factory object
+  return authFactory;
+
+}])
+
+// ===================================================
+// factory for handling tokens
+// inject $window to store token client-side
+// ===================================================
+.factory('AuthToken', ["$window", function($window) {
+
+  var authTokenFactory = {};
+
+  // get the token out of local storage
+  authTokenFactory.getToken = function() {
+    return $window.localStorage.getItem('token');
+  };
+
+  // function to set token or clear token
+  // if a token is passed, set the token
+  // if there is no token, clear it from local storage
+  authTokenFactory.setToken = function(token) {
+    if (token)
+      $window.localStorage.setItem('token', token);
+    else
+      $window.localStorage.removeItem('token');
+  };
+
+  return authTokenFactory;
+
+}])
+
+// ===================================================
+// application configuration to integrate token into requests
+// ===================================================
+.factory('AuthInterceptor', ["$q", "$location", "AuthToken", function($q, $location, AuthToken) {
+
+  var interceptorFactory = {};
+
+  // this will happen on all HTTP requests
+  interceptorFactory.request = function(config) {
+
+    // grab the token
+    var token = AuthToken.getToken();
+
+    // if the token exists, add it to the header as x-access-token
+    if (token)
+      config.headers['x-access-token'] = token;
+
+    return config;
+  };
+
+  // happens on response errors
+  interceptorFactory.responseError = function(response) {
+
+    // if our server returns a 403 forbidden response
+    if (response.status == 403) {
+      AuthToken.setToken();
+      $location.path('/index.html#fromerror');
+    }
+
+    // return the errors from the server as a promise
+    return $q.reject(response);
+  };
+
+  return interceptorFactory;
+
+}]);
+
+angular.module('Crosstronica').
+constant('connection', {
+  pallete: 'http://localhost:5984/pallete',
+  patterns: 'http://localhost:5984/patterns'
+});
+
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    transclude: true,
+
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controller: ["$scope", function ($scope) {
+
+      $scope.showDrawer = false;
+
+    }],
+
+    link: function (scope, elem, attrs) {
+
+      scope.closeDrawer = function() {
+        scope.showDrawer = false;
+      };
+
+      scope.openDrawer = function() {
+        scope.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
+
 function addColor() {
 
   return {
@@ -28920,52 +29093,6 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
-
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    transclude: true,
-
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controller: ["$scope", function ($scope) {
-
-      $scope.showDrawer = false;
-
-    }],
-
-    link: function (scope, elem, attrs) {
-
-      scope.closeDrawer = function() {
-        scope.showDrawer = false;
-      };
-
-      scope.openDrawer = function() {
-        scope.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
 
 function gridSquare() {
 
@@ -29023,19 +29150,83 @@ function gridSquare() {
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
 
+function loginScreen() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
+
+    controller: ["$scope", "$location", "Auth", function ($scope, $location, Auth) {
+      $scope.authorized =  Auth.isLoggedIn();
+
+      // get user information on page load
+      Auth.getUser()
+        .then(function(data) {
+          console.log('User data: ', data);
+          $scope.user = data.data;
+        });
+
+      // function to handle login form
+      $scope.doLogin = function() {
+        $scope.processing = true;
+
+        // clear the error
+        $scope.error = '';
+
+        Auth.login($scope.loginData.username, $scope.loginData.password)
+          .success(function(data) {
+            $scope.processing = false;
+
+            // if a user successfully logs in, redirect to users page
+            if (data.success)
+              $location.path('/index.html#success');
+            else
+              $scope.error = data.message;
+
+          });
+      };
+
+      // function to handle logging out
+      $scope.doLogout = function() {
+        Auth.logout();
+        $location.path('/login');
+      };
+
+    }],
+
+
+    link: function (scope, elem, attrs) {
+
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('loginScreen', loginScreen);
+
+/**
+* paintMode:
+* true  = paint with clicks
+* false = add border with clicks
+**/
+
 function pageState() {
 
   return {
     controller: ["$scope", function ($scope) {
 
-      $scope.pageState = {};
+      $scope.pageState = {
+        borderSide: 'left',
+        paintMode: true,
+        selected: {},
+        showGrid: false
+      };
 
-      // true  = paint with clicks
-      // false = add boreder with clicks
-      $scope.pageState.paintMode = true;
-      $scope.pageState.showGrid = false;
-      $scope.pageState.selected = {};
-      $scope.pageState.borderSide = 'left';
     }]
   };
 
