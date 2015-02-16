@@ -1,4 +1,6 @@
-var User   = require('../models/user'),
+var User     = require('../models/user'),
+    Color    = require('../models/color'),
+    Pattern  = require('../models/pattern'),
     jwt    = require('jsonwebtoken'),
     config = require('../../config');
 
@@ -38,27 +40,29 @@ module.exports = function(app, express) {
   })
 
   // Check for token on api usage
-  apiRouter.use(function(req, res, next) {
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-    if (token) {
+  // apiRouter.use(function(req, res, next) {
+  //   var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  //   if (token) {
 
-      jwt.verify(token, config.secret, function(err, decoded) {
+  //     jwt.verify(token, config.secret, function(err, decoded) {
 
-        if (err) {
-          return res.status(403).send({ success: false, message: 'Failed to authenticate token.'});
-        } else {
-          req.decoded = decoded;
+  //       if (err) {
+  //         return res.status(403).send({ success: false, message: 'Failed to authenticate token.'});
+  //       } else {
+  //         req.decoded = decoded;
 
-          next();
-        }
+  //         next();
+  //       }
 
-      });
+  //     });
 
-    } else {
-      return res.status(403).send({ success: false, message: 'No token provided.'});
-    }
+  //   } else {
+  //     return res.status(403).send({ success: false, message: 'No token provided.'});
+  //   }
 
-  })
+  // })
+
+
 
   // Custom Middleware
   // =================================================================
@@ -68,11 +72,20 @@ module.exports = function(app, express) {
     next();
   })
 
+
+
+  // Base Call - this is /api/
+  // =================================================================
   apiRouter.get('/', function(req, res) {
     res.json({message: 'Welcome to the API'});
   })
 
-  apiRouter.route('/users')
+
+
+
+  // /users operations
+  // =================================================================
+    apiRouter.route('/users')
 
     .post(function(req, res) {
       var user = new User();
@@ -144,6 +157,112 @@ module.exports = function(app, express) {
   apiRouter.get('/me', function(req, res) {
     res.send(req.decoded);
   });
+
+
+
+
+  // Pallete Operations
+  // ==========================================================
+
+  // apiRouter.route('/pallete')
+
+  //   .post(function(req, res) {
+  //     var pattern = new Pattern();
+
+  //     color.name   = req.body.name;
+  //     color.rgb    = req.body.rgb;
+  //     color.symbol = req.body.symbol;
+  //     color.c_id   = req.body.c_id;
+
+  //     color.save(function(err) {
+  //       if (err) {
+  //         if (err.code == 11000) {
+  //           return res.json({
+  //             success: false,
+  //             message: 'A color with that id already exists',
+  //             error: err
+  //           });
+  //         } else {
+  //           return res.send(err);
+  //         }
+  //       }
+  //       res.json({message: 'Color created!'});
+  //     });
+
+  //   })
+
+  //   .get(function(req, res) {
+  //     Color.find(function(err, colors) {
+  //       if (err) res.send(err);
+
+  //       res.json(colors);
+  //     });
+  //   });
+
+
+
+
+  // Pattern Operations
+  // ==========================================================
+
+  // apiRouter.route('/pattern')
+
+  //   .post(function(req, res) {
+  //     var pattern = new Pattern();
+
+  //     pattern.name = req.body.name;
+  //     pattern.grid = req.body.grid;
+
+  //     pattern.save(function(err) {
+  //       if (err) {
+  //         return res.send(err);
+  //       }
+  //       res.json({message: 'Pattern created!'});
+  //     });
+
+  //   })
+
+  //   .get(function(req, res) {
+  //     Pattern.find(function(err, patterns) {
+  //       if (err) res.send(err);
+
+  //       res.json(patterns);
+  //     });
+  //   });
+
+  // apiRouter.route('/pattern/:pattern_id')
+
+  //   .get(function(req, res) {
+  //     Pattern.findById(req.params.pattern_id, function(err, pattern) {
+  //       if (err) res.send(err);
+
+  //       res.json(pattern);
+  //     });
+  //   })
+
+  //   .put(function(req, res) {
+  //     Pattern.findById(req.params.pattern_id, function(err, pattern) {
+  //       if (err) res.send(err);
+
+  //       if (req.body.name) pattern.name = req.body.name;
+  //       if (req.body.grid) pattern.password = req.body.grid;
+
+  //       pattern.save(function(err) {
+  //         if (err) res.send(err);
+  //         res.json({ message: 'Pattern Updated!'});
+  //       });
+  //     })
+  //   })
+
+  //   .delete(function(req, res) {
+  //     Pattern.remove({
+  //       _id: req.params.pattern_id
+  //     }, function(err, pattern) {
+  //       if (err) res.send(err);
+
+  //       res.json({ message: 'Successfully Deleted Pattern!'});
+  //     });
+  //   });
 
   return apiRouter;
 
