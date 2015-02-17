@@ -502,7 +502,8 @@ body, html {
 /* line 12, ../../../../dev/scss/base/_typography.scss */
 .text-small,
 .panel *,
-.drawer-control {
+.drawer-control,
+.form-login h4 {
   font-size: 12px;
 }
 
@@ -808,6 +809,42 @@ a.but-selection:active {
   -moz-border-radius-bottomright: 3px;
   -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+/* line 1, ../../../../dev/scss/modules/_login.scss */
+.form-login {
+  background: white;
+  border: 5px solid #edc721;
+}
+/* line 4, ../../../../dev/scss/modules/_login.scss */
+.form-login h4 {
+  margin: 0 0 0.5em;
+}
+
+/* line 1, ../../../../dev/scss/modules/_window-shade.scss */
+.window-shade {
+  background: #222222;
+  height: 100%;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* line 12, ../../../../dev/scss/modules/_window-shade.scss */
+.shade-contents {
+  position: fixed;
+  top: 20%;
+  bottom: 20%;
+  left: 20%;
+  width: 60%;
+  z-index: 10000;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 /* line 1, ../../../../dev/scss/modules/_pattern-grid.scss */
