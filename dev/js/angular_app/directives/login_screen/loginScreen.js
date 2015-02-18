@@ -1,4 +1,4 @@
-function loginScreen() {
+function loginScreen(pageStateFactory) {
 
   return {
     restrict: 'E',
@@ -6,42 +6,42 @@ function loginScreen() {
 
     scope: {},
 
+    controllerAs: 'loginVM',
+    bindToController: true,
+
     templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
 
-    controller: function ($scope, $location, Auth) {
-      $scope.authorized =  Auth.isLoggedIn();
+    controller: function ($location, Auth) {
+      // Determine initial login state
+      pageStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
           console.log('User data: ', data);
-          $scope.user = data.data;
+          this.user = data.data;
         });
 
       // function to handle login form
-      $scope.doLogin = function() {
-        $scope.processing = true;
+      this.doLogin = function() {
+        this.processing = true;
 
         // clear the error
-        $scope.error = '';
+        this.error = '';
 
-        Auth.login($scope.loginData.username, $scope.loginData.password)
+        Auth.login(this.username, this.password)
           .success(function(data) {
-            $scope.processing = false;
+            this.processing = false;
 
-            // if a user successfully logs in, redirect to users page
-            if (data.success)
-              $location.path('/index.html#success');
-            else
-              $scope.error = data.message;
+            if (data.success) {
+              pageStateFactory.authorize(true);
+              console.log('successful login: ', data);
+            } else {
+              this.error = data.message;
+              console.log('error on login: ', data);
+            }
 
           });
-      };
-
-      // function to handle logging out
-      $scope.doLogout = function() {
-        Auth.logout();
-        $location.path('/login');
       };
 
     },

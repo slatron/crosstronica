@@ -1,19 +1,14 @@
-/**
-* paintMode:
-* true  = paint with clicks
-* false = add border with clicks
-**/
-
-function pageState() {
+function pageState(pageStateFactory) {
 
   return {
-    controller: function ($scope) {
+    controller: function ($scope, Auth) {
 
-      $scope.pageState = {
-        borderSide: 'left',
-        paintMode: true,
-        selected: {},
-        showGrid: false
+      $scope.pageState = pageStateFactory.get();
+
+      // function to handle logging out
+      $scope.doLogout = function() {
+        Auth.logout();
+        pageStateFactory.authorize(false);
       };
 
     }

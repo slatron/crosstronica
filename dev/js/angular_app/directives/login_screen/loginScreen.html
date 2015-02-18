@@ -4,11 +4,11 @@
     <form class="form-login" action="">
       <h4>Please Login:</h4>
       <label for="">Username:</label>
-      <input type="text" ng-model="loginData.username">
+      <input type="text" ng-model="loginVM.username">
       <label for="">Password:</label>
-      <input type="text" ng-model="loginData.password">
+      <input type="text" ng-model="loginVM.password">
       <button
-        ng-click="doLogin()"
+        ng-click="loginVM.doLogin()"
       >login</button>
     </form>
   </div>

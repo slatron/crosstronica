@@ -28877,6 +28877,48 @@ gridFactory.$inject = ["$http", "$q", "connection"];
 angular.module('Crosstronica').
 factory('gridFactory', gridFactory);
 
+/**
+* paintMode:
+* true  = paint with clicks
+* false = add border with clicks
+**/
+function pageStateFactory() {
+
+  var pageState = {
+    authorized: false,
+    borderSide: 'left',
+    paintMode: true,
+    selected: {},
+    showGrid: false
+  };
+
+  var pageStateFactoryMethods = {};
+
+  pageStateFactoryMethods.get = function(key) {
+
+    if (pageState.hasOwnProperty(key))
+      return pageState[key];
+    else
+      return pageState;
+
+  };
+
+  pageStateFactoryMethods.authorize = function(authorized) {
+    authorized = authorized || false;
+
+    if (authorized)
+      pageState.authorized = true;
+    else
+      pageState.authorized = false;
+  };
+
+  return pageStateFactoryMethods;
+
+}
+
+angular.module('Crosstronica').
+factory('pageStateFactory', pageStateFactory);
+
 angular.module('authService', [])
 
 // ===================================================
@@ -29149,7 +29191,7 @@ function gridSquare() {
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
 
-function loginScreen() {
+function loginScreen(pageStateFactory) {
 
   return {
     restrict: 'E',
@@ -29157,42 +29199,42 @@ function loginScreen() {
 
     scope: {},
 
+    controllerAs: 'loginVM',
+    bindToController: true,
+
     templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
 
-    controller: ["$scope", "$location", "Auth", function ($scope, $location, Auth) {
-      $scope.authorized =  Auth.isLoggedIn();
+    controller: ["$location", "Auth", function ($location, Auth) {
+      // Determine initial login state
+      pageStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
           console.log('User data: ', data);
-          $scope.user = data.data;
+          this.user = data.data;
         });
 
       // function to handle login form
-      $scope.doLogin = function() {
-        $scope.processing = true;
+      this.doLogin = function() {
+        this.processing = true;
 
         // clear the error
-        $scope.error = '';
+        this.error = '';
 
-        Auth.login($scope.loginData.username, $scope.loginData.password)
+        Auth.login(this.username, this.password)
           .success(function(data) {
-            $scope.processing = false;
+            this.processing = false;
 
-            // if a user successfully logs in, redirect to users page
-            if (data.success)
-              $location.path('/index.html#success');
-            else
-              $scope.error = data.message;
+            if (data.success) {
+              pageStateFactory.authorize(true);
+              console.log('successful login: ', data);
+            } else {
+              this.error = data.message;
+              console.log('error on login: ', data);
+            }
 
           });
-      };
-
-      // function to handle logging out
-      $scope.doLogout = function() {
-        Auth.logout();
-        $location.path('/login');
       };
 
     }],
@@ -29204,32 +29246,29 @@ function loginScreen() {
 
   };
 }
+loginScreen.$inject = ["pageStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
 
-/**
-* paintMode:
-* true  = paint with clicks
-* false = add border with clicks
-**/
-
-function pageState() {
+function pageState(pageStateFactory) {
 
   return {
-    controller: ["$scope", function ($scope) {
+    controller: ["$scope", "Auth", function ($scope, Auth) {
 
-      $scope.pageState = {
-        borderSide: 'left',
-        paintMode: true,
-        selected: {},
-        showGrid: false
+      $scope.pageState = pageStateFactory.get();
+
+      // function to handle logging out
+      $scope.doLogout = function() {
+        Auth.logout();
+        pageStateFactory.authorize(false);
       };
 
     }]
   };
 
 }
+pageState.$inject = ["pageStateFactory"];
 
 angular.module('Crosstronica').
 directive('pageState', pageState);
