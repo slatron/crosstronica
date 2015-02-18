@@ -28787,14 +28787,13 @@ function gridFactory($http, $q, connection) {
         }
         deferred.resolve(data.rows);
       }).error(function(e) {
-        deferred.reject('There was an error getting pallete data');
-        console.error('error with GET pallete', e);
+        console.error('An error occurred while querying the database', e);
 
         // GET BACKUP FROM LOCAL JSON FILE
         $http.get('/json/pallete.json').success(function(data){
           deferred.resolve(data);
         }).error(function() {
-          deferred.reject('There was an error getting pallete.json');
+          deferred.reject('There was an error getting local pallete.json file');
         });
 
     });
@@ -28996,6 +28995,57 @@ angular.module('authService', [])
   return interceptorFactory;
 
 }]);
+
+function addColor() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/add_color/addColor.html',
+    controller: ["$scope", "$http", "gridFactory", "connection", function ($scope, $http, gridFactory, connection) {
+
+      function postColor(colorObj) {
+        // send post request
+        $http.post(connection.pallete, colorObj)
+          .success(function () {
+            console.log('successful color post');
+
+          // Clear New Color Form
+          $scope.newname   = '';
+          $scope.newrgb    = '';
+          $scope.newsymbol = '';
+          $scope.newdmc    = '';
+
+          // Update Current Pallete with new color
+          gridFactory.getPallete()
+            .then(function(data){
+              $scope.pallete = data;
+            }, function(data){
+              console.error('error resolving getPallete promise: ', data);
+            });
+          }).error(function (err) {
+            console.log('Error: ' + err);
+          });
+      }
+
+      $scope.addColor = function() {
+        var colorObj = {
+          data: {
+            name: $scope.newname,
+            rgb: $scope.newrgb,
+            symbol: $scope.newsymbol,
+            dmc: $scope.newdmc
+          }
+        };
+        postColor(colorObj);
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('addColor', addColor);
 
 function drawMode() {
 
@@ -29341,54 +29391,3 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
-
-function addColor() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/add_color/addColor.html',
-    controller: ["$scope", "$http", "gridFactory", "connection", function ($scope, $http, gridFactory, connection) {
-
-      function postColor(colorObj) {
-        // send post request
-        $http.post(connection.pallete, colorObj)
-          .success(function () {
-            console.log('successful color post');
-
-          // Clear New Color Form
-          $scope.newname   = '';
-          $scope.newrgb    = '';
-          $scope.newsymbol = '';
-          $scope.newdmc    = '';
-
-          // Update Current Pallete with new color
-          gridFactory.getPallete()
-            .then(function(data){
-              $scope.pallete = data;
-            }, function(data){
-              console.error('error resolving getPallete promise: ', data);
-            });
-          }).error(function (err) {
-            console.log('Error: ' + err);
-          });
-      }
-
-      $scope.addColor = function() {
-        var colorObj = {
-          data: {
-            name: $scope.newname,
-            rgb: $scope.newrgb,
-            symbol: $scope.newsymbol,
-            dmc: $scope.newdmc
-          }
-        };
-        postColor(colorObj);
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('addColor', addColor);

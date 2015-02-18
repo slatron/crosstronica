@@ -16,14 +16,13 @@ function gridFactory($http, $q, connection) {
         }
         deferred.resolve(data.rows);
       }).error(function(e) {
-        deferred.reject('There was an error getting pallete data');
-        console.error('error with GET pallete', e);
+        console.error('An error occurred while querying the database', e);
 
         // GET BACKUP FROM LOCAL JSON FILE
         $http.get('/json/pallete.json').success(function(data){
           deferred.resolve(data);
         }).error(function() {
-          deferred.reject('There was an error getting pallete.json');
+          deferred.reject('There was an error getting local pallete.json file');
         });
 
     });
