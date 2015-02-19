@@ -4,7 +4,7 @@ function addColor() {
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/add_color/addColor.html',
-    controller: function ($scope, $http, gridFactory, connection) {
+    controller: function ($scope, $http, palleteFactory, connection) {
 
       function postColor(colorObj) {
         // send post request
@@ -19,7 +19,7 @@ function addColor() {
           $scope.newdmc    = '';
 
           // Update Current Pallete with new color
-          gridFactory.getPallete()
+          palleteFactory.getPallete()
             .then(function(data){
               $scope.pallete = data;
             }, function(data){

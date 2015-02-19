@@ -4,13 +4,13 @@ function pallete() {
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/pallete/pallete.html',
-    controller: function ($scope, $http, gridFactory) {
+    controller: function ($scope, $http, palleteFactory) {
 
       $scope.pallete  = [];
 
       var _init = function() {
 
-        gridFactory.getPallete()
+        palleteFactory.getPallete()
           .then(function(data){
             $scope.pallete = data;
           }, function(data){
