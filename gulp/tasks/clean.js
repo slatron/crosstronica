@@ -7,6 +7,6 @@ gulp.task('clean', function(cb) {
        'express-project/public/assets/js',
        'express-project/public/assets/images',
        'express-project/public/index.html',
-       'express-project/public/templates'
+       'express-project/public/**/*.html'
       ], cb)
 });

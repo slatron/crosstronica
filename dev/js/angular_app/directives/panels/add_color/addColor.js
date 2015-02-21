@@ -3,7 +3,7 @@ function addColor() {
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/add_color/addColor.html',
+    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
     controller: function ($scope, $http, palleteFactory) {
 
       $scope.addColor = function () {
@@ -35,7 +35,7 @@ function addColor() {
             }).error(function (err) {
               console.log('Error: ' + err);
             });
-      }
+      };
 
     }
   };

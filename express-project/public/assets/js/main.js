@@ -29042,65 +29042,6 @@ angular.module('authService', [])
 
 }]);
 
-function addColor() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/add_color/addColor.html',
-    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
-
-      $scope.addColor = function () {
-
-        console.log('attempting post');
-
-        var colorObj = {
-          name: $scope.newname,
-          rgb: $scope.newrgb,
-          symbol: $scope.newsymbol
-        };
-
-        $http.post('/api/pallete', colorObj)
-          .success(function () {
-            console.log('successful color post');
-
-            // Clear New Color Form
-            $scope.newname   = '';
-            $scope.newrgb    = '';
-            $scope.newsymbol = '';
-
-            // Update Current Pallete with new color
-            palleteFactory.getPallete()
-              .then(function(data){
-                $scope.pallete = data;
-              }, function(data){
-                console.error('error resolving getPallete promise: ', data);
-              });
-            }).error(function (err) {
-              console.log('Error: ' + err);
-            });
-      }
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('addColor', addColor);
-
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
-
 function drawer() {
 
   return {
@@ -29272,36 +29213,6 @@ pageState.$inject = ["pageStateFactory"];
 angular.module('Crosstronica').
 directive('pageState', pageState);
 
-function pallete() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/pallete/pallete.html',
-    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
-
-      $scope.pallete  = [];
-
-      var _init = function() {
-
-        palleteFactory.getPallete()
-          .then(function(data){
-            $scope.pallete = data;
-          }, function(data){
-            console.error('error resolving getPallete promise: ', data);
-          });
-      };
-
-      _init();
-
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('pallete', pallete);
-
 function pattern() {
 
   return {
@@ -29375,27 +29286,6 @@ function pattern() {
 angular.module('Crosstronica').
 directive('pattern', pattern);
 
-function selectedColor() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/selected_color/selectedColor.html',
-    controller: ["$scope", function ($scope) {
-
-      $scope.selectColor = function(color) {
-        color = color || {};
-        $scope.pageState.selected = color;
-      };
-
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('selectedColor', selectedColor);
-
 function showHide() {
 
   return {
@@ -29417,12 +29307,122 @@ function showHide() {
 angular.module('Crosstronica').
 directive('showHide', showHide);
 
+function addColor() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
+    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
+
+      $scope.addColor = function () {
+
+        console.log('attempting post');
+
+        var colorObj = {
+          name: $scope.newname,
+          rgb: $scope.newrgb,
+          symbol: $scope.newsymbol
+        };
+
+        $http.post('/api/pallete', colorObj)
+          .success(function () {
+            console.log('successful color post');
+
+            // Clear New Color Form
+            $scope.newname   = '';
+            $scope.newrgb    = '';
+            $scope.newsymbol = '';
+
+            // Update Current Pallete with new color
+            palleteFactory.getPallete()
+              .then(function(data){
+                $scope.pallete = data;
+              }, function(data){
+                console.error('error resolving getPallete promise: ', data);
+              });
+            }).error(function (err) {
+              console.log('Error: ' + err);
+            });
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('addColor', addColor);
+
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
+
+function pallete() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
+    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
+
+      $scope.pallete  = [];
+
+      var _init = function() {
+
+        palleteFactory.getPallete()
+          .then(function(data){
+            $scope.pallete = data;
+          }, function(data){
+            console.error('error resolving getPallete promise: ', data);
+          });
+      };
+
+      _init();
+
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('pallete', pallete);
+
+function selectedColor() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/selected_color/selectedColor.html',
+    controller: ["$scope", function ($scope) {
+
+      $scope.selectColor = function(color) {
+        color = color || {};
+        $scope.pageState.selected = color;
+      };
+
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('selectedColor', selectedColor);
+
 function tools() {
 
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/tools/tools.html'
+    templateUrl: '/js/angular_app/directives/panels/tools/tools.html'
   };
 
 }
