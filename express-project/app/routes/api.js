@@ -1,6 +1,5 @@
 var User     = require('../models/user'),
     Color    = require('../models/color'),
-    Pallete  = require('../models/pallete'),
     Pattern  = require('../models/pattern'),
     jwt    = require('jsonwebtoken'),
     config = require('../../config');
@@ -42,6 +41,7 @@ module.exports = function(app, express) {
 
   // Check for token on api usage
   apiRouter.use(function(req, res, next) {
+    console.log('checking token');
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
     if (token) {
 
@@ -165,40 +165,38 @@ module.exports = function(app, express) {
   // Pallete Operations
   // ==========================================================
 
-  // apiRouter.route('/pallete')
+  apiRouter.route('/pallete')
 
-  //   .post(function(req, res) {
-  //     var pattern = new Pattern();
+    .post(function(req, res) {
+      var color = new Color();
 
-  //     color.name   = req.body.name;
-  //     color.rgb    = req.body.rgb;
-  //     color.symbol = req.body.symbol;
-  //     color.c_id   = req.body.c_id;
+      color.name   = req.body.name;
+      color.rgb    = req.body.rgb;
+      color.symbol = req.body.symbol;
 
-  //     color.save(function(err) {
-  //       if (err) {
-  //         if (err.code == 11000) {
-  //           return res.json({
-  //             success: false,
-  //             message: 'A color with that id already exists',
-  //             error: err
-  //           });
-  //         } else {
-  //           return res.send(err);
-  //         }
-  //       }
-  //       res.json({message: 'Color created!'});
-  //     });
+      color.save(function(err) {
+        if (err) {
+          if (err.code == 11000) {
+            return res.json({
+              success: false,
+              message: 'A color with that id already exists',
+              error: err
+            });
+          } else {
+            return res.send(err);
+          }
+        }
+        res.json({message: 'Color created!'});
+      });
 
-  //   })
+    })
 
-  //   .get(function(req, res) {
-  //     Color.find(function(err, colors) {
-  //       if (err) res.send(err);
-
-  //       res.json(colors);
-  //     });
-  //   });
+    .get(function(req, res) {
+      Color.find(function(err, pallete) {
+        if (err) res.send(err);
+        res.json(pallete);
+      });
+    });
 
 
 

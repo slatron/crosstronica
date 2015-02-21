@@ -35,7 +35,7 @@
     </main>
 
 
-    <footer ng-include="'layout/footer.html'"></footer>
+    <footer ng-if="pageState.authorized" ng-include="'layout/footer.html'"></footer>
 
     <script src="assets/js/main.js"></script>
 

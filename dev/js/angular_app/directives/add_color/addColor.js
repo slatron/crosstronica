@@ -4,11 +4,11 @@ function addColor() {
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/add_color/addColor.html',
-    controller: function ($scope, $http, palleteFactory, connection) {
+    controller: function ($scope, $http, palleteFactory) {
 
       function postColor(colorObj) {
         // send post request
-        $http.post(connection.pallete, colorObj)
+        $http.post('/api/pallete', colorObj)
           .success(function () {
             console.log('successful color post');
 
@@ -16,7 +16,6 @@ function addColor() {
           $scope.newname   = '';
           $scope.newrgb    = '';
           $scope.newsymbol = '';
-          $scope.newdmc    = '';
 
           // Update Current Pallete with new color
           palleteFactory.getPallete()
@@ -35,8 +34,7 @@ function addColor() {
           data: {
             name: $scope.newname,
             rgb: $scope.newrgb,
-            symbol: $scope.newsymbol,
-            dmc: $scope.newdmc
+            symbol: $scope.newsymbol
           }
         };
         postColor(colorObj);

@@ -28763,12 +28763,6 @@ angular.module('Crosstronica', ['authService'])
 
 }]);
 
-angular.module('Crosstronica').
-constant('connection', {
-  pallete: 'http://localhost:5984/pallete',
-  patterns: 'http://localhost:5984/patterns'
-});
-
 function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
@@ -28890,7 +28884,7 @@ function pageStateFactory() {
 angular.module('Crosstronica').
 factory('pageStateFactory', pageStateFactory);
 
-function palleteFactory($http, $q, connection) {
+function palleteFactory($http, $q) {
 
   var palleteFactoryMethods = {};
 
@@ -28898,25 +28892,23 @@ function palleteFactory($http, $q, connection) {
 
     var deferred = $q.defer();
 
-    $http.get(connection.pallete + '/_design/pallete/_view/getAll')
-      .success(function(data) {
-        for(var i = 0;i < data.rows.length; i++) {
-          data.rows[i] = data.rows[i].value;
+    $http.get('/api/pallete').success(function(data) {
+      console.log('data: ', data);
+      for(var i = 0;i < data.length; i++) {
+        // c_id helps to index the pallete array
+        data[i].c_id = i;
+      }
+      deferred.resolve(data);
+    }).error(function(e) {
+      console.error('An error occurred while querying the remote database', e);
 
-          // c_id helps to index the pallete array
-          data.rows[i].c_id = i;
-        }
-        deferred.resolve(data.rows);
-      }).error(function(e) {
-        console.error('An error occurred while querying the database', e);
-
-        // GET BACKUP FROM LOCAL JSON FILE
-        $http.get('/json/pallete.json').success(function(data){
-          deferred.resolve(data);
-        }).error(function() {
-          deferred.reject('There was an error getting local pallete.json file');
-        });
-
+      // GET BACKUP FROM LOCAL JSON FILE
+      $http.get('/json/pallete.json').success(function(data){
+        console.error('Using local fallback pallete');
+        deferred.resolve(data);
+      }).error(function() {
+        deferred.reject('There was an error getting local pallete.json file');
+      });
     });
 
     return deferred.promise;
@@ -28926,7 +28918,7 @@ function palleteFactory($http, $q, connection) {
   return palleteFactoryMethods;
 
 }
-palleteFactory.$inject = ["$http", "$q", "connection"];
+palleteFactory.$inject = ["$http", "$q"];
 
 angular.module('Crosstronica').
 factory('palleteFactory', palleteFactory);
@@ -29056,11 +29048,11 @@ function addColor() {
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/add_color/addColor.html',
-    controller: ["$scope", "$http", "palleteFactory", "connection", function ($scope, $http, palleteFactory, connection) {
+    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
 
       function postColor(colorObj) {
         // send post request
-        $http.post(connection.pallete, colorObj)
+        $http.post('/api/pallete', colorObj)
           .success(function () {
             console.log('successful color post');
 
@@ -29068,7 +29060,6 @@ function addColor() {
           $scope.newname   = '';
           $scope.newrgb    = '';
           $scope.newsymbol = '';
-          $scope.newdmc    = '';
 
           // Update Current Pallete with new color
           palleteFactory.getPallete()
@@ -29087,8 +29078,7 @@ function addColor() {
           data: {
             name: $scope.newname,
             rgb: $scope.newrgb,
-            symbol: $scope.newsymbol,
-            dmc: $scope.newdmc
+            symbol: $scope.newsymbol
           }
         };
         postColor(colorObj);
