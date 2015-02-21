@@ -175,6 +175,7 @@ module.exports = function(app, express) {
       color.symbol = req.body.symbol;
 
       color.save(function(err) {
+        console.log('error on color.save: ', err);
         if (err) {
           if (err.code == 11000) {
             return res.json({
