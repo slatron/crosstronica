@@ -11,7 +11,7 @@ function loginScreen(pageStateFactory) {
 
     templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
 
-    controller: function ($location, Auth) {
+    controller: function (Auth) {
       // Determine initial login state
       pageStateFactory.authorize(Auth.isLoggedIn());
 
@@ -43,11 +43,6 @@ function loginScreen(pageStateFactory) {
 
           });
       };
-
-    },
-
-
-    link: function (scope, elem, attrs) {
 
     }
 

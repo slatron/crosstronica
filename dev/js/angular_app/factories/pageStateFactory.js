@@ -9,19 +9,13 @@ function pageStateFactory() {
     authorized: false,
     borderSide: 'left',
     paintMode: true,
-    selected: {},
-    showGrid: false
+    selected: {}
   };
 
   var pageStateFactoryMethods = {};
 
-  pageStateFactoryMethods.get = function(key) {
-
-    if (pageState.hasOwnProperty(key))
-      return pageState[key];
-    else
-      return pageState;
-
+  pageStateFactoryMethods.get = function() {
+    return pageState;
   };
 
   pageStateFactoryMethods.authorize = function(authorized) {

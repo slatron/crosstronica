@@ -28853,19 +28853,13 @@ function pageStateFactory() {
     authorized: false,
     borderSide: 'left',
     paintMode: true,
-    selected: {},
-    showGrid: false
+    selected: {}
   };
 
   var pageStateFactoryMethods = {};
 
-  pageStateFactoryMethods.get = function(key) {
-
-    if (pageState.hasOwnProperty(key))
-      return pageState[key];
-    else
-      return pageState;
-
+  pageStateFactoryMethods.get = function() {
+    return pageState;
   };
 
   pageStateFactoryMethods.authorize = function(authorized) {
@@ -29144,7 +29138,7 @@ function loginScreen(pageStateFactory) {
 
     templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
 
-    controller: ["$location", "Auth", function ($location, Auth) {
+    controller: ["Auth", function (Auth) {
       // Determine initial login state
       pageStateFactory.authorize(Auth.isLoggedIn());
 
@@ -29177,12 +29171,7 @@ function loginScreen(pageStateFactory) {
           });
       };
 
-    }],
-
-
-    link: function (scope, elem, attrs) {
-
-    }
+    }]
 
   };
 }
