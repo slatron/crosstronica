@@ -29042,24 +29042,24 @@ function drawer() {
     restrict: 'E',
     replace: true,
 
-    transclude: true,
+    scope: {},
 
+    transclude: true,
     templateUrl: '/js/angular_app/directives/drawer/drawer.html',
 
-    controller: ["$scope", function ($scope) {
+    controllerAs: 'drawerVM',
+    bindToController: true,
 
-      $scope.showDrawer = false;
+    controller: function () {
 
-    }],
+      this.showDrawer = false;
 
-    link: function (scope, elem, attrs) {
-
-      scope.closeDrawer = function() {
-        scope.showDrawer = false;
+      this.closeDrawer = function() {
+        this.showDrawer = false;
       };
 
-      scope.openDrawer = function() {
-        scope.showDrawer = true;
+      this.openDrawer = function() {
+        this.showDrawer = true;
       };
     }
 
