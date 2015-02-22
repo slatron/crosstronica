@@ -33555,9 +33555,20 @@ directive('addColor', addColor);
 function drawMode() {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html'
+    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html',
+
+    controllerAs: 'drawModeVM',
+    bindToController: true,
+
+    controller: ["pageStateFactory", function(pageStateFactory) {
+      var vm = this;
+
+      vm.pageState = pageStateFactory.get();
+    }]
   };
 
 }
