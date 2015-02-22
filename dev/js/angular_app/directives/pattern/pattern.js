@@ -1,12 +1,18 @@
-function pattern() {
+function pattern(pageStateFactory, gridFactory) {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/pattern/pattern.html',
-    controller: function ($scope, gridFactory) {
 
-      $scope.grid = gridFactory.makeGrid();
+    controllerAs: 'patternVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.grid = gridFactory.get();
 
     },
 
@@ -17,42 +23,46 @@ function pattern() {
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if(scope.pageState.paintMode) {
-          var lastColor = scope.grid[row][col];
+        if (pageStateFactory.paintMode()) {
+          var lastColor = gridFactory.get()[row][col];
           var oldBorders = lastColor.borders;
-          scope.pageState.selected.borders = oldBorders;
-          scope.grid[row][col] = angular.copy(scope.pageState.selected);
+          pageStateFactory.selected().borders = oldBorders;
+          gridFactory.get()[row][col] = angular.copy(pageStateFactory.selected());
+
+          console.log('paint color: ', pageStateFactory.selected());
+          // console.log('grid: ', gridFactory.get());
+
         }
 
         // Border Mode
-        if(!scope.pageState.paintMode) {
+        // if(!scope.pageState.paintMode) {
 
-          if(!_.size(scope.pageState.selected)) {
+        //   if(!_.size(scope.pageState.selected)) {
 
-            scope.grid[row][col].borders = [false, false, false, false];
+        //     scope.grid[row][col].borders = [false, false, false, false];
 
-          } else {
+        //   } else {
 
-            var prevBorders = scope.grid[row][col].borders || [false, false, false, false];
+        //     var prevBorders = scope.grid[row][col].borders || [false, false, false, false];
 
-            // console.log(prevBorders, scope.pageState.borderSide);
+        //     // console.log(prevBorders, scope.pageState.borderSide);
 
-            if(scope.pageState.borderSide === 'top') prevBorders[0] = true;
-            if(scope.pageState.borderSide === 'right') prevBorders[1] = true;
-            if(scope.pageState.borderSide === 'bottom') prevBorders[2] = true;
-            if(scope.pageState.borderSide === 'left') prevBorders[3] = true;
+        //     if(scope.pageState.borderSide === 'top') prevBorders[0] = true;
+        //     if(scope.pageState.borderSide === 'right') prevBorders[1] = true;
+        //     if(scope.pageState.borderSide === 'bottom') prevBorders[2] = true;
+        //     if(scope.pageState.borderSide === 'left') prevBorders[3] = true;
 
-            var newBorders = new Array([]);
+        //     var newBorders = new Array([]);
 
-            _.each(prevBorders, function(elem, idx) {
-              newBorders[idx] = elem;
-            });
+        //     _.each(prevBorders, function(elem, idx) {
+        //       newBorders[idx] = elem;
+        //     });
 
-            // console.log('newborders in paintCel: ', newBorders);
+        //     // console.log('newborders in paintCel: ', newBorders);
 
-            scope.grid[row][col].borders = newBorders;
-          }
-        }
+        //     scope.grid[row][col].borders = newBorders;
+        //   }
+        // }
 
         if(triggerDigest) scope.$digest();
       };

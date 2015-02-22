@@ -2,9 +2,9 @@ function gridFactory($http, $q) {
 
   var gridFactoryMethods = {};
 
-  gridFactoryMethods.makeGrid = function() {
+  var grid = [];
 
-    var grid = [];
+  gridFactoryMethods.get = function() {
 
     // Poor man's data storage below
 
