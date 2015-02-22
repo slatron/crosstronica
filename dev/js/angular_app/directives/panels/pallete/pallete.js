@@ -10,7 +10,7 @@ function pallete() {
     controllerAs: 'palleteVM',
     bindToController: true,
 
-    controller: function (palleteFactory) {
+    controller: function (palleteFactory, pageStateFactory) {
 
       var vm = this;
 

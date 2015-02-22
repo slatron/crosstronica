@@ -33027,11 +33027,10 @@ function pageStateFactory() {
 
   var pageState = {
     authorized: false,
+    selected: {},
+    paintMode: true,
     borderSide: 'left'
   };
-
-  var paintMode = true,
-      selected  = {};
 
   var pageStateFactoryMethods = {};
 
@@ -33039,20 +33038,30 @@ function pageStateFactory() {
     return pageState;
   };
 
+  // Setter for paintMode
   pageStateFactoryMethods.paintMode = function(enablePaintMode) {
     if (enablePaintMode !== undefined)
-      paintMode = enablePaintMode;
-    else
-      return paintMode;
+      enablePaintMode = false;
+    paintMode = enablePaintMode;
   };
 
+  // Setter for selected
   pageStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined)
-      selected = newColor;
+      pageState.selected = newColor;
     else
-      return selected;
+      pageState.selected = {};
   };
 
+  // Setter for borderSide
+  pageStateFactoryMethods.borderSide = function(newBorder) {
+    if (newBorder !== undefined)
+      borderSide = newBorder;
+    else
+      console.error('newBorder is required by borderside()');
+  };
+
+  // Setter for authorized
   pageStateFactoryMethods.authorize = function(authorized) {
     authorized = authorized || false;
 
@@ -33563,7 +33572,7 @@ function pallete() {
     controllerAs: 'palleteVM',
     bindToController: true,
 
-    controller: ["palleteFactory", function (palleteFactory) {
+    controller: ["palleteFactory", "pageStateFactory", function (palleteFactory, pageStateFactory) {
 
       var vm = this;
 
@@ -33589,23 +33598,28 @@ function pallete() {
 angular.module('Crosstronica').
 directive('pallete', pallete);
 
-function selectedColor() {
+function selectedColor(pageStateFactory) {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
+
     templateUrl: '/js/angular_app/directives/panels/selected_color/selectedColor.html',
-    controller: ["$scope", function ($scope) {
 
-      // $scope.selectColor = function(color) {
-      //   color = color || {};
-      //   $scope.pageState.selected = color;
-      // };
+    controllerAs: 'selectedVM',
+    bindToController: true,
 
-    }]
+    controller: function () {
+      var vm = this;
+
+      vm.pageState = pageStateFactory.get();
+    }
   };
 
 }
+selectedColor.$inject = ["pageStateFactory"];
 
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);

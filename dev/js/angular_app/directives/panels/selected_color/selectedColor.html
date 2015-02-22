@@ -1,34 +1,36 @@
 <div class="panel">
 
-  <div ng-hide="pageState.paintMode">
+  {{selectedVM.pageState}}
+
+  <div ng-hide="selectedVM.pageState.paintMode">
     <h6>Border Side: </h6>
-    <select ng-model="pageState.borderSide">
+    <select ng-model="selectedVM.pageState.borderSide">
       <option value="top">top</option>
       <option value="right">right</option>
       <option value="bottom">bottom</option>
       <option value="left">left</option>
     </select>
     <br>
-    <b>{{ pageState.borderSide }}</b>
+    <b>{{ selectedVM.pageState.borderSide }}</b>
 
   </div>
 
-  <div ng-show="pageState.paintMode">
+  <div ng-show="selectedVM.pageState.paintMode">
     <h6>Paint Color:</h6>
-    <span ng-show="pageState.selected.name">
+    <span ng-show="selectedVM.pageState.selected.name">
       <grid-square
-        ng-show="pageState.selected"
-        color="pageState.selected"
+        ng-show="selectedVM.pageState.selected"
+        color="selectedVM.pageState.selected"
       ></grid-square>
       <grid-square
-        ng-hide="pageState.selected"
-        color="pageState.selected"
+        ng-hide="selectedVM.pageState.selected"
+        color="selectedVM.pageState.selected"
       ></grid-square>
     </span>
     <br>
     <p>
-      <span ng-show="pageState.selected.name">{{pageState.selected.name}} #{{pageState.selected.rgb}}</span>
-      <span ng-hide="pageState.selected.name">Eraser</span>
+      <span ng-show="selectedVM.pageState.selected.name">{{selectedVM.pageState.selected.name}} #{{selectedVM.pageState.selected.rgb}}</span>
+      <span ng-hide="selectedVM.pageState.selected.name">Eraser</span>
     </p>
   </div>
 

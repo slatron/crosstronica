@@ -1,16 +1,20 @@
-function selectedColor() {
+function selectedColor(pageStateFactory) {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
+
     templateUrl: '/js/angular_app/directives/panels/selected_color/selectedColor.html',
-    controller: function ($scope) {
 
-      // $scope.selectColor = function(color) {
-      //   color = color || {};
-      //   $scope.pageState.selected = color;
-      // };
+    controllerAs: 'selectedVM',
+    bindToController: true,
 
+    controller: function () {
+      var vm = this;
+
+      vm.pageState = pageStateFactory.get();
     }
   };
 
