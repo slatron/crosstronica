@@ -33349,10 +33349,10 @@ directive('gridSquare', gridSquare);
 function loginScreen(pageStateFactory) {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
-
-    scope: {},
 
     controllerAs: 'loginVM',
     bindToController: true,
@@ -33463,34 +33463,34 @@ function pattern(pageStateFactory, gridFactory) {
         }
 
         // Border Mode
-        // if(!scope.pageState.paintMode) {
+        if(!pageState.paintMode) {
 
-        //   if(!_.size(scope.pageState.selected)) {
+          if(!_.size(pageState.selected)) {
 
-        //     scope.grid[row][col].borders = [false, false, false, false];
+            ctrlVM.grid[row][col].borders = [false, false, false, false];
 
-        //   } else {
+          } else {
 
-        //     var prevBorders = scope.grid[row][col].borders || [false, false, false, false];
+            var prevBorders = ctrlVM.grid[row][col].borders || [false, false, false, false];
 
-        //     // console.log(prevBorders, scope.pageState.borderSide);
+            // console.log(prevBorders, scope.pageState.borderSide);
 
-        //     if(scope.pageState.borderSide === 'top') prevBorders[0] = true;
-        //     if(scope.pageState.borderSide === 'right') prevBorders[1] = true;
-        //     if(scope.pageState.borderSide === 'bottom') prevBorders[2] = true;
-        //     if(scope.pageState.borderSide === 'left') prevBorders[3] = true;
+            if(pageState.borderSide === 'top') prevBorders[0] = true;
+            if(pageState.borderSide === 'right') prevBorders[1] = true;
+            if(pageState.borderSide === 'bottom') prevBorders[2] = true;
+            if(pageState.borderSide === 'left') prevBorders[3] = true;
 
-        //     var newBorders = new Array([]);
+            var newBorders = new Array([]);
 
-        //     _.each(prevBorders, function(elem, idx) {
-        //       newBorders[idx] = elem;
-        //     });
+            _.each(prevBorders, function(elem, idx) {
+              newBorders[idx] = elem;
+            });
 
-        //     // console.log('newborders in paintCel: ', newBorders);
+            // console.log('newborders in paintCel: ', newBorders);
 
-        //     scope.grid[row][col].borders = newBorders;
-        //   }
-        // }
+            ctrlVM.grid[row][col].borders = newBorders;
+          }
+        }
 
         if(triggerDigest) scope.$digest();
       };
@@ -33524,6 +33524,52 @@ function showHide() {
 
 angular.module('Crosstronica').
 directive('showHide', showHide);
+
+function addColor() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
+
+    controllerAs: 'addColorVM',
+    bindToController: true,
+
+    controller: ["$http", "palleteFactory", "pageStateFactory", function ($http, palleteFactory, pageStateFactory) {
+
+      var vm = this;
+
+      vm.addColor = function () {
+
+        console.log('attempting post');
+
+        var colorObj = {
+          name: vm.newname,
+          rgb: vm.newrgb,
+          symbol: vm.newsymbol
+        };
+
+        $http.post('/api/pallete', colorObj)
+          .success(function () {
+
+            // Clear New Color Form
+            vm.newname   = '';
+            vm.newrgb    = '';
+            vm.newsymbol = '';
+
+            // Update Current Pallete with new color
+            palleteFactory.getPallete();
+          });
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('addColor', addColor);
 
 function drawMode() {
 
@@ -33640,49 +33686,3 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
-
-function addColor() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
-
-    controllerAs: 'addColorVM',
-    bindToController: true,
-
-    controller: ["$http", "palleteFactory", "pageStateFactory", function ($http, palleteFactory, pageStateFactory) {
-
-      var vm = this;
-
-      vm.addColor = function () {
-
-        console.log('attempting post');
-
-        var colorObj = {
-          name: vm.newname,
-          rgb: vm.newrgb,
-          symbol: vm.newsymbol
-        };
-
-        $http.post('/api/pallete', colorObj)
-          .success(function () {
-
-            // Clear New Color Form
-            vm.newname   = '';
-            vm.newrgb    = '';
-            vm.newsymbol = '';
-
-            // Update Current Pallete with new color
-            palleteFactory.getPallete();
-          });
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('addColor', addColor);

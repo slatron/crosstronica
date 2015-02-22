@@ -1,10 +1,10 @@
 function loginScreen(pageStateFactory) {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
-
-    scope: {},
 
     controllerAs: 'loginVM',
     bindToController: true,
