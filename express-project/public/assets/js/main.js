@@ -33420,26 +33420,27 @@ function pattern(pageStateFactory, gridFactory) {
 
     controller: function () {
 
-      this.grid = gridFactory.get();
+      var vm = this;
+
+      vm.grid = gridFactory.get();
 
     },
 
     link: function (scope, elem, attrs) {
+
+      var ctrlVM = scope.patternVM;
+      var pageState = pageStateFactory.get();
 
       scope.paintCel = function(row, col, triggerDigest) {
 
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if (pageStateFactory.paintMode()) {
-          var lastColor = gridFactory.get()[row][col];
+        if (pageState.paintMode) {
+          var lastColor = ctrlVM.grid[row][col];
           var oldBorders = lastColor.borders;
-          pageStateFactory.selected().borders = oldBorders;
-          gridFactory.get()[row][col] = angular.copy(pageStateFactory.selected());
-
-          console.log('paint color: ', pageStateFactory.selected());
-          // console.log('grid: ', gridFactory.get());
-
+          pageState.selected.borders = oldBorders;
+          ctrlVM.grid[row][col] = angular.copy(pageState.selected);
         }
 
         // Border Mode
@@ -33551,6 +33552,19 @@ function addColor() {
 angular.module('Crosstronica').
 directive('addColor', addColor);
 
+function drawMode() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html'
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);
+
 function pallete() {
 
   return {
@@ -33627,16 +33641,3 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
-
-function drawMode() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html'
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
