@@ -33554,24 +33554,32 @@ directive('drawMode', drawMode);
 function pallete() {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
-    controller: ["$scope", "$http", "palleteFactory", function ($scope, $http, palleteFactory) {
 
-      $scope.pallete  = [];
+    controllerAs: 'palleteVM',
+    bindToController: true,
 
-      var _init = function() {
+    controller: ["palleteFactory", function (palleteFactory) {
 
-        palleteFactory.getPallete()
-          .then(function(data){
-            $scope.pallete = data;
-          }, function(data){
-            console.error('error resolving getPallete promise: ', data);
-          });
+      var vm = this;
+
+      vm.pallete = {};
+
+      palleteFactory.getPallete()
+        .then(function(data){
+          vm.pallete = data;
+        }, function(data){
+          console.error('error resolving getPallete promise: ', data);
+        });
+
+      vm.selectColor = function(color) {
+        color = color || {};
+        pageStateFactory.selected(color);
       };
-
-      _init();
 
     }]
   };
@@ -33589,10 +33597,10 @@ function selectedColor() {
     templateUrl: '/js/angular_app/directives/panels/selected_color/selectedColor.html',
     controller: ["$scope", function ($scope) {
 
-      $scope.selectColor = function(color) {
-        color = color || {};
-        $scope.pageState.selected = color;
-      };
+      // $scope.selectColor = function(color) {
+      //   color = color || {};
+      //   $scope.pageState.selected = color;
+      // };
 
     }]
   };

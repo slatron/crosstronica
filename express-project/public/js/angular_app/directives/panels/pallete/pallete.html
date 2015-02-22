@@ -1,7 +1,8 @@
 <div class="panel">
+  <p>data: {{ palleteVM }}</p>
   <grid-square
-    ng-repeat="color in pallete"
-    ng-click="selectColor(color)"
+    ng-repeat="color in palleteVM.pallete"
+    ng-click="palleteVM.selectColor(color)"
     color="color"
   ></grid-square>
 </div>

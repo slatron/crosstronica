@@ -1,24 +1,32 @@
 function pallete() {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
     templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
-    controller: function ($scope, $http, palleteFactory) {
 
-      $scope.pallete  = [];
+    controllerAs: 'palleteVM',
+    bindToController: true,
 
-      var _init = function() {
+    controller: function (palleteFactory) {
 
-        palleteFactory.getPallete()
-          .then(function(data){
-            $scope.pallete = data;
-          }, function(data){
-            console.error('error resolving getPallete promise: ', data);
-          });
+      var vm = this;
+
+      vm.pallete = {};
+
+      palleteFactory.getPallete()
+        .then(function(data){
+          vm.pallete = data;
+        }, function(data){
+          console.error('error resolving getPallete promise: ', data);
+        });
+
+      vm.selectColor = function(color) {
+        color = color || {};
+        pageStateFactory.selected(color);
       };
-
-      _init();
 
     }
   };
