@@ -2,13 +2,13 @@
   <h6>Add New Color</h6>
   <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
   <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <form novalidate ng-hide="collapsed" ng-submit="addColor()" name="addcolor">
+  <form novalidate ng-hide="collapsed" ng-submit="addColorVM.addColor()" name="addcolor">
     <label for="newname">Color Name: </label>
     <input
       type="text"
       id="newname"
       name="newname"
-      ng-model="newname"
+      ng-model="addColorVM.newname"
       maxlength="30"
       required
     >
@@ -17,7 +17,7 @@
       type="text"
       id="newrgb"
       name="newrgb"
-      ng-model="newrgb"
+      ng-model="addColorVM.newrgb"
       required
       maxlength="6"
       ng-pattern="/[A-Fa-f0-9]{6}/"
@@ -27,7 +27,7 @@
       type="text"
       id="newsymbol"
       name="newsymbol"
-      ng-model="newsymbol"
+      ng-model="addColorVM.newsymbol"
       required
       maxlength="2"
     >
