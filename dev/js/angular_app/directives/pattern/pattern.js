@@ -6,13 +6,7 @@ function pattern() {
     templateUrl: '/js/angular_app/directives/pattern/pattern.html',
     controller: function ($scope, gridFactory) {
 
-      $scope.grid  = [];
-
-      var _init = function() {
-        $scope.grid = gridFactory.makeGrid();
-      };
-
-      _init();
+      $scope.grid = gridFactory.makeGrid();
 
     },
 
