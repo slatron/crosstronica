@@ -33643,9 +33643,24 @@ directive('selectedColor', selectedColor);
 function tools() {
 
   return {
+    scope: {},
+
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/panels/tools/tools.html'
+    templateUrl: '/js/angular_app/directives/panels/tools/tools.html',
+
+    controllerAs: 'toolsVM',
+    bindToController: true,
+
+    controller: ["pageStateFactory", function(pageStateFactory) {
+      var vm = this;
+
+      vm.pageState = pageStateFactory.get();
+
+      vm.selectEraseTool = function() {
+        pageStateFactory.selected();
+      };
+    }]
   };
 
 }
