@@ -12,32 +12,36 @@ function loginScreen(pageStateFactory) {
     templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
 
     controller: function (Auth) {
+
+      var vm = this;
+
       // Determine initial login state
+      console.log(Auth.isLoggedIn());
       pageStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
           console.log('User data: ', data);
-          this.user = data.data;
+          vm.user = data.data;
         });
 
       // function to handle login form
-      this.doLogin = function() {
-        this.processing = true;
+      vm.doLogin = function() {
+        vm.processing = true;
 
         // clear the error
-        this.error = '';
+        vm.error = '';
 
-        Auth.login(this.username, this.password)
+        Auth.login(vm.username, vm.password)
           .success(function(data) {
-            this.processing = false;
+            vm.processing = false;
 
             if (data.success) {
               pageStateFactory.authorize(true);
               console.log('successful login: ', data);
             } else {
-              this.error = data.message;
+              vm.error = data.message;
               console.log('error on login: ', data);
             }
 
