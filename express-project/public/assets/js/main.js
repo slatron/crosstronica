@@ -33080,9 +33080,30 @@ factory('pageStateFactory', pageStateFactory);
 
 function palleteFactory($http, $q) {
 
+  var pallete = {
+    colors: []
+  };
+
   var palleteFactoryMethods = {};
 
   palleteFactoryMethods.getPallete = function() {
+
+    var deferred = $q.defer();
+
+    updatePallete()
+      .then(function(data){
+        pallete.colors = data;
+        deferred.resolve(pallete);
+      }, function(data){
+        console.error('error resolving updatePallete promise: ', data);
+        deferred.reject('error resolving updatePallete promise');
+      });
+
+    return deferred.promise;
+
+  };
+
+  var updatePallete = function() {
 
     var deferred = $q.defer();
 
@@ -33343,13 +33364,11 @@ function loginScreen(pageStateFactory) {
       var vm = this;
 
       // Determine initial login state
-      console.log(Auth.isLoggedIn());
       pageStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
-          console.log('User data: ', data);
           vm.user = data.data;
         });
 
@@ -33506,61 +33525,6 @@ function showHide() {
 angular.module('Crosstronica').
 directive('showHide', showHide);
 
-function addColor() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
-
-    controllerAs: 'addColorVM',
-    bindToController: true,
-
-    controller: ["$http", "palleteFactory", "pageStateFactory", function ($http, palleteFactory, pageStateFactory) {
-
-      var vm = this;
-
-      vm.addColor = function () {
-
-        console.log('attempting post');
-
-        var colorObj = {
-          name: vm.newname,
-          rgb: vm.newrgb,
-          symbol: vm.newsymbol
-        };
-
-        $http.post('/api/pallete', colorObj)
-          .success(function () {
-            console.log('successful color post');
-
-            // Clear New Color Form
-            vm.newname   = '';
-            vm.newrgb    = '';
-            vm.newsymbol = '';
-
-            // Update Current Pallete with new color
-            palleteFactory.getPallete()
-              .then(function(data){
-                // DO Something WIth this
-                console.log(data);
-              }, function(data){
-                console.error('error resolving getPallete promise: ', data);
-              });
-            }).error(function (err) {
-              console.log('Error: ' + err);
-            });
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('addColor', addColor);
-
 function drawMode() {
 
   return {
@@ -33676,3 +33640,49 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
+
+function addColor() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/add_color/addColor.html',
+
+    controllerAs: 'addColorVM',
+    bindToController: true,
+
+    controller: ["$http", "palleteFactory", "pageStateFactory", function ($http, palleteFactory, pageStateFactory) {
+
+      var vm = this;
+
+      vm.addColor = function () {
+
+        console.log('attempting post');
+
+        var colorObj = {
+          name: vm.newname,
+          rgb: vm.newrgb,
+          symbol: vm.newsymbol
+        };
+
+        $http.post('/api/pallete', colorObj)
+          .success(function () {
+
+            // Clear New Color Form
+            vm.newname   = '';
+            vm.newrgb    = '';
+            vm.newsymbol = '';
+
+            // Update Current Pallete with new color
+            palleteFactory.getPallete();
+          });
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('addColor', addColor);

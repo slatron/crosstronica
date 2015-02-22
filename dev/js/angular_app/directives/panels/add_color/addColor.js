@@ -26,7 +26,6 @@ function addColor() {
 
         $http.post('/api/pallete', colorObj)
           .success(function () {
-            console.log('successful color post');
 
             // Clear New Color Form
             vm.newname   = '';
@@ -34,16 +33,8 @@ function addColor() {
             vm.newsymbol = '';
 
             // Update Current Pallete with new color
-            palleteFactory.getPallete()
-              .then(function(data){
-                // DO Something WIth this
-                console.log(data);
-              }, function(data){
-                console.error('error resolving getPallete promise: ', data);
-              });
-            }).error(function (err) {
-              console.log('Error: ' + err);
-            });
+            palleteFactory.getPallete();
+          });
       };
 
     }

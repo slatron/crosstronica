@@ -16,13 +16,11 @@ function loginScreen(pageStateFactory) {
       var vm = this;
 
       // Determine initial login state
-      console.log(Auth.isLoggedIn());
       pageStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
-          console.log('User data: ', data);
           vm.user = data.data;
         });
 

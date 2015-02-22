@@ -1,8 +1,29 @@
 function palleteFactory($http, $q) {
 
+  var pallete = {
+    colors: []
+  };
+
   var palleteFactoryMethods = {};
 
   palleteFactoryMethods.getPallete = function() {
+
+    var deferred = $q.defer();
+
+    updatePallete()
+      .then(function(data){
+        pallete.colors = data;
+        deferred.resolve(pallete);
+      }, function(data){
+        console.error('error resolving updatePallete promise: ', data);
+        deferred.reject('error resolving updatePallete promise');
+      });
+
+    return deferred.promise;
+
+  };
+
+  var updatePallete = function() {
 
     var deferred = $q.defer();
 
