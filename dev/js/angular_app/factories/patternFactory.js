@@ -8,6 +8,10 @@ function patternFactory($http, $q) {
 
   var patternFactoryMethods = {};
 
+  patternFactoryMethods.clearAvailable = function() {
+    patternData.available = [];
+  };
+
   patternFactoryMethods.getAvailable = function() {
     var deferred = $q.defer();
 
@@ -50,17 +54,12 @@ function patternFactory($http, $q) {
 
   patternFactoryMethods.load = function(id) {
 
-    var deferred = $q.defer();
-
     $http.get('/api/pattern/' + id).success(function(data) {
       patternData.name = data.name;
       patternData.grid = data.grid;
-      deferred.resolve(patternData);
     }).error(function(e) {
-      deferred.reject('An error occurred while querying the remote database');
+      console.error('An error occurred while querying the remote database');
     });
-
-    return deferred.promise;
   };
 
   return patternFactoryMethods;

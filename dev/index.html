@@ -12,9 +12,9 @@
   </head>
   <body page-state>
 
-    <login-screen ng-if="!pageState.authorized"></login-screen>
+    <login-screen ng-if="!pageStateVM.pageState.authorized"></login-screen>
 
-    <div class="drawer-grid grid-padded" ng-if="pageState.authorized">
+    <div class="drawer-grid grid-padded" ng-if="pageStateVM.pageState.authorized">
 
       <drawer>
 
@@ -29,14 +29,14 @@
 
     </div>
 
-    <main class="grid-padded float-right" ng-if="pageState.authorized">
+    <main class="grid-padded float-right" ng-if="pageStateVM.pageState.authorized">
 
       <pattern></pattern>
 
     </main>
 
 
-    <footer ng-if="pageState.authorized" ng-include="'layout/footer.html'"></footer>
+    <footer ng-if="pageStateVM.pageState.authorized" ng-include="'layout/footer.html'"></footer>
 
     <script src="assets/js/main.js"></script>
 

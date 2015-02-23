@@ -6,16 +6,23 @@
 function pageStateFactory() {
 
   var pageState = {
-    authorized: false,
     selected: {},
     paintMode: true,
     borderSide: 'left'
+  };
+
+  var userState = {
+    authorized: false
   };
 
   var pageStateFactoryMethods = {};
 
   pageStateFactoryMethods.get = function() {
     return pageState;
+  };
+
+  pageStateFactoryMethods.getUserState = function() {
+    return userState;
   };
 
   // Setter for paintMode
@@ -46,9 +53,9 @@ function pageStateFactory() {
     authorized = authorized || false;
 
     if (authorized)
-      pageState.authorized = true;
+      userState.authorized = true;
     else
-      pageState.authorized = false;
+      userState.authorized = false;
   };
 
   return pageStateFactoryMethods;

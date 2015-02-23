@@ -1,14 +1,18 @@
-function pageState(pageStateFactory) {
+function pageState(pageStateFactory, patternFactory) {
 
   return {
-    controller: function ($scope, Auth) {
+    controllerAs: 'pageStateVM',
+    bindToController: true,
+    controller: function (Auth) {
+      var vm = this;
 
-      $scope.pageState = pageStateFactory.get();
+      vm.pageState = pageStateFactory.getUserState();
 
       // function to handle logging out
-      $scope.doLogout = function() {
+      vm.doLogout = function() {
         Auth.logout();
         pageStateFactory.authorize(false);
+        patternFactory.clearAvailable();
       };
 
     }

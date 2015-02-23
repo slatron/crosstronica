@@ -14,7 +14,7 @@ function drawer() {
 
     controller: function () {
 
-      this.showDrawer = false;
+      this.showDrawer = true;
 
       this.closeDrawer = function() {
         this.showDrawer = false;

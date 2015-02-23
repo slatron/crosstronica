@@ -37583,16 +37583,23 @@ angular.module('Crosstronica', ['authService'])
 function pageStateFactory() {
 
   var pageState = {
-    authorized: false,
     selected: {},
     paintMode: true,
     borderSide: 'left'
+  };
+
+  var userState = {
+    authorized: false
   };
 
   var pageStateFactoryMethods = {};
 
   pageStateFactoryMethods.get = function() {
     return pageState;
+  };
+
+  pageStateFactoryMethods.getUserState = function() {
+    return userState;
   };
 
   // Setter for paintMode
@@ -37623,9 +37630,9 @@ function pageStateFactory() {
     authorized = authorized || false;
 
     if (authorized)
-      pageState.authorized = true;
+      userState.authorized = true;
     else
-      pageState.authorized = false;
+      userState.authorized = false;
   };
 
   return pageStateFactoryMethods;
@@ -37704,6 +37711,10 @@ function patternFactory($http, $q) {
 
   var patternFactoryMethods = {};
 
+  patternFactoryMethods.clearAvailable = function() {
+    patternData.available = [];
+  };
+
   patternFactoryMethods.getAvailable = function() {
     var deferred = $q.defer();
 
@@ -37746,17 +37757,12 @@ function patternFactory($http, $q) {
 
   patternFactoryMethods.load = function(id) {
 
-    var deferred = $q.defer();
-
     $http.get('/api/pattern/' + id).success(function(data) {
       patternData.name = data.name;
       patternData.grid = data.grid;
-      deferred.resolve(patternData);
     }).error(function(e) {
-      deferred.reject('An error occurred while querying the remote database');
+      console.error('An error occurred while querying the remote database');
     });
-
-    return deferred.promise;
   };
 
   return patternFactoryMethods;
@@ -37902,7 +37908,7 @@ function drawer() {
 
     controller: function () {
 
-      this.showDrawer = false;
+      this.showDrawer = true;
 
       this.closeDrawer = function() {
         this.showDrawer = false;
@@ -38032,24 +38038,28 @@ loginScreen.$inject = ["pageStateFactory"];
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
 
-function pageState(pageStateFactory) {
+function pageState(pageStateFactory, patternFactory) {
 
   return {
-    controller: ["$scope", "Auth", function ($scope, Auth) {
+    controllerAs: 'pageStateVM',
+    bindToController: true,
+    controller: ["Auth", function (Auth) {
+      var vm = this;
 
-      $scope.pageState = pageStateFactory.get();
+      vm.pageState = pageStateFactory.getUserState();
 
       // function to handle logging out
-      $scope.doLogout = function() {
+      vm.doLogout = function() {
         Auth.logout();
         pageStateFactory.authorize(false);
+        patternFactory.clearAvailable();
       };
 
     }]
   };
 
 }
-pageState.$inject = ["pageStateFactory"];
+pageState.$inject = ["pageStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pageState', pageState);
@@ -38258,13 +38268,7 @@ function loadPattern() {
         });
 
       vm.reloadPattern = function() {
-
-      patternFactory.load(vm.selectedPattern)
-        .then(function(data) {
-          console.log('loaded :', data);
-        }, function(err) {
-          console.error(err);
-        });
+        patternFactory.load(vm.selectedPattern);
       };
 
     }]
