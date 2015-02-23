@@ -16,9 +16,6 @@ function pattern(pageStateFactory, patternFactory) {
 
       vm.gridData = {};
 
-      // vm.name = '';
-      // vm.grid = [];
-
       patternFactory.get()
         .then(function(data) {
 
@@ -41,10 +38,10 @@ function pattern(pageStateFactory, patternFactory) {
 
         // Paint Mode
         if (pageState.paintMode) {
-          var lastColor = ctrlVM.grid[row][col];
+          var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
           pageState.selected.borders = oldBorders;
-          ctrlVM.grid[row][col] = angular.copy(pageState.selected);
+          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.selected);
         }
 
         // Border Mode
@@ -52,11 +49,11 @@ function pattern(pageStateFactory, patternFactory) {
 
           if(!_.size(pageState.selected)) {
 
-            ctrlVM.grid[row][col].borders = [false, false, false, false];
+            ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
           } else {
 
-            var prevBorders = ctrlVM.grid[row][col].borders || [false, false, false, false];
+            var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
             // console.log(prevBorders, scope.pageState.borderSide);
 
@@ -73,7 +70,7 @@ function pattern(pageStateFactory, patternFactory) {
 
             // console.log('newborders in paintCel: ', newBorders);
 
-            ctrlVM.grid[row][col].borders = newBorders;
+            ctrlVM.gridData.grid[row][col].borders = newBorders;
           }
         }
 
