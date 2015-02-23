@@ -1,15 +1,21 @@
 <div class="panel">
 
   <div ng-hide="selectedVM.pageState.paintMode">
-    <h6>Border Side: </h6>
-    <select ng-model="selectedVM.pageState.borderSide">
-      <option value="top">top</option>
-      <option value="right">right</option>
-      <option value="bottom">bottom</option>
-      <option value="left">left</option>
-    </select>
-    <br>
-    <b>{{ selectedVM.pageState.borderSide }}</b>
+    <div
+      ng-show="selectedVM.pageState.selected.name"
+    >
+      <h6>Border Side: </h6>
+      <select ng-model="selectedVM.pageState.borderSide">
+        <option value="top">top</option>
+        <option value="right">right</option>
+        <option value="bottom">bottom</option>
+        <option value="left">left</option>
+      </select>
+    </div>
+
+    <p
+      ng-if="selectedVM.pageState.selected.name === undefined"
+    >Erase Border</p>
 
   </div>
 

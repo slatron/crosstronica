@@ -10,6 +10,14 @@
   text-align: left;
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 .indented {
   margin-left: 32px;
 }
@@ -47,3 +55,8 @@
 .bg-ltltgrey       {background-color: $color-ltltgrey;}
 .bg-medgrey        {background-color: $color-medgrey;}
 .bg-description    {background-color: $color-description}
+
+.loading {
+  background: url(../images/loading.gif) 50% 50% no-repeat;
+  padding: $base-unit*15 $base-unit;
+}
