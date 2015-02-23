@@ -204,7 +204,6 @@ module.exports = function(app, express) {
 
   // Pattern Operations
   // ==========================================================
-
   apiRouter.route('/pattern')
     .get(function(req, res) {
       Pattern.find(function(err, patterns) {

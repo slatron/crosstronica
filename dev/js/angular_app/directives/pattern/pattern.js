@@ -19,11 +19,17 @@ function pattern(pageStateFactory, patternFactory) {
 
       patternFactory.get()
         .then(function(data) {
+
           vm.grid = data.grid;
           vm.name = data.name;
+
         }, function(err) {
           console.error(err);
         });
+
+      vm.reloadPattern = function() {
+        console.log('here', vm.selectedPattern);
+      };
 
     },
 
