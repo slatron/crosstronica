@@ -1,4 +1,4 @@
-function pattern(pageStateFactory, gridFactory) {
+function pattern(pageStateFactory, patternFactory) {
 
   return {
     scope: {},
@@ -14,7 +14,16 @@ function pattern(pageStateFactory, gridFactory) {
 
       var vm = this;
 
-      vm.grid = gridFactory.get();
+      vm.name = '';
+      vm.grid = [];
+
+      patternFactory.get()
+        .then(function(data) {
+          vm.grid = data.grid;
+          vm.name = data.name;
+        }, function(err) {
+          console.error(err);
+        });
 
     },
 

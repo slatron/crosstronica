@@ -28,7 +28,6 @@ function palleteFactory($http, $q) {
     var deferred = $q.defer();
 
     $http.get('/api/pallete').success(function(data) {
-      console.log('data: ', data);
       for(var i = 0;i < data.length; i++) {
         // c_id helps to index the pallete array
         data[i].c_id = i;
