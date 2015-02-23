@@ -48,6 +48,21 @@ function patternFactory($http, $q) {
     return deferred.promise;
   };
 
+  patternFactoryMethods.load = function(id) {
+
+    var deferred = $q.defer();
+
+    $http.get('/api/pattern/' + id).success(function(data) {
+      patternData.name = data.name;
+      patternData.grid = data.grid;
+      deferred.resolve(patternData);
+    }).error(function(e) {
+      deferred.reject('An error occurred while querying the remote database');
+    });
+
+    return deferred.promise;
+  };
+
   return patternFactoryMethods;
 
 }

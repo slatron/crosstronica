@@ -14,22 +14,19 @@ function pattern(pageStateFactory, patternFactory) {
 
       var vm = this;
 
-      vm.name = '';
-      vm.grid = [];
+      vm.gridData = {};
+
+      // vm.name = '';
+      // vm.grid = [];
 
       patternFactory.get()
         .then(function(data) {
 
-          vm.grid = data.grid;
-          vm.name = data.name;
+          vm.gridData = data;
 
         }, function(err) {
           console.error(err);
         });
-
-      vm.reloadPattern = function() {
-        console.log('here', vm.selectedPattern);
-      };
 
     },
 

@@ -37744,6 +37744,21 @@ function patternFactory($http, $q) {
     return deferred.promise;
   };
 
+  patternFactoryMethods.load = function(id) {
+
+    var deferred = $q.defer();
+
+    $http.get('/api/pattern/' + id).success(function(data) {
+      patternData.name = data.name;
+      patternData.grid = data.grid;
+      deferred.resolve(patternData);
+    }).error(function(e) {
+      deferred.reject('An error occurred while querying the remote database');
+    });
+
+    return deferred.promise;
+  };
+
   return patternFactoryMethods;
 
 }
@@ -38055,22 +38070,19 @@ function pattern(pageStateFactory, patternFactory) {
 
       var vm = this;
 
-      vm.name = '';
-      vm.grid = [];
+      vm.gridData = {};
+
+      // vm.name = '';
+      // vm.grid = [];
 
       patternFactory.get()
         .then(function(data) {
 
-          vm.grid = data.grid;
-          vm.name = data.name;
+          vm.gridData = data;
 
         }, function(err) {
           console.error(err);
         });
-
-      vm.reloadPattern = function() {
-        console.log('here', vm.selectedPattern);
-      };
 
     },
 
@@ -38249,7 +38261,13 @@ function loadPattern() {
         });
 
       vm.reloadPattern = function() {
-        console.log('here', vm.selectedPattern);
+
+      patternFactory.load(vm.selectedPattern)
+        .then(function(data) {
+          console.log('loaded :', data);
+        }, function(err) {
+          console.error(err);
+        });
       };
 
     }]

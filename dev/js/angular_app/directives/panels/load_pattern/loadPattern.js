@@ -23,7 +23,13 @@ function loadPattern() {
         });
 
       vm.reloadPattern = function() {
-        console.log('here', vm.selectedPattern);
+
+      patternFactory.load(vm.selectedPattern)
+        .then(function(data) {
+          console.log('loaded :', data);
+        }, function(err) {
+          console.error(err);
+        });
       };
 
     }

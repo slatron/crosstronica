@@ -1,8 +1,8 @@
 <div>
 
-  <h5>{{patternVM.name}}</h5>
+  <h5>{{patternVM.gridData.name}}</h5>
   <div class="pattern-grid">
-    <div ng-repeat="row in patternVM.grid track by $index" class="grid pattern-row">
+    <div ng-repeat="row in patternVM.gridData.grid track by $index" class="grid pattern-row">
       <div ng-repeat="color in row track by $index" class="grid">
         <grid-square
           color="color"
@@ -14,5 +14,5 @@
   <button ng-click="pageState.showGrid = !pageState.showGrid">
     grid data
   </button>
-  <textarea ng-show="pageState.showGrid">{{patternVM.grid}}</textarea>
+  <textarea ng-show="pageState.showGrid">{{patternVM.gridData.grid}}</textarea>
 </div>

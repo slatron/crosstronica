@@ -228,15 +228,15 @@ module.exports = function(app, express) {
   //   })
 
 
-  // apiRouter.route('/pattern/:pattern_id')
+  apiRouter.route('/pattern/:pattern_id')
 
-  //   .get(function(req, res) {
-  //     Pattern.findById(req.params.pattern_id, function(err, pattern) {
-  //       if (err) res.send(err);
+    .get(function(req, res) {
+      Pattern.findById(req.params.pattern_id, function(err, pattern) {
+        if (err) res.send(err);
 
-  //       res.json(pattern);
-  //     });
-  //   })
+        res.json(pattern);
+      });
+    });
 
   //   .put(function(req, res) {
   //     Pattern.findById(req.params.pattern_id, function(err, pattern) {
