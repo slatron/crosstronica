@@ -205,7 +205,13 @@ module.exports = function(app, express) {
   // Pattern Operations
   // ==========================================================
 
-  // apiRouter.route('/pattern')
+  apiRouter.route('/pattern')
+    .get(function(req, res) {
+      Pattern.find(function(err, patterns) {
+        if (err) res.send(err);
+        res.json(patterns);
+      });
+    });
 
   //   .post(function(req, res) {
   //     var pattern = new Pattern();
@@ -222,13 +228,6 @@ module.exports = function(app, express) {
 
   //   })
 
-  //   .get(function(req, res) {
-  //     Pattern.find(function(err, patterns) {
-  //       if (err) res.send(err);
-
-  //       res.json(patterns);
-  //     });
-  //   });
 
   // apiRouter.route('/pattern/:pattern_id')
 

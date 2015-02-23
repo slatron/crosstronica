@@ -4,7 +4,17 @@ var mongoose = require('mongoose'),
 var PatternSchema = new Schema(
   {
     name: {type: String},
-    grid: Schema.Types.Mixed
+    grid: [
+            [
+              {
+                borders: [String],
+                c_id: Number,
+                name: String,
+                rgb: String,
+                symbol: String
+              }
+            ]
+          ]
   }
 );
 
