@@ -62,6 +62,27 @@ function patternFactory($http, $q) {
     });
   };
 
+  patternFactoryMethods.createNew = function(specs) {
+
+    patternData.name = specs.name || '';
+    patternData.grid = [];
+
+    var rows = specs.rows,
+        cols = specs.cols;
+
+    for(var i=0; i < rows; i++) {
+      var thisRow = [];
+
+      for(var j=0; j<cols; j++) {
+        thisRow.push({
+          borders: [false, false, false, false]
+        });
+      }
+
+      patternData.grid[i] = thisRow;
+    }
+  };
+
   return patternFactoryMethods;
 
 }

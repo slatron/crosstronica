@@ -1,0 +1,35 @@
+<div class="panel" show-hide collapsed="true">
+  <h6>Create New Pattern</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <form novalidate ng-hide="collapsed" ng-submit="newPatternVM.createPattern()" name="newpattern">
+    <label for="newname">Pattern Name: </label>
+    <input
+      type="text"
+      id="newname"
+      name="newname"
+      ng-model="newPatternVM.newname"
+      maxlength="30"
+      required
+    >
+    <label for="newrgb">Rows: (max 40)</label>
+    <input
+      type="text"
+      id="newrows"
+      name="newrows"
+      ng-model="newPatternVM.newrows"
+      required
+      maxlength="2"
+    >
+    <label for="newsymbol">Cols: (max 40)</label>
+    <input
+      type="text"
+      id="newcols"
+      name="newcols"
+      ng-model="newPatternVM.newcols"
+      required
+      maxlength="2"
+    >
+    <button type="submit" ng-disabled="newpattern.$invalid">Save</button>
+  </form>
+</div>

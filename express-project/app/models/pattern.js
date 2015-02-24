@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var PatternSchema = new Schema(
   {
+    creation_date: {type:Date, default: Date.now},
     name: {type: String},
     grid: []
   }
