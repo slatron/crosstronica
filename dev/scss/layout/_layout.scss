@@ -1,5 +1,6 @@
 // Layout styles go here
 main {
   width: 60%;
-  margin: 0 auto;
+  margin: $base-unit auto;
+  float: right;
 }

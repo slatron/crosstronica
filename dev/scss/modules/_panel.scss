@@ -1,4 +1,6 @@
 .panel {
+  @extend %text-small;
+
   border-bottom: 1px solid $color-sohi;
   margin: $base-unit-half 0;
   padding: $base-unit-half $base-unit-quarter;
@@ -9,18 +11,22 @@
     margin-bottom: 0;
   }
 
-  * {
-    @extend %text-small;
-    vertical-align: middle;
-    display: inline-block;
-    margin-bottom: 0;
-  }
-
   .but {
     min-width: 0;
   }
 }
 
+.panel h6 {
+  display: inline-block;
+}
+
 .panel h6 + a {
+  display: inline-block;
+  padding: 0;
+  position: relative;
+  top: -2px;
+}
+
+.pallete > div {
   display: inline-block;
 }

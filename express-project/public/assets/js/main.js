@@ -38182,7 +38182,6 @@ function showHide() {
       scope.collapsed = attrs.collapsed;
 
       scope.toggleMe = function() {
-        // console.log(scope.collapsed);
         scope.collapsed = !scope.collapsed;
       };
 
@@ -38239,30 +38238,6 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
-
-function drawMode() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html',
-
-    controllerAs: 'drawModeVM',
-    bindToController: true,
-
-    controller: ["pageStateFactory", function(pageStateFactory) {
-      var vm = this;
-
-      vm.pageState = pageStateFactory.get();
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
 
 function loadPattern() {
 
@@ -38430,3 +38405,27 @@ function tools() {
 
 angular.module('Crosstronica').
 directive('tools', tools);
+
+function drawMode() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html',
+
+    controllerAs: 'drawModeVM',
+    bindToController: true,
+
+    controller: ["pageStateFactory", function(pageStateFactory) {
+      var vm = this;
+
+      vm.pageState = pageStateFactory.get();
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('drawMode', drawMode);

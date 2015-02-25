@@ -12,24 +12,28 @@
       maxlength="30"
       required
     >
-    <label for="newrgb">Rows: (max 40)</label>
+    <label for="newrgb">Rows:</label>
     <input
-      type="text"
+      type="range"
       id="newrows"
       name="newrows"
       ng-model="newPatternVM.newrows"
+      ng-init="newPatternVM.newrows = 10"
       required
-      maxlength="2"
-    >
-    <label for="newsymbol">Cols: (max 40)</label>
+      min="2"
+      max="40"
+    > {{ newPatternVM.newrows }}
+    <label for="newsymbol">Cols:</label>
     <input
-      type="text"
+      type="range"
       id="newcols"
       name="newcols"
       ng-model="newPatternVM.newcols"
+      ng-init="newPatternVM.newcols = 10"
       required
-      maxlength="2"
-    >
+      min="2"
+      max="40"
+    > {{ newPatternVM.newcols }}
     <button type="submit" ng-disabled="newpattern.$invalid">Save</button>
   </form>
 </div>

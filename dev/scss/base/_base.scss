@@ -6,6 +6,7 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
+  vertical-align: middle;
 }
 
 html, body {
@@ -26,7 +27,7 @@ a {
 // Standard block text lements should push the one below away
 h1, h2, h3, h4, h5, h6, p, ul, dl, ol, table {
   margin-top: 0;
-  margin-bottom: $base-unit;
+  margin-bottom: $base-unit-quarter;
 }
 
 dd {

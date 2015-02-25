@@ -14,7 +14,7 @@
 
     <login-screen ng-if="!pageStateVM.pageState.authorized"></login-screen>
 
-    <div class="drawer-grid grid-padded" ng-if="pageStateVM.pageState.authorized">
+    <div class="drawer-grid" ng-if="pageStateVM.pageState.authorized">
 
       <drawer>
 
@@ -30,7 +30,7 @@
 
     </div>
 
-    <main class="grid-padded float-right" ng-if="pageStateVM.pageState.authorized">
+    <main ng-if="pageStateVM.pageState.authorized">
 
       <pattern></pattern>
 

@@ -7,7 +7,6 @@ function showHide() {
       scope.collapsed = attrs.collapsed;
 
       scope.toggleMe = function() {
-        // console.log(scope.collapsed);
         scope.collapsed = !scope.collapsed;
       };
 

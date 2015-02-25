@@ -413,14 +413,15 @@ html {
 /* line 7, ../../../../dev/scss/base/_base.scss */
 *, *:before, *:after {
   box-sizing: inherit;
+  vertical-align: middle;
 }
 
-/* line 11, ../../../../dev/scss/base/_base.scss */
+/* line 12, ../../../../dev/scss/base/_base.scss */
 html, body {
   color: #222222;
 }
 
-/* line 15, ../../../../dev/scss/base/_base.scss */
+/* line 16, ../../../../dev/scss/base/_base.scss */
 a {
   -webkit-transition: all 0.15s ease-out;
   -moz-transition: all 0.15s ease-out;
@@ -429,58 +430,58 @@ a {
   color: #222222;
 }
 
-/* line 27, ../../../../dev/scss/base/_base.scss */
+/* line 28, ../../../../dev/scss/base/_base.scss */
 h1, h2, h3, h4, h5, h6, p, ul, dl, ol, table {
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
 }
 
-/* line 32, ../../../../dev/scss/base/_base.scss */
+/* line 33, ../../../../dev/scss/base/_base.scss */
 dd {
   margin-left: 0;
 }
 
-/* line 37, ../../../../dev/scss/base/_base.scss */
+/* line 38, ../../../../dev/scss/base/_base.scss */
 ul {
   padding-left: 1em;
 }
 
-/* line 41, ../../../../dev/scss/base/_base.scss */
+/* line 42, ../../../../dev/scss/base/_base.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 47, ../../../../dev/scss/base/_base.scss */
+/* line 48, ../../../../dev/scss/base/_base.scss */
 thead tr {
   background: #eef6f6;
 }
 
-/* line 51, ../../../../dev/scss/base/_base.scss */
+/* line 52, ../../../../dev/scss/base/_base.scss */
 tbody tr:nth-child(even) {
   background-color: #fbf9f9;
 }
 
-/* line 56, ../../../../dev/scss/base/_base.scss */
+/* line 57, ../../../../dev/scss/base/_base.scss */
 td,
 th {
   padding: 0.25em;
   border: 1px solid #f0eeee;
 }
 
-/* line 62, ../../../../dev/scss/base/_base.scss */
+/* line 63, ../../../../dev/scss/base/_base.scss */
 form {
   display: block;
   padding: 1em;
 }
 
-/* line 67, ../../../../dev/scss/base/_base.scss */
+/* line 68, ../../../../dev/scss/base/_base.scss */
 label {
   display: block;
   margin: 0.25em 0;
 }
 
-/* line 72, ../../../../dev/scss/base/_base.scss */
+/* line 73, ../../../../dev/scss/base/_base.scss */
 button {
   display: block;
   margin: 1em 0;
@@ -501,7 +502,7 @@ body, html {
 
 /* line 12, ../../../../dev/scss/base/_typography.scss */
 .text-small,
-.panel *,
+.panel,
 .drawer-control,
 .form-login h4 {
   font-size: 12px;
@@ -588,7 +589,8 @@ h6 {
 /* line 2, ../../../../dev/scss/layout/_layout.scss */
 main {
   width: 60%;
-  margin: 0 auto;
+  margin: 1em auto;
+  float: right;
 }
 
 /* line 1, ../../../../dev/scss/modules/_buttons.scss */
@@ -694,24 +696,31 @@ a.but-selection:active {
   padding: 0.5em 0.25em;
   vertical-align: middle;
 }
-/* line 7, ../../../../dev/scss/modules/_panel.scss */
+/* line 9, ../../../../dev/scss/modules/_panel.scss */
 .panel:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }
-/* line 12, ../../../../dev/scss/modules/_panel.scss */
-.panel * {
-  vertical-align: middle;
-  display: inline-block;
-  margin-bottom: 0;
-}
-/* line 19, ../../../../dev/scss/modules/_panel.scss */
+/* line 14, ../../../../dev/scss/modules/_panel.scss */
 .panel .but {
   min-width: 0;
 }
 
-/* line 24, ../../../../dev/scss/modules/_panel.scss */
+/* line 19, ../../../../dev/scss/modules/_panel.scss */
+.panel h6 {
+  display: inline-block;
+}
+
+/* line 23, ../../../../dev/scss/modules/_panel.scss */
 .panel h6 + a {
+  display: inline-block;
+  padding: 0;
+  position: relative;
+  top: -2px;
+}
+
+/* line 30, ../../../../dev/scss/modules/_panel.scss */
+.pallete > div {
   display: inline-block;
 }
 
