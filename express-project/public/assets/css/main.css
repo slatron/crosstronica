@@ -593,21 +593,10 @@ main {
   float: right;
 }
 
-/* line 1, ../../../../dev/scss/modules/_buttons.scss */
-.but {
-  border: none;
-  text-decoration: none;
-}
-/* line 5, ../../../../dev/scss/modules/_buttons.scss */
-.but:active {
-  background: #a1a1a1;
-  color: white;
-}
-
-/* line 12, ../../../../dev/scss/modules/_buttons.scss */
+/* line 2, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
-  color: #222222;
+  color: white;
   cursor: pointer;
   display: inline-block;
   padding: 0.5em 1em;
@@ -618,40 +607,40 @@ main {
   -o-border-radius: 7px;
   border-radius: 7px;
 }
-/* line 23, ../../../../dev/scss/modules/_buttons.scss */
+/* line 13, ../../../../dev/scss/modules/_buttons.scss */
 .but.active,
 .but:active {
-  background: #222222;
-  color: white;
-}
-/* line 28, ../../../../dev/scss/modules/_buttons.scss */
-.but:hover {
   background-color: #edc721;
+  color: #363636;
+}
+/* line 18, ../../../../dev/scss/modules/_buttons.scss */
+.but:hover {
+  color: #f0eeee;
 }
 
-/* line 33, ../../../../dev/scss/modules/_buttons.scss */
+/* line 23, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection {
   text-decoration: none;
 }
-/* line 36, ../../../../dev/scss/modules/_buttons.scss */
+/* line 26, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection:active {
   background: #edc721;
   color: #569e56;
 }
 
-/* line 43, ../../../../dev/scss/modules/_buttons.scss */
+/* line 33, ../../../../dev/scss/modules/_buttons.scss */
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 0;
 }
-/* line 48, ../../../../dev/scss/modules/_buttons.scss */
+/* line 38, ../../../../dev/scss/modules/_buttons.scss */
 .but-row .but {
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-/* line 54, ../../../../dev/scss/modules/_buttons.scss */
+/* line 44, ../../../../dev/scss/modules/_buttons.scss */
 .but[disabled] {
   opacity: 0.2;
 }

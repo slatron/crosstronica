@@ -2,12 +2,12 @@
   <h6>Draw Mode</h6>
   <span
     class="text-tiny but"
-    ng-show="drawModeVM.pageState.paintMode"
-    ng-click="drawModeVM.pageState.paintMode = !drawModeVM.pageState.paintMode"
+    ng-class="drawModeVM.pageState.paintMode ? 'active' : ''"
+    ng-click="drawModeVM.pageState.paintMode = true"
   >Paint</span>
   <span
     class="text-tiny but"
-    ng-hide="drawModeVM.pageState.paintMode"
-    ng-click="drawModeVM.pageState.paintMode = !drawModeVM.pageState.paintMode"
+    ng-class="drawModeVM.pageState.paintMode ? '' : 'active'"
+    ng-click="drawModeVM.pageState.paintMode = false"
   >Borders</span>
 </div>

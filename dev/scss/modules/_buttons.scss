@@ -1,17 +1,7 @@
-.but {
-  border: none;
-  text-decoration: none;
-
-  &:active {
-    background: $color-medgrey;
-    color: $color-white;
-  }
-}
-
 %but,
 .but {
   background: $color-sohi;
-  color: $color-black;
+  color: $color-white;
   cursor: pointer;
   display: inline-block;
   padding: $base-unit-half $base-unit;
@@ -21,12 +11,12 @@
 
   &.active,
   &:active {
-    background: $color-black;
-    color: $color-white;
+    background-color: $color-gold;
+    color: $color-dkgrey;
   }
 
   &:hover {
-    background-color: $color-gold;
+    color: $color-ltgrey;
   }
 }
 
