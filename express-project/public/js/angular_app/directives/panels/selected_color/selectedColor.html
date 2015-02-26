@@ -1,42 +1,59 @@
-<div class="panel">
+<div class="panel" show-hide opened="true">
+  <h6 ng-click="toggleMe()">Tool</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <div ng-hide="collapsed">
 
-  <div ng-hide="selectedVM.pageState.paintMode">
-    <div
-      ng-show="selectedVM.pageState.selected.name"
-    >
-      <h6>Border Side</h6>
-      <select ng-model="selectedVM.pageState.borderSide">
-        <option value="top">top</option>
-        <option value="right">right</option>
-        <option value="bottom">bottom</option>
-        <option value="left">left</option>
-      </select>
+    <div class="panel-section">
+      <span
+        class="text-tiny but"
+        ng-class="selectedVM.pageState.paintMode ? 'active' : ''"
+        ng-click="selectedVM.pageState.paintMode = true"
+      >Paint</span>
+      <span
+        class="text-tiny but"
+        ng-class="selectedVM.pageState.paintMode ? '' : 'active'"
+        ng-click="selectedVM.pageState.paintMode = false"
+      >Borders</span>
     </div>
 
-    <p
-      ng-if="selectedVM.pageState.selected.name === undefined"
-    >Erase Border</p>
+    <div ng-hide="selectedVM.pageState.paintMode">
+      <div
+        ng-show="selectedVM.pageState.selected.name"
+      >
+        <h6>Border Side</h6>
+        <select ng-model="selectedVM.pageState.borderSide">
+          <option value="top">top</option>
+          <option value="right">right</option>
+          <option value="bottom">bottom</option>
+          <option value="left">left</option>
+        </select>
+      </div>
+
+      <p
+        ng-if="selectedVM.pageState.selected.name === undefined"
+      >Erase Border</p>
+
+    </div>
+
+    <div ng-show="selectedVM.pageState.paintMode">
+      <h6>Paint Color:</h6>
+      <span ng-show="selectedVM.pageState.selected.name">
+        <grid-square
+          ng-show="selectedVM.pageState.selected"
+          color="selectedVM.pageState.selected"
+        ></grid-square>
+        <grid-square
+          ng-hide="selectedVM.pageState.selected"
+          color="selectedVM.pageState.selected"
+        ></grid-square>
+      </span>
+      <br>
+      <p>
+        <span ng-show="selectedVM.pageState.selected.name">{{selectedVM.pageState.selected.name}} #{{selectedVM.pageState.selected.rgb}}</span>
+        <span ng-hide="selectedVM.pageState.selected.name">Eraser</span>
+      </p>
+    </div>
 
   </div>
-
-  <div ng-show="selectedVM.pageState.paintMode">
-    <h6>Paint Color:</h6>
-    <span ng-show="selectedVM.pageState.selected.name">
-      <grid-square
-        ng-show="selectedVM.pageState.selected"
-        color="selectedVM.pageState.selected"
-      ></grid-square>
-      <grid-square
-        ng-hide="selectedVM.pageState.selected"
-        color="selectedVM.pageState.selected"
-      ></grid-square>
-    </span>
-    <br>
-    <p>
-      <span ng-show="selectedVM.pageState.selected.name">{{selectedVM.pageState.selected.name}} #{{selectedVM.pageState.selected.rgb}}</span>
-      <span ng-hide="selectedVM.pageState.selected.name">Eraser</span>
-    </p>
-  </div>
-
-
 </div>

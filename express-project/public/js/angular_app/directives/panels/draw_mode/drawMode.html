@@ -1,13 +1,8 @@
-<div class="panel">
-  <h6>Draw Mode</h6>
-  <span
-    class="text-tiny but"
-    ng-class="drawModeVM.pageState.paintMode ? 'active' : ''"
-    ng-click="drawModeVM.pageState.paintMode = true"
-  >Paint</span>
-  <span
-    class="text-tiny but"
-    ng-class="drawModeVM.pageState.paintMode ? '' : 'active'"
-    ng-click="drawModeVM.pageState.paintMode = false"
-  >Borders</span>
+<div class="panel" show-hide opened="true">
+  <h6 ng-click="toggleMe()">Draw Mode</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <div ng-hide="collapsed" class="panel-section">
+
+  </div>
 </div>

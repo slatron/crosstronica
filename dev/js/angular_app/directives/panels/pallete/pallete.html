@@ -1,8 +1,15 @@
-<div class="panel pallete">
+<div class="panel" show-hide opened="true">
   <h6>Pallete</h6>
-  <grid-square
-    ng-repeat="color in palleteVM.pallete.colors"
-    ng-click="palleteVM.selectColor(color)"
-    color="color"
-  ></grid-square>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <div ng-hide="collapsed" class="panel-section pallete">
+    <grid-square
+      ng-repeat="color in palleteVM.pallete.colors"
+      ng-click="palleteVM.selectColor(color)"
+      color="color"
+    ></grid-square>
+  </div>
+  <div class="panel-section pallete">
+    <span class="but text-tiny" ng-click="toolsVM.selectEraseTool()">Eraser</span>
+  </div>
 </div>

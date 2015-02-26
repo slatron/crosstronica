@@ -38179,7 +38179,11 @@ function showHide() {
     restrict: 'A',
     link: function (scope, elem, attrs) {
 
-      scope.collapsed = attrs.collapsed;
+      scope.collapsed = true;
+
+      if (attrs.opened) {
+        scope.collapsed = false;
+      }
 
       scope.toggleMe = function() {
         scope.collapsed = !scope.collapsed;
@@ -38368,6 +38372,10 @@ function pallete() {
         pageStateFactory.selected(color);
       };
 
+      // Clear selected color
+      vm.selectEraser = function() {
+        pageStateFactory.selected();
+      };
     }]
   };
 
@@ -38401,31 +38409,3 @@ selectedColor.$inject = ["pageStateFactory"];
 
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);
-
-function tools() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/tools/tools.html',
-
-    controllerAs: 'toolsVM',
-    bindToController: true,
-
-    controller: ["pageStateFactory", function(pageStateFactory) {
-      var vm = this;
-
-      vm.pageState = pageStateFactory.get();
-
-      vm.selectEraseTool = function() {
-        pageStateFactory.selected();
-      };
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('tools', tools);

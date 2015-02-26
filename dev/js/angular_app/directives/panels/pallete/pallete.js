@@ -28,6 +28,10 @@ function pallete() {
         pageStateFactory.selected(color);
       };
 
+      // Clear selected color
+      vm.selectEraser = function() {
+        pageStateFactory.selected();
+      };
     }
   };
 

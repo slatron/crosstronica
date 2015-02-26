@@ -472,7 +472,7 @@ th {
 /* line 63, ../../../../dev/scss/base/_base.scss */
 form {
   display: block;
-  padding: 1em;
+  padding: 0.25em;
 }
 
 /* line 68, ../../../../dev/scss/base/_base.scss */
@@ -511,14 +511,14 @@ body, html {
 /* line 16, ../../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
+h6,
 p {
   font-size: 14px;
 }
 
 /* line 20, ../../../../dev/scss/base/_typography.scss */
 .text-medlg,
-h5,
-h6 {
+h5 {
   font-size: 16px;
 }
 
@@ -593,6 +593,11 @@ main {
   float: right;
 }
 
+/* line 8, ../../../../dev/scss/layout/_layout.scss */
+.panel-section {
+  margin: 1em;
+}
+
 /* line 2, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
@@ -613,34 +618,30 @@ main {
   background-color: #edc721;
   color: #363636;
 }
-/* line 18, ../../../../dev/scss/modules/_buttons.scss */
-.but:hover {
-  color: #f0eeee;
-}
 
-/* line 23, ../../../../dev/scss/modules/_buttons.scss */
+/* line 20, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection {
   text-decoration: none;
 }
-/* line 26, ../../../../dev/scss/modules/_buttons.scss */
+/* line 23, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection:active {
   background: #edc721;
   color: #569e56;
 }
 
-/* line 33, ../../../../dev/scss/modules/_buttons.scss */
+/* line 30, ../../../../dev/scss/modules/_buttons.scss */
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 0;
 }
-/* line 38, ../../../../dev/scss/modules/_buttons.scss */
+/* line 35, ../../../../dev/scss/modules/_buttons.scss */
 .but-row .but {
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-/* line 44, ../../../../dev/scss/modules/_buttons.scss */
+/* line 41, ../../../../dev/scss/modules/_buttons.scss */
 .but[disabled] {
   opacity: 0.2;
 }
@@ -686,21 +687,25 @@ a.but-selection:active {
   vertical-align: middle;
 }
 /* line 9, ../../../../dev/scss/modules/_panel.scss */
+.panel .fa {
+  color: #569e56;
+}
+/* line 13, ../../../../dev/scss/modules/_panel.scss */
 .panel:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }
-/* line 14, ../../../../dev/scss/modules/_panel.scss */
+/* line 18, ../../../../dev/scss/modules/_panel.scss */
 .panel .but {
   min-width: 0;
 }
 
-/* line 19, ../../../../dev/scss/modules/_panel.scss */
+/* line 23, ../../../../dev/scss/modules/_panel.scss */
 .panel h6 {
   display: inline-block;
 }
 
-/* line 23, ../../../../dev/scss/modules/_panel.scss */
+/* line 27, ../../../../dev/scss/modules/_panel.scss */
 .panel h6 + a {
   display: inline-block;
   padding: 0;
@@ -708,7 +713,7 @@ a.but-selection:active {
   top: -2px;
 }
 
-/* line 30, ../../../../dev/scss/modules/_panel.scss */
+/* line 34, ../../../../dev/scss/modules/_panel.scss */
 .pallete > div {
   display: inline-block;
 }

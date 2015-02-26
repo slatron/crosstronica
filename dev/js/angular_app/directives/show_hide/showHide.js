@@ -4,7 +4,11 @@ function showHide() {
     restrict: 'A',
     link: function (scope, elem, attrs) {
 
-      scope.collapsed = attrs.collapsed;
+      scope.collapsed = true;
+
+      if (attrs.opened) {
+        scope.collapsed = false;
+      }
 
       scope.toggleMe = function() {
         scope.collapsed = !scope.collapsed;

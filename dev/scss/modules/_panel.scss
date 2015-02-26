@@ -6,6 +6,10 @@
   padding: $base-unit-half $base-unit-quarter;
   vertical-align: middle;
 
+  .fa {
+    color: $color-sohi;
+  }
+
   &:last-child {
     border-bottom: none;
     margin-bottom: 0;
@@ -30,3 +34,4 @@
 .pallete > div {
   display: inline-block;
 }
+
