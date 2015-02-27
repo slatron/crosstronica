@@ -37598,8 +37598,8 @@ function pageStateFactory() {
     return pageState;
   };
 
-  pageStateFactoryMethods.getSelected = function() {
-    return pageState.selected;
+  pageStateFactoryMethods.getUserState = function() {
+    return userState;
   };
 
   // Setter for paintMode
