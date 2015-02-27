@@ -1,9 +1,12 @@
 %but,
 .but {
   background: $color-sohi;
+  border: none;
+  box-shadow: none;
   color: $color-white;
   cursor: pointer;
   display: inline-block;
+  outline: none;
   padding: $base-unit-half $base-unit;
   text-align: center;
 

@@ -9,19 +9,25 @@
         class="text-tiny but"
         ng-class="selectedVM.pageState.paintMode ? 'active' : ''"
         ng-click="selectedVM.pageState.paintMode = true"
-      >Paint</span>
+      >
+        <span ng-hide="selectedVM.pageState.selected.name">Erase Color</span>
+        <span ng-show="selectedVM.pageState.selected.name">Paint</span>
+      </span>
       <span
         class="text-tiny but"
         ng-class="selectedVM.pageState.paintMode ? '' : 'active'"
-        ng-click="selectedVM.pageState.paintMode = false"
-      >Borders</span>
+        ng-click="selectedVM.pageState.paintMode = false;selectedVM.pageState.selected = {}"
+      >
+      <span
+        ng-if="selectedVM.pageState.selected.name === undefined"
+      >Erase</span> Borders</span>
     </div>
 
     <div ng-hide="selectedVM.pageState.paintMode">
       <div
         ng-show="selectedVM.pageState.selected.name"
       >
-        <h6>Border Side</h6>
+        <p>Border Side</p>
         <select ng-model="selectedVM.pageState.borderSide">
           <option value="top">top</option>
           <option value="right">right</option>
@@ -29,15 +35,12 @@
           <option value="left">left</option>
         </select>
       </div>
-
-      <p
-        ng-if="selectedVM.pageState.selected.name === undefined"
-      >Erase Border</p>
-
     </div>
 
     <div ng-show="selectedVM.pageState.paintMode">
-      <h6>Paint Color:</h6>
+      <p ng-hide="selectedVM.pageState.selected.name === undefined">
+        Paint Color:
+      </p>
       <span ng-show="selectedVM.pageState.selected.name">
         <grid-square
           ng-show="selectedVM.pageState.selected"
@@ -51,7 +54,6 @@
       <br>
       <p>
         <span ng-show="selectedVM.pageState.selected.name">{{selectedVM.pageState.selected.name}} #{{selectedVM.pageState.selected.rgb}}</span>
-        <span ng-hide="selectedVM.pageState.selected.name">Eraser</span>
       </p>
     </div>
 

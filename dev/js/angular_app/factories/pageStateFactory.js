@@ -21,15 +21,16 @@ function pageStateFactory() {
     return pageState;
   };
 
-  pageStateFactoryMethods.getUserState = function() {
-    return userState;
+  pageStateFactoryMethods.getSelected = function() {
+    return pageState.selected;
   };
 
   // Setter for paintMode
   pageStateFactoryMethods.paintMode = function(enablePaintMode) {
     if (enablePaintMode !== undefined)
-      enablePaintMode = false;
-    paintMode = enablePaintMode;
+      pageState.paintMode = enablePaintMode;
+    else
+      pageState.paintMode = false;
   };
 
   // Setter for selected

@@ -37598,15 +37598,16 @@ function pageStateFactory() {
     return pageState;
   };
 
-  pageStateFactoryMethods.getUserState = function() {
-    return userState;
+  pageStateFactoryMethods.getSelected = function() {
+    return pageState.selected;
   };
 
   // Setter for paintMode
   pageStateFactoryMethods.paintMode = function(enablePaintMode) {
     if (enablePaintMode !== undefined)
-      enablePaintMode = false;
-    paintMode = enablePaintMode;
+      pageState.paintMode = enablePaintMode;
+    else
+      pageState.paintMode = false;
   };
 
   // Setter for selected
@@ -38242,30 +38243,6 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
-
-function drawMode() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/draw_mode/drawMode.html',
-
-    controllerAs: 'drawModeVM',
-    bindToController: true,
-
-    controller: ["pageStateFactory", function(pageStateFactory) {
-      var vm = this;
-
-      vm.pageState = pageStateFactory.get();
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('drawMode', drawMode);
 
 function loadPattern() {
 

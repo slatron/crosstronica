@@ -496,7 +496,8 @@ body, html {
 /* line 8, ../../../../dev/scss/base/_typography.scss */
 .text-tiny,
 .pattern-grid .square,
-.square {
+.square,
+.panel h6 + a {
   font-size: 10.4px;
 }
 
@@ -601,9 +602,12 @@ main {
 /* line 2, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
+  border: none;
+  box-shadow: none;
   color: white;
   cursor: pointer;
   display: inline-block;
+  outline: none;
   padding: 0.5em 1em;
   text-align: center;
   -webkit-border-radius: 7px;
@@ -612,36 +616,36 @@ main {
   -o-border-radius: 7px;
   border-radius: 7px;
 }
-/* line 13, ../../../../dev/scss/modules/_buttons.scss */
+/* line 16, ../../../../dev/scss/modules/_buttons.scss */
 .but.active,
 .but:active {
   background-color: #edc721;
   color: #363636;
 }
 
-/* line 20, ../../../../dev/scss/modules/_buttons.scss */
+/* line 23, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection {
   text-decoration: none;
 }
-/* line 23, ../../../../dev/scss/modules/_buttons.scss */
+/* line 26, ../../../../dev/scss/modules/_buttons.scss */
 a.but-selection:active {
   background: #edc721;
   color: #569e56;
 }
 
-/* line 30, ../../../../dev/scss/modules/_buttons.scss */
+/* line 33, ../../../../dev/scss/modules/_buttons.scss */
 .but-row {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 0;
 }
-/* line 35, ../../../../dev/scss/modules/_buttons.scss */
+/* line 38, ../../../../dev/scss/modules/_buttons.scss */
 .but-row .but {
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-/* line 41, ../../../../dev/scss/modules/_buttons.scss */
+/* line 44, ../../../../dev/scss/modules/_buttons.scss */
 .but[disabled] {
   opacity: 0.2;
 }
@@ -707,13 +711,14 @@ a.but-selection:active {
 
 /* line 27, ../../../../dev/scss/modules/_panel.scss */
 .panel h6 + a {
+  border: 1px solid #569e56;
   display: inline-block;
-  padding: 0;
+  padding: 1px 2px;
   position: relative;
   top: -2px;
 }
 
-/* line 34, ../../../../dev/scss/modules/_panel.scss */
+/* line 37, ../../../../dev/scss/modules/_panel.scss */
 .pallete > div {
   display: inline-block;
 }
