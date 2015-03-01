@@ -37588,7 +37588,8 @@ function drawStateFactory() {
       selected: {}
     },
     border: {
-      borderSide: 'left'
+      borderSide: 'left',
+      erase: false
     }
   };
 
@@ -37606,12 +37607,22 @@ function drawStateFactory() {
     }
   };
 
+  // Setter for border.erase
+  drawStateFactoryMethods.setBorderMode = function(mode) {
+    if (mode === 'draw')
+      drawState.border.erase = false;
+    if (mode === 'erase')
+      drawState.border.erase = true;
+  };
+
   // Setter for selected
   drawStateFactoryMethods.selected = function(newColor) {
-    if (newColor !== undefined)
+    if (newColor !== undefined) {
       drawState.paint.selected = newColor;
-    else
+    } else {
       drawState.paint.selected = {};
+      drawState.border.erase   = true;
+    }
   };
 
   // Setter for borderSide
@@ -38150,7 +38161,7 @@ function pattern(drawStateFactory, patternFactory) {
         // Border Mode
         if (drawState.drawMode === 'border') {
 
-          if(drawState.border.borderSide === '') {
+          if(drawState.border.erase) {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
@@ -38394,6 +38405,10 @@ function selectedColor(drawStateFactory) {
 
       vm.enableDrawMode = function(mode) {
         drawStateFactory.setMode(mode);
+      };
+
+      vm.borderMode = function(mode) {
+        drawStateFactory.setBorderMode(mode);
       };
     }
   };

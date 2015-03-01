@@ -47,7 +47,7 @@ function pattern(drawStateFactory, patternFactory) {
         // Border Mode
         if (drawState.drawMode === 'border') {
 
-          if(drawState.border.borderSide === '') {
+          if(drawState.border.erase) {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 

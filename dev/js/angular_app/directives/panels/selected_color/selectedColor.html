@@ -23,20 +23,28 @@
 
   <!-- Border Area -->
   <div ng-show="selectedVM.drawState.drawMode === 'border'">
-    <span
-      ng-show="selectedVM.drawState.paint.selected.name"
-    >Side: </span>
-    <select
-      ng-model="selectedVM.drawState.border.borderSide"
-      ng-show="selectedVM.drawState.paint.selected.name"
-    >
-      <option value="top">top</option>
-      <option value="right">right</option>
-      <option value="bottom">bottom</option>
-      <option value="left">left</option>
-    </select>
-    <span ng-show="selectedVM.drawState.paint.selected.name === undefined">
-      Erase Border
+
+    <!-- Border Draw Mode -->
+    <div ng-hide="selectedVM.drawState.border.erase">
+      Side:
+      <select
+        ng-model="selectedVM.drawState.border.borderSide"
+
+      >
+        <option value="top">top</option>
+        <option value="right">right</option>
+        <option value="bottom">bottom</option>
+        <option value="left">left</option>
+      </select>
+      <span
+        ng-click="selectedVM.borderMode('erase')"
+        class="text-tiny but"
+      >Erase Borders</span>
+    </div>
+
+    <!-- Border Erase Mode -->
+    <span ng-show="selectedVM.drawState.border.erase">
+      Erase Mode <span class="text-tiny but" ng-click="selectedVM.borderMode('draw')">Draw Borders</span>
     </span>
   </div>
 

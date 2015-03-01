@@ -19,6 +19,10 @@ function selectedColor(drawStateFactory) {
       vm.enableDrawMode = function(mode) {
         drawStateFactory.setMode(mode);
       };
+
+      vm.borderMode = function(mode) {
+        drawStateFactory.setBorderMode(mode);
+      };
     }
   };
 

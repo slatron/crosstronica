@@ -11,7 +11,8 @@ function drawStateFactory() {
       selected: {}
     },
     border: {
-      borderSide: 'left'
+      borderSide: 'left',
+      erase: false
     }
   };
 
@@ -29,12 +30,22 @@ function drawStateFactory() {
     }
   };
 
+  // Setter for border.erase
+  drawStateFactoryMethods.setBorderMode = function(mode) {
+    if (mode === 'draw')
+      drawState.border.erase = false;
+    if (mode === 'erase')
+      drawState.border.erase = true;
+  };
+
   // Setter for selected
   drawStateFactoryMethods.selected = function(newColor) {
-    if (newColor !== undefined)
+    if (newColor !== undefined) {
       drawState.paint.selected = newColor;
-    else
+    } else {
       drawState.paint.selected = {};
+      drawState.border.erase   = true;
+    }
   };
 
   // Setter for borderSide
