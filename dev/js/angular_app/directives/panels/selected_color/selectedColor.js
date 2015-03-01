@@ -15,6 +15,10 @@ function selectedColor(drawStateFactory) {
       var vm = this;
 
       vm.drawState = drawStateFactory.get();
+
+      vm.enableDrawMode = function(mode) {
+        drawStateFactory.setMode(mode);
+      };
     }
   };
 

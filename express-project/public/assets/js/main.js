@@ -37598,14 +37598,14 @@ function drawStateFactory() {
     return drawState;
   };
 
-  // Setters for paintMode
-  drawStateFactoryMethods.paintMode = function() {
-    drawState.drawMode = 'paint';
+  // Setter for drawMode
+  drawStateFactoryMethods.setMode = function(mode) {
+    if (_.contains(['paint', 'border'], mode)) {
+      console.log('setting drawMode to ', mode);
+      drawState.drawMode = mode;
+    }
   };
 
-  drawStateFactoryMethods.borderMode = function() {
-    drawState.drawMode = 'border';
-  };
   // Setter for selected
   drawStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined)
@@ -38391,6 +38391,10 @@ function selectedColor(drawStateFactory) {
       var vm = this;
 
       vm.drawState = drawStateFactory.get();
+
+      vm.enableDrawMode = function(mode) {
+        drawStateFactory.setMode(mode);
+      };
     }
   };
 

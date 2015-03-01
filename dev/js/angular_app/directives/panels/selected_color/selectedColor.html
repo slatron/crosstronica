@@ -3,57 +3,61 @@
 
   <div class="panel-section">
 
-    here: {{selectedVM.drawMode}}
-
+    <!-- Color Button -->
     <span
       class="text-tiny but"
-      ng-class="selectedVM.drawState.paintMode ? 'active' : ''"
-      ng-click="selectedVM.drawState.paintMode = true"
+      ng-class="selectedVM.drawState.drawMode === 'paint' ? 'active' : ''"
+      ng-click="selectedVM.enableDrawMode('paint')"
     >
-      <span ng-hide="selectedVM.drawState.selected.name">Erase Color</span>
-      <span ng-show="selectedVM.drawState.selected.name">Paint</span>
+      Paint
     </span>
+
+    <!-- Border Button -->
     <span
       class="text-tiny but"
-      ng-class="selectedVM.drawState.paintMode ? '' : 'active'"
-      ng-click="selectedVM.drawState.paintMode = false;selectedVM.drawState.selected = {}"
+      ng-class="selectedVM.drawState.drawMode === 'border' ? 'active' : ''"
+      ng-click="selectedVM.enableDrawMode('border')"
     >
+    Borders
+  </div>
+
+  <!-- Border Area -->
+  <div ng-show="selectedVM.drawState.drawMode === 'border'">
     <span
-      ng-if="selectedVM.drawState.selected.name === undefined"
-    >Erase</span> Borders</span>
-  </div>
-
-  <div ng-hide="selectedVM.drawState.paintMode">
-    <div
-      ng-show="selectedVM.drawState.selected.name"
+      ng-show="selectedVM.drawState.paint.selected.name"
+    >Side: </span>
+    <select
+      ng-model="selectedVM.drawState.border.borderSide"
+      ng-show="selectedVM.drawState.paint.selected.name"
     >
-      <p>Border Side</p>
-      <select ng-model="selectedVM.drawState.borderSide">
-        <option value="top">top</option>
-        <option value="right">right</option>
-        <option value="bottom">bottom</option>
-        <option value="left">left</option>
-      </select>
-    </div>
+      <option value="top">top</option>
+      <option value="right">right</option>
+      <option value="bottom">bottom</option>
+      <option value="left">left</option>
+    </select>
+    <span ng-show="selectedVM.drawState.paint.selected.name === undefined">
+      Erase Border
+    </span>
   </div>
 
-  <div ng-show="selectedVM.drawState.paintMode">
-    <p ng-hide="selectedVM.drawState.selected.name === undefined">
-      Paint Color:
-    </p>
-    <span ng-show="selectedVM.drawState.selected.name">
-      <grid-square
-        ng-show="selectedVM.drawState.selected"
-        color="selectedVM.drawState.selected"
-      ></grid-square>
-      <grid-square
-        ng-hide="selectedVM.drawState.selected"
-        color="selectedVM.drawState.selected"
-      ></grid-square>
+  <!-- Color Area -->
+  <div
+    ng-show="selectedVM.drawState.drawMode === 'paint'"
+    class="paint-info"
+  >
+    <span ng-show="selectedVM.drawState.paint.selected.name === undefined">
+      Erase:
     </span>
-    <br>
-    <p>
-      <span ng-show="selectedVM.drawState.selected.name">{{selectedVM.drawState.selected.name}} #{{selectedVM.drawState.selected.rgb}}</span>
-    </p>
+    <span ng-show="selectedVM.drawState.paint.selected.name">
+      Color:
+    </span>
+    <grid-square
+      color="selectedVM.drawState.paint.selected"
+    ></grid-square>
+    {{selectedVM.drawState.paint.selected.name}}
+    <span ng-show="selectedVM.drawState.paint.selected.rgb">
+      #{{selectedVM.drawState.paint.selected.rgb}}
+    </span>
   </div>
+
 </div>

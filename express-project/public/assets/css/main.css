@@ -723,6 +723,11 @@ a.but-selection:active {
   display: inline-block;
 }
 
+/* line 41, ../../../../dev/scss/modules/_panel.scss */
+.paint-info .square {
+  display: inline-block;
+}
+
 /* line 3, ../../../../dev/scss/modules/_grid.scss */
 .grid {
   display: flex;
