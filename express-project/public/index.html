@@ -12,14 +12,14 @@
   </head>
   <body page-state>
 
-    <login-screen ng-if="!pageStateVM.pageState.authorized"></login-screen>
+    <login-screen ng-if="!pageStateVM.userState.authorized"></login-screen>
 
-    <div class="drawer-grid" ng-if="pageStateVM.pageState.authorized">
+    <div class="drawer-grid" ng-if="pageStateVM.userState.authorized">
 
       <drawer>
 
-        <pallete></pallete>
         <selected-color></selected-color>
+        <pallete></pallete>
         <add-color></add-color>
         <new-pattern></new-pattern>
         <load-pattern></load-pattern>
@@ -28,14 +28,14 @@
 
     </div>
 
-    <main ng-if="pageStateVM.pageState.authorized">
+    <main ng-if="pageStateVM.userState.authorized">
 
       <pattern></pattern>
 
     </main>
 
 
-    <footer ng-if="pageStateVM.pageState.authorized" ng-include="'layout/footer.html'"></footer>
+    <footer ng-if="pageStateVM.userState.authorized" ng-include="'layout/footer.html'"></footer>
 
     <script src="assets/js/main.js"></script>
 

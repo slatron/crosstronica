@@ -6,13 +6,13 @@
 function pageStateFactory() {
 
   var pageState = {
-    selected: {},
-    paintMode: true,
-    borderSide: 'left'
-  };
-
-  var userState = {
-    authorized: false
+    drawMode: 'paint',
+    paint: {
+      selected: {}
+    },
+    border: {
+      borderSide: 'left'
+    }
   };
 
   var pageStateFactoryMethods = {};
@@ -21,42 +21,28 @@ function pageStateFactory() {
     return pageState;
   };
 
-  pageStateFactoryMethods.getUserState = function() {
-    return userState;
+  // Setters for paintMode
+  pageStateFactoryMethods.paintMode = function() {
+    pageState.drawMode = 'paint';
   };
 
-  // Setter for paintMode
-  pageStateFactoryMethods.paintMode = function(enablePaintMode) {
-    if (enablePaintMode !== undefined)
-      pageState.paintMode = enablePaintMode;
-    else
-      pageState.paintMode = false;
+  pageStateFactoryMethods.borderMode = function() {
+    pageState.drawMode = 'border';
   };
-
   // Setter for selected
   pageStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined)
-      pageState.selected = newColor;
+      pageState.paint.selected = newColor;
     else
-      pageState.selected = {};
+      pageState.paint.selected = {};
   };
 
   // Setter for borderSide
   pageStateFactoryMethods.borderSide = function(newBorder) {
     if (newBorder !== undefined)
-      borderSide = newBorder;
+      pageState.border.borderSide = newBorder;
     else
       console.error('newBorder is required by borderside()');
-  };
-
-  // Setter for authorized
-  pageStateFactoryMethods.authorize = function(authorized) {
-    authorized = authorized || false;
-
-    if (authorized)
-      userState.authorized = true;
-    else
-      userState.authorized = false;
   };
 
   return pageStateFactoryMethods;

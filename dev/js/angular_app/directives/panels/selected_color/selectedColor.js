@@ -15,6 +15,8 @@ function selectedColor(pageStateFactory) {
       var vm = this;
 
       vm.pageState = pageStateFactory.get();
+
+      vm.drawMode = pageState.drawMode;
     }
   };
 

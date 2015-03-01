@@ -1,4 +1,4 @@
-function pageState(pageStateFactory, patternFactory) {
+function pageState(userStateFactory, patternFactory) {
 
   return {
     controllerAs: 'pageStateVM',
@@ -6,12 +6,12 @@ function pageState(pageStateFactory, patternFactory) {
     controller: function (Auth) {
       var vm = this;
 
-      vm.pageState = pageStateFactory.getUserState();
+      vm.userState = userStateFactory.get();
 
       // function to handle logging out
       vm.doLogout = function() {
         Auth.logout();
-        pageStateFactory.authorize(false);
+        userStateFactory.authorize(false);
         patternFactory.clearAvailable();
       };
 

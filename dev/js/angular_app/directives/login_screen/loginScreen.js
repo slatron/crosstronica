@@ -1,4 +1,4 @@
-function loginScreen(pageStateFactory) {
+function loginScreen(userStateFactory) {
 
   return {
     scope: {},
@@ -16,7 +16,7 @@ function loginScreen(pageStateFactory) {
       var vm = this;
 
       // Determine initial login state
-      pageStateFactory.authorize(Auth.isLoggedIn());
+      userStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
@@ -36,7 +36,7 @@ function loginScreen(pageStateFactory) {
             vm.processing = false;
 
             if (data.success) {
-              pageStateFactory.authorize(true);
+              userStateFactory.authorize(true);
               console.log('successful login: ', data);
             } else {
               vm.error = data.message;

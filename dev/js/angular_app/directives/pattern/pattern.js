@@ -37,17 +37,17 @@ function pattern(pageStateFactory, patternFactory) {
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if (pageState.paintMode) {
+        if (pageState.drawMode === 'paint') {
           var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
-          pageState.selected.borders = oldBorders;
-          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.selected);
+          pageState.paint.selected.borders = oldBorders;
+          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.paint.selected);
         }
 
         // Border Mode
-        if(!pageState.paintMode) {
+        if (pageState.drawMode === 'border') {
 
-          if(!_.size(pageState.selected)) {
+          if(pageState.border.borderSide === '') {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
@@ -55,12 +55,10 @@ function pattern(pageStateFactory, patternFactory) {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            // console.log(prevBorders, scope.pageState.borderSide);
-
-            if(pageState.borderSide === 'top') prevBorders[0] = true;
-            if(pageState.borderSide === 'right') prevBorders[1] = true;
-            if(pageState.borderSide === 'bottom') prevBorders[2] = true;
-            if(pageState.borderSide === 'left') prevBorders[3] = true;
+            if(pageState.border.borderSide === 'top') prevBorders[0] = true;
+            if(pageState.border.borderSide === 'right') prevBorders[1] = true;
+            if(pageState.border.borderSide === 'bottom') prevBorders[2] = true;
+            if(pageState.border.borderSide === 'left') prevBorders[3] = true;
 
             var newBorders = new Array([]);
 

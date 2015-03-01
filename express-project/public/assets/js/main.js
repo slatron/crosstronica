@@ -37583,13 +37583,13 @@ angular.module('Crosstronica', ['authService'])
 function pageStateFactory() {
 
   var pageState = {
-    selected: {},
-    paintMode: true,
-    borderSide: 'left'
-  };
-
-  var userState = {
-    authorized: false
+    drawMode: 'paint',
+    paint: {
+      selected: {}
+    },
+    border: {
+      borderSide: 'left'
+    }
   };
 
   var pageStateFactoryMethods = {};
@@ -37598,42 +37598,28 @@ function pageStateFactory() {
     return pageState;
   };
 
-  pageStateFactoryMethods.getUserState = function() {
-    return userState;
+  // Setters for paintMode
+  pageStateFactoryMethods.paintMode = function() {
+    pageState.drawMode = 'paint';
   };
 
-  // Setter for paintMode
-  pageStateFactoryMethods.paintMode = function(enablePaintMode) {
-    if (enablePaintMode !== undefined)
-      pageState.paintMode = enablePaintMode;
-    else
-      pageState.paintMode = false;
+  pageStateFactoryMethods.borderMode = function() {
+    pageState.drawMode = 'border';
   };
-
   // Setter for selected
   pageStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined)
-      pageState.selected = newColor;
+      pageState.paint.selected = newColor;
     else
-      pageState.selected = {};
+      pageState.paint.selected = {};
   };
 
   // Setter for borderSide
   pageStateFactoryMethods.borderSide = function(newBorder) {
     if (newBorder !== undefined)
-      borderSide = newBorder;
+      pageState.border.borderSide = newBorder;
     else
       console.error('newBorder is required by borderside()');
-  };
-
-  // Setter for authorized
-  pageStateFactoryMethods.authorize = function(authorized) {
-    authorized = authorized || false;
-
-    if (authorized)
-      userState.authorized = true;
-    else
-      userState.authorized = false;
   };
 
   return pageStateFactoryMethods;
@@ -37794,6 +37780,35 @@ patternFactory.$inject = ["$http", "$q"];
 
 angular.module('Crosstronica').
 factory('patternFactory', patternFactory);
+
+function userStateFactory() {
+
+  var userState = {
+    authorized: false
+  };
+
+  var userStateFactoryMethods = {};
+
+  userStateFactoryMethods.get = function() {
+    return userState;
+  };
+
+  // Setter for authorized
+  userStateFactoryMethods.authorize = function(authorized) {
+    authorized = authorized || false;
+
+    if (authorized)
+      userState.authorized = true;
+    else
+      userState.authorized = false;
+  };
+
+  return userStateFactoryMethods;
+
+}
+
+angular.module('Crosstronica').
+factory('userStateFactory', userStateFactory);
 
 angular.module('authService', [])
 
@@ -38003,7 +38018,7 @@ function gridSquare() {
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
 
-function loginScreen(pageStateFactory) {
+function loginScreen(userStateFactory) {
 
   return {
     scope: {},
@@ -38021,7 +38036,7 @@ function loginScreen(pageStateFactory) {
       var vm = this;
 
       // Determine initial login state
-      pageStateFactory.authorize(Auth.isLoggedIn());
+      userStateFactory.authorize(Auth.isLoggedIn());
 
       // get user information on page load
       Auth.getUser()
@@ -38041,7 +38056,7 @@ function loginScreen(pageStateFactory) {
             vm.processing = false;
 
             if (data.success) {
-              pageStateFactory.authorize(true);
+              userStateFactory.authorize(true);
               console.log('successful login: ', data);
             } else {
               vm.error = data.message;
@@ -38055,12 +38070,12 @@ function loginScreen(pageStateFactory) {
 
   };
 }
-loginScreen.$inject = ["pageStateFactory"];
+loginScreen.$inject = ["userStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
 
-function pageState(pageStateFactory, patternFactory) {
+function pageState(userStateFactory, patternFactory) {
 
   return {
     controllerAs: 'pageStateVM',
@@ -38068,12 +38083,12 @@ function pageState(pageStateFactory, patternFactory) {
     controller: ["Auth", function (Auth) {
       var vm = this;
 
-      vm.pageState = pageStateFactory.getUserState();
+      vm.userState = userStateFactory.get();
 
       // function to handle logging out
       vm.doLogout = function() {
         Auth.logout();
-        pageStateFactory.authorize(false);
+        userStateFactory.authorize(false);
         patternFactory.clearAvailable();
       };
 
@@ -38081,7 +38096,7 @@ function pageState(pageStateFactory, patternFactory) {
   };
 
 }
-pageState.$inject = ["pageStateFactory", "patternFactory"];
+pageState.$inject = ["userStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pageState', pageState);
@@ -38125,17 +38140,17 @@ function pattern(pageStateFactory, patternFactory) {
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if (pageState.paintMode) {
+        if (pageState.drawMode === 'paint') {
           var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
-          pageState.selected.borders = oldBorders;
-          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.selected);
+          pageState.paint.selected.borders = oldBorders;
+          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.paint.selected);
         }
 
         // Border Mode
-        if(!pageState.paintMode) {
+        if (pageState.drawMode === 'border') {
 
-          if(!_.size(pageState.selected)) {
+          if(pageState.border.borderSide === '') {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
@@ -38143,12 +38158,10 @@ function pattern(pageStateFactory, patternFactory) {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            // console.log(prevBorders, scope.pageState.borderSide);
-
-            if(pageState.borderSide === 'top') prevBorders[0] = true;
-            if(pageState.borderSide === 'right') prevBorders[1] = true;
-            if(pageState.borderSide === 'bottom') prevBorders[2] = true;
-            if(pageState.borderSide === 'left') prevBorders[3] = true;
+            if(pageState.border.borderSide === 'top') prevBorders[0] = true;
+            if(pageState.border.borderSide === 'right') prevBorders[1] = true;
+            if(pageState.border.borderSide === 'bottom') prevBorders[2] = true;
+            if(pageState.border.borderSide === 'left') prevBorders[3] = true;
 
             var newBorders = new Array([]);
 
@@ -38378,6 +38391,8 @@ function selectedColor(pageStateFactory) {
       var vm = this;
 
       vm.pageState = pageStateFactory.get();
+
+      vm.drawMode = pageState.drawMode;
     }
   };
 
