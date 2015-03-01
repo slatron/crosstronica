@@ -594,11 +594,6 @@ main {
   float: right;
 }
 
-/* line 8, ../../../../dev/scss/layout/_layout.scss */
-.panel-section {
-  margin: 1em;
-}
-
 /* line 2, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
@@ -726,6 +721,17 @@ a.but-selection:active {
 /* line 41, ../../../../dev/scss/modules/_panel.scss */
 .paint-info .square {
   display: inline-block;
+}
+
+/* line 45, ../../../../dev/scss/modules/_panel.scss */
+.panel-section {
+  margin: 1em;
+}
+
+/* line 49, ../../../../dev/scss/modules/_panel.scss */
+.panel-subsection {
+  border: 1px dashed #83c1bf;
+  padding: 0.5em;
 }
 
 /* line 3, ../../../../dev/scss/modules/_grid.scss */

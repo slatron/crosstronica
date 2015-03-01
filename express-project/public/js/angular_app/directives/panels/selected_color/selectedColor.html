@@ -22,36 +22,42 @@
   </div>
 
   <!-- Border Area -->
-  <div ng-show="selectedVM.drawState.drawMode === 'border'">
+  <div
+    ng-show="selectedVM.drawState.drawMode === 'border'"
+    class="panel-subsection"
+  >
 
     <!-- Border Draw Mode -->
     <div ng-hide="selectedVM.drawState.border.erase">
-      Side:
-      <select
-        ng-model="selectedVM.drawState.border.borderSide"
-
-      >
-        <option value="top">top</option>
-        <option value="right">right</option>
-        <option value="bottom">bottom</option>
-        <option value="left">left</option>
-      </select>
+      <b>Draw Mode</b>
       <span
         ng-click="selectedVM.borderMode('erase')"
         class="text-tiny but"
-      >Erase Borders</span>
+      >Erase</span>
+      <div class="panel-section">
+        Side:
+        <select
+          ng-model="selectedVM.drawState.border.borderSide"
+
+        >
+          <option value="top">top</option>
+          <option value="right">right</option>
+          <option value="bottom">bottom</option>
+          <option value="left">left</option>
+        </select>
+      </div>
     </div>
 
     <!-- Border Erase Mode -->
     <span ng-show="selectedVM.drawState.border.erase">
-      Erase Mode <span class="text-tiny but" ng-click="selectedVM.borderMode('draw')">Draw Borders</span>
+      <b>Erase Mode</b> <span class="text-tiny but" ng-click="selectedVM.borderMode('draw')">Draw</span>
     </span>
   </div>
 
   <!-- Color Area -->
   <div
     ng-show="selectedVM.drawState.drawMode === 'paint'"
-    class="paint-info"
+    class="paint-info panel-subsection"
   >
     <span ng-show="selectedVM.drawState.paint.selected.name === undefined">
       Erase:

@@ -41,3 +41,12 @@
 .paint-info .square {
   display: inline-block;
 }
+
+.panel-section {
+  margin: $base-unit;
+}
+
+.panel-subsection {
+  border: 1px dashed $color-pool;
+  padding: $base-unit-half;
+}
