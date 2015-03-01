@@ -2,9 +2,25 @@
   <h6 ng-click="toggleMe()">Save Pattern</h6>
   <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
   <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <div ng-hide="collapsed" class="panel-section">
+  <div ng-hide="collapsed">
+
+    <div
+      ng-hide="savePatternVM.currentPattern.id === undefined"
+      class="panel-section"
+    >
+      <div class="panel-section">
+        <b>Update Pattern: </b>
+      </div>
+      <span
+        ng-click="savePatternVM.updatePattern()"
+        class="text-tiny but"
+      >Save Changes</span>
+    </div>
+
     <div class="panel-section">
-      <b>Save As New Pattern to Database: </b>
+      <div class="panel-section">
+        <b>Save As New Pattern: </b>
+      </div>
       <span
         ng-click="savePatternVM.savePattern()"
         class="text-tiny but"

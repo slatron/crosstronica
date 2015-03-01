@@ -14,6 +14,8 @@ function savePattern() {
 
       var vm = this;
 
+      vm.currentPattern = patternFactory.get();
+
       vm.savePattern = function() {
 
         currentPattern = patternFactory.get();
@@ -25,10 +27,30 @@ function savePattern() {
 
         patternFactory.saveNew(patternData).then(
           function(success) {
-            console.log('successful pattern post', success);
+            console.log('successful pattern POST', success);
           },
           function(error) {
-            console.error('error on pattern post', error);
+            console.error('error on pattern POST', error);
+          }
+        );
+
+      };
+
+      vm.updatePattern = function() {
+
+        currentPattern = patternFactory.get();
+
+        var patternData = {
+          name: currentPattern.name,
+          grid: currentPattern.grid
+        };
+
+        patternFactory.updatePattern(patternData, currentPattern.id).then(
+          function(success) {
+            console.log('successful pattern PUT', success);
+          },
+          function(error) {
+            console.error('error on pattern PUT', error);
           }
         );
 

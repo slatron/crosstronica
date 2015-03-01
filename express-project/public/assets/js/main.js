@@ -37703,10 +37703,15 @@ function patternFactory($http, $q) {
   var patternData = {
     name: '',
     grid: [],
+    id: undefined,
     available: []
   };
 
   var patternFactoryMethods = {};
+
+  patternFactoryMethods.get = function() {
+    return patternData;
+  };
 
   patternFactoryMethods.clearAvailable = function() {
     patternData.available = [];
@@ -37735,20 +37740,16 @@ function patternFactory($http, $q) {
     return deferred.promise;
   };
 
-  patternFactoryMethods.get = function() {
-    return patternData;
-  };
-
-
   patternFactoryMethods.init = function() {
 
     var deferred = $q.defer();
 
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
-      data = data[0];
+      data = data[1];
       patternData.name = data.name;
       patternData.grid = data.grid;
+      patternData.id   = data._id;
       deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
@@ -37762,6 +37763,7 @@ function patternFactory($http, $q) {
     $http.get('/api/pattern/' + id).success(function(data) {
       patternData.name = data.name;
       patternData.grid = data.grid;
+      patternData.id   = data._id;
     }).error(function(e) {
       console.error('An error occurred while querying the remote database');
     });
@@ -37772,6 +37774,22 @@ function patternFactory($http, $q) {
     var deferred = $q.defer();
 
     $http.post('/api/pattern', pattern)
+      .success(function(data) {
+        console.log('TODO: store new pattern ID');
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while POSTing a pattern to  the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
+  patternFactoryMethods.updatePattern = function(pattern, id) {
+
+    var deferred = $q.defer();
+
+    $http.put('/api/pattern/' + id, pattern)
       .success(function(data) {
         deferred.resolve(data);
       }).error(function(e) {
@@ -37801,6 +37819,8 @@ function patternFactory($http, $q) {
 
       patternData.grid[i] = thisRow;
     }
+
+    patternData.id = undefined;
   };
 
   return patternFactoryMethods;
@@ -38454,6 +38474,8 @@ function savePattern() {
 
       var vm = this;
 
+      vm.currentPattern = patternFactory.get();
+
       vm.savePattern = function() {
 
         currentPattern = patternFactory.get();
@@ -38465,10 +38487,30 @@ function savePattern() {
 
         patternFactory.saveNew(patternData).then(
           function(success) {
-            console.log('successful pattern post', success);
+            console.log('successful pattern POST', success);
           },
           function(error) {
-            console.error('error on pattern post', error);
+            console.error('error on pattern POST', error);
+          }
+        );
+
+      };
+
+      vm.updatePattern = function() {
+
+        currentPattern = patternFactory.get();
+
+        var patternData = {
+          name: currentPattern.name,
+          grid: currentPattern.grid
+        };
+
+        patternFactory.updatePattern(patternData, currentPattern.id).then(
+          function(success) {
+            console.log('successful pattern PUT', success);
+          },
+          function(error) {
+            console.error('error on pattern PUT', error);
           }
         );
 

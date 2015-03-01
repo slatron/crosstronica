@@ -236,21 +236,21 @@ module.exports = function(app, express) {
 
         res.json(pattern);
       });
+    })
+
+    .put(function(req, res) {
+      Pattern.findById(req.params.pattern_id, function(err, pattern) {
+        if (err) res.send(err);
+
+        if (req.body.name) pattern.name = req.body.name;
+        if (req.body.grid) pattern.grid = req.body.grid;
+
+        pattern.save(function(err) {
+          if (err) res.send(err);
+          res.json({ message: 'Pattern Updated!'});
+        });
+      })
     });
-
-  //   .put(function(req, res) {
-  //     Pattern.findById(req.params.pattern_id, function(err, pattern) {
-  //       if (err) res.send(err);
-
-  //       if (req.body.name) pattern.name = req.body.name;
-  //       if (req.body.grid) pattern.password = req.body.grid;
-
-  //       pattern.save(function(err) {
-  //         if (err) res.send(err);
-  //         res.json({ message: 'Pattern Updated!'});
-  //       });
-  //     })
-  //   })
 
   //   .delete(function(req, res) {
   //     Pattern.remove({
