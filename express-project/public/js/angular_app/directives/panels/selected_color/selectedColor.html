@@ -7,28 +7,28 @@
 
     <span
       class="text-tiny but"
-      ng-class="selectedVM.pageState.paintMode ? 'active' : ''"
-      ng-click="selectedVM.pageState.paintMode = true"
+      ng-class="selectedVM.drawState.paintMode ? 'active' : ''"
+      ng-click="selectedVM.drawState.paintMode = true"
     >
-      <span ng-hide="selectedVM.pageState.selected.name">Erase Color</span>
-      <span ng-show="selectedVM.pageState.selected.name">Paint</span>
+      <span ng-hide="selectedVM.drawState.selected.name">Erase Color</span>
+      <span ng-show="selectedVM.drawState.selected.name">Paint</span>
     </span>
     <span
       class="text-tiny but"
-      ng-class="selectedVM.pageState.paintMode ? '' : 'active'"
-      ng-click="selectedVM.pageState.paintMode = false;selectedVM.pageState.selected = {}"
+      ng-class="selectedVM.drawState.paintMode ? '' : 'active'"
+      ng-click="selectedVM.drawState.paintMode = false;selectedVM.drawState.selected = {}"
     >
     <span
-      ng-if="selectedVM.pageState.selected.name === undefined"
+      ng-if="selectedVM.drawState.selected.name === undefined"
     >Erase</span> Borders</span>
   </div>
 
-  <div ng-hide="selectedVM.pageState.paintMode">
+  <div ng-hide="selectedVM.drawState.paintMode">
     <div
-      ng-show="selectedVM.pageState.selected.name"
+      ng-show="selectedVM.drawState.selected.name"
     >
       <p>Border Side</p>
-      <select ng-model="selectedVM.pageState.borderSide">
+      <select ng-model="selectedVM.drawState.borderSide">
         <option value="top">top</option>
         <option value="right">right</option>
         <option value="bottom">bottom</option>
@@ -37,23 +37,23 @@
     </div>
   </div>
 
-  <div ng-show="selectedVM.pageState.paintMode">
-    <p ng-hide="selectedVM.pageState.selected.name === undefined">
+  <div ng-show="selectedVM.drawState.paintMode">
+    <p ng-hide="selectedVM.drawState.selected.name === undefined">
       Paint Color:
     </p>
-    <span ng-show="selectedVM.pageState.selected.name">
+    <span ng-show="selectedVM.drawState.selected.name">
       <grid-square
-        ng-show="selectedVM.pageState.selected"
-        color="selectedVM.pageState.selected"
+        ng-show="selectedVM.drawState.selected"
+        color="selectedVM.drawState.selected"
       ></grid-square>
       <grid-square
-        ng-hide="selectedVM.pageState.selected"
-        color="selectedVM.pageState.selected"
+        ng-hide="selectedVM.drawState.selected"
+        color="selectedVM.drawState.selected"
       ></grid-square>
     </span>
     <br>
     <p>
-      <span ng-show="selectedVM.pageState.selected.name">{{selectedVM.pageState.selected.name}} #{{selectedVM.pageState.selected.rgb}}</span>
+      <span ng-show="selectedVM.drawState.selected.name">{{selectedVM.drawState.selected.name}} #{{selectedVM.drawState.selected.rgb}}</span>
     </p>
   </div>
 </div>

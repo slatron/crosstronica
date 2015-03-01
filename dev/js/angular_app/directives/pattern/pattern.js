@@ -1,4 +1,4 @@
-function pattern(pageStateFactory, patternFactory) {
+function pattern(drawStateFactory, patternFactory) {
 
   return {
     scope: {},
@@ -30,24 +30,24 @@ function pattern(pageStateFactory, patternFactory) {
     link: function (scope, elem, attrs) {
 
       var ctrlVM = scope.patternVM;
-      var pageState = pageStateFactory.get();
+      var drawState = drawStateFactory.get();
 
       scope.paintCel = function(row, col, triggerDigest) {
 
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if (pageState.drawMode === 'paint') {
+        if (drawState.drawMode === 'paint') {
           var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
-          pageState.paint.selected.borders = oldBorders;
-          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.paint.selected);
+          drawState.paint.selected.borders = oldBorders;
+          ctrlVM.gridData.grid[row][col] = angular.copy(drawState.paint.selected);
         }
 
         // Border Mode
-        if (pageState.drawMode === 'border') {
+        if (drawState.drawMode === 'border') {
 
-          if(pageState.border.borderSide === '') {
+          if(drawState.border.borderSide === '') {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
@@ -55,10 +55,10 @@ function pattern(pageStateFactory, patternFactory) {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            if(pageState.border.borderSide === 'top') prevBorders[0] = true;
-            if(pageState.border.borderSide === 'right') prevBorders[1] = true;
-            if(pageState.border.borderSide === 'bottom') prevBorders[2] = true;
-            if(pageState.border.borderSide === 'left') prevBorders[3] = true;
+            if(drawState.border.borderSide === 'top') prevBorders[0] = true;
+            if(drawState.border.borderSide === 'right') prevBorders[1] = true;
+            if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
+            if(drawState.border.borderSide === 'left') prevBorders[3] = true;
 
             var newBorders = new Array([]);
 

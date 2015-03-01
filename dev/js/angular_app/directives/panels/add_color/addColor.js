@@ -10,7 +10,7 @@ function addColor() {
     controllerAs: 'addColorVM',
     bindToController: true,
 
-    controller: function ($http, palleteFactory, pageStateFactory) {
+    controller: function ($http, palleteFactory, drawStateFactory) {
 
       var vm = this;
 

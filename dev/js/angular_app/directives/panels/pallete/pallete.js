@@ -10,7 +10,7 @@ function pallete() {
     controllerAs: 'palleteVM',
     bindToController: true,
 
-    controller: function (palleteFactory, pageStateFactory) {
+    controller: function (palleteFactory, drawStateFactory) {
 
       var vm = this;
 
@@ -25,12 +25,12 @@ function pallete() {
 
       vm.selectColor = function(color) {
         color = color || {};
-        pageStateFactory.selected(color);
+        drawStateFactory.selected(color);
       };
 
       // Clear selected color
       vm.selectEraser = function() {
-        pageStateFactory.selected();
+        drawStateFactory.selected();
       };
     }
   };

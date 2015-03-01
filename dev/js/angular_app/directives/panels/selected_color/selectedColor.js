@@ -1,4 +1,4 @@
-function selectedColor(pageStateFactory) {
+function selectedColor(drawStateFactory) {
 
   return {
     scope: {},
@@ -14,9 +14,7 @@ function selectedColor(pageStateFactory) {
     controller: function () {
       var vm = this;
 
-      vm.pageState = pageStateFactory.get();
-
-      vm.drawMode = pageState.drawMode;
+      vm.drawState = drawStateFactory.get();
     }
   };
 

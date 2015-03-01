@@ -37577,12 +37577,12 @@ angular.module('Crosstronica', ['authService'])
 
 /**
 * paintMode:
-* true  = paint with clicks
-* false = add border with clicks
+* paint  = paint with clicks
+* border = add border with clicks
 **/
-function pageStateFactory() {
+function drawStateFactory() {
 
-  var pageState = {
+  var drawState = {
     drawMode: 'paint',
     paint: {
       selected: {}
@@ -37592,42 +37592,42 @@ function pageStateFactory() {
     }
   };
 
-  var pageStateFactoryMethods = {};
+  var drawStateFactoryMethods = {};
 
-  pageStateFactoryMethods.get = function() {
-    return pageState;
+  drawStateFactoryMethods.get = function() {
+    return drawState;
   };
 
   // Setters for paintMode
-  pageStateFactoryMethods.paintMode = function() {
-    pageState.drawMode = 'paint';
+  drawStateFactoryMethods.paintMode = function() {
+    drawState.drawMode = 'paint';
   };
 
-  pageStateFactoryMethods.borderMode = function() {
-    pageState.drawMode = 'border';
+  drawStateFactoryMethods.borderMode = function() {
+    drawState.drawMode = 'border';
   };
   // Setter for selected
-  pageStateFactoryMethods.selected = function(newColor) {
+  drawStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined)
-      pageState.paint.selected = newColor;
+      drawState.paint.selected = newColor;
     else
-      pageState.paint.selected = {};
+      drawState.paint.selected = {};
   };
 
   // Setter for borderSide
-  pageStateFactoryMethods.borderSide = function(newBorder) {
+  drawStateFactoryMethods.borderSide = function(newBorder) {
     if (newBorder !== undefined)
-      pageState.border.borderSide = newBorder;
+      drawState.border.borderSide = newBorder;
     else
       console.error('newBorder is required by borderside()');
   };
 
-  return pageStateFactoryMethods;
+  return drawStateFactoryMethods;
 
 }
 
 angular.module('Crosstronica').
-factory('pageStateFactory', pageStateFactory);
+factory('drawStateFactory', drawStateFactory);
 
 function palleteFactory($http, $q) {
 
@@ -38101,7 +38101,7 @@ pageState.$inject = ["userStateFactory", "patternFactory"];
 angular.module('Crosstronica').
 directive('pageState', pageState);
 
-function pattern(pageStateFactory, patternFactory) {
+function pattern(drawStateFactory, patternFactory) {
 
   return {
     scope: {},
@@ -38133,24 +38133,24 @@ function pattern(pageStateFactory, patternFactory) {
     link: function (scope, elem, attrs) {
 
       var ctrlVM = scope.patternVM;
-      var pageState = pageStateFactory.get();
+      var drawState = drawStateFactory.get();
 
       scope.paintCel = function(row, col, triggerDigest) {
 
         triggerDigest = triggerDigest || false;
 
         // Paint Mode
-        if (pageState.drawMode === 'paint') {
+        if (drawState.drawMode === 'paint') {
           var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
-          pageState.paint.selected.borders = oldBorders;
-          ctrlVM.gridData.grid[row][col] = angular.copy(pageState.paint.selected);
+          drawState.paint.selected.borders = oldBorders;
+          ctrlVM.gridData.grid[row][col] = angular.copy(drawState.paint.selected);
         }
 
         // Border Mode
-        if (pageState.drawMode === 'border') {
+        if (drawState.drawMode === 'border') {
 
-          if(pageState.border.borderSide === '') {
+          if(drawState.border.borderSide === '') {
 
             ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
 
@@ -38158,10 +38158,10 @@ function pattern(pageStateFactory, patternFactory) {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            if(pageState.border.borderSide === 'top') prevBorders[0] = true;
-            if(pageState.border.borderSide === 'right') prevBorders[1] = true;
-            if(pageState.border.borderSide === 'bottom') prevBorders[2] = true;
-            if(pageState.border.borderSide === 'left') prevBorders[3] = true;
+            if(drawState.border.borderSide === 'top') prevBorders[0] = true;
+            if(drawState.border.borderSide === 'right') prevBorders[1] = true;
+            if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
+            if(drawState.border.borderSide === 'left') prevBorders[3] = true;
 
             var newBorders = new Array([]);
 
@@ -38182,7 +38182,7 @@ function pattern(pageStateFactory, patternFactory) {
   };
 
 }
-pattern.$inject = ["pageStateFactory", "patternFactory"];
+pattern.$inject = ["drawStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pattern', pattern);
@@ -38223,7 +38223,7 @@ function addColor() {
     controllerAs: 'addColorVM',
     bindToController: true,
 
-    controller: ["$http", "palleteFactory", "pageStateFactory", function ($http, palleteFactory, pageStateFactory) {
+    controller: ["$http", "palleteFactory", "drawStateFactory", function ($http, palleteFactory, drawStateFactory) {
 
       var vm = this;
 
@@ -38305,7 +38305,7 @@ function newPattern() {
     controllerAs: 'newPatternVM',
     bindToController: true,
 
-    controller: ["patternFactory", "pageStateFactory", function (patternFactory, pageStateFactory) {
+    controller: ["patternFactory", "drawStateFactory", function (patternFactory, drawStateFactory) {
 
       var vm = this;
 
@@ -38344,7 +38344,7 @@ function pallete() {
     controllerAs: 'palleteVM',
     bindToController: true,
 
-    controller: ["palleteFactory", "pageStateFactory", function (palleteFactory, pageStateFactory) {
+    controller: ["palleteFactory", "drawStateFactory", function (palleteFactory, drawStateFactory) {
 
       var vm = this;
 
@@ -38359,12 +38359,12 @@ function pallete() {
 
       vm.selectColor = function(color) {
         color = color || {};
-        pageStateFactory.selected(color);
+        drawStateFactory.selected(color);
       };
 
       // Clear selected color
       vm.selectEraser = function() {
-        pageStateFactory.selected();
+        drawStateFactory.selected();
       };
     }]
   };
@@ -38374,7 +38374,7 @@ function pallete() {
 angular.module('Crosstronica').
 directive('pallete', pallete);
 
-function selectedColor(pageStateFactory) {
+function selectedColor(drawStateFactory) {
 
   return {
     scope: {},
@@ -38390,14 +38390,12 @@ function selectedColor(pageStateFactory) {
     controller: function () {
       var vm = this;
 
-      vm.pageState = pageStateFactory.get();
-
-      vm.drawMode = pageState.drawMode;
+      vm.drawState = drawStateFactory.get();
     }
   };
 
 }
-selectedColor.$inject = ["pageStateFactory"];
+selectedColor.$inject = ["drawStateFactory"];
 
 angular.module('Crosstronica').
 directive('selectedColor', selectedColor);
