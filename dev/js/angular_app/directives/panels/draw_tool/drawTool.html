@@ -1,0 +1,77 @@
+<div class="panel">
+  <h6 ng-click="toggleMe()">Draw Tool</h6>
+
+  <div class="panel-section">
+
+    <!-- Color Button -->
+    <span
+      class="text-tiny but"
+      ng-class="drawtoolVM.drawState.drawMode === 'paint' ? 'active' : 'faded'"
+      ng-click="drawtoolVM.enableDrawMode('paint')"
+    >
+      Paint
+    </span>
+
+    <!-- Border Button -->
+    <span
+      class="text-tiny but"
+      ng-class="drawtoolVM.drawState.drawMode === 'border' ? 'active' : 'faded'"
+      ng-click="drawtoolVM.enableDrawMode('border')"
+    >
+    Borders
+  </div>
+
+  <!-- Border Area -->
+  <div
+    ng-show="drawtoolVM.drawState.drawMode === 'border'"
+    class="panel-subsection"
+  >
+
+    <!-- Border Draw Mode -->
+    <div ng-hide="drawtoolVM.drawState.border.erase">
+      <b>Draw Mode</b>
+      <span
+        ng-click="drawtoolVM.borderMode('erase')"
+        class="text-tiny but"
+      >Erase</span>
+      <div class="panel-section">
+        Side:
+        <select
+          ng-model="drawtoolVM.drawState.border.borderSide"
+
+        >
+          <option value="top">top</option>
+          <option value="right">right</option>
+          <option value="bottom">bottom</option>
+          <option value="left">left</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Border Erase Mode -->
+    <span ng-show="drawtoolVM.drawState.border.erase">
+      <b>Erase Mode</b> <span class="text-tiny but" ng-click="drawtoolVM.borderMode('draw')">Draw</span>
+    </span>
+  </div>
+
+  <!-- Color Area -->
+  <div
+    ng-show="drawtoolVM.drawState.drawMode === 'paint'"
+    class="paint-info panel-subsection"
+  >
+    <span ng-show="drawtoolVM.drawState.paint.selected.name === undefined">
+      Erase:
+    </span>
+    <span ng-show="drawtoolVM.drawState.paint.selected.name">
+      Color:
+    </span>
+    <grid-square
+      color="drawtoolVM.drawState.paint.selected"
+    ></grid-square>
+    {{drawtoolVM.drawState.paint.selected.name}}
+    <span ng-show="drawtoolVM.drawState.paint.selected.rgb">
+      #{{drawtoolVM.drawState.paint.selected.rgb}}
+    </span>
+  </div>
+
+</div>

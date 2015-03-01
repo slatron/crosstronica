@@ -915,138 +915,143 @@ a.but-selection:active {
 }
 
 /* line 25, ../../../../dev/scss/state/_state.scss */
+.faded {
+  opacity: 0.35;
+}
+
+/* line 29, ../../../../dev/scss/state/_state.scss */
 .vertical-align-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* line 32, ../../../../dev/scss/state/_state.scss */
+/* line 36, ../../../../dev/scss/state/_state.scss */
 .color-black {
   color: #222222;
 }
 
-/* line 33, ../../../../dev/scss/state/_state.scss */
+/* line 37, ../../../../dev/scss/state/_state.scss */
 .color-white {
   color: white;
 }
 
-/* line 34, ../../../../dev/scss/state/_state.scss */
+/* line 38, ../../../../dev/scss/state/_state.scss */
 .color-sohi {
   color: #569e56;
 }
 
-/* line 35, ../../../../dev/scss/state/_state.scss */
+/* line 39, ../../../../dev/scss/state/_state.scss */
 .color-gold {
   color: #edc721;
 }
 
-/* line 36, ../../../../dev/scss/state/_state.scss */
+/* line 40, ../../../../dev/scss/state/_state.scss */
 .color-pool {
   color: #83c1bf;
 }
 
-/* line 37, ../../../../dev/scss/state/_state.scss */
+/* line 41, ../../../../dev/scss/state/_state.scss */
 .color-agua {
   color: #eef6f6;
 }
 
-/* line 38, ../../../../dev/scss/state/_state.scss */
+/* line 42, ../../../../dev/scss/state/_state.scss */
 .color-dkdkblue {
   color: #001325;
 }
 
-/* line 39, ../../../../dev/scss/state/_state.scss */
+/* line 43, ../../../../dev/scss/state/_state.scss */
 .color-ltgrey {
   color: #f0eeee;
 }
 
-/* line 40, ../../../../dev/scss/state/_state.scss */
+/* line 44, ../../../../dev/scss/state/_state.scss */
 .color-dkgrey {
   color: #363636;
 }
 
-/* line 41, ../../../../dev/scss/state/_state.scss */
+/* line 45, ../../../../dev/scss/state/_state.scss */
 .color-ltltgrey {
   color: #fbf9f9;
 }
 
-/* line 42, ../../../../dev/scss/state/_state.scss */
+/* line 46, ../../../../dev/scss/state/_state.scss */
 .color-medgrey {
   color: #a1a1a1;
 }
 
-/* line 43, ../../../../dev/scss/state/_state.scss */
+/* line 47, ../../../../dev/scss/state/_state.scss */
 .color-cream {
   color: #f5f4e2;
 }
 
-/* line 44, ../../../../dev/scss/state/_state.scss */
+/* line 48, ../../../../dev/scss/state/_state.scss */
 .color-description {
   color: #666666;
 }
 
-/* line 46, ../../../../dev/scss/state/_state.scss */
+/* line 50, ../../../../dev/scss/state/_state.scss */
 .bg-black {
   background-color: #222222;
 }
 
-/* line 47, ../../../../dev/scss/state/_state.scss */
+/* line 51, ../../../../dev/scss/state/_state.scss */
 .bg-white {
   background-color: white;
 }
 
-/* line 48, ../../../../dev/scss/state/_state.scss */
+/* line 52, ../../../../dev/scss/state/_state.scss */
 .bg-sohi {
   background-color: #569e56;
 }
 
-/* line 49, ../../../../dev/scss/state/_state.scss */
+/* line 53, ../../../../dev/scss/state/_state.scss */
 .bg-gold {
   background-color: #edc721;
 }
 
-/* line 50, ../../../../dev/scss/state/_state.scss */
+/* line 54, ../../../../dev/scss/state/_state.scss */
 .bg-pool {
   background-color: #83c1bf;
 }
 
-/* line 51, ../../../../dev/scss/state/_state.scss */
+/* line 55, ../../../../dev/scss/state/_state.scss */
 .bg-agua {
   background-color: #eef6f6;
 }
 
-/* line 52, ../../../../dev/scss/state/_state.scss */
+/* line 56, ../../../../dev/scss/state/_state.scss */
 .bg-dkdkblue {
   background-color: #001325;
 }
 
-/* line 53, ../../../../dev/scss/state/_state.scss */
+/* line 57, ../../../../dev/scss/state/_state.scss */
 .bg-ltgrey {
   background-color: #f0eeee;
 }
 
-/* line 54, ../../../../dev/scss/state/_state.scss */
+/* line 58, ../../../../dev/scss/state/_state.scss */
 .bg-dkgrey {
   background-color: #363636;
 }
 
-/* line 55, ../../../../dev/scss/state/_state.scss */
+/* line 59, ../../../../dev/scss/state/_state.scss */
 .bg-ltltgrey {
   background-color: #fbf9f9;
 }
 
-/* line 56, ../../../../dev/scss/state/_state.scss */
+/* line 60, ../../../../dev/scss/state/_state.scss */
 .bg-medgrey {
   background-color: #a1a1a1;
 }
 
-/* line 57, ../../../../dev/scss/state/_state.scss */
+/* line 61, ../../../../dev/scss/state/_state.scss */
 .bg-description {
   background-color: #666666;
 }
 
-/* line 59, ../../../../dev/scss/state/_state.scss */
+/* line 63, ../../../../dev/scss/state/_state.scss */
 .loading {
   background: url(../images/loading.gif) 50% 50% no-repeat;
   padding: 15em 1em;

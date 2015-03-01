@@ -25,7 +25,6 @@ function drawStateFactory() {
   // Setter for drawMode
   drawStateFactoryMethods.setMode = function(mode) {
     if (_.contains(['paint', 'border'], mode)) {
-      console.log('setting drawMode to ', mode);
       drawState.drawMode = mode;
     }
   };

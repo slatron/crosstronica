@@ -1,4 +1,4 @@
-function selectedColor(drawStateFactory) {
+function drawTool(drawStateFactory) {
 
   return {
     scope: {},
@@ -6,9 +6,9 @@ function selectedColor(drawStateFactory) {
     restrict: 'E',
     replace: true,
 
-    templateUrl: '/js/angular_app/directives/panels/selected_color/selectedColor.html',
+    templateUrl: '/js/angular_app/directives/panels/draw_tool/drawTool.html',
 
-    controllerAs: 'selectedVM',
+    controllerAs: 'drawtoolVM',
     bindToController: true,
 
     controller: function () {
@@ -29,4 +29,4 @@ function selectedColor(drawStateFactory) {
 }
 
 angular.module('Crosstronica').
-directive('selectedColor', selectedColor);
+directive('drawTool', drawTool);
