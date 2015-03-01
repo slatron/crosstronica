@@ -36,6 +36,11 @@ function patternFactory($http, $q) {
   };
 
   patternFactoryMethods.get = function() {
+    return patternData;
+  };
+
+
+  patternFactoryMethods.init = function() {
 
     var deferred = $q.defer();
 
@@ -60,6 +65,21 @@ function patternFactory($http, $q) {
     }).error(function(e) {
       console.error('An error occurred while querying the remote database');
     });
+  };
+
+  patternFactoryMethods.saveNew = function(pattern) {
+
+    var deferred = $q.defer();
+
+    $http.post('/api/pattern', pattern)
+      .success(function(data) {
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while POSTing a pattern to  the remote database');
+      });
+
+    return deferred.promise;
+
   };
 
   patternFactoryMethods.createNew = function(specs) {

@@ -681,7 +681,7 @@ a.but-selection:active {
 /* line 1, ../../../../dev/scss/modules/_panel.scss */
 .panel {
   border-bottom: 1px solid #569e56;
-  margin: 0.5em 0;
+  margin: 0;
   padding: 0.5em 0.25em;
   vertical-align: middle;
 }

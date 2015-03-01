@@ -32,7 +32,7 @@
       <b>Draw Mode</b>
       <span
         ng-click="drawtoolVM.borderMode('erase')"
-        class="text-tiny but"
+        class="text-tiny but faded"
       >Erase</span>
       <div class="panel-section">
         Side:
@@ -50,7 +50,7 @@
 
     <!-- Border Erase Mode -->
     <span ng-show="drawtoolVM.drawState.border.erase">
-      <b>Erase Mode</b> <span class="text-tiny but" ng-click="drawtoolVM.borderMode('draw')">Draw</span>
+      <b>Erase Mode</b> <span class="text-tiny but faded" ng-click="drawtoolVM.borderMode('draw')">Draw</span>
     </span>
   </div>
 

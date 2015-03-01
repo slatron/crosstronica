@@ -16,7 +16,7 @@ function pattern(drawStateFactory, patternFactory) {
 
       vm.gridData = {};
 
-      patternFactory.get()
+      patternFactory.init()
         .then(function(data) {
 
           vm.gridData = data;

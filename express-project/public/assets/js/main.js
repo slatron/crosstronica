@@ -37736,6 +37736,11 @@ function patternFactory($http, $q) {
   };
 
   patternFactoryMethods.get = function() {
+    return patternData;
+  };
+
+
+  patternFactoryMethods.init = function() {
 
     var deferred = $q.defer();
 
@@ -37760,6 +37765,21 @@ function patternFactory($http, $q) {
     }).error(function(e) {
       console.error('An error occurred while querying the remote database');
     });
+  };
+
+  patternFactoryMethods.saveNew = function(pattern) {
+
+    var deferred = $q.defer();
+
+    $http.post('/api/pattern', pattern)
+      .success(function(data) {
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while POSTing a pattern to  the remote database');
+      });
+
+    return deferred.promise;
+
   };
 
   patternFactoryMethods.createNew = function(specs) {
@@ -38129,7 +38149,7 @@ function pattern(drawStateFactory, patternFactory) {
 
       vm.gridData = {};
 
-      patternFactory.get()
+      patternFactory.init()
         .then(function(data) {
 
           vm.gridData = data;
@@ -38349,7 +38369,7 @@ function newPattern() {
     controllerAs: 'newPatternVM',
     bindToController: true,
 
-    controller: ["patternFactory", "drawStateFactory", function (patternFactory, drawStateFactory) {
+    controller: ["patternFactory", function (patternFactory) {
 
       var vm = this;
 
@@ -38417,3 +38437,46 @@ function pallete() {
 
 angular.module('Crosstronica').
 directive('pallete', pallete);
+
+function savePattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/save_pattern/savePattern.html',
+
+    controllerAs: 'savePatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function (patternFactory) {
+
+      var vm = this;
+
+      vm.savePattern = function() {
+
+        currentPattern = patternFactory.get();
+
+        var patternData = {
+          name: currentPattern.name,
+          grid: currentPattern.grid
+        };
+
+        patternFactory.saveNew(patternData).then(
+          function(success) {
+            console.log('successful pattern post', success);
+          },
+          function(error) {
+            console.error('error on pattern post', error);
+          }
+        );
+
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('savePattern', savePattern);

@@ -10,7 +10,7 @@ function newPattern() {
     controllerAs: 'newPatternVM',
     bindToController: true,
 
-    controller: function (patternFactory, drawStateFactory) {
+    controller: function (patternFactory) {
 
       var vm = this;
 

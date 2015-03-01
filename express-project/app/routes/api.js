@@ -210,22 +210,22 @@ module.exports = function(app, express) {
         if (err) res.send(err);
         res.json(patterns);
       });
+    })
+
+    .post(function(req, res) {
+      var pattern = new Pattern();
+
+      pattern.name = req.body.name;
+      pattern.grid = req.body.grid;
+
+      pattern.save(function(err) {
+        if (err) {
+          return res.send(err);
+        }
+        res.json({message: 'Pattern created!'});
+      });
+
     });
-
-  //   .post(function(req, res) {
-  //     var pattern = new Pattern();
-
-  //     pattern.name = req.body.name;
-  //     pattern.grid = req.body.grid;
-
-  //     pattern.save(function(err) {
-  //       if (err) {
-  //         return res.send(err);
-  //       }
-  //       res.json({message: 'Pattern created!'});
-  //     });
-
-  //   })
 
 
   apiRouter.route('/pattern/:pattern_id')

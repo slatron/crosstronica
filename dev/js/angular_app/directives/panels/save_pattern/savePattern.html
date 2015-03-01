@@ -1,0 +1,15 @@
+<div class="panel" show-hide>
+  <h6 ng-click="toggleMe()">Save Pattern</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <div ng-hide="collapsed" class="panel-section">
+    <div class="panel-section">
+      <b>Save As New Pattern to Database: </b>
+      <span
+        ng-click="savePatternVM.savePattern()"
+        class="text-tiny but"
+      >Save New Pattern</span>
+    </div>
+
+  </div>
+</div>
