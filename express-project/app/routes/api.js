@@ -250,17 +250,17 @@ module.exports = function(app, express) {
           res.json({ message: 'Pattern Updated!'});
         });
       })
+    })
+
+    .delete(function(req, res) {
+      Pattern.remove({
+        _id: req.params.pattern_id
+      }, function(err, pattern) {
+        if (err) res.send(err);
+
+        res.json({ message: 'Successfully Deleted Pattern!'});
+      });
     });
-
-  //   .delete(function(req, res) {
-  //     Pattern.remove({
-  //       _id: req.params.pattern_id
-  //     }, function(err, pattern) {
-  //       if (err) res.send(err);
-
-  //       res.json({ message: 'Successfully Deleted Pattern!'});
-  //     });
-  //   });
 
   return apiRouter;
 

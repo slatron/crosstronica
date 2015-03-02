@@ -100,6 +100,21 @@ function patternFactory($http, $q) {
 
   };
 
+  patternFactoryMethods.deletePattern = function(id) {
+
+    var deferred = $q.defer();
+
+    $http.delete('/api/pattern/' + id)
+      .success(function(data) {
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while DELETEing a pattern from the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
   patternFactoryMethods.createNew = function(specs) {
 
     patternData.name = specs.name || '';

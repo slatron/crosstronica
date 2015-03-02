@@ -37800,6 +37800,21 @@ function patternFactory($http, $q) {
 
   };
 
+  patternFactoryMethods.deletePattern = function(id) {
+
+    var deferred = $q.defer();
+
+    $http.delete('/api/pattern/' + id)
+      .success(function(data) {
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while DELETEing a pattern from the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
   patternFactoryMethods.createNew = function(specs) {
 
     patternData.name = specs.name || '';
@@ -38306,6 +38321,46 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
+
+function deletePattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
+
+    controllerAs: 'deletePatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function (patternFactory) {
+
+      var vm = this;
+
+      vm.currentPattern = patternFactory.get();
+
+      vm.deletePattern = function() {
+
+        currentPattern = patternFactory.get();
+
+        patternFactory.deletePattern(currentPattern.id).then(
+          function(success) {
+            console.log('successful pattern DELETE', success);
+          },
+          function(error) {
+            console.error('error on pattern DELETE', error);
+          }
+        );
+
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('deletePattern', deletePattern);
 
 function drawTool(drawStateFactory) {
 

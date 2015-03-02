@@ -1,0 +1,18 @@
+<div class="panel" show-hide>
+  <h6 ng-click="toggleMe()">Delete Pattern</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+  <div ng-hide="collapsed">
+
+    <div
+      ng-hide="deletePatternVM.currentPattern.id === undefined"
+      class="panel-section"
+    >
+      <span
+        ng-click="deletePatternVM.deletePattern()"
+        class="text-tiny but"
+      >Delete Current Pattern</span>
+    </div>
+
+  </div>
+</div>
