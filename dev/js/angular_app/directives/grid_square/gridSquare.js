@@ -15,11 +15,15 @@ function gridSquare() {
     bindToController: true,
 
     controller: function($scope) {
-      $scope.$watch('color.borders', function(side) {
-        if(side) {
-          // console.log('in gridSquare.js controller borders watch ', side);
-          $scope.setBorders(side);
-        }
+
+      var vm = this;
+
+      $scope.$watch(function() {
+        return vm.color.borders;
+      }, function(borders) {
+        console.log(borders);
+        if (borders)
+          $scope.setBorders(borders);
       });
     },
 
@@ -43,13 +47,13 @@ function gridSquare() {
       };
 
       elem.on('mousedown', function() {
-        scope.paint();
+        ctrlVM.paint();
       });
 
       elem.on('mouseover', function(e) {
         if(ms_utils.detectLeftButton(e)) {
           elem.on('mouseup mousemove', function handler(e) {
-            scope.paint();
+            ctrlVM.paint();
             elem.off('mouseup mousemove', handler);
           });
         }

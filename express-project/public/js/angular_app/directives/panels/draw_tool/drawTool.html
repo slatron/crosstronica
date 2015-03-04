@@ -29,7 +29,7 @@
 
     <!-- Border Draw Mode -->
     <div ng-hide="drawtoolVM.drawState.border.erase">
-      <b>Draw Mode</b>
+      <b>Draw Borders Mode</b>
       <span
         ng-click="drawtoolVM.borderMode('erase')"
         class="text-tiny but faded"
@@ -50,7 +50,7 @@
 
     <!-- Border Erase Mode -->
     <span ng-show="drawtoolVM.drawState.border.erase">
-      <b>Erase Mode</b> <span class="text-tiny but faded" ng-click="drawtoolVM.borderMode('draw')">Draw</span>
+      <b>Erase Borders Mode</b> <span class="text-tiny but faded" ng-click="drawtoolVM.borderMode('draw')">Draw</span>
     </span>
   </div>
 
