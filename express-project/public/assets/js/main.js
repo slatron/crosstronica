@@ -37568,7 +37568,9 @@ var ms_utils = {
 angular.module('Crosstronica', ['authService'])
 
 // application configuration to integrate token into requests
-.config(["$httpProvider", function($httpProvider) {
+.config(["$httpProvider", "$compileProvider", function($httpProvider, $compileProvider) {
+
+  $compileProvider.debugInfoEnabled(false);
 
   // attach our auth interceptor to the http requests
   $httpProvider.interceptors.push('AuthInterceptor');
