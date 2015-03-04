@@ -31,8 +31,7 @@ function patternFactory($http, $q) {
         patternData.available.push(patternOption);
       });
 
-      // Set first in response as current grid
-      deferred.resolve(patternData);
+      deferred.resolve(patternData.available);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
@@ -51,8 +50,13 @@ function patternFactory($http, $q) {
         patternData.name = data.name;
         patternData.grid = data.grid;
         patternData.id   = data._id;
-        deferred.resolve(patternData);
+      } else {
+        patternData.name = 'Create a new Pattern to begin';
+        patternData.grid = [];
+        patternData.id   = undefined;
       }
+
+      deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });

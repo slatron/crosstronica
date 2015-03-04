@@ -6,15 +6,8 @@
     <select
       ng-change="loadPatternVM.reloadPattern()"
       ng-model="loadPatternVM.selectedPattern"
+      ng-options="pattern.name for pattern in loadPatternVM.availablePattens track by pattern.id"
     >
-      <option
-        ng-repeat="pattern in loadPatternVM.availablePattens"
-        value="{{pattern.id}}"
-      >
-        {{pattern.name}}
-      </option>
-
-    </select>
   </div>
 
 </div>

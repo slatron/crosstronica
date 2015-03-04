@@ -17,13 +17,16 @@ function loadPattern() {
 
       patternFactory.getAvailable()
         .then(function(data) {
-          vm.availablePattens = data.available;
+          if (data.length) {
+            vm.selectedPattern  = data[0];
+            vm.availablePattens = data;
+          }
         }, function(err) {
           console.error(err);
         });
 
       vm.reloadPattern = function() {
-        patternFactory.load(vm.selectedPattern);
+        patternFactory.load(vm.selectedPattern.id);
       };
 
     }

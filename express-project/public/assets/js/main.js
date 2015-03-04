@@ -37568,9 +37568,10 @@ var ms_utils = {
 angular.module('Crosstronica', ['authService'])
 
 // application configuration to integrate token into requests
-.config(["$httpProvider", "$compileProvider", function($httpProvider, $compileProvider) {
+.config(["$httpProvider", function($httpProvider) {
 
-  $compileProvider.debugInfoEnabled(false);
+  // Uncomment before production
+  // $compileProvider.debugInfoEnabled(false);
 
   // attach our auth interceptor to the http requests
   $httpProvider.interceptors.push('AuthInterceptor');
@@ -37733,8 +37734,7 @@ function patternFactory($http, $q) {
         patternData.available.push(patternOption);
       });
 
-      // Set first in response as current grid
-      deferred.resolve(patternData);
+      deferred.resolve(patternData.available);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
@@ -37753,8 +37753,13 @@ function patternFactory($http, $q) {
         patternData.name = data.name;
         patternData.grid = data.grid;
         patternData.id   = data._id;
-        deferred.resolve(patternData);
+      } else {
+        patternData.name = 'Create a new Pattern to begin';
+        patternData.grid = [];
+        patternData.id   = undefined;
       }
+
+      deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
@@ -38054,7 +38059,6 @@ function gridSquare() {
       $scope.$watch(function() {
         return vm.color.borders;
       }, function(borders) {
-        console.log(borders);
         if (borders)
           $scope.setBorders(borders);
       });
@@ -38430,13 +38434,16 @@ function loadPattern() {
 
       patternFactory.getAvailable()
         .then(function(data) {
-          vm.availablePattens = data.available;
+          if (data.length) {
+            vm.selectedPattern  = data[0];
+            vm.availablePattens = data;
+          }
         }, function(err) {
           console.error(err);
         });
 
       vm.reloadPattern = function() {
-        patternFactory.load(vm.selectedPattern);
+        patternFactory.load(vm.selectedPattern.id);
       };
 
     }]

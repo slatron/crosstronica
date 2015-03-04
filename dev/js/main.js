@@ -1,9 +1,10 @@
 angular.module('Crosstronica', ['authService'])
 
 // application configuration to integrate token into requests
-.config(function($httpProvider, $compileProvider) {
+.config(function($httpProvider) {
 
-  $compileProvider.debugInfoEnabled(false);
+  // Uncomment before production
+  // $compileProvider.debugInfoEnabled(false);
 
   // attach our auth interceptor to the http requests
   $httpProvider.interceptors.push('AuthInterceptor');

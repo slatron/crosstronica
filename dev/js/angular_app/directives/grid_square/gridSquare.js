@@ -21,7 +21,6 @@ function gridSquare() {
       $scope.$watch(function() {
         return vm.color.borders;
       }, function(borders) {
-        console.log(borders);
         if (borders)
           $scope.setBorders(borders);
       });
