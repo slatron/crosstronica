@@ -3,11 +3,16 @@ function gridSquare() {
   return {
     restrict: 'E',
     replace: true,
+
     scope: {
       color: '=',  // All Data in one sane object
       paint: '&'   // ref to parent paint function
     },
+
     templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
+
+    controllerAs: 'gridSquareVM',
+    bindToController: true,
 
     controller: function($scope) {
       $scope.$watch('color.borders', function(side) {
@@ -19,6 +24,8 @@ function gridSquare() {
     },
 
     link: function (scope, elem) {
+
+      var ctrlVM = scope.gridSquareVM;
 
       scope.setBorders = function(sides) {
         elem.removeClass('border-top border-right border-bottom border-left');
