@@ -37746,11 +37746,13 @@ function patternFactory($http, $q) {
 
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
-      data = data[1];
-      patternData.name = data.name;
-      patternData.grid = data.grid;
-      patternData.id   = data._id;
-      deferred.resolve(patternData);
+      if (data.length) {
+        data = data[0];
+        patternData.name = data.name;
+        patternData.grid = data.grid;
+        patternData.id   = data._id;
+        deferred.resolve(patternData);
+      }
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
