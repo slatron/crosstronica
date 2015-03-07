@@ -26,8 +26,8 @@ function newPattern() {
 
         // Clear Form
         vm.newname = '';
-        vm.newrows = '';
-        vm.newcols = '';
+        vm.newrows = '10';
+        vm.newcols = '10';
       };
 
     }

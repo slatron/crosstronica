@@ -37862,7 +37862,8 @@ function patternFactory($http, $q) {
       patternData.grid[i] = thisRow;
     }
 
-    patternData.id = undefined;
+    patternData.id       = undefined;
+    patternData.selected = undefined;
   };
 
   return patternFactoryMethods;
@@ -38021,39 +38022,6 @@ angular.module('authService', [])
 
 }]);
 
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
 function gridSquare() {
 
   return {
@@ -38176,6 +38144,39 @@ loginScreen.$inject = ["userStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
 
 function pageState(userStateFactory, patternFactory) {
 
@@ -38497,8 +38498,8 @@ function newPattern() {
 
         // Clear Form
         vm.newname = '';
-        vm.newrows = '';
-        vm.newcols = '';
+        vm.newrows = '10';
+        vm.newcols = '10';
       };
 
     }]

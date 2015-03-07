@@ -159,7 +159,8 @@ function patternFactory($http, $q) {
       patternData.grid[i] = thisRow;
     }
 
-    patternData.id = undefined;
+    patternData.id       = undefined;
+    patternData.selected = undefined;
   };
 
   return patternFactoryMethods;
