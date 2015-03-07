@@ -37707,7 +37707,8 @@ function patternFactory($http, $q) {
     name: '',
     grid: [],
     id: undefined,
-    available: []
+    available: [],
+    selected: {}
   };
 
   var patternFactoryMethods = {};
@@ -37720,7 +37721,15 @@ function patternFactory($http, $q) {
     patternData.available = [];
   };
 
-  patternFactoryMethods.getAvailable = function() {
+  patternFactoryMethods.getSelected = function() {
+    return patternData.selected;
+  };
+
+  patternFactoryMethods.updateSelected = function(selected) {
+    patternData.selected = selected;
+  };
+
+  patternFactoryMethods.initAvailable = function() {
     var deferred = $q.defer();
 
     $http.get('/api/pattern').success(function(data) {
@@ -37734,7 +37743,11 @@ function patternFactory($http, $q) {
         patternData.available.push(patternOption);
       });
 
-      deferred.resolve(patternData.available);
+      if (patternData.available.length) {
+        patternData.selected = (patternData.available[0]);
+      }
+
+      deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
@@ -37773,6 +37786,11 @@ function patternFactory($http, $q) {
       patternData.name = data.name;
       patternData.grid = data.grid;
       patternData.id   = data._id;
+
+      patternData.selected = {
+        name: data.name,
+        id: data._id
+      };
     }).error(function(e) {
       console.error('An error occurred while querying the remote database');
     });
@@ -38003,6 +38021,39 @@ angular.module('authService', [])
 
 }]);
 
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
+
 function gridSquare() {
 
   return {
@@ -38151,39 +38202,6 @@ pageState.$inject = ["userStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pageState', pageState);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
 
 function pattern(drawStateFactory, patternFactory) {
 
@@ -38430,20 +38448,17 @@ function loadPattern() {
     controller: ["patternFactory", function(patternFactory) {
       var vm = this;
 
-      vm.availablePattens = [];
+      vm.patternData = patternFactory.get();
 
-      patternFactory.getAvailable()
+      patternFactory.initAvailable()
         .then(function(data) {
-          if (data.length) {
-            vm.selectedPattern  = data[0];
-            vm.availablePattens = data;
-          }
+          console.log('available patterns loaded', data);
         }, function(err) {
           console.error(err);
         });
 
       vm.reloadPattern = function() {
-        patternFactory.load(vm.selectedPattern.id);
+        patternFactory.load(vm.patternData.selected.id);
       };
 
     }]

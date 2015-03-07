@@ -13,20 +13,17 @@ function loadPattern() {
     controller: function(patternFactory) {
       var vm = this;
 
-      vm.availablePattens = [];
+      vm.patternData = patternFactory.get();
 
-      patternFactory.getAvailable()
+      patternFactory.initAvailable()
         .then(function(data) {
-          if (data.length) {
-            vm.selectedPattern  = data[0];
-            vm.availablePattens = data;
-          }
+          console.log('available patterns loaded', data);
         }, function(err) {
           console.error(err);
         });
 
       vm.reloadPattern = function() {
-        patternFactory.load(vm.selectedPattern.id);
+        patternFactory.load(vm.patternData.selected.id);
       };
 
     }

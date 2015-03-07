@@ -4,7 +4,8 @@ function patternFactory($http, $q) {
     name: '',
     grid: [],
     id: undefined,
-    available: []
+    available: [],
+    selected: {}
   };
 
   var patternFactoryMethods = {};
@@ -17,7 +18,15 @@ function patternFactory($http, $q) {
     patternData.available = [];
   };
 
-  patternFactoryMethods.getAvailable = function() {
+  patternFactoryMethods.getSelected = function() {
+    return patternData.selected;
+  };
+
+  patternFactoryMethods.updateSelected = function(selected) {
+    patternData.selected = selected;
+  };
+
+  patternFactoryMethods.initAvailable = function() {
     var deferred = $q.defer();
 
     $http.get('/api/pattern').success(function(data) {
@@ -31,7 +40,11 @@ function patternFactory($http, $q) {
         patternData.available.push(patternOption);
       });
 
-      deferred.resolve(patternData.available);
+      if (patternData.available.length) {
+        patternData.selected = (patternData.available[0]);
+      }
+
+      deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
     });
@@ -70,6 +83,11 @@ function patternFactory($http, $q) {
       patternData.name = data.name;
       patternData.grid = data.grid;
       patternData.id   = data._id;
+
+      patternData.selected = {
+        name: data.name,
+        id: data._id
+      };
     }).error(function(e) {
       console.error('An error occurred while querying the remote database');
     });
