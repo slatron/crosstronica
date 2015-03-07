@@ -187,7 +187,7 @@ module.exports = function(app, express) {
             return res.send(err);
           }
         }
-        res.json({message: 'Color created!'});
+        res.json({message: 'Color created!', req: req, res: res});
       });
 
     })
@@ -222,7 +222,8 @@ module.exports = function(app, express) {
         if (err) {
           return res.send(err);
         }
-        res.json({message: 'Pattern created!'});
+        // res.json({message: 'Pattern created!', name: pattern.name});
+        return res.send(pattern)
       });
 
     });

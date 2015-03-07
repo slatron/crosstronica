@@ -81,7 +81,7 @@ function patternFactory($http, $q) {
 
     $http.post('/api/pattern', pattern)
       .success(function(data) {
-        console.log('TODO: store new pattern ID');
+        patternData.id = data._id;
         deferred.resolve(data);
       }).error(function(e) {
         deferred.reject('An error occurred while POSTing a pattern to  the remote database');

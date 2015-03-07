@@ -37784,7 +37784,7 @@ function patternFactory($http, $q) {
 
     $http.post('/api/pattern', pattern)
       .success(function(data) {
-        console.log('TODO: store new pattern ID');
+        patternData.id = data._id;
         deferred.resolve(data);
       }).error(function(e) {
         deferred.reject('An error occurred while POSTing a pattern to  the remote database');
@@ -38003,39 +38003,6 @@ angular.module('authService', [])
 
 }]);
 
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
 function gridSquare() {
 
   return {
@@ -38184,6 +38151,39 @@ pageState.$inject = ["userStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pageState', pageState);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
 
 function pattern(drawStateFactory, patternFactory) {
 
