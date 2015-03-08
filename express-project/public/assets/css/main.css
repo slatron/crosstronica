@@ -1056,3 +1056,8 @@ a.but-selection:active {
   background: url(../images/loading.gif) 50% 50% no-repeat;
   padding: 15em 1em;
 }
+
+/* line 68, ../../../../dev/scss/state/_state.scss */
+.fa-trash {
+  cursor: pointer;
+}

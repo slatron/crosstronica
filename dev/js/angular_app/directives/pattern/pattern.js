@@ -17,7 +17,7 @@ function pattern(drawStateFactory, patternFactory) {
       vm.gridData = patternFactory.get();
     },
 
-    link: function (scope, elem, attrs) {
+    link: function (scope, elem) {
 
       var ctrlVM = scope.patternVM;
       var drawState = drawStateFactory.get();

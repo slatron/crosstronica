@@ -37652,11 +37652,10 @@ function palleteFactory($http, $q) {
     $http.delete('/api/pallete/' + colorId)
       .success(function(data) {
         var deleteId = data.color_id;
-        console.log('deleteId: ', deleteId);
-        console.log('pallete before delete: ', pallete.colors);
+
         var deleteColor = _.find(pallete.colors, {_id: deleteId});
+
         pallete.colors = _.without(pallete.colors, deleteColor);
-        console.log('pallete after delete: ', pallete.colors);
         deferred.resolve(data);
       }).error(function(e) {
         deferred.reject('An error occurred while deleting a show from the remote database');
@@ -38039,39 +38038,6 @@ angular.module('authService', [])
 
 }]);
 
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
 function gridSquare() {
 
   return {
@@ -38240,7 +38206,7 @@ function pattern(drawStateFactory, patternFactory) {
       vm.gridData = patternFactory.get();
     },
 
-    link: function (scope, elem, attrs) {
+    link: function (scope, elem) {
 
       var ctrlVM = scope.patternVM;
       var drawState = drawStateFactory.get();
@@ -38321,44 +38287,38 @@ function showHide() {
 angular.module('Crosstronica').
 directive('showHide', showHide);
 
-function deletePattern() {
+function drawer() {
 
   return {
-    scope: {},
-
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
 
-    controllerAs: 'deletePatternVM',
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
     bindToController: true,
 
-    controller: ["patternFactory", function (patternFactory) {
+    controller: function () {
 
-      var vm = this;
+      this.showDrawer = true;
 
-      vm.currentPattern = patternFactory.get();
-
-      vm.deletePattern = function() {
-
-        patternFactory.deletePattern(vm.currentPattern.id).then(
-          function(success) {
-            console.log('successful pattern DELETE', success);
-            patternFactory.clearCurrent();
-          },
-          function(error) {
-            console.error('error on pattern DELETE', error);
-          }
-        );
-
+      this.closeDrawer = function() {
+        this.showDrawer = false;
       };
 
-    }]
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
   };
 }
 
 angular.module('Crosstronica').
-directive('deletePattern', deletePattern);
+directive('drawer', drawer);
 
 function addColor() {
 
@@ -38403,6 +38363,45 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
+
+function deletePattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
+
+    controllerAs: 'deletePatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function (patternFactory) {
+
+      var vm = this;
+
+      vm.currentPattern = patternFactory.get();
+
+      vm.deletePattern = function() {
+
+        patternFactory.deletePattern(vm.currentPattern.id).then(
+          function(success) {
+            console.log('successful pattern DELETE', success);
+            patternFactory.clearCurrent();
+          },
+          function(error) {
+            console.error('error on pattern DELETE', error);
+          }
+        );
+
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('deletePattern', deletePattern);
 
 function drawTool(drawStateFactory, palleteFactory) {
 
