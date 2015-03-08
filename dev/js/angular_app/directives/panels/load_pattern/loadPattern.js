@@ -15,13 +15,6 @@ function loadPattern() {
 
       vm.patternData = patternFactory.get();
 
-      patternFactory.initAvailable()
-        .then(function(data) {
-          console.log('available patterns loaded', data);
-        }, function(err) {
-          console.error(err);
-        });
-
       vm.reloadPattern = function() {
         patternFactory.load(vm.patternData.selected.id);
       };

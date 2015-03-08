@@ -14,17 +14,7 @@ function pattern(drawStateFactory, patternFactory) {
 
       var vm = this;
 
-      vm.gridData = {};
-
-      patternFactory.init()
-        .then(function(data) {
-
-          vm.gridData = data;
-
-        }, function(err) {
-          console.error(err);
-        });
-
+      vm.gridData = patternFactory.get();
     },
 
     link: function (scope, elem, attrs) {

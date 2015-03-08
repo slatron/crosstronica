@@ -10,59 +10,30 @@ function patternFactory($http, $q) {
 
   var patternFactoryMethods = {};
 
-  patternFactoryMethods.get = function() {
-    return patternData;
-  };
-
-  patternFactoryMethods.clearAvailable = function() {
-    patternData.available = [];
-  };
-
-  patternFactoryMethods.getSelected = function() {
-    return patternData.selected;
-  };
-
-  patternFactoryMethods.updateSelected = function(selected) {
-    patternData.selected = selected;
-  };
-
-  patternFactoryMethods.initAvailable = function() {
-    var deferred = $q.defer();
-
-    $http.get('/api/pattern').success(function(data) {
-
-      // Load all pattern options array
-      _.each(data, function(pattern) {
-        var patternOption = {
-          name: pattern.name,
-          id: pattern._id
-        };
-        patternData.available.push(patternOption);
-      });
-
-      if (patternData.available.length) {
-        patternData.selected = (patternData.available[0]);
-      }
-
-      deferred.resolve(patternData);
-    }).error(function(e) {
-      deferred.reject('An error occurred while querying the remote database');
-    });
-
-    return deferred.promise;
-  };
-
-  patternFactoryMethods.init = function() {
+  // Initialize pattern data from server
+  _init = function() {
 
     var deferred = $q.defer();
 
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
       if (data.length) {
-        data = data[0];
-        patternData.name = data.name;
-        patternData.grid = data.grid;
-        patternData.id   = data._id;
+        patternData.name = data[0].name;
+        patternData.grid = data[0].grid;
+        patternData.id   = data[0]._id;
+
+        // Load all pattern options array
+        _.each(data, function(pattern) {
+          var patternOption = {
+            name: pattern.name,
+            id: pattern._id
+          };
+
+          patternData.available.push(patternOption);
+        });
+
+        patternData.selected = (patternData.available[0]);
+
       } else {
         patternData.name = 'Create a new Pattern to begin';
         patternData.grid = [];
@@ -75,6 +46,21 @@ function patternFactory($http, $q) {
     });
 
     return deferred.promise;
+  };
+
+  patternFactoryMethods.get = function() {
+    return patternData;
+  };
+
+  patternFactoryMethods.clearAvailable = function() {
+    patternData.available = [];
+  };
+
+  patternFactoryMethods.clearCurrent = function() {
+    patternData.selected = {};
+    patternData.name     = 'Please load or create a new pattern.';
+    patternData.grid     = [];
+    patternData.id       = undefined;
   };
 
   patternFactoryMethods.load = function(id) {
@@ -162,6 +148,8 @@ function patternFactory($http, $q) {
     patternData.id       = undefined;
     patternData.selected = undefined;
   };
+
+  _init();
 
   return patternFactoryMethods;
 

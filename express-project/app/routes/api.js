@@ -175,7 +175,6 @@ module.exports = function(app, express) {
       color.symbol = req.body.symbol;
 
       color.save(function(err) {
-        console.log('error on color.save: ', err);
         if (err) {
           if (err.code == 11000) {
             return res.json({
@@ -187,7 +186,8 @@ module.exports = function(app, express) {
             return res.send(err);
           }
         }
-        res.json({message: 'Color created!', req: req, res: res});
+        return res.send(color);
+        // res.json({message: 'Color created!'});
       });
 
     })

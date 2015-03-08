@@ -6,20 +6,33 @@ function palleteFactory($http, $q) {
 
   var palleteFactoryMethods = {};
 
-  palleteFactoryMethods.getPallete = function() {
+  palleteFactoryMethods.addColor = function(color) {
 
     var deferred = $q.defer();
+
+    $http.post('/api/pallete', color)
+      .success(function(data) {
+        console.log('pallete data: ', data);
+        pallete.colors.push(data);
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while POSTing a pattern to  the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
+  palleteFactoryMethods.getPallete = function() {
 
     updatePallete()
       .then(function(data){
         pallete.colors = data;
-        deferred.resolve(pallete);
       }, function(data){
         console.error('error resolving updatePallete promise: ', data);
-        deferred.reject('error resolving updatePallete promise');
       });
 
-    return deferred.promise;
+    return pallete;
 
   };
 

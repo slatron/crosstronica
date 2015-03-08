@@ -18,11 +18,10 @@ function deletePattern() {
 
       vm.deletePattern = function() {
 
-        currentPattern = patternFactory.get();
-
-        patternFactory.deletePattern(currentPattern.id).then(
+        patternFactory.deletePattern(vm.currentPattern.id).then(
           function(success) {
             console.log('successful pattern DELETE', success);
+            patternFactory.clearCurrent();
           },
           function(error) {
             console.error('error on pattern DELETE', error);

@@ -1,8 +1,3 @@
-/**
-* paintMode:
-* paint  = paint with clicks
-* border = add border with clicks
-**/
 function drawStateFactory() {
 
   var drawState = {

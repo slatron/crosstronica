@@ -14,14 +14,7 @@ function pallete() {
 
       var vm = this;
 
-      vm.pallete = {};
-
-      palleteFactory.getPallete()
-        .then(function(data){
-          vm.pallete = data;
-        }, function(data){
-          console.error('error resolving getPallete promise: ', data);
-        });
+      vm.pallete = palleteFactory.getPallete();
 
       vm.selectColor = function(color) {
         color = color || {};

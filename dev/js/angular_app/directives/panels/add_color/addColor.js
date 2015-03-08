@@ -16,25 +16,23 @@ function addColor() {
 
       vm.addColor = function () {
 
-        console.log('attempting post');
-
         var colorObj = {
           name: vm.newname,
           rgb: vm.newrgb,
           symbol: vm.newsymbol
         };
 
-        $http.post('/api/pallete', colorObj)
-          .success(function () {
+        // Send new color to factory
+        palleteFactory.addColor(colorObj);
 
-            // Clear New Color Form
-            vm.newname   = '';
-            vm.newrgb    = '';
-            vm.newsymbol = '';
+        // Clear New Color Form
+        vm.newname   = '';
+        vm.newrgb    = '';
+        vm.newsymbol = '';
 
-            // Update Current Pallete with new color
-            palleteFactory.getPallete();
-          });
+        // Update Current Pallete with new color
+        palleteFactory.getPallete();
+
       };
 
     }
