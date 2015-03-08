@@ -37893,7 +37893,9 @@ factory('patternFactory', patternFactory);
 function userStateFactory() {
 
   var userState = {
-    authorized: false
+    authorized: false,
+    name: '',
+    guest: false
   };
 
   var userStateFactoryMethods = {};
@@ -37910,6 +37912,14 @@ function userStateFactory() {
       userState.authorized = true;
     else
       userState.authorized = false;
+  };
+
+  userStateFactoryMethods.setUserName = function(name) {
+    userState.name = name || '';
+  };
+
+  userStateFactoryMethods.setGuest = function() {
+    userState.guest = true;
   };
 
   return userStateFactoryMethods;
@@ -38149,7 +38159,10 @@ function loginScreen(userStateFactory) {
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
-          vm.user = data.data;
+          console.log('USER DATA: ', data);
+          userStateFactory.setUserName(data.data.name);
+          if (data.data.name === 'Guest')
+            userStateFactory.setGuest();
         });
 
       // function to handle login form

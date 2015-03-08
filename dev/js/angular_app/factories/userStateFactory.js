@@ -1,7 +1,9 @@
 function userStateFactory() {
 
   var userState = {
-    authorized: false
+    authorized: false,
+    name: '',
+    guest: false
   };
 
   var userStateFactoryMethods = {};
@@ -18,6 +20,14 @@ function userStateFactory() {
       userState.authorized = true;
     else
       userState.authorized = false;
+  };
+
+  userStateFactoryMethods.setUserName = function(name) {
+    userState.name = name || '';
+  };
+
+  userStateFactoryMethods.setGuest = function() {
+    userState.guest = true;
   };
 
   return userStateFactoryMethods;

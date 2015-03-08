@@ -23,8 +23,12 @@
         <add-color></add-color>
         <load-pattern></load-pattern>
         <new-pattern></new-pattern>
-        <save-pattern></save-pattern>
-        <delete-pattern></delete-pattern>
+        <save-pattern
+          ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
+        ></save-pattern>
+        <delete-pattern
+          ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
+        ></delete-pattern>
 
       </drawer>
 

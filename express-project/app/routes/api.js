@@ -94,6 +94,7 @@ module.exports = function(app, express) {
       user.name = req.body.name;
       user.username = req.body.username;
       user.password = req.body.password;
+      user.guest = req.body.guest;
 
       user.save(function(err) {
         if (err) {

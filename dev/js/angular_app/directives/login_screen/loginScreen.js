@@ -21,7 +21,10 @@ function loginScreen(userStateFactory) {
       // get user information on page load
       Auth.getUser()
         .then(function(data) {
-          vm.user = data.data;
+          console.log('USER DATA: ', data);
+          userStateFactory.setUserName(data.data.name);
+          if (data.data.name === 'Guest')
+            userStateFactory.setGuest();
         });
 
       // function to handle login form
