@@ -6,6 +6,27 @@ function palleteFactory($http, $q) {
 
   var palleteFactoryMethods = {};
 
+  palleteFactoryMethods.deleteColor = function(colorId) {
+
+    var deferred = $q.defer();
+
+    $http.delete('/api/pallete/' + colorId)
+      .success(function(data) {
+        var deleteId = data.color_id;
+        console.log('deleteId: ', deleteId);
+        console.log('pallete before delete: ', pallete.colors);
+        var deleteColor = _.find(pallete.colors, {_id: deleteId});
+        pallete.colors = _.without(pallete.colors, deleteColor);
+        console.log('pallete after delete: ', pallete.colors);
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while deleting a show from the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
   palleteFactoryMethods.addColor = function(color) {
 
     var deferred = $q.defer();

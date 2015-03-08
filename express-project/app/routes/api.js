@@ -199,6 +199,16 @@ module.exports = function(app, express) {
       });
     });
 
+  apiRouter.route('/pallete/:color_id')
+
+    .delete(function(req, res) {
+      Color.remove({
+        _id: req.params.color_id
+      }, function(err, color) {
+        if (err) res.send(err);
+        res.json({ message: 'Successfully Deleted Color!', color_id: req.params.color_id});
+      });
+    });
 
 
 

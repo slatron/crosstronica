@@ -1,4 +1,4 @@
-function drawTool(drawStateFactory) {
+function drawTool(drawStateFactory, palleteFactory) {
 
   return {
     scope: {},
@@ -23,6 +23,22 @@ function drawTool(drawStateFactory) {
       vm.borderMode = function(mode) {
         drawStateFactory.setBorderMode(mode);
       };
+
+      vm.deleteColor = function() {
+        if (confirm('Are you sure you want to to delete ' + drawStateFactory.get().paint.selected.name + '?')) {
+          var id = drawStateFactory.get().paint.selected._id;
+          palleteFactory.deleteColor(id).then(
+            function(success) {
+              console.log('Successful color deletion: ', success);
+              drawStateFactory.selected();
+            },
+            function(error) {
+              console.error(error);
+            }
+          );
+        }
+      };
+
     }
   };
 

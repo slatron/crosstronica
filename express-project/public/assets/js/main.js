@@ -37645,6 +37645,27 @@ function palleteFactory($http, $q) {
 
   var palleteFactoryMethods = {};
 
+  palleteFactoryMethods.deleteColor = function(colorId) {
+
+    var deferred = $q.defer();
+
+    $http.delete('/api/pallete/' + colorId)
+      .success(function(data) {
+        var deleteId = data.color_id;
+        console.log('deleteId: ', deleteId);
+        console.log('pallete before delete: ', pallete.colors);
+        var deleteColor = _.find(pallete.colors, {_id: deleteId});
+        pallete.colors = _.without(pallete.colors, deleteColor);
+        console.log('pallete after delete: ', pallete.colors);
+        deferred.resolve(data);
+      }).error(function(e) {
+        deferred.reject('An error occurred while deleting a show from the remote database');
+      });
+
+    return deferred.promise;
+
+  };
+
   palleteFactoryMethods.addColor = function(color) {
 
     var deferred = $q.defer();
@@ -38300,6 +38321,45 @@ function showHide() {
 angular.module('Crosstronica').
 directive('showHide', showHide);
 
+function deletePattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
+
+    controllerAs: 'deletePatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function (patternFactory) {
+
+      var vm = this;
+
+      vm.currentPattern = patternFactory.get();
+
+      vm.deletePattern = function() {
+
+        patternFactory.deletePattern(vm.currentPattern.id).then(
+          function(success) {
+            console.log('successful pattern DELETE', success);
+            patternFactory.clearCurrent();
+          },
+          function(error) {
+            console.error('error on pattern DELETE', error);
+          }
+        );
+
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('deletePattern', deletePattern);
+
 function addColor() {
 
   return {
@@ -38344,46 +38404,7 @@ function addColor() {
 angular.module('Crosstronica').
 directive('addColor', addColor);
 
-function deletePattern() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
-
-    controllerAs: 'deletePatternVM',
-    bindToController: true,
-
-    controller: ["patternFactory", function (patternFactory) {
-
-      var vm = this;
-
-      vm.currentPattern = patternFactory.get();
-
-      vm.deletePattern = function() {
-
-        patternFactory.deletePattern(vm.currentPattern.id).then(
-          function(success) {
-            console.log('successful pattern DELETE', success);
-            patternFactory.clearCurrent();
-          },
-          function(error) {
-            console.error('error on pattern DELETE', error);
-          }
-        );
-
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('deletePattern', deletePattern);
-
-function drawTool(drawStateFactory) {
+function drawTool(drawStateFactory, palleteFactory) {
 
   return {
     scope: {},
@@ -38408,11 +38429,27 @@ function drawTool(drawStateFactory) {
       vm.borderMode = function(mode) {
         drawStateFactory.setBorderMode(mode);
       };
+
+      vm.deleteColor = function() {
+        if (confirm('Are you sure you want to to delete ' + drawStateFactory.get().paint.selected.name + '?')) {
+          var id = drawStateFactory.get().paint.selected._id;
+          palleteFactory.deleteColor(id).then(
+            function(success) {
+              console.log('Successful color deletion: ', success);
+              drawStateFactory.selected();
+            },
+            function(error) {
+              console.error(error);
+            }
+          );
+        }
+      };
+
     }
   };
 
 }
-drawTool.$inject = ["drawStateFactory"];
+drawTool.$inject = ["drawStateFactory", "palleteFactory"];
 
 angular.module('Crosstronica').
 directive('drawTool', drawTool);
@@ -38485,6 +38522,41 @@ function newPattern() {
 angular.module('Crosstronica').
 directive('newPattern', newPattern);
 
+function pallete() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
+
+    controllerAs: 'palleteVM',
+    bindToController: true,
+
+    controller: ["palleteFactory", "drawStateFactory", function (palleteFactory, drawStateFactory) {
+
+      var vm = this;
+
+      vm.pallete = palleteFactory.getPallete();
+
+      vm.selectColor = function(color) {
+        color = color || {};
+        drawStateFactory.selected(color);
+      };
+
+      // Clear selected color
+      vm.selectEraser = function() {
+        drawStateFactory.selected();
+      };
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('pallete', pallete);
+
 function savePattern() {
 
   return {
@@ -38549,38 +38621,3 @@ function savePattern() {
 
 angular.module('Crosstronica').
 directive('savePattern', savePattern);
-
-function pallete() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
-
-    controllerAs: 'palleteVM',
-    bindToController: true,
-
-    controller: ["palleteFactory", "drawStateFactory", function (palleteFactory, drawStateFactory) {
-
-      var vm = this;
-
-      vm.pallete = palleteFactory.getPallete();
-
-      vm.selectColor = function(color) {
-        color = color || {};
-        drawStateFactory.selected(color);
-      };
-
-      // Clear selected color
-      vm.selectEraser = function() {
-        drawStateFactory.selected();
-      };
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('pallete', pallete);
