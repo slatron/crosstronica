@@ -38038,6 +38038,39 @@ angular.module('authService', [])
 
 }]);
 
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
+
 function gridSquare() {
 
   return {
@@ -38062,13 +38095,31 @@ function gridSquare() {
         return vm.color.borders;
       }, function(borders) {
         if (borders) {
-          // $scope.setBorders(borders);
-          if(borders[0]) vm.top    = 'border-top';
-          if(borders[1]) vm.right  = 'border-right';
-          if(borders[2]) vm.bottom = 'border-bottom';
-          if(borders[3]) vm.left   = 'border-left';
-        }
 
+          if (borders[0]) {
+            vm.top = 'border-top';
+          } else {
+            vm.top = '';
+          }
+
+          if (borders[1]) {
+            vm.right = 'border-right';
+          } else {
+            vm.right = '';
+          }
+
+          if (borders[2]) {
+            vm.bottom = 'border-bottom';
+          } else {
+            vm.bottom = '';
+          }
+
+          if (borders[3]) {
+            vm.left = 'border-left';
+          } else {
+            vm.left = '';
+          }
+        }
       });
     }],
 
@@ -38152,39 +38203,6 @@ loginScreen.$inject = ["userStateFactory"];
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
 
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
 function pageState(userStateFactory, patternFactory) {
 
   return {
@@ -38250,29 +38268,29 @@ function pattern(drawStateFactory, patternFactory) {
         // Border Mode
         if (drawState.drawMode === 'border') {
 
+          var newBorders = [];
+
           if(drawState.border.erase) {
 
-            ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
+            newBorders = [false, false, false, false];
 
           } else {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            if(drawState.border.borderSide === 'top') prevBorders[0] = true;
-            if(drawState.border.borderSide === 'right') prevBorders[1] = true;
+            if(drawState.border.borderSide === 'top') prevBorders[0]    = true;
+            if(drawState.border.borderSide === 'right') prevBorders[1]  = true;
             if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
-            if(drawState.border.borderSide === 'left') prevBorders[3] = true;
-
-            var newBorders = new Array([]);
+            if(drawState.border.borderSide === 'left') prevBorders[3]   = true;
 
             _.each(prevBorders, function(elem, idx) {
               newBorders[idx] = elem;
             });
 
-            // console.log('newborders in paintCel: ', newBorders);
-
-            ctrlVM.gridData.grid[row][col].borders = newBorders;
           }
+
+          ctrlVM.gridData.grid[row][col].borders = newBorders;
+
         }
 
         if(triggerDigest) scope.$digest();

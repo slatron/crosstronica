@@ -37,29 +37,29 @@ function pattern(drawStateFactory, patternFactory) {
         // Border Mode
         if (drawState.drawMode === 'border') {
 
+          var newBorders = [];
+
           if(drawState.border.erase) {
 
-            ctrlVM.gridData.grid[row][col].borders = [false, false, false, false];
+            newBorders = [false, false, false, false];
 
           } else {
 
             var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            if(drawState.border.borderSide === 'top') prevBorders[0] = true;
-            if(drawState.border.borderSide === 'right') prevBorders[1] = true;
+            if(drawState.border.borderSide === 'top') prevBorders[0]    = true;
+            if(drawState.border.borderSide === 'right') prevBorders[1]  = true;
             if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
-            if(drawState.border.borderSide === 'left') prevBorders[3] = true;
-
-            var newBorders = new Array([]);
+            if(drawState.border.borderSide === 'left') prevBorders[3]   = true;
 
             _.each(prevBorders, function(elem, idx) {
               newBorders[idx] = elem;
             });
 
-            // console.log('newborders in paintCel: ', newBorders);
-
-            ctrlVM.gridData.grid[row][col].borders = newBorders;
           }
+
+          ctrlVM.gridData.grid[row][col].borders = newBorders;
+
         }
 
         if(triggerDigest) scope.$digest();

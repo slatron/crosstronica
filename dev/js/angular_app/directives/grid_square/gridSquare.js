@@ -22,13 +22,31 @@ function gridSquare() {
         return vm.color.borders;
       }, function(borders) {
         if (borders) {
-          // $scope.setBorders(borders);
-          if(borders[0]) vm.top    = 'border-top';
-          if(borders[1]) vm.right  = 'border-right';
-          if(borders[2]) vm.bottom = 'border-bottom';
-          if(borders[3]) vm.left   = 'border-left';
-        }
 
+          if (borders[0]) {
+            vm.top = 'border-top';
+          } else {
+            vm.top = '';
+          }
+
+          if (borders[1]) {
+            vm.right = 'border-right';
+          } else {
+            vm.right = '';
+          }
+
+          if (borders[2]) {
+            vm.bottom = 'border-bottom';
+          } else {
+            vm.bottom = '';
+          }
+
+          if (borders[3]) {
+            vm.left = 'border-left';
+          } else {
+            vm.left = '';
+          }
+        }
       });
     },
 
