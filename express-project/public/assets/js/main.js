@@ -38061,29 +38061,20 @@ function gridSquare() {
       $scope.$watch(function() {
         return vm.color.borders;
       }, function(borders) {
-        if (borders)
-          $scope.setBorders(borders);
+        if (borders) {
+          // $scope.setBorders(borders);
+          if(borders[0]) vm.top    = 'border-top';
+          if(borders[1]) vm.right  = 'border-right';
+          if(borders[2]) vm.bottom = 'border-bottom';
+          if(borders[3]) vm.left   = 'border-left';
+        }
+
       });
     }],
 
     link: function (scope, elem) {
 
       var ctrlVM = scope.gridSquareVM;
-
-      scope.setBorders = function(sides) {
-        elem.removeClass('border-top border-right border-bottom border-left');
-
-        var sidesArray = [];
-
-        if(sides[0]) sidesArray.push('border-top');
-        if(sides[1]) sidesArray.push('border-right');
-        if(sides[2]) sidesArray.push('border-bottom');
-        if(sides[3]) sidesArray.push('border-left');
-
-        sidesString = sidesArray.join(' ');
-
-        elem.addClass(sidesString);
-      };
 
       elem.on('mousedown', function() {
         ctrlVM.paint();
@@ -38160,6 +38151,39 @@ loginScreen.$inject = ["userStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
 
 function pageState(userStateFactory, patternFactory) {
 
@@ -38286,39 +38310,6 @@ function showHide() {
 
 angular.module('Crosstronica').
 directive('showHide', showHide);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
 
 function addColor() {
 

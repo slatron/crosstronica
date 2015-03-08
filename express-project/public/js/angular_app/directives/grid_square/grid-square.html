@@ -1,5 +1,6 @@
 <div
   class="square"
+  ng-class="[gridSquareVM.top, gridSquareVM.right, gridSquareVM.bottom, gridSquareVM.left]"
   style="background-color: #{{gridSquareVM.color.rgb}}"
 >
   {{gridSquareVM.color.symbol}}
