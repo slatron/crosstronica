@@ -22,30 +22,10 @@ function gridSquare() {
         return vm.color.borders;
       }, function(borders) {
         if (borders) {
-
-          if (borders[0]) {
-            vm.top = 'border-top';
-          } else {
-            vm.top = '';
-          }
-
-          if (borders[1]) {
-            vm.right = 'border-right';
-          } else {
-            vm.right = '';
-          }
-
-          if (borders[2]) {
-            vm.bottom = 'border-bottom';
-          } else {
-            vm.bottom = '';
-          }
-
-          if (borders[3]) {
-            vm.left = 'border-left';
-          } else {
-            vm.left = '';
-          }
+          vm.top    = borders[0] ? 'border-top' : '';
+          vm.right  = borders[1] ? 'border-right' : '';
+          vm.bottom = borders[2] ? 'border-bottom' : '';
+          vm.left   = borders[3] ? 'border-left' : '';
         }
       });
     },
