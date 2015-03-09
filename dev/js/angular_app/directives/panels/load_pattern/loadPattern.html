@@ -1,13 +1,9 @@
-<div class="panel" show-hide>
-  <h6 ng-click="toggleMe()">Load Pattern</h6>
-  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
-  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <div ng-hide="collapsed" class="panel-section">
-    <select
-      ng-change="loadPatternVM.reloadPattern()"
-      ng-model="loadPatternVM.patternData.selected"
-      ng-options="pattern.name for pattern in loadPatternVM.patternData.available track by pattern.id"
-    >
-  </div>
-
+<div class="panel-section">
+  <h6>Load: </h6>
+  <select
+    ng-change="loadPatternVM.reloadPattern()"
+    ng-model="loadPatternVM.patternData.selected"
+    ng-options="pattern.name for pattern in loadPatternVM.patternData.available track by pattern.id"
+    class="pattern-load"
+  >
 </div>

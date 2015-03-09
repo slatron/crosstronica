@@ -20,15 +20,30 @@
 
         <draw-tool></draw-tool>
         <pallete></pallete>
-        <add-color></add-color>
-        <load-pattern></load-pattern>
-        <new-pattern></new-pattern>
-        <save-pattern
-          ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
-        ></save-pattern>
-        <delete-pattern
-          ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
-        ></delete-pattern>
+
+
+        <div class="panel" show-hide>
+          <h6 ng-click="toggleMe()">Pattern Controls</h6>
+          <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+          <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+
+          <div ng-hide="collapsed">
+
+            <save-pattern
+              ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
+            ></save-pattern>
+
+            <new-pattern></new-pattern>
+
+            <load-pattern></load-pattern>
+
+            <delete-pattern
+              ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
+            ></delete-pattern>
+
+          </div>
+
+        </div>
 
       </drawer>
 
@@ -36,14 +51,18 @@
 
     <main ng-if="pageStateVM.userState.authorized">
 
+      <h1>Welcome, {{pageStateVM.userState.name}}!</h1>
+      <a
+        href="#"
+        class="text-tiny"
+        ng-click="pageStateVM.doLogout()"
+      >logout</a>
+
       <pattern></pattern>
 
     </main>
 
-
-    <footer ng-if="pageStateVM.userState.authorized" ng-include="'layout/footer.html'"></footer>
-
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.min.js"></script>
 
   </body>
 </html>

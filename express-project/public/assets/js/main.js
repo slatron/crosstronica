@@ -37739,6 +37739,8 @@ function patternFactory($http, $q) {
     selected: {}
   };
 
+  var waitingForAuthentication = true;
+
   var patternFactoryMethods = {};
 
   // Initialize pattern data from server
@@ -37780,6 +37782,12 @@ function patternFactory($http, $q) {
   };
 
   patternFactoryMethods.get = function() {
+
+    if (waitingForAuthentication) {
+      waitingForAuthentication = false;
+      _init();
+    }
+
     return patternData;
   };
 
@@ -37879,8 +37887,6 @@ function patternFactory($http, $q) {
     patternData.id       = undefined;
     patternData.selected = undefined;
   };
-
-  _init();
 
   return patternFactoryMethods;
 
@@ -38103,65 +38109,6 @@ function gridSquare() {
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
 
-function pageState(userStateFactory, patternFactory) {
-
-  return {
-    controllerAs: 'pageStateVM',
-    bindToController: true,
-    controller: ["Auth", function (Auth) {
-      var vm = this;
-
-      vm.userState = userStateFactory.get();
-
-      // function to handle logging out
-      vm.doLogout = function() {
-        Auth.logout();
-        userStateFactory.authorize(false);
-        patternFactory.clearAvailable();
-      };
-
-    }]
-  };
-
-}
-pageState.$inject = ["userStateFactory", "patternFactory"];
-
-angular.module('Crosstronica').
-directive('pageState', pageState);
-
-function drawer() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {},
-
-    transclude: true,
-    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
-
-    controllerAs: 'drawerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      this.showDrawer = true;
-
-      this.closeDrawer = function() {
-        this.showDrawer = false;
-      };
-
-      this.openDrawer = function() {
-        this.showDrawer = true;
-      };
-    }
-
-  };
-}
-
-angular.module('Crosstronica').
-directive('drawer', drawer);
-
 function loginScreen(userStateFactory) {
 
   return {
@@ -38221,6 +38168,32 @@ loginScreen.$inject = ["userStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
+
+function pageState(userStateFactory, patternFactory) {
+
+  return {
+    controllerAs: 'pageStateVM',
+    bindToController: true,
+    controller: ["Auth", function (Auth) {
+      var vm = this;
+
+      vm.userState = userStateFactory.get();
+
+      // function to handle logging out
+      vm.doLogout = function() {
+        Auth.logout();
+        userStateFactory.authorize(false);
+        patternFactory.clearAvailable();
+      };
+
+    }]
+  };
+
+}
+pageState.$inject = ["userStateFactory", "patternFactory"];
+
+angular.module('Crosstronica').
+directive('pageState', pageState);
 
 function pattern(drawStateFactory, patternFactory) {
 
@@ -38297,6 +38270,39 @@ pattern.$inject = ["drawStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pattern', pattern);
+
+function drawer() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {},
+
+    transclude: true,
+    templateUrl: '/js/angular_app/directives/drawer/drawer.html',
+
+    controllerAs: 'drawerVM',
+    bindToController: true,
+
+    controller: function () {
+
+      this.showDrawer = true;
+
+      this.closeDrawer = function() {
+        this.showDrawer = false;
+      };
+
+      this.openDrawer = function() {
+        this.showDrawer = true;
+      };
+    }
+
+  };
+}
+
+angular.module('Crosstronica').
+directive('drawer', drawer);
 
 function showHide() {
 
@@ -38385,17 +38391,18 @@ function deletePattern() {
       vm.currentPattern = patternFactory.get();
 
       vm.deletePattern = function() {
+        if (confirm('Are you sure?')) {
 
-        patternFactory.deletePattern(vm.currentPattern.id).then(
-          function(success) {
-            console.log('successful pattern DELETE', success);
-            patternFactory.clearCurrent();
-          },
-          function(error) {
-            console.error('error on pattern DELETE', error);
-          }
-        );
-
+          patternFactory.deletePattern(vm.currentPattern.id).then(
+            function(success) {
+              console.log('successful pattern DELETE', success);
+              patternFactory.clearCurrent();
+            },
+            function(error) {
+              console.error('error on pattern DELETE', error);
+            }
+          );
+        }
       };
 
     }]

@@ -18,35 +18,55 @@
   .but {
     min-width: 0;
   }
+
+  .panel-subsection {
+    @extend %text-tiny;
+    border: 1px dashed $color-pool;
+    padding: $base-unit-half;
+
+    h6, a, i.fa {
+      @extend %text-tiny;
+      color: $color-pool;
+    }
+
+    h6 + a {
+      @extend %text-tiny;
+      border: 1px solid $color-pool;
+    }
+
+    .but {
+      background: $color-pool;
+    }
+
+  }
+
 }
 
 .panel h6 {
+  @extend %text-normal;
   display: inline-block;
 }
 
 .panel h6 + a {
-  @extend %text-tiny;
+  @extend %text-small;
 
   border: 1px solid $color-sohi;
   display: inline-block;
-  padding: 1px 2px;
+  padding: 2px;
   position: relative;
   top: -2px;
+
 }
 
-.pallete > div {
-  display: inline-block;
+.pallete {
+  margin: $base-unit 0 $base-unit-half;
 }
 
-.paint-info .square {
+.paint-info .square,
+.pallete .square {
   display: inline-block;
 }
 
 .panel-section {
   margin: $base-unit 0 $base-unit-half;
-}
-
-.panel-subsection {
-  border: 1px dashed $color-pool;
-  padding: $base-unit-half;
 }

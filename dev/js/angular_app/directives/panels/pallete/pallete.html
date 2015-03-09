@@ -2,7 +2,7 @@
   <h6>Pallete</h6>
   <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
   <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <div ng-hide="collapsed" class="panel-section pallete">
+  <div ng-hide="collapsed" class="pallete">
     <grid-square
       ng-repeat="color in palleteVM.pallete.colors"
       ng-click="palleteVM.selectColor(color)"
@@ -11,6 +11,8 @@
     <div class="panel-section">
       <span class="but text-tiny" ng-click="palleteVM.selectEraser()">Eraser</span>
     </div>
-  </div>
 
+    <add-color></add-color>
+
+  </div>
 </div>

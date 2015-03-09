@@ -1,42 +1,45 @@
-<div class="panel" show-hide>
-  <h6 ng-click="toggleMe()">Create New Pattern</h6>
+<div class="panel-subsection" show-hide>
+  <h6>Create New Pattern</h6>
   <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
   <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <div ng-hide="collapsed" class="panel-section">
-    <form novalidate ng-hide="collapsed" ng-submit="newPatternVM.createPattern()" name="newpattern">
-      <label for="newname">Pattern Name: </label>
-      <input
-        type="text"
-        id="newname"
-        name="newname"
-        ng-model="newPatternVM.newname"
-        maxlength="30"
-        required
-      >
-      <label for="newrgb">Rows:</label>
-      <input
-        type="range"
-        id="newrows"
-        name="newrows"
-        ng-model="newPatternVM.newrows"
-        ng-init="newPatternVM.newrows = 10"
-        required
-        min="2"
-        max="40"
-      > {{ newPatternVM.newrows }}
-      <label for="newsymbol">Cols:</label>
-      <input
-        type="range"
-        id="newcols"
-        name="newcols"
-        ng-model="newPatternVM.newcols"
-        ng-init="newPatternVM.newcols = 10"
-        required
-        min="2"
-        max="40"
-      > {{ newPatternVM.newcols }}
-      <button class="text-tiny but" type="submit" ng-disabled="newpattern.$invalid">Generate</button>
+  <form
+    ng-hide="collapsed"
+    novalidate
+    ng-submit="newPatternVM.createPattern()"
+    name="newpattern"
+  >
+    <label for="newname">Pattern Name: </label>
+    <input
+      type="text"
+      id="newname"
+      name="newname"
+      ng-model="newPatternVM.newname"
+      maxlength="30"
+      required
+    >
+    <label for="newrgb">Rows:</label>
+    <input
+      type="range"
+      id="newrows"
+      name="newrows"
+      ng-model="newPatternVM.newrows"
+      ng-init="newPatternVM.newrows = 10"
+      required
+      min="2"
+      max="100"
+    > {{ newPatternVM.newrows }}
+    <label for="newsymbol">Cols:</label>
+    <input
+      type="range"
+      id="newcols"
+      name="newcols"
+      ng-model="newPatternVM.newcols"
+      ng-init="newPatternVM.newcols = 10"
+      required
+      min="2"
+      max="80"
+    > {{ newPatternVM.newcols }}
+    <button class="text-tiny but" type="submit" ng-disabled="newpattern.$invalid">Generate</button>
 
-    </form>
-  </div>
+  </form>
 </div>

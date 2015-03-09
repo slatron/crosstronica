@@ -17,17 +17,18 @@ function deletePattern() {
       vm.currentPattern = patternFactory.get();
 
       vm.deletePattern = function() {
+        if (confirm('Are you sure?')) {
 
-        patternFactory.deletePattern(vm.currentPattern.id).then(
-          function(success) {
-            console.log('successful pattern DELETE', success);
-            patternFactory.clearCurrent();
-          },
-          function(error) {
-            console.error('error on pattern DELETE', error);
-          }
-        );
-
+          patternFactory.deletePattern(vm.currentPattern.id).then(
+            function(success) {
+              console.log('successful pattern DELETE', success);
+              patternFactory.clearCurrent();
+            },
+            function(error) {
+              console.error('error on pattern DELETE', error);
+            }
+          );
+        }
       };
 
     }

@@ -8,6 +8,8 @@ function patternFactory($http, $q) {
     selected: {}
   };
 
+  var waitingForAuthentication = true;
+
   var patternFactoryMethods = {};
 
   // Initialize pattern data from server
@@ -49,6 +51,12 @@ function patternFactory($http, $q) {
   };
 
   patternFactoryMethods.get = function() {
+
+    if (waitingForAuthentication) {
+      waitingForAuthentication = false;
+      _init();
+    }
+
     return patternData;
   };
 
@@ -148,8 +156,6 @@ function patternFactory($http, $q) {
     patternData.id       = undefined;
     patternData.selected = undefined;
   };
-
-  _init();
 
   return patternFactoryMethods;
 

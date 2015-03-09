@@ -1,8 +1,8 @@
-<div class="panel" show-hide>
+<div class="panel-subsection" show-hide>
   <h6 ng-click="toggleMe()">Add New Color</h6>
   <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
   <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-  <div ng-hide="collapsed" class="panel-section">
+  <div ng-hide="collapsed">
     <form novalidate ng-submit="addColorVM.addColor()" name="addcolor">
       <label for="newname">Color Name: </label>
       <input
