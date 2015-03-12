@@ -10,7 +10,7 @@ You can view the online app at [Heroku](https://crosstronica.herokuapp.com). Use
 
 If you are interested in the code behind this application, you may feel free to fork or clone this repositoty and run it yourself.
 
- Go to [Installation](https://github.com/slatron/crosstronica/wiki/2)-Installation) in the wiki to begin.
+ Go to [Installation](https://github.com/slatron/crosstronica/wiki/1\)-Installation) in the wiki to begin.
 
  ### Feedback
 
