@@ -601,12 +601,17 @@ main {
 }
 
 /* line 8, ../../../../dev/scss/layout/_layout.scss */
+.main-contents {
+  margin: 0 auto;
+}
+
+/* line 12, ../../../../dev/scss/layout/_layout.scss */
 h1 {
   text-align: right;
   margin-bottom: 0;
 }
 
-/* line 13, ../../../../dev/scss/layout/_layout.scss */
+/* line 17, ../../../../dev/scss/layout/_layout.scss */
 h1 + a {
   display: inline-block;
   margin-bottom: 1em;
@@ -1087,4 +1092,9 @@ a.but-selection:active {
 /* line 68, ../../../../dev/scss/state/_state.scss */
 .fa-trash {
   cursor: pointer;
+}
+
+/* line 72, ../../../../dev/scss/state/_state.scss */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }

@@ -14,7 +14,7 @@
 
     <login-screen ng-if="!pageStateVM.userState.authorized"></login-screen>
 
-    <div class="drawer-grid" ng-if="pageStateVM.userState.authorized">
+    <div class="drawer-grid" ng-if="pageStateVM.userState.authorized" ng-cloak>
 
       <drawer>
 
@@ -51,14 +51,18 @@
 
     <main ng-if="pageStateVM.userState.authorized">
 
-      <h1>Welcome, {{pageStateVM.userState.name}}!</h1>
-      <a
-        href="#"
-        class="text-tiny"
-        ng-click="pageStateVM.doLogout()"
-      >logout</a>
+      <div class="main-contents">
 
-      <pattern></pattern>
+        <h1>Welcome, {{pageStateVM.userState.name}}!</h1>
+        <a
+          href="#"
+          class="text-tiny"
+          ng-click="pageStateVM.doLogout()"
+        >logout</a>
+
+        <pattern></pattern>
+
+      </div>
 
     </main>
 
