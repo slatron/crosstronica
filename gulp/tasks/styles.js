@@ -16,8 +16,11 @@ gulp.task('styles', function() {
       displayError(err);
     })
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .on('error', handleErrors)
+      .on('error', handleErrors)
     .pipe(rename({suffix: '.min'}))
+      .on('error', handleErrors)
     .pipe(minifycss())
-    .pipe(gulp.dest('express-project/public/assets/css'));
+      .on('error', handleErrors)
+    .pipe(gulp.dest('assets/css'))
+      .on('error', handleErrors);
 });
