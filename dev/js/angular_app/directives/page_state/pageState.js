@@ -12,7 +12,6 @@ function pageState(userStateFactory, patternFactory) {
       vm.doLogout = function() {
         Auth.logout();
         userStateFactory.authorize(false);
-        patternFactory.clearAvailable();
       };
 
     }

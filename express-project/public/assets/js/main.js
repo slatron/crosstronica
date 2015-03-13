@@ -37896,7 +37896,7 @@ patternFactory.$inject = ["$http", "$q"];
 angular.module('Crosstronica').
 factory('patternFactory', patternFactory);
 
-function userStateFactory() {
+function userStateFactory(Auth) {
 
   var userState = {
     authorized: false,
@@ -37914,23 +37914,34 @@ function userStateFactory() {
   userStateFactoryMethods.authorize = function(authorized) {
     authorized = authorized || false;
 
-    if (authorized)
-      userState.authorized = true;
-    else
+    if (!authorized) {
       userState.authorized = false;
+      userState.name = '';
+      userState.guest = false;
+    } else {
+      userState.authorized = true;
+      Auth.getUser().then(
+        function(data) {
+          console.log('User Data: ', data);
+          userStateFactoryMethods.setUserName(data.data.name);
+        },
+        function(error) {
+          console.error('ERROR GETTING USER DATA: ', error);
+        }
+      );
+    }
   };
 
   userStateFactoryMethods.setUserName = function(name) {
     userState.name = name || '';
-  };
-
-  userStateFactoryMethods.setGuest = function() {
-    userState.guest = true;
+    if (name === 'Guest')
+      userState.guest = true;
   };
 
   return userStateFactoryMethods;
 
 }
+userStateFactory.$inject = ["Auth"];
 
 angular.module('Crosstronica').
 factory('userStateFactory', userStateFactory);
@@ -38162,15 +38173,6 @@ function loginScreen(userStateFactory) {
       // Determine initial login state
       userStateFactory.authorize(Auth.isLoggedIn());
 
-      // get user information on page load
-      Auth.getUser()
-        .then(function(data) {
-          console.log('USER DATA: ', data);
-          userStateFactory.setUserName(data.data.name);
-          if (data.data.name === 'Guest')
-            userStateFactory.setGuest();
-        });
-
       // function to handle login form
       vm.doLogin = function() {
         vm.processing = true;
@@ -38216,7 +38218,6 @@ function pageState(userStateFactory, patternFactory) {
       vm.doLogout = function() {
         Auth.logout();
         userStateFactory.authorize(false);
-        patternFactory.clearAvailable();
       };
 
     }]

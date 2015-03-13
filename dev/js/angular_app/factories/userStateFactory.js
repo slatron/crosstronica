@@ -1,4 +1,4 @@
-function userStateFactory() {
+function userStateFactory(Auth) {
 
   var userState = {
     authorized: false,
@@ -16,18 +16,28 @@ function userStateFactory() {
   userStateFactoryMethods.authorize = function(authorized) {
     authorized = authorized || false;
 
-    if (authorized)
-      userState.authorized = true;
-    else
+    if (!authorized) {
       userState.authorized = false;
+      userState.name = '';
+      userState.guest = false;
+    } else {
+      userState.authorized = true;
+      Auth.getUser().then(
+        function(data) {
+          console.log('User Data: ', data);
+          userStateFactoryMethods.setUserName(data.data.name);
+        },
+        function(error) {
+          console.error('ERROR GETTING USER DATA: ', error);
+        }
+      );
+    }
   };
 
   userStateFactoryMethods.setUserName = function(name) {
     userState.name = name || '';
-  };
-
-  userStateFactoryMethods.setGuest = function() {
-    userState.guest = true;
+    if (name === 'Guest')
+      userState.guest = true;
   };
 
   return userStateFactoryMethods;

@@ -18,15 +18,6 @@ function loginScreen(userStateFactory) {
       // Determine initial login state
       userStateFactory.authorize(Auth.isLoggedIn());
 
-      // get user information on page load
-      Auth.getUser()
-        .then(function(data) {
-          console.log('USER DATA: ', data);
-          userStateFactory.setUserName(data.data.name);
-          if (data.data.name === 'Guest')
-            userStateFactory.setGuest();
-        });
-
       // function to handle login form
       vm.doLogin = function() {
         vm.processing = true;

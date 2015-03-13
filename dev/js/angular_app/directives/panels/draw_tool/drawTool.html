@@ -74,7 +74,7 @@
     </span>
     <i
       ng-click="drawtoolVM.deleteColor()"
-      ng-show="drawtoolVM.drawState.paint.selected.name"
+      ng-show="drawtoolVM.drawState.paint.selected.name && !$root.pageStateVM.userState.guest"
       class="fa fa-trash"
     ></i>
 
