@@ -45,6 +45,9 @@ function patternFactory($http, $q) {
       dataLoaded = true;
       deferred.resolve(patternData);
     }).error(function(e) {
+      patternData.name = 'Create a new Pattern to begin';
+      patternData.grid = [];
+      patternData.id   = undefined;
       deferred.reject('An error occurred while querying the remote database');
     });
 
@@ -55,6 +58,7 @@ function patternFactory($http, $q) {
 
     if (!dataLoaded) {
       _init();
+      dataLoaded = true;
     }
 
     return patternData;
