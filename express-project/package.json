@@ -9,7 +9,7 @@
     "express": "^4.10.4",
     "jsonwebtoken": "^3.2.2",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^3.8.21",
+    "mongoose": "3.8",
     "morgan": "~1.5.0"
   }
 }
