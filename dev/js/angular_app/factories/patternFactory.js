@@ -8,7 +8,7 @@ function patternFactory($http, $q) {
     selected: {}
   };
 
-  var waitingForAuthentication = true;
+  var dataLoaded = false;
 
   var patternFactoryMethods = {};
 
@@ -23,6 +23,7 @@ function patternFactory($http, $q) {
         patternData.name = data[0].name;
         patternData.grid = data[0].grid;
         patternData.id   = data[0]._id;
+        patternData.available = [];
 
         // Load all pattern options array
         _.each(data, function(pattern) {
@@ -30,7 +31,6 @@ function patternFactory($http, $q) {
             name: pattern.name,
             id: pattern._id
           };
-
           patternData.available.push(patternOption);
         });
 
@@ -42,6 +42,7 @@ function patternFactory($http, $q) {
         patternData.id   = undefined;
       }
 
+      dataLoaded = true;
       deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
@@ -52,8 +53,7 @@ function patternFactory($http, $q) {
 
   patternFactoryMethods.get = function() {
 
-    if (waitingForAuthentication) {
-      waitingForAuthentication = false;
+    if (!dataLoaded) {
       _init();
     }
 

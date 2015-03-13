@@ -37643,7 +37643,50 @@ function palleteFactory($http, $q) {
     colors: []
   };
 
+  var dataLoaded = false;
+
   var palleteFactoryMethods = {};
+
+  var _init = function() {
+
+    var deferred = $q.defer();
+
+    $http.get('/api/pallete').success(function(data) {
+      for(var i = 0;i < data.length; i++) {
+        // c_id helps to index the pallete array
+        // TODO: Kill this in favor of db id
+        data[i].c_id = i;
+        pallete.colors = data;
+      }
+      dataLoaded = true;
+      deferred.resolve(data);
+    }).error(function(e) {
+      console.error('An error occurred while querying the remote database', e);
+
+      // GET BACKUP FROM LOCAL JSON FILE
+      $http.get('/json/pallete.json').success(function(data){
+        console.error('Using local fallback pallete');
+        pallete.colors = data;
+        dataLoaded = true;
+        deferred.resolve(data);
+      }).error(function() {
+        deferred.reject('There was an error getting local pallete.json file');
+      });
+    });
+
+    return deferred.promise;
+
+  };
+
+  palleteFactoryMethods.get = function() {
+
+    if (!dataLoaded) {
+      _init();
+    }
+
+    return pallete;
+
+  };
 
   palleteFactoryMethods.deleteColor = function(colorId) {
 
@@ -37682,45 +37725,6 @@ function palleteFactory($http, $q) {
 
   };
 
-  palleteFactoryMethods.getPallete = function() {
-
-    updatePallete()
-      .then(function(data){
-        pallete.colors = data;
-      }, function(data){
-        console.error('error resolving updatePallete promise: ', data);
-      });
-
-    return pallete;
-
-  };
-
-  var updatePallete = function() {
-
-    var deferred = $q.defer();
-
-    $http.get('/api/pallete').success(function(data) {
-      for(var i = 0;i < data.length; i++) {
-        // c_id helps to index the pallete array
-        data[i].c_id = i;
-      }
-      deferred.resolve(data);
-    }).error(function(e) {
-      console.error('An error occurred while querying the remote database', e);
-
-      // GET BACKUP FROM LOCAL JSON FILE
-      $http.get('/json/pallete.json').success(function(data){
-        console.error('Using local fallback pallete');
-        deferred.resolve(data);
-      }).error(function() {
-        deferred.reject('There was an error getting local pallete.json file');
-      });
-    });
-
-    return deferred.promise;
-
-  };
-
   return palleteFactoryMethods;
 
 }
@@ -37739,7 +37743,7 @@ function patternFactory($http, $q) {
     selected: {}
   };
 
-  var waitingForAuthentication = true;
+  var dataLoaded = false;
 
   var patternFactoryMethods = {};
 
@@ -37754,6 +37758,7 @@ function patternFactory($http, $q) {
         patternData.name = data[0].name;
         patternData.grid = data[0].grid;
         patternData.id   = data[0]._id;
+        patternData.available = [];
 
         // Load all pattern options array
         _.each(data, function(pattern) {
@@ -37761,7 +37766,6 @@ function patternFactory($http, $q) {
             name: pattern.name,
             id: pattern._id
           };
-
           patternData.available.push(patternOption);
         });
 
@@ -37773,6 +37777,7 @@ function patternFactory($http, $q) {
         patternData.id   = undefined;
       }
 
+      dataLoaded = true;
       deferred.resolve(patternData);
     }).error(function(e) {
       deferred.reject('An error occurred while querying the remote database');
@@ -37783,8 +37788,7 @@ function patternFactory($http, $q) {
 
   patternFactoryMethods.get = function() {
 
-    if (waitingForAuthentication) {
-      waitingForAuthentication = false;
+    if (!dataLoaded) {
       _init();
     }
 
@@ -38361,9 +38365,6 @@ function addColor() {
         vm.newrgb    = '';
         vm.newsymbol = '';
 
-        // Update Current Pallete with new color
-        palleteFactory.getPallete();
-
       };
 
     }]
@@ -38547,7 +38548,7 @@ function pallete() {
 
       var vm = this;
 
-      vm.pallete = palleteFactory.getPallete();
+      vm.pallete = palleteFactory.get();
 
       vm.selectColor = function(color) {
         color = color || {};

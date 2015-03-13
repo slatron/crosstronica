@@ -14,7 +14,7 @@ function pallete() {
 
       var vm = this;
 
-      vm.pallete = palleteFactory.getPallete();
+      vm.pallete = palleteFactory.get();
 
       vm.selectColor = function(color) {
         color = color || {};

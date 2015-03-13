@@ -30,9 +30,6 @@ function addColor() {
         vm.newrgb    = '';
         vm.newsymbol = '';
 
-        // Update Current Pallete with new color
-        palleteFactory.getPallete();
-
       };
 
     }
