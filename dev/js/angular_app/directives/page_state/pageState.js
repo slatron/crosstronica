@@ -1,4 +1,4 @@
-function pageState(userStateFactory, patternFactory) {
+function pageState(userStateFactory, patternFactory, viewStateFactory) {
 
   return {
     controllerAs: 'pageStateVM',
@@ -7,11 +7,20 @@ function pageState(userStateFactory, patternFactory) {
       var vm = this;
 
       vm.userState = userStateFactory.get();
+      vm.viewState = viewStateFactory.get();
 
       // function to handle logging out
       vm.doLogout = function() {
         Auth.logout();
         userStateFactory.authorize(false);
+      };
+
+      vm.centerGrid = function(centered) {
+        if (centered) {
+          viewFactory.centerGrid(true);
+        } else {
+          viewFactory.centerGrid(true);
+        }
       };
 
     }

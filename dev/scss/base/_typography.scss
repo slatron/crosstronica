@@ -4,6 +4,10 @@ body, html {
 
 // Text sizing classes
 // =============================
+.text-teency,
+%text-teency {
+  font-size: $base-font-size * 0.5;}
+
 .text-tiny,
 %text-tiny {
   font-size: $base-font-size * 0.65;} // 12px / .65em

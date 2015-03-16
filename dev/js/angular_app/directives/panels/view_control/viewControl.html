@@ -1,0 +1,17 @@
+<div class="panel" show-hide>
+  <h6 ng-click="toggleMe()">View Control</h6>
+  <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
+  <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
+
+  <div ng-hide="collapsed">
+
+    <span ng-hide="viewControlVM.viewState.centered">Grid On Right</span>
+    <span ng-show="viewControlVM.viewState.centered">Grid Centered</span>
+
+    <button ng-click="viewControlVM.toggleCenterGrid()" class="but text-tiny">
+      Swap Position
+    </button>
+
+  </div>
+
+</div>

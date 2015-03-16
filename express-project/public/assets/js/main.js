@@ -37904,55 +37904,96 @@ patternFactory.$inject = ["$http", "$q"];
 angular.module('Crosstronica').
 factory('patternFactory', patternFactory);
 
-function userStateFactory(Auth) {
+(function() {
+  'use strict';
 
-  var userState = {
-    authorized: false,
-    name: '',
-    guest: false
-  };
+  angular
+      .module('Crosstronica')
+      .factory('userStateFactory', userStateFactory);
 
-  var userStateFactoryMethods = {};
+  /* @ngInject */
+  function userStateFactory(Auth) {
 
-  userStateFactoryMethods.get = function() {
-    return userState;
-  };
+    var userState = {
+      authorized: false,
+      name: '',
+      guest: false
+    };
 
-  // Setter for authorized
-  userStateFactoryMethods.authorize = function(authorized) {
-    authorized = authorized || false;
+    var userStateFactoryMethods = {};
 
-    if (!authorized) {
-      userState.authorized = false;
-      userState.name = '';
-      userState.guest = false;
-    } else {
-      userState.authorized = true;
-      Auth.getUser().then(
-        function(data) {
-          console.log('User Data: ', data);
-          userStateFactoryMethods.setUserName(data.data.name);
-        },
-        function(error) {
-          console.error('ERROR GETTING USER DATA: ', error);
+    userStateFactoryMethods.get = function() {
+      return userState;
+    };
+
+    // Setter for authorized
+    userStateFactoryMethods.authorize = function(authorized) {
+      authorized = authorized || false;
+
+      if (!authorized) {
+        userState.authorized = false;
+        userState.name = '';
+        userState.guest = false;
+      } else {
+        userState.authorized = true;
+        Auth.getUser().then(
+          function(data) {
+            console.log('User Data: ', data);
+            userStateFactoryMethods.setUserName(data.data.name);
+          },
+          function(error) {
+            console.error('ERROR GETTING USER DATA: ', error);
+          }
+        );
+      }
+    };
+
+    userStateFactoryMethods.setUserName = function(name) {
+      userState.name = name || '';
+      if (name === 'Guest')
+        userState.guest = true;
+    };
+
+    return userStateFactoryMethods;
+
+  }
+  userStateFactory.$inject = ["Auth"];
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('Crosstronica')
+        .factory('viewStateFactory', viewStateFactory);
+
+    /* @ngInject */
+    function viewStateFactory() {
+
+      var viewState = {
+          centered: false
+      };
+
+      var viewStateFactoryMethods = {};
+
+      viewStateFactoryMethods.get = function() {
+        return viewState;
+      };
+
+      viewStateFactoryMethods.centerGrid = function(centered) {
+        if (centered) {
+          viewState.centered = true;
+        } else {
+          viewState.centered = false;
         }
-      );
+      };
+
+
+      return viewStateFactoryMethods;
+
     }
-  };
-
-  userStateFactoryMethods.setUserName = function(name) {
-    userState.name = name || '';
-    if (name === 'Guest')
-      userState.guest = true;
-  };
-
-  return userStateFactoryMethods;
-
-}
-userStateFactory.$inject = ["Auth"];
-
-angular.module('Crosstronica').
-factory('userStateFactory', userStateFactory);
+})();
 
 angular.module('authService', [])
 
@@ -38106,6 +38147,91 @@ function drawer() {
 angular.module('Crosstronica').
 directive('drawer', drawer);
 
+function pageState(userStateFactory, patternFactory, viewStateFactory) {
+
+  return {
+    controllerAs: 'pageStateVM',
+    bindToController: true,
+    controller: ["Auth", function (Auth) {
+      var vm = this;
+
+      vm.userState = userStateFactory.get();
+      vm.viewState = viewStateFactory.get();
+
+      // function to handle logging out
+      vm.doLogout = function() {
+        Auth.logout();
+        userStateFactory.authorize(false);
+      };
+
+      vm.centerGrid = function(centered) {
+        if (centered) {
+          viewFactory.centerGrid(true);
+        } else {
+          viewFactory.centerGrid(true);
+        }
+      };
+
+    }]
+  };
+
+}
+pageState.$inject = ["userStateFactory", "patternFactory", "viewStateFactory"];
+
+angular.module('Crosstronica').
+directive('pageState', pageState);
+
+function loginScreen(userStateFactory) {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+
+    controllerAs: 'loginVM',
+    bindToController: true,
+
+    templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
+
+    controller: ["Auth", function (Auth) {
+
+      var vm = this;
+
+      // Determine initial login state
+      userStateFactory.authorize(Auth.isLoggedIn());
+
+      // function to handle login form
+      vm.doLogin = function() {
+        vm.processing = true;
+
+        // clear the error
+        vm.error = '';
+
+        Auth.login(vm.username, vm.password)
+          .success(function(data) {
+            vm.processing = false;
+
+            if (data.success) {
+              userStateFactory.authorize(true);
+              console.log('successful login: ', data);
+            } else {
+              vm.error = data.message;
+              console.log('error on login: ', data);
+            }
+
+          });
+      };
+
+    }]
+
+  };
+}
+loginScreen.$inject = ["userStateFactory"];
+
+angular.module('Crosstronica').
+directive('loginScreen', loginScreen);
+
 function gridSquare() {
 
   return {
@@ -38160,82 +38286,6 @@ function gridSquare() {
 
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
-
-function loginScreen(userStateFactory) {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-
-    controllerAs: 'loginVM',
-    bindToController: true,
-
-    templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
-
-    controller: ["Auth", function (Auth) {
-
-      var vm = this;
-
-      // Determine initial login state
-      userStateFactory.authorize(Auth.isLoggedIn());
-
-      // function to handle login form
-      vm.doLogin = function() {
-        vm.processing = true;
-
-        // clear the error
-        vm.error = '';
-
-        Auth.login(vm.username, vm.password)
-          .success(function(data) {
-            vm.processing = false;
-
-            if (data.success) {
-              userStateFactory.authorize(true);
-              console.log('successful login: ', data);
-            } else {
-              vm.error = data.message;
-              console.log('error on login: ', data);
-            }
-
-          });
-      };
-
-    }]
-
-  };
-}
-loginScreen.$inject = ["userStateFactory"];
-
-angular.module('Crosstronica').
-directive('loginScreen', loginScreen);
-
-function pageState(userStateFactory, patternFactory) {
-
-  return {
-    controllerAs: 'pageStateVM',
-    bindToController: true,
-    controller: ["Auth", function (Auth) {
-      var vm = this;
-
-      vm.userState = userStateFactory.get();
-
-      // function to handle logging out
-      vm.doLogout = function() {
-        Auth.logout();
-        userStateFactory.authorize(false);
-      };
-
-    }]
-  };
-
-}
-pageState.$inject = ["userStateFactory", "patternFactory"];
-
-angular.module('Crosstronica').
-directive('pageState', pageState);
 
 function pattern(drawStateFactory, patternFactory) {
 
@@ -38635,3 +38685,35 @@ function savePattern() {
 
 angular.module('Crosstronica').
 directive('savePattern', savePattern);
+
+function viewControl(viewStateFactory) {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+
+    templateUrl: '/js/angular_app/directives/panels/view_control/viewControl.html',
+
+    controllerAs: 'viewControlVM',
+    bindToController: true,
+
+    controller: function () {
+      var vm = this;
+
+      vm.viewState = viewStateFactory.get();
+
+      vm.toggleCenterGrid = function() {
+        var current = vm.viewState.centered;
+        viewStateFactory.centerGrid(!current);
+      };
+
+    }
+  };
+
+}
+viewControl.$inject = ["viewStateFactory"];
+
+angular.module('Crosstronica').
+directive('viewControl', viewControl);

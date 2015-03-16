@@ -1,16 +1,22 @@
 // Layout styles go here
 main {
-  margin: $base-unit auto $base-unit $drawer-col-width;
+  margin: $base-unit auto;
   padding-right: $base-unit;
   text-align: right;
 }
 
-.main-contents {
-  margin: 0 auto;
+main.grid-centered {
+  text-align: center;
+}
+
+.main-area {
+  // inline-block forces grid squares to push full width
+  display: inline-block;
+  text-align: left;
 }
 
 h1 {
-  text-align: right;
+  text-align: left;
   margin-bottom: 0;
 }
 

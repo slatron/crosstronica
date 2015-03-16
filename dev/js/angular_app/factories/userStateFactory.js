@@ -1,48 +1,55 @@
-function userStateFactory(Auth) {
+(function() {
+  'use strict';
 
-  var userState = {
-    authorized: false,
-    name: '',
-    guest: false
-  };
+  angular
+      .module('Crosstronica')
+      .factory('userStateFactory', userStateFactory);
 
-  var userStateFactoryMethods = {};
+  /* @ngInject */
+  function userStateFactory(Auth) {
 
-  userStateFactoryMethods.get = function() {
-    return userState;
-  };
+    var userState = {
+      authorized: false,
+      name: '',
+      guest: false
+    };
 
-  // Setter for authorized
-  userStateFactoryMethods.authorize = function(authorized) {
-    authorized = authorized || false;
+    var userStateFactoryMethods = {};
 
-    if (!authorized) {
-      userState.authorized = false;
-      userState.name = '';
-      userState.guest = false;
-    } else {
-      userState.authorized = true;
-      Auth.getUser().then(
-        function(data) {
-          console.log('User Data: ', data);
-          userStateFactoryMethods.setUserName(data.data.name);
-        },
-        function(error) {
-          console.error('ERROR GETTING USER DATA: ', error);
-        }
-      );
-    }
-  };
+    userStateFactoryMethods.get = function() {
+      return userState;
+    };
 
-  userStateFactoryMethods.setUserName = function(name) {
-    userState.name = name || '';
-    if (name === 'Guest')
-      userState.guest = true;
-  };
+    // Setter for authorized
+    userStateFactoryMethods.authorize = function(authorized) {
+      authorized = authorized || false;
 
-  return userStateFactoryMethods;
+      if (!authorized) {
+        userState.authorized = false;
+        userState.name = '';
+        userState.guest = false;
+      } else {
+        userState.authorized = true;
+        Auth.getUser().then(
+          function(data) {
+            console.log('User Data: ', data);
+            userStateFactoryMethods.setUserName(data.data.name);
+          },
+          function(error) {
+            console.error('ERROR GETTING USER DATA: ', error);
+          }
+        );
+      }
+    };
 
-}
+    userStateFactoryMethods.setUserName = function(name) {
+      userState.name = name || '';
+      if (name === 'Guest')
+        userState.guest = true;
+    };
 
-angular.module('Crosstronica').
-factory('userStateFactory', userStateFactory);
+    return userStateFactoryMethods;
+
+  }
+
+})();

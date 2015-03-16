@@ -20,49 +20,21 @@
 
         <draw-tool></draw-tool>
         <pallete></pallete>
-
-        <div class="panel" show-hide>
-          <h6 ng-click="toggleMe()">Pattern Controls</h6>
-          <a ng-if="!collapsed" ng-click="toggleMe()"><i class="fa fa-minus"></i></a>
-          <a ng-if="collapsed" ng-click="toggleMe()"><i class="fa fa-plus"></i></a>
-
-          <div ng-hide="collapsed">
-
-            <save-pattern
-              ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
-            ></save-pattern>
-
-            <new-pattern></new-pattern>
-
-            <load-pattern></load-pattern>
-
-            <delete-pattern
-              ng-if="pageStateVM.userState.authorized && !pageStateVM.userState.guest"
-            ></delete-pattern>
-
-          </div>
-
-        </div>
+        <div ng-include="'templates/pattern-controls.html'"></div>
+        <view-control></view-control>
 
       </drawer>
 
     </div>
 
-    <main ng-if="pageStateVM.userState.authorized">
+    <main
+      ng-if="pageStateVM.userState.authorized"
+      ng-class="pageStateVM.viewState.centered ? 'grid-centered' : ''"
+    >
 
-      <div class="main-contents">
-
-        <h1 ng-show="pageStateVM.userState.name">
-          Welcome, <span ng-bind="pageStateVM.userState.name"></span>!
-        </h1>
-        <a
-          href="#"
-          class="text-tiny"
-          ng-click="pageStateVM.doLogout()"
-        >logout</a>
-
+      <div class="main-area">
+        <div ng-include="'templates/user-info.html'"></div>
         <pattern></pattern>
-
       </div>
 
     </main>

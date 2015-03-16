@@ -1,15 +1,15 @@
 %square,
 .square {
-  @extend %text-tiny;
+  @extend %text-teency;
 
   border: 1px solid $color-black;
   cursor: pointer;
-  height: 15px;
-  line-height: 15px;
+  height: $square-sides;
+  line-height: $square-sides;
   padding-left: $base-unit-quarter;
   text-align: center;
   user-select: none;
-  width: 15px;
+  width: $square-sides;
 
   // border[0]
   &.border-top {
