@@ -17,7 +17,8 @@ gulp.task('scripts', function() {
         'dev/js/angular_base/angular.js',
         'dev/js/vendor/**/*.js',
         'dev/js/main.js',
-        'dev/js/angular_app/**/*.js'
+        'dev/js/angular_app/**/*.js',
+        '!**/*Spec.js'
       ],
       {base: 'dev/js'}
     )
