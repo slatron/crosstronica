@@ -159,6 +159,8 @@ function patternFactory($http, $q) {
 
     patternData.id       = undefined;
     patternData.selected = undefined;
+
+    dataLoaded = true;
   };
 
   return patternFactoryMethods;

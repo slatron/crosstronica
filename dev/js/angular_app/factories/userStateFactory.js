@@ -5,7 +5,6 @@
       .module('Crosstronica')
       .factory('userStateFactory', userStateFactory);
 
-  /* @ngInject */
   function userStateFactory(Auth) {
 
     var userState = {

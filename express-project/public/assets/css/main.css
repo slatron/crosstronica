@@ -502,6 +502,7 @@ body, html {
 
 /* line 12, ../../../../dev/scss/base/_typography.scss */
 .text-tiny,
+h1 + a,
 .panel .panel-subsection,
 .panel .panel-subsection h6,
 .panel .panel-subsection a,
@@ -524,6 +525,7 @@ body, html {
 table,
 h6,
 p,
+h1,
 .panel h6 {
   font-size: 14px;
 }
@@ -553,8 +555,7 @@ h2 {
 }
 
 /* line 40, ../../../../dev/scss/base/_typography.scss */
-.text-verylarge,
-h1 {
+.text-verylarge {
   font-size: 32px;
 }
 
@@ -568,32 +569,27 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-/* line 52, ../../../../dev/scss/base/_typography.scss */
-h1 {
-  color: #569e56;
-}
-
-/* line 56, ../../../../dev/scss/base/_typography.scss */
+/* line 54, ../../../../dev/scss/base/_typography.scss */
 h2 {
   color: #a1a1a1;
 }
 
-/* line 60, ../../../../dev/scss/base/_typography.scss */
+/* line 58, ../../../../dev/scss/base/_typography.scss */
 h3 {
   color: #a1a1a1;
 }
 
-/* line 65, ../../../../dev/scss/base/_typography.scss */
+/* line 63, ../../../../dev/scss/base/_typography.scss */
 h4 {
   color: #001325;
 }
 
-/* line 69, ../../../../dev/scss/base/_typography.scss */
+/* line 67, ../../../../dev/scss/base/_typography.scss */
 h5 {
   color: #569e56;
 }
 
-/* line 73, ../../../../dev/scss/base/_typography.scss */
+/* line 71, ../../../../dev/scss/base/_typography.scss */
 h6 {
   color: #569e56;
 }
@@ -612,17 +608,21 @@ main.grid-centered {
 
 /* line 12, ../../../../dev/scss/layout/_layout.scss */
 .main-area {
+  text-align: right;
+}
+
+/* line 16, ../../../../dev/scss/layout/_layout.scss */
+.pattern-area {
   display: inline-block;
   text-align: left;
 }
 
-/* line 18, ../../../../dev/scss/layout/_layout.scss */
+/* line 22, ../../../../dev/scss/layout/_layout.scss */
 h1 {
-  text-align: left;
   margin-bottom: 0;
 }
 
-/* line 23, ../../../../dev/scss/layout/_layout.scss */
+/* line 27, ../../../../dev/scss/layout/_layout.scss */
 h1 + a {
   display: inline-block;
   margin-bottom: 1em;

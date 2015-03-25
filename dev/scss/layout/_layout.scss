@@ -10,17 +10,22 @@ main.grid-centered {
 }
 
 .main-area {
+  text-align: right;
+}
+
+.pattern-area {
   // inline-block forces grid squares to push full width
   display: inline-block;
   text-align: left;
 }
 
 h1 {
-  text-align: left;
+  @extend %text-normal;
   margin-bottom: 0;
 }
 
 h1 + a {
+  @extend %text-tiny;
   display: inline-block;
   margin-bottom: $base-unit;
 }

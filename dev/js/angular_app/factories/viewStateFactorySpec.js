@@ -1,19 +1,29 @@
-describe("Factory Unit Tests > ", function() {
-  var viewStateFactory;
+describe("viewStateFactory Unit Tests > ", function() {
+  var viewStateFactory, testViewState;
 
   beforeEach(module('Crosstronica'));
   beforeEach(inject(function(_viewStateFactory_) {
     viewStateFactory = _viewStateFactory_;
   }));
 
-  describe("viewStateFactory Unit Tests > ", function() {
+  it("Should start the view aligned right", function() {
 
-    it("Should start the view aligned right", function() {
+    testViewState = viewStateFactory.get();
 
-      var testViewState = viewStateFactory.get();
+    expect(testViewState.centered).toEqual(false);
 
-      expect(testViewState.centered).toEqual(false);
-    });
+  });
+
+  it("Should center view upon command", function() {
+
+    testViewState = viewStateFactory.get();
+    viewStateFactory.centerGrid(true);
+
+    expect(testViewState.centered).toEqual(true);
+
+    viewStateFactory.centerGrid(false);
+
+    expect(testViewState.centered).toEqual(false);
 
   });
 

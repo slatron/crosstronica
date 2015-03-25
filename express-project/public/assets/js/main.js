@@ -37894,6 +37894,8 @@ function patternFactory($http, $q) {
 
     patternData.id       = undefined;
     patternData.selected = undefined;
+
+    dataLoaded = true;
   };
 
   return patternFactoryMethods;
@@ -37911,7 +37913,6 @@ factory('patternFactory', patternFactory);
       .module('Crosstronica')
       .factory('userStateFactory', userStateFactory);
 
-  /* @ngInject */
   function userStateFactory(Auth) {
 
     var userState = {
@@ -37988,7 +37989,6 @@ factory('patternFactory', patternFactory);
           viewState.centered = false;
         }
       };
-
 
       return viewStateFactoryMethods;
 
