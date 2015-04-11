@@ -1,5 +1,5 @@
 describe("patternFactory Unit Tests > ", function() {
-  var patternFactory, testPattern;
+  var patternFactory, testPattern, httpMock;
 
   var patternSpec = {
     name: 'Test Pattern',
@@ -8,11 +8,16 @@ describe("patternFactory Unit Tests > ", function() {
   };
 
   beforeEach(module('Crosstronica'));
-  beforeEach(inject(function(_patternFactory_) {
+  beforeEach(inject(function(_patternFactory_, $httpBackend) {
     patternFactory = _patternFactory_;
+    httpMock = $httpBackend;
   }));
 
   it("Should create a new pattern from a given spec object", function() {
+
+    // httpMock.expectGET("/data").respond("pig");
+    // controllerService('cDashboard', {$scope: scope});
+    // httpMock.flush();
 
     patternFactory.createNew(patternSpec);
 

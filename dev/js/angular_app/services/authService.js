@@ -106,7 +106,6 @@ angular.module('authService', [])
     // if our server returns a 403 forbidden response
     if (response.status == 403) {
       AuthToken.setToken();
-      $location.path('/index.html#fromerror');
     }
 
     // return the errors from the server as a promise

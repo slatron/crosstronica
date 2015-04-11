@@ -27,7 +27,7 @@ body {
  * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
-/* line 42, ../../../../dev/scss/base/_normalize.scss */
+/* line 31, ../../../../dev/scss/base/_normalize.scss */
 article,
 aside,
 details,
@@ -47,7 +47,7 @@ summary {
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-/* line 54, ../../../../dev/scss/base/_normalize.scss */
+/* line 51, ../../../../dev/scss/base/_normalize.scss */
 audio,
 canvas,
 progress,
@@ -72,7 +72,7 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-/* line 75, ../../../../dev/scss/base/_normalize.scss */
+/* line 74, ../../../../dev/scss/base/_normalize.scss */
 [hidden],
 template {
   display: none;
@@ -91,7 +91,7 @@ a {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-/* line 95, ../../../../dev/scss/base/_normalize.scss */
+/* line 94, ../../../../dev/scss/base/_normalize.scss */
 a:active,
 a:hover {
   outline: 0;
@@ -110,7 +110,7 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
  */
-/* line 115, ../../../../dev/scss/base/_normalize.scss */
+/* line 114, ../../../../dev/scss/base/_normalize.scss */
 b,
 strong {
   font-weight: bold;
@@ -144,7 +144,7 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-/* line 149, ../../../../dev/scss/base/_normalize.scss */
+/* line 148, ../../../../dev/scss/base/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -212,7 +212,7 @@ pre {
 /**
  * Address odd `em`-unit font size rendering in all browsers.
  */
-/* line 219, ../../../../dev/scss/base/_normalize.scss */
+/* line 216, ../../../../dev/scss/base/_normalize.scss */
 code,
 kbd,
 pre,
@@ -233,7 +233,7 @@ samp {
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
  */
-/* line 243, ../../../../dev/scss/base/_normalize.scss */
+/* line 239, ../../../../dev/scss/base/_normalize.scss */
 button,
 input,
 optgroup,
@@ -261,7 +261,7 @@ button {
  * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
  * Correct `select` style inheritance in Firefox.
  */
-/* line 265, ../../../../dev/scss/base/_normalize.scss */
+/* line 264, ../../../../dev/scss/base/_normalize.scss */
 button,
 select {
   text-transform: none;
@@ -274,7 +274,7 @@ select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-/* line 280, ../../../../dev/scss/base/_normalize.scss */
+/* line 277, ../../../../dev/scss/base/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -288,7 +288,7 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-/* line 290, ../../../../dev/scss/base/_normalize.scss */
+/* line 289, ../../../../dev/scss/base/_normalize.scss */
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -297,7 +297,7 @@ html input[disabled] {
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-/* line 299, ../../../../dev/scss/base/_normalize.scss */
+/* line 298, ../../../../dev/scss/base/_normalize.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -320,7 +320,7 @@ input {
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
  * 2. Remove excess padding in IE 8/9/10.
  */
-/* line 322, ../../../../dev/scss/base/_normalize.scss */
+/* line 321, ../../../../dev/scss/base/_normalize.scss */
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -334,7 +334,7 @@ input[type="radio"] {
  * `font-size` values of the `input`, it causes the cursor style of the
  * decrement button to change from `default` to `text`.
  */
-/* line 334, ../../../../dev/scss/base/_normalize.scss */
+/* line 333, ../../../../dev/scss/base/_normalize.scss */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto;
@@ -360,7 +360,7 @@ input[type="search"] {
  * Safari (but not Chrome) clips the cancel button when the search input has
  * padding (and `textfield` appearance).
  */
-/* line 358, ../../../../dev/scss/base/_normalize.scss */
+/* line 357, ../../../../dev/scss/base/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -418,7 +418,7 @@ html {
 
 /* line 12, ../../../../dev/scss/base/_base.scss */
 html, body {
-  color: #222222;
+  color: #222;
 }
 
 /* line 16, ../../../../dev/scss/base/_base.scss */
@@ -427,7 +427,7 @@ a {
   -moz-transition: all 0.15s ease-out;
   -o-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
-  color: #222222;
+  color: #222;
 }
 
 /* line 28, ../../../../dev/scss/base/_base.scss */
@@ -462,7 +462,7 @@ tbody tr:nth-child(even) {
   background-color: #fbf9f9;
 }
 
-/* line 57, ../../../../dev/scss/base/_base.scss */
+/* line 56, ../../../../dev/scss/base/_base.scss */
 td,
 th {
   padding: 0.25em;
@@ -493,14 +493,14 @@ body, html {
   font-family: "Open Sans", sans-serif;
 }
 
-/* line 8, ../../../../dev/scss/base/_typography.scss */
+/* line 7, ../../../../dev/scss/base/_typography.scss */
 .text-teency,
 .pattern-grid .square,
 .square {
   font-size: 8px;
 }
 
-/* line 12, ../../../../dev/scss/base/_typography.scss */
+/* line 11, ../../../../dev/scss/base/_typography.scss */
 .text-tiny,
 h1 + a,
 .panel .panel-subsection,
@@ -511,7 +511,7 @@ h1 + a,
   font-size: 10.4px;
 }
 
-/* line 16, ../../../../dev/scss/base/_typography.scss */
+/* line 15, ../../../../dev/scss/base/_typography.scss */
 .text-small,
 .panel,
 .panel h6 + a,
@@ -520,7 +520,7 @@ h1 + a,
   font-size: 12px;
 }
 
-/* line 20, ../../../../dev/scss/base/_typography.scss */
+/* line 19, ../../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
 h6,
@@ -530,36 +530,36 @@ h1,
   font-size: 14px;
 }
 
-/* line 24, ../../../../dev/scss/base/_typography.scss */
+/* line 23, ../../../../dev/scss/base/_typography.scss */
 .text-medlg,
 h5 {
   font-size: 16px;
 }
 
-/* line 28, ../../../../dev/scss/base/_typography.scss */
+/* line 27, ../../../../dev/scss/base/_typography.scss */
 .text-large,
 h3,
 h4 {
   font-size: 18px;
 }
 
-/* line 32, ../../../../dev/scss/base/_typography.scss */
+/* line 31, ../../../../dev/scss/base/_typography.scss */
 .text-largemed {
   font-size: 20px;
 }
 
-/* line 36, ../../../../dev/scss/base/_typography.scss */
+/* line 35, ../../../../dev/scss/base/_typography.scss */
 .text-extralg,
 h2 {
   font-size: 24px;
 }
 
-/* line 40, ../../../../dev/scss/base/_typography.scss */
+/* line 39, ../../../../dev/scss/base/_typography.scss */
 .text-verylarge {
   font-size: 32px;
 }
 
-/* line 44, ../../../../dev/scss/base/_typography.scss */
+/* line 43, ../../../../dev/scss/base/_typography.scss */
 .text-superlarge {
   font-size: 36px;
 }
@@ -628,24 +628,22 @@ h1 + a {
   margin-bottom: 1em;
 }
 
-/* line 2, ../../../../dev/scss/modules/_buttons.scss */
+/* line 1, ../../../../dev/scss/modules/_buttons.scss */
 .but {
   background: #569e56;
   border: none;
   box-shadow: none;
-  color: white;
+  color: #fff;
   cursor: pointer;
   display: inline-block;
   outline: none;
   padding: 0.5em 1em;
   text-align: center;
-  -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
+  -webkit-border-radius: 7px;
   border-radius: 7px;
 }
-/* line 16, ../../../../dev/scss/modules/_buttons.scss */
+/* line 15, ../../../../dev/scss/modules/_buttons.scss */
 .but.active,
 .but:active {
   background-color: #edc721;
@@ -679,10 +677,10 @@ a.but-selection:active {
   opacity: 0.2;
 }
 
-/* line 2, ../../../../dev/scss/modules/_square.scss */
+/* line 1, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .square,
 .square {
-  border: 1px solid #222222;
+  border: 1px solid #222;
   cursor: pointer;
   height: 12px;
   line-height: 12px;
@@ -694,22 +692,22 @@ a.but-selection:active {
 /* line 15, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-top.square,
 .square.border-top {
-  border-top: 2px solid #222222;
+  border-top: 2px solid #222;
 }
 /* line 20, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-right.square,
 .square.border-right {
-  border-right: 2px solid #222222;
+  border-right: 2px solid #222;
 }
 /* line 25, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-bottom.square,
 .square.border-bottom {
-  border-bottom: 2px solid #222222;
+  border-bottom: 2px solid #222;
 }
 /* line 30, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-left.square,
 .square.border-left {
-  border-left: 2px solid #222222;
+  border-left: 2px solid #222;
 }
 
 /* line 1, ../../../../dev/scss/modules/_panel.scss */
@@ -764,7 +762,7 @@ a.but-selection:active {
   margin: 1em 0 0.5em;
 }
 
-/* line 61, ../../../../dev/scss/modules/_panel.scss */
+/* line 60, ../../../../dev/scss/modules/_panel.scss */
 .paint-info .square,
 .pallete .square {
   display: inline-block;
@@ -808,7 +806,7 @@ a.but-selection:active {
 
 /* line 20, ../../../../dev/scss/modules/_drawer.scss */
 .drawer {
-  background: #f5f4e2;
+  background: #F5F4E2;
   border-right: 3px solid #569e56;
   border-bottom: 3px solid #569e56;
   margin-left: 0;
@@ -830,7 +828,7 @@ a.but-selection:active {
 .drawer a {
   color: #569e56;
 }
-/* line 42, ../../../../dev/scss/modules/_drawer.scss */
+/* line 41, ../../../../dev/scss/modules/_drawer.scss */
 .drawer a:active, .drawer a.active {
   background: #83c1bf;
 }
@@ -847,7 +845,7 @@ a.but-selection:active {
 /* line 58, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
   background: #569e56;
-  color: white;
+  color: #fff;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -870,7 +868,7 @@ a.but-selection:active {
 
 /* line 1, ../../../../dev/scss/modules/_login.scss */
 .form-login {
-  background: white;
+  background: #fff;
   border: 5px solid #edc721;
 }
 /* line 4, ../../../../dev/scss/modules/_login.scss */
@@ -880,7 +878,7 @@ a.but-selection:active {
 
 /* line 1, ../../../../dev/scss/modules/_window-shade.scss */
 .window-shade {
-  background: #222222;
+  background: #222;
   height: 100%;
   opacity: 0.8;
   position: fixed;
@@ -916,9 +914,9 @@ a.but-selection:active {
   border-right: none;
   transition: all 800ms ease-out;
 }
-/* line 16, ../../../../dev/scss/modules/_pattern-grid.scss */
+/* line 15, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid .square.active, .pattern-grid .square:hover {
-  color: #222222;
+  color: #222;
 }
 
 /* line 1, ../../../../dev/scss/state/_state.scss */
@@ -965,12 +963,12 @@ a.but-selection:active {
 
 /* line 36, ../../../../dev/scss/state/_state.scss */
 .color-black {
-  color: #222222;
+  color: #222;
 }
 
 /* line 37, ../../../../dev/scss/state/_state.scss */
 .color-white {
-  color: white;
+  color: #fff;
 }
 
 /* line 38, ../../../../dev/scss/state/_state.scss */
@@ -1020,22 +1018,22 @@ a.but-selection:active {
 
 /* line 47, ../../../../dev/scss/state/_state.scss */
 .color-cream {
-  color: #f5f4e2;
+  color: #F5F4E2;
 }
 
 /* line 48, ../../../../dev/scss/state/_state.scss */
 .color-description {
-  color: #666666;
+  color: #666;
 }
 
 /* line 50, ../../../../dev/scss/state/_state.scss */
 .bg-black {
-  background-color: #222222;
+  background-color: #222;
 }
 
 /* line 51, ../../../../dev/scss/state/_state.scss */
 .bg-white {
-  background-color: white;
+  background-color: #fff;
 }
 
 /* line 52, ../../../../dev/scss/state/_state.scss */
@@ -1085,7 +1083,7 @@ a.but-selection:active {
 
 /* line 61, ../../../../dev/scss/state/_state.scss */
 .bg-description {
-  background-color: #666666;
+  background-color: #666;
 }
 
 /* line 63, ../../../../dev/scss/state/_state.scss */
@@ -1103,3 +1101,5 @@ a.but-selection:active {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+/*# sourceMappingURL=main.css.map */

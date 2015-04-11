@@ -26,7 +26,7 @@ module.exports = function(config) {
     **/
     files: [
         'dev/js/angular_base/angular.js',
-        'tests/units/support/angular-mocks.js',
+        'dev/js/tests/angular-mocks.js',
         'dev/js/vendor/**/*.js',
         'dev/js/main.js',
         'dev/js/angular_app/**/*.js'
@@ -51,7 +51,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['dots'],
 
     // web server port
     port: 9876,
