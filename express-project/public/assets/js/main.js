@@ -37971,7 +37971,6 @@ factory('patternFactory', patternFactory);
         .module('Crosstronica')
         .factory('viewStateFactory', viewStateFactory);
 
-    /* @ngInject */
     function viewStateFactory() {
 
       var viewState = {

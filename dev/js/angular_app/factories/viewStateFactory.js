@@ -5,7 +5,6 @@
         .module('Crosstronica')
         .factory('viewStateFactory', viewStateFactory);
 
-    /* @ngInject */
     function viewStateFactory() {
 
       var viewState = {
