@@ -17,17 +17,6 @@
       maxlength="30"
       required
     >
-    <label for="newrgb">Rows:</label>
-    <input
-      type="range"
-      id="newrows"
-      name="newrows"
-      ng-model="newPatternVM.newrows"
-      ng-init="newPatternVM.newrows = 10"
-      required
-      min="2"
-      max="100"
-    > {{ newPatternVM.newrows }}
     <label for="newsymbol">Cols:</label>
     <input
       type="range"
@@ -39,7 +28,17 @@
       min="2"
       max="80"
     > {{ newPatternVM.newcols }}
+    <label for="newrgb">Rows:</label>
+    <input
+      type="range"
+      id="newrows"
+      name="newrows"
+      ng-model="newPatternVM.newrows"
+      ng-init="newPatternVM.newrows = 10"
+      required
+      min="2"
+      max="100"
+    > {{ newPatternVM.newrows }}
     <button class="text-tiny but" type="submit" ng-disabled="newpattern.$invalid">Generate</button>
-
   </form>
 </div>

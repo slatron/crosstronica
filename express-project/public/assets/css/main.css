@@ -935,7 +935,7 @@ a.but-selection:active {
 
 /* line 10, ../../../../dev/scss/modules/_tracer.scss */
 .tracer-area img {
-  max-width: 100%;
+  width: 100%;
 }
 
 /* line 1, ../../../../dev/scss/state/_state.scss */
