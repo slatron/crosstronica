@@ -11,6 +11,8 @@
 
   transition: all 500ms;
 
+  z-index: 1000;
+
   &.collapsed {
     width: $drawer-control-width * 2;
     padding: $base-unit-half 0;

@@ -1,3 +1,11 @@
+.pattern-area {
+  // inline-block forces grid squares to push full width
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  z-index: 100;
+}
+
 .pattern-grid {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;

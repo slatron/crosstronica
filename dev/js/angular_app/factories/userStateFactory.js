@@ -28,14 +28,16 @@
         userState.name = '';
         userState.guest = false;
       } else {
-        userState.authorized = true;
         Auth.getUser().then(
           function(data) {
             console.log('User Data: ', data);
+            userState.authorized = true;
             userStateFactoryMethods.setUserName(data.data.name);
           },
           function(error) {
             console.error('ERROR GETTING USER DATA: ', error);
+            userState.authorized = false;
+            userState.name = '';
           }
         );
       }

@@ -598,31 +598,26 @@ h6 {
 main {
   margin: 1em auto;
   padding-right: 1em;
+  position: relative;
   text-align: right;
 }
 
-/* line 8, ../../../../dev/scss/layout/_layout.scss */
+/* line 9, ../../../../dev/scss/layout/_layout.scss */
 main.grid-centered {
   text-align: center;
 }
 
-/* line 12, ../../../../dev/scss/layout/_layout.scss */
+/* line 13, ../../../../dev/scss/layout/_layout.scss */
 .main-area {
   text-align: right;
 }
 
-/* line 16, ../../../../dev/scss/layout/_layout.scss */
-.pattern-area {
-  display: inline-block;
-  text-align: left;
-}
-
-/* line 22, ../../../../dev/scss/layout/_layout.scss */
+/* line 17, ../../../../dev/scss/layout/_layout.scss */
 h1 {
   margin-bottom: 0;
 }
 
-/* line 27, ../../../../dev/scss/layout/_layout.scss */
+/* line 22, ../../../../dev/scss/layout/_layout.scss */
 h1 + a {
   display: inline-block;
   margin-bottom: 1em;
@@ -797,14 +792,15 @@ a.but-selection:active {
   width: 250px;
   flex-shrink: 0;
   transition: all 500ms;
+  z-index: 1000;
 }
-/* line 14, ../../../../dev/scss/modules/_drawer.scss */
+/* line 16, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-col.collapsed {
   width: 30px;
   padding: 0.5em 0;
 }
 
-/* line 20, ../../../../dev/scss/modules/_drawer.scss */
+/* line 22, ../../../../dev/scss/modules/_drawer.scss */
 .drawer {
   background: #F5F4E2;
   border-right: 3px solid #569e56;
@@ -817,32 +813,32 @@ a.but-selection:active {
   border-bottom-right-radius: 13px;
   transition: all 500ms;
 }
-/* line 30, ../../../../dev/scss/modules/_drawer.scss */
+/* line 32, ../../../../dev/scss/modules/_drawer.scss */
 .drawer ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   min-height: 20px;
 }
-/* line 37, ../../../../dev/scss/modules/_drawer.scss */
+/* line 39, ../../../../dev/scss/modules/_drawer.scss */
 .drawer a {
   color: #569e56;
 }
-/* line 41, ../../../../dev/scss/modules/_drawer.scss */
+/* line 43, ../../../../dev/scss/modules/_drawer.scss */
 .drawer a:active, .drawer a.active {
   background: #83c1bf;
 }
-/* line 47, ../../../../dev/scss/modules/_drawer.scss */
+/* line 49, ../../../../dev/scss/modules/_drawer.scss */
 .drawer * {
   overflow: hidden;
 }
 
-/* line 54, ../../../../dev/scss/modules/_drawer.scss */
+/* line 56, ../../../../dev/scss/modules/_drawer.scss */
 .collapsed > .drawer {
   margin-left: -215px;
 }
 
-/* line 58, ../../../../dev/scss/modules/_drawer.scss */
+/* line 60, ../../../../dev/scss/modules/_drawer.scss */
 .drawer-control {
   background: #569e56;
   color: #fff;
@@ -903,20 +899,36 @@ a.but-selection:active {
 }
 
 /* line 1, ../../../../dev/scss/modules/_pattern-grid.scss */
+.pattern-area {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  z-index: 100;
+}
+
+/* line 9, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;
 }
 
-/* line 6, ../../../../dev/scss/modules/_pattern-grid.scss */
+/* line 14, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid .square {
   border-bottom: none;
   border-right: none;
   transition: all 800ms ease-out;
 }
-/* line 15, ../../../../dev/scss/modules/_pattern-grid.scss */
+/* line 23, ../../../../dev/scss/modules/_pattern-grid.scss */
 .pattern-grid .square.active, .pattern-grid .square:hover {
   color: #222;
+}
+
+/* line 1, ../../../../dev/scss/modules/_tracer.scss */
+.tracer-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
 }
 
 /* line 1, ../../../../dev/scss/state/_state.scss */

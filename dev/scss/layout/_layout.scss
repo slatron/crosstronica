@@ -2,6 +2,7 @@
 main {
   margin: $base-unit auto;
   padding-right: $base-unit;
+  position: relative;
   text-align: right;
 }
 
@@ -11,12 +12,6 @@ main.grid-centered {
 
 .main-area {
   text-align: right;
-}
-
-.pattern-area {
-  // inline-block forces grid squares to push full width
-  display: inline-block;
-  text-align: left;
 }
 
 h1 {
