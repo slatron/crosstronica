@@ -5,18 +5,55 @@
 
   <div ng-hide="collapsed">
 
-    <span ng-hide="viewControlVM.viewState.centered">Grid On Right</span>
-    <span ng-show="viewControlVM.viewState.centered">Grid Centered</span>
-
     <button ng-click="viewControlVM.toggleCenterGrid()" class="but text-tiny">
       Swap Position
     </button>
+    <span ng-hide="viewControlVM.viewState.centered">Grid On Right</span>
+    <span ng-show="viewControlVM.viewState.centered">Grid Centered</span>
 
     <br>
 
     <button ng-click="viewControlVM.toggleTracer()" class="but text-tiny">
       Toggle Tracer
     </button>
+    <span ng-hide="viewControlVM.viewState.tracer">Tracer Off</span>
+    <span ng-show="viewControlVM.viewState.tracer">Tracer On</span>
+
+    <div
+      ng-show="viewControlVM.viewState.tracer"
+      class="panel-subsection"
+    >
+      <h6>Tracer Controls:</h6>
+      <label for="tracerTop">Top:</label>
+      <input
+        type="range"
+        id="tracerTop"
+        name="tracerTop"
+        ng-model="viewControlVM.viewState.tracerTop"
+        min="-200"
+        max="400"
+      > {{ viewControlVM.viewState.tracerTop }}px
+
+      <label for="tracerLeft">left:</label>
+      <input
+        type="range"
+        id="tracerLeft"
+        name="tracerLeft"
+        ng-model="viewControlVM.viewState.tracerLeft"
+        min="-100"
+        max="500"
+      > {{ viewControlVM.viewState.tracerLeft }}px
+
+      <label for="tracerWidth">Border Width:</label>
+      <input
+        type="range"
+        id="tracerWidth"
+        name="tracerWidth"
+        ng-model="viewControlVM.viewState.tracerWidth"
+        min="1"
+        max="100"
+      > {{ viewControlVM.viewState.tracerWidth }}%
+    </div>
 
   </div>
 

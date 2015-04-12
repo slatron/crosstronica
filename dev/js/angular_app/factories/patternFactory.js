@@ -20,9 +20,9 @@ function patternFactory($http, $q) {
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
       if (data.length) {
-        patternData.name = data[0].name;
-        patternData.grid = data[0].grid;
-        patternData.id   = data[0]._id;
+        patternData.name = data[12].name;
+        patternData.grid = data[12].grid;
+        patternData.id   = data[12]._id;
         patternData.available = [];
 
         // Load all pattern options array
@@ -34,7 +34,7 @@ function patternFactory($http, $q) {
           patternData.available.push(patternOption);
         });
 
-        patternData.selected = (patternData.available[0]);
+        patternData.selected = (patternData.available[12]);
 
       } else {
         patternData.name = 'Create a new Pattern to begin';

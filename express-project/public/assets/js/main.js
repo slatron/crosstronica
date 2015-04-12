@@ -37755,9 +37755,9 @@ function patternFactory($http, $q) {
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
       if (data.length) {
-        patternData.name = data[0].name;
-        patternData.grid = data[0].grid;
-        patternData.id   = data[0]._id;
+        patternData.name = data[12].name;
+        patternData.grid = data[12].grid;
+        patternData.id   = data[12]._id;
         patternData.available = [];
 
         // Load all pattern options array
@@ -37769,7 +37769,7 @@ function patternFactory($http, $q) {
           patternData.available.push(patternOption);
         });
 
-        patternData.selected = (patternData.available[0]);
+        patternData.selected = (patternData.available[12]);
 
       } else {
         patternData.name = 'Create a new Pattern to begin';
@@ -37974,8 +37974,11 @@ factory('patternFactory', patternFactory);
     function viewStateFactory() {
 
       var viewState = {
-          centered: true,
-          tracer: false
+        centered: true,
+        tracer: true,
+        tracerTop: 100,
+        tracerLeft: 220,
+        tracerWidth: 50
       };
 
       var viewStateFactoryMethods = {};
@@ -37994,6 +37997,27 @@ factory('patternFactory', patternFactory);
 
       viewStateFactoryMethods.toggleTracer = function() {
         viewState.tracer = !viewState.tracer;
+      };
+
+      viewStateFactoryMethods.setTracerTop = function(newTop) {
+        // Check for integer passed in + range
+        if (newTop === parseInt(newTop, 10) && newTop < 401 && newTop > -601) {
+          viewState.tracerTop = newTop;
+        }
+      };
+
+      viewStateFactoryMethods.setTracerLeft = function(newLeft) {
+        // Check for integer passed in + range
+        if (newLeft === parseInt(newLeft, 10) && newLeft < 301 && newLeft > -701) {
+          viewState.tracerLeft = newLeft;
+        }
+      };
+
+      viewStateFactoryMethods.setTracerWidth = function(newWidth) {
+        // Check for integer passed in + range
+        if (newWidth === parseInt(newWidth, 10) && newWidth < 101 && newWidth > 0) {
+          viewState.tracerWidth = newWidth;
+        }
       };
 
       return viewStateFactoryMethods;
@@ -38403,30 +38427,7 @@ function tracer() {
     templateUrl: '/js/angular_app/directives/tracer/tracer.html',
 
     controllerAs: 'tracerVM',
-    bindToController: true,
-
-    controller: function () {
-
-      var vm = this;
-
-      vm.top   = 0;
-      vm.left  = 0;
-
-      vm.setTop = function(newTop) {
-        // Check for integer passed in
-        if (newTop === parseInt(newTop, 10)) {
-          vm.top = newTop;
-        }
-      };
-
-      vm.setLeft = function(newLeft) {
-        // Check for integer passed in
-        if (newLeft === parseInt(newLeft, 10)) {
-          vm.left = newLeft;
-        }
-      };
-
-    }
+    bindToController: true
 
   };
 }

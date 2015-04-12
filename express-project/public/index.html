@@ -40,7 +40,11 @@
         <pattern></pattern>
       </div>
 
-      <div class="tracer-area" ng-show="pageStateVM.viewState.tracer">
+      <div
+        ng-show="pageStateVM.viewState.tracer"
+        style="top: {{pageStateVM.viewState.tracerTop}}px; left: {{pageStateVM.viewState.tracerLeft}}px; width: {{pageStateVM.viewState.tracerWidth}}%"
+        class="tracer-area"
+      >
         <tracer></tracer>
       </div>
 

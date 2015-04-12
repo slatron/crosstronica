@@ -927,8 +927,15 @@ a.but-selection:active {
 .tracer-area {
   position: absolute;
   left: 0;
+  outline: 1px dashed #222;
   top: 0;
+  width: 100%;
   z-index: 10;
+}
+
+/* line 10, ../../../../dev/scss/modules/_tracer.scss */
+.tracer-area img {
+  max-width: 100%;
 }
 
 /* line 1, ../../../../dev/scss/state/_state.scss */

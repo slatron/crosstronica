@@ -1,6 +1,6 @@
 <div>
   <p class="loading" ng-show="patternVM.gridData.grid === undefined"></p>
-  <h5>{{patternVM.gridData.name}}</h5><div class="pattern-grid">
+  <h5>{{patternVM.gridData.name}} {{patternVM.gridData.grid.length}}x{{patternVM.gridData.grid[0].length}}</h5><div class="pattern-grid">
   <div ng-repeat="row in patternVM.gridData.grid track by $index" class="grid pattern-row">
     <div ng-repeat="color in row track by $index" class="grid">
       <grid-square
