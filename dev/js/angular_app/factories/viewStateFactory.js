@@ -9,7 +9,8 @@
     function viewStateFactory() {
 
       var viewState = {
-          centered: false
+          centered: true,
+          tracer: false
       };
 
       var viewStateFactoryMethods = {};
@@ -24,6 +25,10 @@
         } else {
           viewState.centered = false;
         }
+      };
+
+      viewStateFactoryMethods.toggleTracer = function() {
+        viewState.tracer = !viewState.tracer;
       };
 
       return viewStateFactoryMethods;

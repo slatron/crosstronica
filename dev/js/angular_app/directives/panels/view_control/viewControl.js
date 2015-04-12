@@ -21,6 +21,9 @@ function viewControl(viewStateFactory) {
         viewStateFactory.centerGrid(!current);
       };
 
+      vm.toggleTracer = function() {
+        viewStateFactory.toggleTracer();
+      };
     }
   };
 

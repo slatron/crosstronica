@@ -37975,7 +37975,8 @@ factory('patternFactory', patternFactory);
     function viewStateFactory() {
 
       var viewState = {
-          centered: false
+          centered: true,
+          tracer: false
       };
 
       var viewStateFactoryMethods = {};
@@ -37990,6 +37991,10 @@ factory('patternFactory', patternFactory);
         } else {
           viewState.centered = false;
         }
+      };
+
+      viewStateFactoryMethods.toggleTracer = function() {
+        viewState.tracer = !viewState.tracer;
       };
 
       return viewStateFactoryMethods;
@@ -38148,57 +38153,6 @@ function drawer() {
 angular.module('Crosstronica').
 directive('drawer', drawer);
 
-function loginScreen(userStateFactory) {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-
-    controllerAs: 'loginVM',
-    bindToController: true,
-
-    templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
-
-    controller: ["Auth", function (Auth) {
-
-      var vm = this;
-
-      // Determine initial login state
-      userStateFactory.authorize(Auth.isLoggedIn());
-
-      // function to handle login form
-      vm.doLogin = function() {
-        vm.processing = true;
-
-        // clear the error
-        vm.error = '';
-
-        Auth.login(vm.username, vm.password)
-          .success(function(data) {
-            vm.processing = false;
-
-            if (data.success) {
-              userStateFactory.authorize(true);
-              console.log('successful login: ', data);
-            } else {
-              vm.error = data.message;
-              console.log('error on login: ', data);
-            }
-
-          });
-      };
-
-    }]
-
-  };
-}
-loginScreen.$inject = ["userStateFactory"];
-
-angular.module('Crosstronica').
-directive('loginScreen', loginScreen);
-
 function gridSquare() {
 
   return {
@@ -38253,6 +38207,57 @@ function gridSquare() {
 
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
+
+function loginScreen(userStateFactory) {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+
+    controllerAs: 'loginVM',
+    bindToController: true,
+
+    templateUrl: '/js/angular_app/directives/login_screen/loginScreen.html',
+
+    controller: ["Auth", function (Auth) {
+
+      var vm = this;
+
+      // Determine initial login state
+      userStateFactory.authorize(Auth.isLoggedIn());
+
+      // function to handle login form
+      vm.doLogin = function() {
+        vm.processing = true;
+
+        // clear the error
+        vm.error = '';
+
+        Auth.login(vm.username, vm.password)
+          .success(function(data) {
+            vm.processing = false;
+
+            if (data.success) {
+              userStateFactory.authorize(true);
+              console.log('successful login: ', data);
+            } else {
+              vm.error = data.message;
+              console.log('error on login: ', data);
+            }
+
+          });
+      };
+
+    }]
+
+  };
+}
+loginScreen.$inject = ["userStateFactory"];
+
+angular.module('Crosstronica').
+directive('loginScreen', loginScreen);
 
 function pageState(userStateFactory, patternFactory, viewStateFactory) {
 
@@ -38405,13 +38410,8 @@ function tracer() {
 
       var vm = this;
 
-      vm.show  = false;
       vm.top   = 0;
       vm.left  = 0;
-
-      vm.toggleShow = function() {
-        vm.show = !vm.show;
-      };
 
       vm.setTop = function(newTop) {
         // Check for integer passed in
@@ -38434,6 +38434,46 @@ function tracer() {
 
 angular.module('Crosstronica').
 directive('tracer', tracer);
+
+function deletePattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
+
+    controllerAs: 'deletePatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function (patternFactory) {
+
+      var vm = this;
+
+      vm.currentPattern = patternFactory.get();
+
+      vm.deletePattern = function() {
+        if (confirm('Are you sure?')) {
+
+          patternFactory.deletePattern(vm.currentPattern.id).then(
+            function(success) {
+              console.log('successful pattern DELETE', success);
+              patternFactory.clearCurrent();
+            },
+            function(error) {
+              console.error('error on pattern DELETE', error);
+            }
+          );
+        }
+      };
+
+    }]
+  };
+}
+
+angular.module('Crosstronica').
+directive('deletePattern', deletePattern);
 
 function addColor() {
 
@@ -38475,46 +38515,6 @@ function addColor() {
 
 angular.module('Crosstronica').
 directive('addColor', addColor);
-
-function deletePattern() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
-
-    controllerAs: 'deletePatternVM',
-    bindToController: true,
-
-    controller: ["patternFactory", function (patternFactory) {
-
-      var vm = this;
-
-      vm.currentPattern = patternFactory.get();
-
-      vm.deletePattern = function() {
-        if (confirm('Are you sure?')) {
-
-          patternFactory.deletePattern(vm.currentPattern.id).then(
-            function(success) {
-              console.log('successful pattern DELETE', success);
-              patternFactory.clearCurrent();
-            },
-            function(error) {
-              console.error('error on pattern DELETE', error);
-            }
-          );
-        }
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('deletePattern', deletePattern);
 
 function drawTool(drawStateFactory, palleteFactory) {
 
@@ -38757,6 +38757,9 @@ function viewControl(viewStateFactory) {
         viewStateFactory.centerGrid(!current);
       };
 
+      vm.toggleTracer = function() {
+        viewStateFactory.toggleTracer();
+      };
     }
   };
 

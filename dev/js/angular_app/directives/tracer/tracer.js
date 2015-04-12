@@ -15,13 +15,8 @@ function tracer() {
 
       var vm = this;
 
-      vm.show  = false;
       vm.top   = 0;
       vm.left  = 0;
-
-      vm.toggleShow = function() {
-        vm.show = !vm.show;
-      };
 
       vm.setTop = function(newTop) {
         // Check for integer passed in
