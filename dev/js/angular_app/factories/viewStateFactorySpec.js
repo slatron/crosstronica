@@ -6,11 +6,11 @@ describe("viewStateFactory Unit Tests > ", function() {
     viewStateFactory = _viewStateFactory_;
   }));
 
-  it("Should start the view aligned right", function() {
+  it("Should start the view aligned center", function() {
 
     testViewState = viewStateFactory.get();
 
-    expect(testViewState.centered).toEqual(false);
+    expect(testViewState.centered).toEqual(true);
 
   });
 
