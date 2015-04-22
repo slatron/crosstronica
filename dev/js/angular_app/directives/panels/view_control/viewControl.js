@@ -16,14 +16,22 @@ function viewControl(viewStateFactory) {
 
       vm.viewState = viewStateFactory.get();
 
-      vm.toggleCenterGrid = function() {
+      vm.toggleCenterGrid = toggleCenterGrid;
+      vm.toggleTracer     = toggleTracer;
+      vm.setGridSize      = setGridSize;
+
+      function toggleCenterGrid() {
         var current = vm.viewState.centered;
         viewStateFactory.centerGrid(!current);
-      };
+      }
 
-      vm.toggleTracer = function() {
+      function toggleTracer() {
         viewStateFactory.toggleTracer();
-      };
+      }
+
+      function setGridSize(size) {
+        viewStateFactory.setGridSize(size);
+      }
     }
   };
 

@@ -673,33 +673,62 @@ a.but-selection:active {
 }
 
 /* line 1, ../../../../dev/scss/modules/_square.scss */
+.large-grid .pattern-grid .square, .pattern-grid .large-grid .square,
+.large-grid .square {
+  height: 14px;
+  line-height: 14px;
+  width: 14px;
+}
+
+/* line 8, ../../../../dev/scss/modules/_square.scss */
+.medium-grid .pattern-grid .square, .pattern-grid .medium-grid .square,
+.medium-grid .square {
+  height: 12px;
+  line-height: 12px;
+  width: 12px;
+}
+
+/* line 15, ../../../../dev/scss/modules/_square.scss */
+.small-grid .pattern-grid .square, .pattern-grid .small-grid .square,
+.small-grid .square {
+  height: 10px;
+  line-height: 10px;
+  width: 10px;
+}
+
+/* line 22, ../../../../dev/scss/modules/_square.scss */
+.tiny-grid .pattern-grid .square, .pattern-grid .tiny-grid .square,
+.tiny-grid .square {
+  height: 8px;
+  line-height: 8px;
+  width: 8px;
+}
+
+/* line 29, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .square,
 .square {
   border: 1px solid #222;
   cursor: pointer;
-  height: 12px;
-  line-height: 12px;
   padding-left: 0.25em;
   text-align: center;
   user-select: none;
-  width: 12px;
 }
-/* line 15, ../../../../dev/scss/modules/_square.scss */
+/* line 40, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-top.square,
 .square.border-top {
   border-top: 2px solid #222;
 }
-/* line 20, ../../../../dev/scss/modules/_square.scss */
+/* line 45, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-right.square,
 .square.border-right {
   border-right: 2px solid #222;
 }
-/* line 25, ../../../../dev/scss/modules/_square.scss */
+/* line 50, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-bottom.square,
 .square.border-bottom {
   border-bottom: 2px solid #222;
 }
-/* line 30, ../../../../dev/scss/modules/_square.scss */
+/* line 55, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-left.square,
 .square.border-left {
   border-left: 2px solid #222;
@@ -1117,6 +1146,12 @@ a.but-selection:active {
 }
 
 /* line 72, ../../../../dev/scss/state/_state.scss */
+.radio-group * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 77, ../../../../dev/scss/state/_state.scss */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }

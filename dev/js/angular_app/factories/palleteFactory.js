@@ -14,9 +14,6 @@ function palleteFactory($http, $q) {
 
     $http.get('/api/pallete').success(function(data) {
       for(var i = 0;i < data.length; i++) {
-        // c_id helps to index the pallete array
-        // TODO: Kill this in favor of db id
-        data[i].c_id = i;
         pallete.colors = data;
       }
       dataLoaded = true;

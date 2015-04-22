@@ -1,4 +1,4 @@
-<div>
+<div ng-class="patternVM.viewState.gridSize">
   <p class="loading" ng-show="patternVM.gridData.grid === undefined"></p>
   <h5>{{patternVM.gridData.name}} {{patternVM.gridData.grid[0].length}}x{{patternVM.gridData.grid.length}}</h5><div class="pattern-grid">
   <div ng-repeat="row in patternVM.gridData.grid track by $index" class="grid pattern-row">

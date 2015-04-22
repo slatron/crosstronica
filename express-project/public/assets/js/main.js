@@ -37653,9 +37653,6 @@ function palleteFactory($http, $q) {
 
     $http.get('/api/pallete').success(function(data) {
       for(var i = 0;i < data.length; i++) {
-        // c_id helps to index the pallete array
-        // TODO: Kill this in favor of db id
-        data[i].c_id = i;
         pallete.colors = data;
       }
       dataLoaded = true;
@@ -37938,7 +37935,6 @@ factory('patternFactory', patternFactory);
       } else {
         Auth.getUser().then(
           function(data) {
-            console.log('User Data: ', data);
             userState.authorized = true;
             userStateFactoryMethods.setUserName(data.data.name);
           },
@@ -37975,11 +37971,14 @@ factory('patternFactory', patternFactory);
 
       var viewState = {
         centered: true,
-        tracer: true,
+        tracer: false,
         tracerTop: 100,
         tracerLeft: 220,
-        tracerWidth: 50
+        tracerWidth: 50,
+        gridSize: 'tiny-grid'
       };
+
+      var availableSizes = ['tiny', 'small', 'medium', 'large'];
 
       var viewStateFactoryMethods = {};
 
@@ -38017,6 +38016,12 @@ factory('patternFactory', patternFactory);
         // Check for integer passed in + range
         if (newWidth === parseInt(newWidth, 10) && newWidth < 101 && newWidth > 0) {
           viewState.tracerWidth = newWidth;
+        }
+      };
+
+      viewStateFactoryMethods.setGridSize = function(size) {
+        if (_.indexOf(availableSizes, size) !== -1) {
+          viewState.gridSize = [size, '-grid'].join('');
         }
       };
 
@@ -38316,7 +38321,7 @@ pageState.$inject = ["userStateFactory", "patternFactory", "viewStateFactory"];
 angular.module('Crosstronica').
 directive('pageState', pageState);
 
-function pattern(drawStateFactory, patternFactory) {
+function pattern(viewStateFactory, drawStateFactory, patternFactory) {
 
   return {
     scope: {},
@@ -38332,7 +38337,9 @@ function pattern(drawStateFactory, patternFactory) {
 
       var vm = this;
 
-      vm.gridData = patternFactory.get();
+      vm.gridData  = patternFactory.get();
+      vm.viewState = viewStateFactory.get();
+
     },
 
     link: function (scope, elem) {
@@ -38387,7 +38394,7 @@ function pattern(drawStateFactory, patternFactory) {
   };
 
 }
-pattern.$inject = ["drawStateFactory", "patternFactory"];
+pattern.$inject = ["viewStateFactory", "drawStateFactory", "patternFactory"];
 
 angular.module('Crosstronica').
 directive('pattern', pattern);
@@ -38752,14 +38759,22 @@ function viewControl(viewStateFactory) {
 
       vm.viewState = viewStateFactory.get();
 
-      vm.toggleCenterGrid = function() {
+      vm.toggleCenterGrid = toggleCenterGrid;
+      vm.toggleTracer     = toggleTracer;
+      vm.setGridSize      = setGridSize;
+
+      function toggleCenterGrid() {
         var current = vm.viewState.centered;
         viewStateFactory.centerGrid(!current);
-      };
+      }
 
-      vm.toggleTracer = function() {
+      function toggleTracer() {
         viewStateFactory.toggleTracer();
-      };
+      }
+
+      function setGridSize(size) {
+        viewStateFactory.setGridSize(size);
+      }
     }
   };
 

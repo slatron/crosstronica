@@ -30,7 +30,6 @@
       } else {
         Auth.getUser().then(
           function(data) {
-            console.log('User Data: ', data);
             userState.authorized = true;
             userStateFactoryMethods.setUserName(data.data.name);
           },

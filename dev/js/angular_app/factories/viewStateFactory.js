@@ -9,11 +9,14 @@
 
       var viewState = {
         centered: true,
-        tracer: true,
+        tracer: false,
         tracerTop: 100,
         tracerLeft: 220,
-        tracerWidth: 50
+        tracerWidth: 50,
+        gridSize: 'tiny-grid'
       };
+
+      var availableSizes = ['tiny', 'small', 'medium', 'large'];
 
       var viewStateFactoryMethods = {};
 
@@ -51,6 +54,12 @@
         // Check for integer passed in + range
         if (newWidth === parseInt(newWidth, 10) && newWidth < 101 && newWidth > 0) {
           viewState.tracerWidth = newWidth;
+        }
+      };
+
+      viewStateFactoryMethods.setGridSize = function(size) {
+        if (_.indexOf(availableSizes, size) !== -1) {
+          viewState.gridSize = [size, '-grid'].join('');
         }
       };
 

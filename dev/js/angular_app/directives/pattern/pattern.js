@@ -1,4 +1,4 @@
-function pattern(drawStateFactory, patternFactory) {
+function pattern(viewStateFactory, drawStateFactory, patternFactory) {
 
   return {
     scope: {},
@@ -14,7 +14,9 @@ function pattern(drawStateFactory, patternFactory) {
 
       var vm = this;
 
-      vm.gridData = patternFactory.get();
+      vm.gridData  = patternFactory.get();
+      vm.viewState = viewStateFactory.get();
+
     },
 
     link: function (scope, elem) {
