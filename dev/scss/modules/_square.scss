@@ -36,6 +36,11 @@
   text-align: center;
   user-select: none;
 
+  // Default Size
+  height: $square-sides;
+  line-height: $square-sides;
+  width: $square-sides;
+
   // border[0]
   &.border-top {
     border-top: 2px solid $color-black;

@@ -712,23 +712,26 @@ a.but-selection:active {
   padding-left: 0.25em;
   text-align: center;
   user-select: none;
+  height: 14px;
+  line-height: 14px;
+  width: 14px;
 }
-/* line 40, ../../../../dev/scss/modules/_square.scss */
+/* line 45, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-top.square,
 .square.border-top {
   border-top: 2px solid #222;
 }
-/* line 45, ../../../../dev/scss/modules/_square.scss */
+/* line 50, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-right.square,
 .square.border-right {
   border-right: 2px solid #222;
 }
-/* line 50, ../../../../dev/scss/modules/_square.scss */
+/* line 55, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-bottom.square,
 .square.border-bottom {
   border-bottom: 2px solid #222;
 }
-/* line 55, ../../../../dev/scss/modules/_square.scss */
+/* line 60, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-left.square,
 .square.border-left {
   border-left: 2px solid #222;

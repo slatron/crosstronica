@@ -1,60 +1,50 @@
 [
   {
-    "c_id": 0,
     "name": "Wacky Purple",
     "rgb": "ab22c7",
     "symbol": "w"
   },
   {
-    "c_id": 1,
     "name": "Tomato",
     "rgb": "e63740",
     "symbol": "t"
   },
   {
-    "c_id": 2,
     "name": "Lavender-DK",
     "rgb": "945B80",
     "symbol": ":"
   },
   {
-    "c_id": 3,
     "name": "Lavender-VY-DK",
-    "rgb": "945B80",
+    "rgb": "B65BA2",
     "symbol": ":"
   },
   {
-    "c_id": 4,
     "name": "Lavender-MD",
     "rgb": "ECCFE1",
     "symbol": "[]"
   },
   {
-    "c_id": 5,
     "name": "Mahogany-VY-DK",
     "rgb": "8F3926",
     "symbol": "••"
   },
   {
-    "c_id": 6,
     "name": "Black",
     "rgb": "000000",
     "symbol": "2"
   },
   {
-    "c_id": 7,
     "name": "Christmas Red",
     "rgb": "E71261",
     "symbol": "8"
   },
   {
-    "c_id": 8,
     "name": "Pewter Grey-DK",
     "rgb": "6D5F5F",
     "symbol": "X"
   },
   {
-    "c_id": 9,
     "name": "Pearl Grey",
     "rgb": "DDDDDA",
     "symbol": "º"
