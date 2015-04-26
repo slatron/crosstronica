@@ -1,6 +1,6 @@
 <div ng-class="patternVM.viewState.gridSize">
   <p class="loading" ng-show="patternVM.gridData.grid === undefined"></p>
-  <h5>{{patternVM.gridData.name}} {{patternVM.gridData.grid[0].length}}x{{patternVM.gridData.grid.length}}</h5><div class="pattern-grid">
+  <h6>{{patternVM.gridData.name}} <span class="text-tiny">{{patternVM.gridData.grid[0].length}}x{{patternVM.gridData.grid.length}}</span></h6><div class="pattern-grid">
   <div ng-repeat="row in patternVM.gridData.grid track by $index" class="grid pattern-row">
     <div ng-repeat="color in row track by $index" class="grid">
       <grid-square
@@ -9,4 +9,12 @@
       ></grid-square>
     </div>
   </div>
+
+  <div show-hide>
+    <h6 ng-click="toggleMe()">Grid Data</h6>
+    <div ng-hide="collapsed">
+      {{patternVM.gridData.grid}}
+    </div>
+  </div>
+
 </div>

@@ -513,6 +513,7 @@ h1 + a,
 
 /* line 15, ../../../../dev/scss/base/_typography.scss */
 .text-small,
+h6,
 .panel,
 .panel h6 + a,
 .drawer-control,
@@ -523,7 +524,6 @@ h1 + a,
 /* line 19, ../../../../dev/scss/base/_typography.scss */
 .text-normal,
 table,
-h6,
 p,
 h1,
 .panel h6 {

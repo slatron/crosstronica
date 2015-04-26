@@ -3,7 +3,6 @@ var mongoose = require('mongoose'),
 
 var PatternSchema = new Schema(
   {
-    creation_date: {type:Date, default: Date.now},
     name: {type: String},
     grid: []
   }
@@ -15,39 +14,23 @@ module.exports = mongoose.model('Pattern', PatternSchema);
 //
 // [
 //   [
+//     {},
 //     {
-//       "borders":[
-//         false,
-//         false,
-//         false,
-//         false
-//       ]
-//     },
-//     {
-//       "borders":[
-//         false,
-//         false,
-//         false,
-//         false
-//       ]
+//       "rgb": "000000",
+//       "symbol": "B"
 //     }
 //   ],
 //   [
 //     {
 //       "borders":[
+//         true,
 //         false,
 //         false,
-//         false,
-//         false
-//       ]
+//         true
+//       ],
+//       "rgb": "000000",
+//       "symbol": "B"
 //     },
-//     {
-//       "borders":[
-//         false,
-//         false,
-//         false,
-//         false
-//       ]
-//     }
+//     {}
 //   ]
 // ]

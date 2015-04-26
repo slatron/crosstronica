@@ -13,7 +13,7 @@ function patternFactory($http, $q) {
   var patternFactoryMethods = {};
 
   // Initialize pattern data from server
-  _init = function() {
+  var _init = function() {
 
     var deferred = $q.defer();
 
@@ -54,6 +54,28 @@ function patternFactory($http, $q) {
     return deferred.promise;
   };
 
+  var _sanitizeGridData = function(gridData) {
+
+
+    _.each(gridData, function(row) {
+      _.each(row, function(square) {
+
+        _.omit(square, 'c_id');
+        _.omit(square, 'creation_date');
+        _.omit(square, 'name');
+        _.omit(square, '_v');
+
+        console.log('square: ', square);
+
+      });
+    });
+
+    // console.log('gridData: ', gridData);
+
+    return gridData;
+
+  };
+
   patternFactoryMethods.get = function() {
 
     if (!dataLoaded) {
@@ -79,7 +101,7 @@ function patternFactory($http, $q) {
 
     $http.get('/api/pattern/' + id).success(function(data) {
       patternData.name = data.name;
-      patternData.grid = data.grid;
+      patternData.grid = _sanitizeGridData(data.grid);
       patternData.id   = data._id;
 
       patternData.selected = {
