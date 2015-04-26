@@ -20,9 +20,9 @@ function patternFactory($http, $q) {
     $http.get('/api/pattern').success(function(data) {
       // Set first in response as current grid
       if (data.length) {
-        patternData.name = data[12].name;
-        patternData.grid = data[12].grid;
-        patternData.id   = data[12]._id;
+        patternData.name = data[0].name;
+        patternData.grid = _sanitizeGridData(data[0].grid);
+        patternData.id   = data[0]._id;
         patternData.available = [];
 
         // Load all pattern options array
@@ -34,7 +34,7 @@ function patternFactory($http, $q) {
           patternData.available.push(patternOption);
         });
 
-        patternData.selected = (patternData.available[12]);
+        patternData.selected = (patternData.available[0]);
 
       } else {
         patternData.name = 'Create a new Pattern to begin';
@@ -54,25 +54,90 @@ function patternFactory($http, $q) {
     return deferred.promise;
   };
 
-  var _sanitizeGridData = function(gridData) {
+  var _sanitizeGridPost = function(gridData) {
 
+    var transformed = [];
 
-    _.each(gridData, function(row) {
-      _.each(row, function(square) {
+    _.each(gridData, function(row, rowIdx) {
 
-        _.omit(square, 'c_id');
-        _.omit(square, 'creation_date');
-        _.omit(square, 'name');
-        _.omit(square, '_v');
+      transformed.push([]);
 
-        console.log('square: ', square);
+      _.each(row, function(square, colIdx) {
+
+        console.log('original square: ', square);
+
+        var borders = null;
+
+        if (_.findIndex(square.borders, true) !== -1) {
+          borders = square.borders;
+        }
+
+        // Only keep necessary data fields around
+        var newSquare = {
+          borders: borders,
+          rgb: square.rgb,
+          symbol: square.symbol
+        };
+
+        transformed[rowIdx].push(newSquare);
 
       });
     });
 
+    return transformed;
+
+  };
+
+  var _sanitizeGridData = function(gridData) {
+
     // console.log('gridData: ', gridData);
 
-    return gridData;
+    var transformed = [];
+
+    _.each(gridData, function(row, rowIdx) {
+
+      transformed.push([]);
+
+      _.each(row, function(square, colIdx) {
+
+        // console.log('original square: ', square);
+
+        // Ensure there is a square object
+        if(square === null) {
+          square = {};
+        }
+
+        // Ensure there is a borders array
+        if(!square.hasOwnProperty('borders')) {
+          square.borders = [];
+        }
+
+        var borders = [];
+
+        if (_.findIndex(square.borders, true) !== -1) {
+          borders = square.borders;
+        }
+
+        // Only keep necessary data fields around
+        var newSquare = {
+          borders: borders,
+          rgb: square.rgb,
+          symbol: square.symbol
+        };
+
+        transformed[rowIdx].push(newSquare);
+
+        // if(!rowIdx && !colIdx) {
+        //   console.log('square: ', newSquare);
+        //   console.log('newSqu: ', transformed[rowIdx][colIdx]);
+        // }
+
+      });
+    });
+
+    // console.log('transformed: ', transformed);
+
+    return transformed;
 
   };
 
@@ -132,6 +197,12 @@ function patternFactory($http, $q) {
   patternFactoryMethods.updatePattern = function(pattern, id) {
 
     var deferred = $q.defer();
+
+    console.log('oringinal pattern: ', pattern);
+
+    pattern.grid = _sanitizeGridPost(pattern.grid);
+
+    console.log('post pattern: ', pattern);
 
     $http.put('/api/pattern/' + id, pattern)
       .success(function(data) {
