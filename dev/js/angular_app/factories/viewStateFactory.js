@@ -13,7 +13,7 @@
         tracerTop: 100,
         tracerLeft: 220,
         tracerWidth: 50,
-        gridSize: 'tiny-grid'
+        gridSize: 'large-grid'
       };
 
       var availableSizes = ['tiny', 'small', 'medium', 'large'];

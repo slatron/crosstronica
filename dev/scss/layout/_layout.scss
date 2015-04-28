@@ -1,6 +1,6 @@
 // Layout styles go here
 main {
-  margin: $base-unit auto;
+  margin: $base-unit auto $base-unit $drawer-col-width;
   padding-right: $base-unit;
   position: relative;
   text-align: right;

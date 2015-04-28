@@ -596,7 +596,7 @@ h6 {
 
 /* line 2, ../../../../dev/scss/layout/_layout.scss */
 main {
-  margin: 1em auto;
+  margin: 1em auto 1em 250px;
   padding-right: 1em;
   position: relative;
   text-align: right;

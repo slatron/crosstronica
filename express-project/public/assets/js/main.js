@@ -37796,20 +37796,26 @@ function patternFactory($http, $q) {
 
       _.each(row, function(square, colIdx) {
 
-        console.log('original square: ', square);
+        var newBorders = [];
 
-        var borders = null;
-
-        if (_.findIndex(square.borders, true) !== -1) {
-          borders = square.borders;
+        // This wild function tests the array for a true side
+        if (_.findIndex(square.borders,
+          function(side) {
+           return side === true;
+          }) !== -1 )
+        {
+          newBorders = square.borders;
         }
 
         // Only keep necessary data fields around
         var newSquare = {
-          borders: borders,
           rgb: square.rgb,
           symbol: square.symbol
         };
+
+        if (newBorders.length) {
+          newSquare.borders = newBorders;
+        }
 
         transformed[rowIdx].push(newSquare);
 
@@ -37822,8 +37828,6 @@ function patternFactory($http, $q) {
 
   var _sanitizeGridData = function(gridData) {
 
-    // console.log('gridData: ', gridData);
-
     var transformed = [];
 
     _.each(gridData, function(row, rowIdx) {
@@ -37832,8 +37836,6 @@ function patternFactory($http, $q) {
 
       _.each(row, function(square, colIdx) {
 
-        // console.log('original square: ', square);
-
         // Ensure there is a square object
         if(square === null) {
           square = {};
@@ -37841,12 +37843,18 @@ function patternFactory($http, $q) {
 
         // Ensure there is a borders array
         if(!square.hasOwnProperty('borders')) {
+
           square.borders = [];
         }
 
         var borders = [];
 
-        if (_.findIndex(square.borders, true) !== -1) {
+        // This wild function tests the array for a true side
+        if (_.findIndex(square.borders,
+          function(side) {
+           return side === true;
+          }) !== -1 )
+        {
           borders = square.borders;
         }
 
@@ -37859,15 +37867,8 @@ function patternFactory($http, $q) {
 
         transformed[rowIdx].push(newSquare);
 
-        // if(!rowIdx && !colIdx) {
-        //   console.log('square: ', newSquare);
-        //   console.log('newSqu: ', transformed[rowIdx][colIdx]);
-        // }
-
       });
     });
-
-    // console.log('transformed: ', transformed);
 
     return transformed;
 
@@ -37913,6 +37914,10 @@ function patternFactory($http, $q) {
   patternFactoryMethods.saveNew = function(pattern) {
 
     var deferred = $q.defer();
+
+    var postPattern = _sanitizeGridPost(pattern.grid);
+
+    pattern.grid = postPattern;
 
     $http.post('/api/pattern', pattern)
       .success(function(data) {
@@ -37974,9 +37979,7 @@ function patternFactory($http, $q) {
       var thisRow = [];
 
       for(var j=0; j<cols; j++) {
-        thisRow.push({
-          borders: [false, false, false, false]
-        });
+        thisRow.push({});
       }
 
       patternData.grid[i] = thisRow;
@@ -38068,7 +38071,7 @@ factory('patternFactory', patternFactory);
         tracerTop: 100,
         tracerLeft: 220,
         tracerWidth: 50,
-        gridSize: 'tiny-grid'
+        gridSize: 'large-grid'
       };
 
       var availableSizes = ['tiny', 'small', 'medium', 'large'];
@@ -38274,6 +38277,61 @@ function drawer() {
 angular.module('Crosstronica').
 directive('drawer', drawer);
 
+function gridSquare() {
+
+  return {
+    restrict: 'E',
+    replace: true,
+
+    scope: {
+      color: '=',  // All Data in one sane object
+      paint: '&'   // ref to parent paint function
+    },
+
+    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
+
+    controllerAs: 'gridSquareVM',
+    bindToController: true,
+
+    controller: ["$scope", function($scope) {
+
+      var vm = this;
+
+      $scope.$watch(function() {
+        return vm.color.borders;
+      }, function(borders) {
+        if (borders) {
+          vm.top    = borders[0] ? 'border-top' : '';
+          vm.right  = borders[1] ? 'border-right' : '';
+          vm.bottom = borders[2] ? 'border-bottom' : '';
+          vm.left   = borders[3] ? 'border-left' : '';
+        }
+      });
+    }],
+
+    link: function (scope, elem) {
+
+      var ctrlVM = scope.gridSquareVM;
+
+      elem.on('mousedown', function() {
+        ctrlVM.paint();
+      });
+
+      elem.on('mouseover', function(e) {
+        if(ms_utils.detectLeftButton(e)) {
+          elem.on('mouseup mousemove', function handler(e) {
+            ctrlVM.paint();
+            elem.off('mouseup mousemove', handler);
+          });
+        }
+      });
+    }
+  };
+}
+
+angular.module('Crosstronica').
+directive('gridSquare', gridSquare);
+
 function loginScreen(userStateFactory) {
 
   return {
@@ -38460,61 +38518,6 @@ function showHide() {
 
 angular.module('Crosstronica').
 directive('showHide', showHide);
-
-function gridSquare() {
-
-  return {
-    restrict: 'E',
-    replace: true,
-
-    scope: {
-      color: '=',  // All Data in one sane object
-      paint: '&'   // ref to parent paint function
-    },
-
-    templateUrl: '/js/angular_app/directives/grid_square/grid-square.html',
-
-    controllerAs: 'gridSquareVM',
-    bindToController: true,
-
-    controller: ["$scope", function($scope) {
-
-      var vm = this;
-
-      $scope.$watch(function() {
-        return vm.color.borders;
-      }, function(borders) {
-        if (borders) {
-          vm.top    = borders[0] ? 'border-top' : '';
-          vm.right  = borders[1] ? 'border-right' : '';
-          vm.bottom = borders[2] ? 'border-bottom' : '';
-          vm.left   = borders[3] ? 'border-left' : '';
-        }
-      });
-    }],
-
-    link: function (scope, elem) {
-
-      var ctrlVM = scope.gridSquareVM;
-
-      elem.on('mousedown', function() {
-        ctrlVM.paint();
-      });
-
-      elem.on('mouseover', function(e) {
-        if(ms_utils.detectLeftButton(e)) {
-          elem.on('mouseup mousemove', function handler(e) {
-            ctrlVM.paint();
-            elem.off('mouseup mousemove', handler);
-          });
-        }
-      });
-    }
-  };
-}
-
-angular.module('Crosstronica').
-directive('gridSquare', gridSquare);
 
 function tracer() {
 
