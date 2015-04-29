@@ -203,11 +203,7 @@ function patternFactory($http, $q) {
 
     var deferred = $q.defer();
 
-    console.log('oringinal pattern: ', pattern);
-
     pattern.grid = _sanitizeGridPost(pattern.grid);
-
-    console.log('post pattern: ', pattern);
 
     $http.put('/api/pattern/' + id, pattern)
       .success(function(data) {

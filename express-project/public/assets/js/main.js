@@ -37938,11 +37938,7 @@ function patternFactory($http, $q) {
 
     var deferred = $q.defer();
 
-    console.log('oringinal pattern: ', pattern);
-
     pattern.grid = _sanitizeGridPost(pattern.grid);
-
-    console.log('post pattern: ', pattern);
 
     $http.put('/api/pattern/' + id, pattern)
       .success(function(data) {
@@ -38541,46 +38537,6 @@ function tracer() {
 angular.module('Crosstronica').
 directive('tracer', tracer);
 
-function deletePattern() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
-
-    controllerAs: 'deletePatternVM',
-    bindToController: true,
-
-    controller: ["patternFactory", function (patternFactory) {
-
-      var vm = this;
-
-      vm.currentPattern = patternFactory.get();
-
-      vm.deletePattern = function() {
-        if (confirm('Are you sure?')) {
-
-          patternFactory.deletePattern(vm.currentPattern.id).then(
-            function(success) {
-              console.log('successful pattern DELETE', success);
-              patternFactory.clearCurrent();
-            },
-            function(error) {
-              console.error('error on pattern DELETE', error);
-            }
-          );
-        }
-      };
-
-    }]
-  };
-}
-
-angular.module('Crosstronica').
-directive('deletePattern', deletePattern);
-
 function addColor() {
 
   return {
@@ -38622,34 +38578,45 @@ function addColor() {
 angular.module('Crosstronica').
 directive('addColor', addColor);
 
-function loadPattern() {
+function deletePattern() {
 
   return {
     scope: {},
 
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/panels/load_pattern/loadPattern.html',
+    templateUrl: '/js/angular_app/directives/panels/delete_pattern/deletePattern.html',
 
-    controllerAs: 'loadPatternVM',
+    controllerAs: 'deletePatternVM',
     bindToController: true,
 
-    controller: ["patternFactory", function(patternFactory) {
+    controller: ["patternFactory", function (patternFactory) {
+
       var vm = this;
 
-      vm.patternData = patternFactory.get();
+      vm.currentPattern = patternFactory.get();
 
-      vm.reloadPattern = function() {
-        patternFactory.load(vm.patternData.selected.id);
+      vm.deletePattern = function() {
+        if (confirm('Are you sure?')) {
+
+          patternFactory.deletePattern(vm.currentPattern.id).then(
+            function(success) {
+              console.log('successful pattern DELETE', success);
+              patternFactory.clearCurrent();
+            },
+            function(error) {
+              console.error('error on pattern DELETE', error);
+            }
+          );
+        }
       };
 
     }]
   };
-
 }
 
 angular.module('Crosstronica').
-directive('loadPattern', loadPattern);
+directive('deletePattern', deletePattern);
 
 function drawTool(drawStateFactory, palleteFactory) {
 
@@ -38700,6 +38667,35 @@ drawTool.$inject = ["drawStateFactory", "palleteFactory"];
 
 angular.module('Crosstronica').
 directive('drawTool', drawTool);
+
+function loadPattern() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/load_pattern/loadPattern.html',
+
+    controllerAs: 'loadPatternVM',
+    bindToController: true,
+
+    controller: ["patternFactory", function(patternFactory) {
+      var vm = this;
+
+      vm.patternData = patternFactory.get();
+
+      vm.reloadPattern = function() {
+        patternFactory.load(vm.patternData.selected.id);
+      };
+
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('loadPattern', loadPattern);
 
 function newPattern() {
 
