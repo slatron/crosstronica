@@ -33,7 +33,7 @@ function pattern(viewStateFactory, drawStateFactory, patternFactory) {
           var lastColor = ctrlVM.gridData.grid[row][col];
           var oldBorders = lastColor.borders;
           drawState.paint.selected.borders = oldBorders;
-          ctrlVM.gridData.grid[row][col] = angular.copy(drawState.paint.selected);
+          ctrlVM.gridData.grid[row][col] = angular.copy(_.omit(drawState.paint.selected, '_id'));
         }
 
         // Border Mode

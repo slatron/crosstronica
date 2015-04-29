@@ -8,16 +8,22 @@ function palleteFactory($http, $q) {
 
   var palleteFactoryMethods = {};
 
+  var _sanitizePalleteData = function(pallete) {
+
+    var newPallete = [];
+
+    _.each(pallete, function(color) {
+      newPallete.push(_.omit(color, ['__v', 'creation_date']));
+    });
+
+    return newPallete;
+  };
+
   var _init = function() {
 
-    var deferred = $q.defer();
-
     $http.get('/api/pallete').success(function(data) {
-      for(var i = 0;i < data.length; i++) {
-        pallete.colors = data;
-      }
-      dataLoaded = true;
-      deferred.resolve(data);
+      pallete.colors = _sanitizePalleteData(data);
+      dataLoaded     = true;
     }).error(function(e) {
       console.error('An error occurred while querying the remote database', e);
 
@@ -26,13 +32,10 @@ function palleteFactory($http, $q) {
         console.error('Using local fallback pallete');
         pallete.colors = data;
         dataLoaded = true;
-        deferred.resolve(data);
       }).error(function() {
-        deferred.reject('There was an error getting local pallete.json file');
+        console.error('There was an error getting local pallete.json file');
       });
     });
-
-    return deferred.promise;
 
   };
 
