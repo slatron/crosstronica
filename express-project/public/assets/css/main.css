@@ -709,32 +709,36 @@ a.but-selection:active {
 .square {
   border: 1px solid #222;
   cursor: pointer;
-  padding-left: 0.25em;
   text-align: center;
   user-select: none;
   height: 14px;
   line-height: 14px;
   width: 14px;
 }
-/* line 45, ../../../../dev/scss/modules/_square.scss */
+/* line 44, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-top.square,
 .square.border-top {
   border-top: 2px solid #222;
 }
-/* line 50, ../../../../dev/scss/modules/_square.scss */
+/* line 49, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-right.square,
 .square.border-right {
   border-right: 2px solid #222;
 }
-/* line 55, ../../../../dev/scss/modules/_square.scss */
+/* line 54, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-bottom.square,
 .square.border-bottom {
   border-bottom: 2px solid #222;
 }
-/* line 60, ../../../../dev/scss/modules/_square.scss */
+/* line 59, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .border-left.square,
 .square.border-left {
   border-left: 2px solid #222;
+}
+/* line 63, ../../../../dev/scss/modules/_square.scss */
+.pattern-grid .square rect,
+.square rect {
+  fill: transparent;
 }
 
 /* line 1, ../../../../dev/scss/modules/_panel.scss */
