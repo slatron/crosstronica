@@ -47895,40 +47895,6 @@ function gridSquare() {
 angular.module('Crosstronica').
 directive('gridSquare', gridSquare);
 
-function pageState(userStateFactory, patternFactory, viewStateFactory) {
-
-  return {
-    controllerAs: 'pageStateVM',
-    bindToController: true,
-    controller: ["Auth", function (Auth) {
-      var vm = this;
-
-      vm.userState = userStateFactory.get();
-      vm.viewState = viewStateFactory.get();
-
-      // function to handle logging out
-      vm.doLogout = function() {
-        Auth.logout();
-        userStateFactory.authorize(false);
-      };
-
-      vm.centerGrid = function(centered) {
-        if (centered) {
-          viewFactory.centerGrid(true);
-        } else {
-          viewFactory.centerGrid(true);
-        }
-      };
-
-    }]
-  };
-
-}
-pageState.$inject = ["userStateFactory", "patternFactory", "viewStateFactory"];
-
-angular.module('Crosstronica').
-directive('pageState', pageState);
-
 function loginScreen(userStateFactory) {
 
   return {
@@ -47979,6 +47945,40 @@ loginScreen.$inject = ["userStateFactory"];
 
 angular.module('Crosstronica').
 directive('loginScreen', loginScreen);
+
+function pageState(userStateFactory, patternFactory, viewStateFactory) {
+
+  return {
+    controllerAs: 'pageStateVM',
+    bindToController: true,
+    controller: ["Auth", function (Auth) {
+      var vm = this;
+
+      vm.userState = userStateFactory.get();
+      vm.viewState = viewStateFactory.get();
+
+      // function to handle logging out
+      vm.doLogout = function() {
+        Auth.logout();
+        userStateFactory.authorize(false);
+      };
+
+      vm.centerGrid = function(centered) {
+        if (centered) {
+          viewFactory.centerGrid(true);
+        } else {
+          viewFactory.centerGrid(true);
+        }
+      };
+
+    }]
+  };
+
+}
+pageState.$inject = ["userStateFactory", "patternFactory", "viewStateFactory"];
+
+angular.module('Crosstronica').
+directive('pageState', pageState);
 
 function pattern(viewStateFactory, drawStateFactory, patternFactory) {
 
@@ -48182,35 +48182,6 @@ function deletePattern() {
 angular.module('Crosstronica').
 directive('deletePattern', deletePattern);
 
-function loadPattern() {
-
-  return {
-    scope: {},
-
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/js/angular_app/directives/panels/load_pattern/loadPattern.html',
-
-    controllerAs: 'loadPatternVM',
-    bindToController: true,
-
-    controller: ["patternFactory", function(patternFactory) {
-      var vm = this;
-
-      vm.patternData = patternFactory.get();
-
-      vm.reloadPattern = function() {
-        patternFactory.load(vm.patternData.selected.id);
-      };
-
-    }]
-  };
-
-}
-
-angular.module('Crosstronica').
-directive('loadPattern', loadPattern);
-
 function drawTool(drawStateFactory, palleteFactory) {
 
   return {
@@ -48261,40 +48232,34 @@ drawTool.$inject = ["drawStateFactory", "palleteFactory"];
 angular.module('Crosstronica').
 directive('drawTool', drawTool);
 
-function pallete() {
+function loadPattern() {
 
   return {
     scope: {},
 
     restrict: 'E',
     replace: true,
-    templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
+    templateUrl: '/js/angular_app/directives/panels/load_pattern/loadPattern.html',
 
-    controllerAs: 'palleteVM',
+    controllerAs: 'loadPatternVM',
     bindToController: true,
 
-    controller: ["palleteFactory", "drawStateFactory", function (palleteFactory, drawStateFactory) {
-
+    controller: ["patternFactory", function(patternFactory) {
       var vm = this;
 
-      vm.pallete = palleteFactory.get();
+      vm.patternData = patternFactory.get();
 
-      vm.selectColor = function(color) {
-        color = color || {};
-        drawStateFactory.selected(color);
+      vm.reloadPattern = function() {
+        patternFactory.load(vm.patternData.selected.id);
       };
 
-      // Clear selected color
-      vm.selectEraser = function() {
-        drawStateFactory.selected();
-      };
     }]
   };
 
 }
 
 angular.module('Crosstronica').
-directive('pallete', pallete);
+directive('loadPattern', loadPattern);
 
 function newPattern() {
 
@@ -48334,6 +48299,41 @@ function newPattern() {
 
 angular.module('Crosstronica').
 directive('newPattern', newPattern);
+
+function pallete() {
+
+  return {
+    scope: {},
+
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/js/angular_app/directives/panels/pallete/pallete.html',
+
+    controllerAs: 'palleteVM',
+    bindToController: true,
+
+    controller: ["palleteFactory", "drawStateFactory", function (palleteFactory, drawStateFactory) {
+
+      var vm = this;
+
+      vm.pallete = palleteFactory.get();
+
+      vm.selectColor = function(color) {
+        color = color || {};
+        drawStateFactory.selected(color);
+      };
+
+      // Clear selected color
+      vm.selectEraser = function() {
+        drawStateFactory.selected();
+      };
+    }]
+  };
+
+}
+
+angular.module('Crosstronica').
+directive('pallete', pallete);
 
 function savePattern() {
 
