@@ -60,50 +60,66 @@ function gridSquare() {
       *   Create a function to watch for frame animations,
       *     re-render the chart when the chart width changes
       **/
-      var prevWidth = elem[0].getBoundingClientRect().width;
+      // var prevWidth = elem[0].getBoundingClientRect().width;
 
-      function onFrameChange() {
-        var currentWidth = elem[0].getBoundingClientRect().width;
+      // function onFrameChange() {
+      //   var currentWidth = elem[0].getBoundingClientRect().width;
 
-        if (!angular.equals(prevWidth, currentWidth)) {
-          scope.render(scope.color);
-        }
+      //   if (!angular.equals(prevWidth, currentWidth)) {
+      //     scope.render(scope.color);
+      //   }
 
-        prevWidth = currentWidth;
-        requestAnimationFrame(onFrameChange);
-      }
+      //   prevWidth = currentWidth;
+      //   requestAnimationFrame(onFrameChange);
+      // }
 
-      onFrameChange();
+      // onFrameChange();
 
-      var drawing = d3.select(elem[0])
-                      .append('svg')
-                      .style('width', '100%');
+      // var drawing = d3.select(elem[0])
+      //                 .append('svg')
+      //                 .style('width', '100%');
+
+      //var drawing =
+
+      var $drawing = $(elem);
 
       scope.render = function(color) {
 
-        var drawingWidth  = drawing.node().offsetWidth,
-            drawingHeight = drawingWidth;
+        var drawingWidth  = $drawing.width(),
+            drawingHeight = $drawing.height();
 
-        // Set height attribute of chart
-        drawing.attr('height', drawingHeight);
+        // // Set height attribute of chart
+        // drawing.attr('height', drawingHeight);
 
-        var squareFill = drawing.selectAll('g')
-                                .data([color.rgb]);
+        $drawing.append('p')
+                .attr({'height': drawingHeight})
+                .attr({'width': drawingWidth})
+                .append('p')
+                .append('p')
+                .attr({'height': drawingHeight})
+                .attr({'width': drawingWidth});
 
-        squareFill.exit().remove();
+        if (color.rgb !== undefined) {
+          $drawing.style({'fill': '#' + color.rgb});
+        }
 
-        squareFill.enter()
-                  .append('g')
-                  .append('rect')
-                  .attr('height', 14)
-                  .attr('width', 14)
-                  .attr('style', function(d) {
-                    if (d !== undefined) {
-                      return 'fill: #' + d;
-                    } else {
-                      return '';
-                    }
-                  });
+        // var squareFill = drawing.selectAll('g')
+        //                         .data([color.rgb]);
+
+        // squareFill.exit().remove();
+
+        // squareFill.enter()
+        //           .append('g')
+        //           .append('rect')
+        //           .attr('height', 14)
+        //           .attr('width', 14)
+        //           .attr('style', function(d) {
+        //             if (d !== undefined) {
+        //               return 'fill: #' + d;
+        //             } else {
+        //               return '';
+        //             }
+        //           });
       };
     }
   };

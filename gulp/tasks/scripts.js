@@ -26,8 +26,5 @@ gulp.task('scripts', function() {
     .pipe(concat('main.js'))
     .pipe(ngAnnotate())
     .pipe(gulp.dest('express-project/public/assets/js'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('express-project/public/assets/js'))
 });
 
