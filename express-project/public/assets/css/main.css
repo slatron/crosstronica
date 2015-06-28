@@ -736,9 +736,23 @@ a.but-selection:active {
   border-left: 2px solid #222;
 }
 /* line 63, ../../../../dev/scss/modules/_square.scss */
+.pattern-grid .square svg,
+.square svg {
+  height: 100%;
+  width: 100%;
+}
+/* line 68, ../../../../dev/scss/modules/_square.scss */
+.pattern-grid .square g,
+.square g {
+  height: 100%;
+  width: 100%;
+}
+/* line 73, ../../../../dev/scss/modules/_square.scss */
 .pattern-grid .square rect,
 .square rect {
   fill: transparent;
+  height: 100%;
+  width: 100%;
 }
 
 /* line 1, ../../../../dev/scss/modules/_panel.scss */

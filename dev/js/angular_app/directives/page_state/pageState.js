@@ -9,6 +9,11 @@ function pageState(userStateFactory, patternFactory, viewStateFactory) {
       vm.userState = userStateFactory.get();
       vm.viewState = viewStateFactory.get();
 
+      // vm.color = {
+      //   borders: [],
+      //   rgb: '00CC00'
+      // };
+
       // function to handle logging out
       vm.doLogout = function() {
         Auth.logout();

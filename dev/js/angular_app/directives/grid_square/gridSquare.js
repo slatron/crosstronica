@@ -35,6 +35,7 @@ function gridSquare() {
       var ctrlVM = scope.gridSquareVM;
 
       elem.on('mousedown', function() {
+        console.log($(elem).text());
         ctrlVM.paint();
       });
 
@@ -56,6 +57,23 @@ function gridSquare() {
 
       // ====================================================================================
 
+      var $drawing = $(elem);
+
+      scope.render = function(color) {
+
+        var drawingWidth  = $drawing.width(),
+            drawingHeight = $drawing.height();
+
+          var h = 'height="' + drawingHeight + '"';
+          var w = 'width="' + drawingWidth + '"';
+          var s = 'style="fill: #' + color.rgb + '"';
+
+          var squareArea = '<svg><rect ' + h + ' ' + w + ' ' + s + '></rect></svg>';
+
+          $drawing.append(squareArea);
+
+      };
+
       /**
       *   Create a function to watch for frame animations,
       *     re-render the chart when the chart width changes
@@ -75,52 +93,6 @@ function gridSquare() {
 
       // onFrameChange();
 
-      // var drawing = d3.select(elem[0])
-      //                 .append('svg')
-      //                 .style('width', '100%');
-
-      //var drawing =
-
-      var $drawing = $(elem);
-
-      scope.render = function(color) {
-
-        var drawingWidth  = $drawing.width(),
-            drawingHeight = $drawing.height();
-
-        // // Set height attribute of chart
-        // drawing.attr('height', drawingHeight);
-
-        $drawing.append('p')
-                .attr({'height': drawingHeight})
-                .attr({'width': drawingWidth})
-                .append('p')
-                .append('p')
-                .attr({'height': drawingHeight})
-                .attr({'width': drawingWidth});
-
-        if (color.rgb !== undefined) {
-          $drawing.style({'fill': '#' + color.rgb});
-        }
-
-        // var squareFill = drawing.selectAll('g')
-        //                         .data([color.rgb]);
-
-        // squareFill.exit().remove();
-
-        // squareFill.enter()
-        //           .append('g')
-        //           .append('rect')
-        //           .attr('height', 14)
-        //           .attr('width', 14)
-        //           .attr('style', function(d) {
-        //             if (d !== undefined) {
-        //               return 'fill: #' + d;
-        //             } else {
-        //               return '';
-        //             }
-        //           });
-      };
     }
   };
 }

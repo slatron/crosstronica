@@ -14,6 +14,7 @@ gulp.task('scripts', function() {
       * then all angular modules
       */
       [
+        'dev/js/angular_base/jquery.min.js',
         'dev/js/angular_base/angular.js',
         'dev/js/vendor/**/*.js',
         'dev/js/main.js',
