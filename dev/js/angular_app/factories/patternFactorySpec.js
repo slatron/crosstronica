@@ -15,10 +15,6 @@ describe("patternFactory Unit Tests > ", function() {
 
   it("Should create a new pattern from a given spec object", function() {
 
-    // httpMock.expectGET("/data").respond("pig");
-    // controllerService('cDashboard', {$scope: scope});
-    // httpMock.flush();
-
     patternFactory.createNew(patternSpec);
 
     testPattern = patternFactory.get();

@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/slatron/crosstronica/issues"
   },
-  "homepage": "https://github.com/slatron/crosstronica/wiki"
+  "homepage": "https://github.com/slatron/crosstronica/wiki",
+  "scripts": {
+    "test": "gulp units"
+  }
 }
