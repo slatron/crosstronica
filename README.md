@@ -1,5 +1,7 @@
 # Crosstronica
 
+[![Build Status](https://travis-ci.org/slatron/crosstronica.svg?branch=master)](https://travis-ci.org/slatron/crosstronica)
+
 ## What is this?
 
 This is a cross stitch pattern creation app. I am writing this as a development experiment to explore MEAN stack application development.
