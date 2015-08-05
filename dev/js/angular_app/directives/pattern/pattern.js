@@ -34,35 +34,39 @@ function pattern(viewStateFactory, drawStateFactory, patternFactory) {
           var oldBorders = lastColor.borders;
           drawState.paint.selected.borders = oldBorders;
           ctrlVM.gridData.grid[row][col] = angular.copy(_.omit(drawState.paint.selected, '_id'));
+        } else {
+          console.log(' ** NOT IN PAINT MODE ** ');
         }
+
+
 
         // Border Mode
-        if (drawState.drawMode === 'border') {
+        // if (drawState.drawMode === 'border') {
 
-          var newBorders = [];
+        //   var newBorders = [];
 
-          if(drawState.border.erase) {
+        //   if(drawState.border.erase) {
 
-            newBorders = [false, false, false, false];
+        //     newBorders = [false, false, false, false];
 
-          } else {
+        //   } else {
 
-            var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
+        //     var prevBorders = ctrlVM.gridData.grid[row][col].borders || [false, false, false, false];
 
-            if(drawState.border.borderSide === 'top') prevBorders[0]    = true;
-            if(drawState.border.borderSide === 'right') prevBorders[1]  = true;
-            if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
-            if(drawState.border.borderSide === 'left') prevBorders[3]   = true;
+        //     if(drawState.border.borderSide === 'top') prevBorders[0]    = true;
+        //     if(drawState.border.borderSide === 'right') prevBorders[1]  = true;
+        //     if(drawState.border.borderSide === 'bottom') prevBorders[2] = true;
+        //     if(drawState.border.borderSide === 'left') prevBorders[3]   = true;
 
-            _.each(prevBorders, function(elem, idx) {
-              newBorders[idx] = elem;
-            });
+        //     _.each(prevBorders, function(elem, idx) {
+        //       newBorders[idx] = elem;
+        //     });
 
-          }
+        //   }
 
-          ctrlVM.gridData.grid[row][col].borders = newBorders;
+        //   ctrlVM.gridData.grid[row][col].borders = newBorders;
 
-        }
+        // }
 
         if(triggerDigest) scope.$digest();
       };

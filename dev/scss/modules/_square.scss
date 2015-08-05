@@ -32,6 +32,7 @@
 
   border: 1px solid $color-black;
   cursor: pointer;
+  position: relative;
   text-align: center;
   user-select: none;
 
@@ -53,6 +54,12 @@
   // border[2]
   &.border-bottom {
     border-bottom: 2px solid $color-black;
+  }
+
+  > .color_symbol {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   // border[3]

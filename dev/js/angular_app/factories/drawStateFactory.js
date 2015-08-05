@@ -24,7 +24,6 @@ function drawStateFactory() {
     }
   };
 
-  // Setter for border.erase
   drawStateFactoryMethods.setBorderMode = function(mode) {
     if (mode === 'draw')
       drawState.border.erase = false;
@@ -32,7 +31,6 @@ function drawStateFactory() {
       drawState.border.erase = true;
   };
 
-  // Setter for selected
   drawStateFactoryMethods.selected = function(newColor) {
     if (newColor !== undefined) {
       drawState.paint.selected = newColor;
@@ -42,7 +40,6 @@ function drawStateFactory() {
     }
   };
 
-  // Setter for borderSide
   drawStateFactoryMethods.borderSide = function(newBorder) {
     if (newBorder !== undefined)
       drawState.border.borderSide = newBorder;

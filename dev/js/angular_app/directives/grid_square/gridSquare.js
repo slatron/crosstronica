@@ -18,16 +18,16 @@ function gridSquare() {
 
       var vm = this;
 
-      $scope.$watch(function() {
-        return vm.color.borders;
-      }, function(borders) {
-        if (borders) {
-          vm.top    = borders[0] ? 'border-top' : '';
-          vm.right  = borders[1] ? 'border-right' : '';
-          vm.bottom = borders[2] ? 'border-bottom' : '';
-          vm.left   = borders[3] ? 'border-left' : '';
-        }
-      });
+      // $scope.$watch(function() {
+      //   return vm.color.borders;
+      // }, function(borders) {
+      //   if (borders) {
+      //     vm.top    = borders[0] ? 'border-top' : '';
+      //     vm.right  = borders[1] ? 'border-right' : '';
+      //     vm.bottom = borders[2] ? 'border-bottom' : '';
+      //     vm.left   = borders[3] ? 'border-left' : '';
+      //   }
+      // });
     },
 
     link: function (scope, elem) {
@@ -35,7 +35,6 @@ function gridSquare() {
       var ctrlVM = scope.gridSquareVM;
 
       elem.on('mousedown', function() {
-        console.log($(elem).text());
         ctrlVM.paint();
       });
 
