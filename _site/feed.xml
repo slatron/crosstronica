@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crosstronica Dev Blog</title>
+    <description>This is the development blog of Mike Slater as he builds a cross-stitch pattern app on a MEAN stack. Seriously
+</description>
+    <link>http://slatron.github.io/</link>
+    <atom:link href="http://slatron.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 13 Mar 2015 08:54:58 -0500</pubDate>
+    <lastBuildDate>Fri, 13 Mar 2015 08:54:58 -0500</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Second MEAN App deploy</title>
+        <description>&lt;h4 id=&quot;project-management&quot;&gt;Project Management&lt;/h4&gt;
+
+&lt;p&gt;In the previous two weeks, I got ambitious with my project management. At least as much as I need for small side projects. I started a personal Trello account and comitted to updating my projet boards each Sunday.&lt;/p&gt;
+
+&lt;p&gt;Trello is very basic as far as features. Not much more than customizable todo lists. This makes it perfect for small-scale projects with a single team member. I create a sprint line in each column and put any tasks that I intend to finish that week above the line. Any additional tasks are entered below the line and considered the following Sunday.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;mad-brad-show-cms&quot;&gt;Mad Brad Show CMS&lt;/h4&gt;
+
+&lt;p&gt;To extend my MEAN skills, I built a CMS for the Mad Bread website. It uses the same authentication service as Crosstronica. I started mongolab and heroku accounts for Mad Bread. The application exposes a single read-only endpoint for the public site. Everything else is behind the admin wall in the heroku deployed app for CRUD’ding the shows.&lt;/p&gt;
+
+&lt;p&gt;Now all we need are some more confirmed public shows so the other guys can test this out. It’s nice to have my skillset at a point where I’m confortable releasing small practical web apps like this.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;crosstronica&quot;&gt;Crosstronica&lt;/h4&gt;
+
+&lt;p&gt;For the main app, I’ve made a lot of progress. This has become a great sandbox for testing Angular features in a safer environment. Any code patterns or techniques I discover online can be implemented and evaluated here. Once I understand the concept, I can decide whether to implement it on the project at my regular job.&lt;/p&gt;
+
+&lt;p&gt;I finished all the following tasks mentioned in the last post:&lt;/p&gt;
+
+&lt;h5 id=&quot;finish-ripping-out-scope&quot;&gt;Finish ripping out $scope&lt;/h5&gt;
+
+&lt;p&gt;All directives use isolate scope and the controllerAs syntax.&lt;/p&gt;
+
+&lt;h5 id=&quot;input-handling-in-new-pallete-ui&quot;&gt;Input handling in new Pallete UI&lt;/h5&gt;
+
+&lt;p&gt;I used range inputs to control how big a new pattern grid can get.&lt;/p&gt;
+
+&lt;h5 id=&quot;panel-usability-upgrade&quot;&gt;Panel usability upgrade&lt;/h5&gt;
+
+&lt;p&gt;All the pattern functionality is combined into one panel in the drawer. I also removed several unneeded headings and improved the subsection styles.&lt;/p&gt;
+
+&lt;h5 id=&quot;improve-draw-function-performance&quot;&gt;Improve draw function performance&lt;/h5&gt;
+
+&lt;p&gt;The border draw function is much more direct from scope and does not use external DOM manipulation to add the classes via jQuery lite.&lt;/p&gt;
+
+&lt;h5 id=&quot;pattern-post-put-operations&quot;&gt;Pattern POST, PUT operations&lt;/h5&gt;
+
+&lt;p&gt;You can now CRUD patterns from the UI.&lt;/p&gt;
+
+&lt;h5 id=&quot;guest-read-only-logins&quot;&gt;Guest read-only logins&lt;/h5&gt;
+
+&lt;p&gt;By logging in as guest / guest, the user does not have the ability to delete or save pattern changes through the UI.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I haven’t gotten to these yet, but plan to within the next couple weeks:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unit tests&lt;/li&gt;
+  &lt;li&gt;Wiki documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are next on the horizon:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;User Feedback&lt;/li&gt;
+  &lt;li&gt;Image Overlay Mode&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m really enjoying the Angular framework by now. Taking a much more service oriented approach to the architecture really makes development smoother. My next project will be to update mikeslater.com by creating a skill tree app for my development skills. I plan on using react / flux so I can compare that framework with angular.&lt;/p&gt;
+
+&lt;p&gt;Cheers!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 10 Mar 2015 00:00:00 -0500</pubDate>
+        <link>http://slatron.github.io/mean,/heroku,/angular,/trello/2015/03/10/second-mean-deploy.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/mean,/heroku,/angular,/trello/2015/03/10/second-mean-deploy.html</guid>
+        
+        
+        <category>mean,</category>
+        
+        <category>heroku,</category>
+        
+        <category>angular,</category>
+        
+        <category>trello</category>
+        
+      </item>
+    
+      <item>
+        <title>Alpha Deployment Retro</title>
+        <description>&lt;p&gt;Very Well.&lt;/p&gt;
+
+&lt;p&gt;I’m pleased to report that I have just deployed my first MEAN application to a public website. I’ve still got several core features to implement, but I’m at a good point to assess the project state and set the next requirements.&lt;/p&gt;
+
+&lt;p&gt;According to my last post, my immediate goals were:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Move the local application data from couch to mongo.&lt;/li&gt;
+  &lt;li&gt;Migrate that local mongo data to mongolab&lt;/li&gt;
+  &lt;li&gt;Update the application to use the public mongolab DB&lt;/li&gt;
+  &lt;li&gt;Deploy the express application to heroku&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of this has been completed. Moving to mongo feels like a good choice. It took a bit longer for me to get mongo set up than couch, but it’s been much easier to work with. I also started using mongoose, a library for working with mongo.&lt;/p&gt;
+
+&lt;p&gt;I set up an api in express to communicate with the DB. There wasn’t really a migration. I had so little data set up, that I used the API to seed what little data I needed in mongo.&lt;/p&gt;
+
+&lt;p&gt;In addition to the database move, I added several other features to the app.&lt;/p&gt;
+
+&lt;p&gt;I didn’t want to set anything public without authentication, so I worked through a few authentication lessons. I highly recommend the book I used, (MEAN Machine)[https://leanpub.com/mean-machine] by Chris Sevilleja and Holly Lloyd. The &lt;a href=&quot;https://github.com/slatron/crosstronica/blob/master/dev/js/angular_app/services/authService.js&quot;&gt;authentication service&lt;/a&gt; is lifed directly from their examples. It was easy to incorporate with my existing angular code.&lt;/p&gt;
+
+&lt;p&gt;I refactored the angular directives to all have isolate scope. This makes all the parts of the application much more independent. I still have one $scope dependency on the grid-square directive. I only need it for a watch function, so I should be able to refactor that out soon.&lt;/p&gt;
+
+&lt;p&gt;Speaking of scope, I also refactored out all my common $scope objects into factories. With no $scope or controllers in the application I should be in good shape for testing out a 2.0 migration. When that comes.&lt;/p&gt;
+
+&lt;p&gt;Since this blog seemed to work well as a check-in, I’ll continue. Here are the items I want to have accomplished before considering the app in beta:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Finish ripping out $scope&lt;/li&gt;
+  &lt;li&gt;Input handling in new Pallete UI&lt;/li&gt;
+  &lt;li&gt;Panel usability upgrade&lt;/li&gt;
+  &lt;li&gt;Unit tests&lt;/li&gt;
+  &lt;li&gt;Improve draw function performance&lt;/li&gt;
+  &lt;li&gt;Wiki documentation&lt;/li&gt;
+  &lt;li&gt;Pattern POST, PUT operations&lt;/li&gt;
+  &lt;li&gt;Guest read-only logins&lt;/li&gt;
+  &lt;li&gt;Image Overlay Mode&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s a lot of features. But I can at least see a clear path to getting each one done. If I get lost or need some prioritization, I’ll clear out my AgileZen board and task the rest of these out.&lt;/p&gt;
+
+&lt;p&gt;When I get that far in another month or so, I’ll be able to call on Holtsford. He’ll be a great help as I try to figure out if I want to scale this for multiple users. I’ll certainly be moving beyond heroku at that point.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 Feb 2015 00:00:00 -0600</pubDate>
+        <link>http://slatron.github.io/mongo,/heroku,/angular,/requirements/2015/02/24/alpha-deployment.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/mongo,/heroku,/angular,/requirements/2015/02/24/alpha-deployment.html</guid>
+        
+        
+        <category>mongo,</category>
+        
+        <category>heroku,</category>
+        
+        <category>angular,</category>
+        
+        <category>requirements</category>
+        
+      </item>
+    
+      <item>
+        <title>Next Steps for 2015</title>
+        <description>&lt;p&gt;That UI investegation went a little too well. As I began using my own application more, I ended up going back to actual crosstitching for a while. It made sense with the time of the year. I ended up finishing all three band members before the holiday.&lt;/p&gt;
+
+&lt;p&gt;I also used Crosstronica to augment several characters on a Disney pattern I bought to make for Zoey. It was created before Frozen, so I left out some characters she’s never heard of, like Oliver. Crosstronica worked great to set up a series of individual 16 x 32 characters. It was the same process I went through on Photoshop to create this pattern for my best friend David:&lt;/p&gt;
+
+&lt;div code-showhide=&quot;&quot; headline=&quot;Davids Friends&quot;&gt;
+
+  &lt;div class=&quot;image-plus-caption&quot;&gt;
+    &lt;img src=&quot;/ms_assets/images/2015-01-11/villians-crosstitch.jpg&quot; /&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;The application has grown to the point where I need to get the database nailed down. I’m still running off a local Couch DB. This is fine locally, but I really want to get some full MEAN stack experience through this. I spent some time last month working through some Express and Mongo tutorials. I have an express workflow set up in me current Slatronica code. I have heroku and mongoLab accounts ready, just got to set some new goals.&lt;/p&gt;
+
+&lt;p&gt;My current overall epic goal is getting the aplication running online against a database. I’ll need to go through some steps to get there.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Move the local application data from couch to mongo.&lt;/li&gt;
+  &lt;li&gt;Migrate that local mongo data to mongolab&lt;/li&gt;
+  &lt;li&gt;Update the application to use the public mongolab DB&lt;/li&gt;
+  &lt;li&gt;Deploy the express application to heroku&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m not sure how often my blog schedule will be around this. It really depends on how lazy I get.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Jan 2015 00:00:00 -0600</pubDate>
+        <link>http://slatron.github.io/requirements/2015/01/11/new-reqs.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/requirements/2015/01/11/new-reqs.html</guid>
+        
+        
+        <category>requirements</category>
+        
+      </item>
+    
+      <item>
+        <title>Results of Self User Testing</title>
+        <description>&lt;p&gt;My initial results are positive. I’m definately finding some missing functionality - mostly storage, a wider toolset, and ability to draw lines across more than just grid borders. But this is exactly the kind of feedback I need, even from myself. I guess I should have thought of an application with a wider user base than just for me if feedback is what I wanted. Oh well, at least I don’t ever plan on selling this - or making $$$ 8 )&amp;gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s some of the UX issues I initially noticed:&lt;/p&gt;
+
+&lt;h3 id=&quot;project-drawer&quot;&gt;Project Drawer&lt;/h3&gt;
+
+&lt;p&gt;The drawer was looking pretty clunky. I was using it open for a while while changing colors, but it got annoying. Especially trying to figure out how to paint squares under it while changing colors.&lt;/p&gt;
+
+&lt;p&gt;I spent some time on the drawer design to make the individual panels as small but useful as possible. I also added a toggle display bar to the add new color as that was rarely used.&lt;/p&gt;
+
+&lt;p&gt;The best update was to center the pattern and leave ehough room on the left side of the screen to open and close the panel.&lt;/p&gt;
+
+&lt;h6 id=&quot;drawer-positioning-examples-here&quot;&gt;Drawer Positioning Examples Here:&lt;/h6&gt;
+
+&lt;div code-showhide=&quot;&quot; headline=&quot;Drawer&quot;&gt;
+
+  &lt;div class=&quot;image-plus-caption&quot;&gt;
+    &lt;img src=&quot;/ms_assets/images/ux-2014-11-22/drawer-closed.png&quot; /&gt;
+    &lt;em&gt;After Update - Drawer Closed&lt;/em&gt;
+
+    &lt;img src=&quot;/ms_assets/images/ux-2014-11-22/drawer-open.png&quot; /&gt;
+    &lt;em&gt;After Update - Drawer Open&lt;/em&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This works for smaller patterns, but will quickly get annoying to position for larger patterns that do not all fit on the screen. My next layout update will be to align the pattern to the left of the screen and have the drawer come down from the top of the screen. Idealy positioned in the upper-right corner to expose the majority of the pattern grid.&lt;/p&gt;
+
+&lt;h3 id=&quot;tools-panel&quot;&gt;Tools Panel&lt;/h3&gt;
+
+&lt;p&gt;The tools panel was made with a larger button. I’ll have to spend more time on their on / off states. But this will work for now with only the eraser tool to select.&lt;/p&gt;
+
+&lt;div code-showhide=&quot;&quot; headline=&quot;Tools Panel&quot;&gt;
+
+  &lt;div class=&quot;image-plus-caption&quot;&gt;
+    &lt;img src=&quot;/ms_assets/images/ux-2014-11-22/tools-panel.png&quot; /&gt;
+    &lt;em&gt;Just one button for now&lt;/em&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Ideally, this will expand soon to include the following tools:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Brush tool for filling multiple squares&lt;/li&gt;
+  &lt;li&gt;Fill tool for filling blank areas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are all just different states for the cursor. This is exactly how photoshop tools function. I’m just limiting them to the essentials.&lt;/p&gt;
+
+&lt;h3 id=&quot;draw-mode-panel&quot;&gt;Draw Mode Panel&lt;/h3&gt;
+
+&lt;div code-showhide=&quot;&quot; headline=&quot;Draw Mode&quot;&gt;
+
+  &lt;div class=&quot;image-plus-caption&quot;&gt;
+    &lt;img src=&quot;/ms_assets/images/ux-2014-11-22/draw-mode-paint.png&quot; /&gt;
+    &lt;em&gt;Paint Mode&lt;/em&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;image-plus-caption&quot;&gt;
+    &lt;img src=&quot;/ms_assets/images/ux-2014-11-22/draw-mode-borders.png&quot; /&gt;
+    &lt;em&gt;Borders Mode&lt;/em&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&quot;borders&quot;&gt;Borders&lt;/h1&gt;
+
+&lt;p&gt;The biggest feature I added to the initial requirements was the borders. You can see them in the above picture, where Carl’s shirt meets the white background. This was accomplished by adding a set of classes to grid squares - once for each border side. If  class for a border side is on, like class=”border-left”, the left side of that square will be 2px instead of 1. THe flex grid keeps everything aligned to acheieve the smooth border effect.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 22 Nov 2014 00:00:00 -0600</pubDate>
+        <link>http://slatron.github.io/ui/2014/11/22/new-feature-reqs.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/ui/2014/11/22/new-feature-reqs.html</guid>
+        
+        
+        <category>ui</category>
+        
+      </item>
+    
+      <item>
+        <title>UXmas</title>
+        <description>&lt;p&gt;With Christmas approaching, I had to put my database quest on pause to start working on some gifts. I’m using Crosstronica in its alpha state to design all three of them, as well as some pieces for a future project. This way, I can also test the UX on myself to determine if the application is usable.&lt;/p&gt;
+
+&lt;p&gt;I’m creating three new pieces for the guys in my band. Each one is based on Carin’s illustrator Mad Bread logo with all of our instruments as cartoon vector images. It should be easier to draw them in Crosstronica than manually with Photoshop, even at this early stage.&lt;/p&gt;
+
+&lt;p&gt;I still haven’t nailed down the database solution. I’m still using couch for the pallete and hardcoded pattern objects to store the patterns. This works perfectly for my current needs, but will have to change if I want this avialable on a website. I’ve begun looking at express and have a version of Crosstronica working locally as an express project.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, I’m using my current project to see if Crosstronica can be used as is to create easy patterns. In my next post, I’ll describe some of the features I improved while using Crosstronica.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 21 Nov 2014 00:00:00 -0600</pubDate>
+        <link>http://slatron.github.io/ux/css/user-testing/2014/11/21/ux-improvements.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/ux/css/user-testing/2014/11/21/ux-improvements.html</guid>
+        
+        
+        <category>ux</category>
+        
+        <category>css</category>
+        
+        <category>user-testing</category>
+        
+      </item>
+    
+      <item>
+        <title>A sidetrip into MEAN</title>
+        <description>&lt;p&gt;The more I play around with couch, the less I like it. This could be simply because databases and operations aren’t my best skill. But I also can’t find much beyond the main Apache documentation on couch. Everything seems to be pointing to MEAN with mongo db as a full stack solution for this kind of app.&lt;/p&gt;
+
+&lt;p&gt;Most importantly, I get a lot of unsolicited emails from technical recruiters. Most of them include MEAN on the list of technical requirements (or at least nice to haves). There’s a lot more out there in the internets on MEAN, which tells me that there will be more community support once I get to deployment.&lt;/p&gt;
+
+&lt;p&gt;I’m going to be taking yet another side trip. I think it will still be worth it as I’m not really on a timeline to get Crosstronica launched. I’d still like to be able to use it for a few Christmas gift patterns, but there’s nothing stopping me from using good old fashioned pencil and paper for those small pieces. Plus, the holidays are going to be a natural sidetrack for me anyway. Actually, I can use Crosstronica in a poor man’s manner by creating the patterns I want and saving screenshots of them. The pieces I’m thinking of are small enough where that will be viable.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 04 Nov 2014 00:00:00 -0600</pubDate>
+        <link>http://slatron.github.io/mean/2014/11/04/looking-into-mean.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/mean/2014/11/04/looking-into-mean.html</guid>
+        
+        
+        <category>mean</category>
+        
+      </item>
+    
+      <item>
+        <title>Upkeepin and Couchin</title>
+        <description>&lt;p&gt;I upkeeped a couple of layout styles this weekend. Now crosstronica has a drawer UI. The pattern grid will be in the main area of the page. The user will be able to open and close the drawer to give the grid more room. I’ll eventually set up a panel directive to contain each control type. That way, they will also be able to be opened, closed and dragged around as the user chooses. Dragon drop is awesome.&lt;/p&gt;
+
+&lt;p&gt;I also got back into a tiny bit of jekyll. A tiny but because I set up default pagination by copying and pasting the logic from &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;the main jekyll site&lt;/a&gt; into index.html.&lt;/p&gt;
+
+&lt;p&gt;I also set up couchdb on my other laptop so that I can update the app on either machine. I also have a first goal to use crosstronica for. I need to draw three small patterns for a Christmas gift. This should be a perfect test. First, I have to set up a way to save grid patterns to the database.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 02 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://slatron.github.io/couch/style/jekyll/2014/11/02/more-style-and-couch.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/couch/style/jekyll/2014/11/02/more-style-and-couch.html</guid>
+        
+        
+        <category>couch</category>
+        
+        <category>style</category>
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>No more ng-controller attributes</title>
+        <description>&lt;p&gt;Time to get beyond database struggles. Couch is pretty tough to get a proper mental model for. After finishing the pallete GET and POST functionality, I’m going to take a DB break to concentrate on the UI again. I’ll need to go in pretty deep to get the grid pattern tables and map-reducings.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://teropa.info/blog/2014/10/24/how-ive-improved-my-angular-apps-by-banning-ng-controller.html&quot;&gt;I read an article&lt;/a&gt; yesterday on improving angular structure by getting rid of the ng-controller attribute. The solution is to put put everything in directives. So I did. It was easier than I expected. At a base level, I didn’t have to think about the business logic at all. It was all about restructuing my code.&lt;/p&gt;
+
+&lt;p&gt;Now that everythig is in a directive, my directory structure is also much easier to read. All the main components are still under a /directive/ folder, but they are all grouped into subfolders. Each subfolder is named for the component and contains the related HTML and directive.js file. That’s it. I could go further and split out the controllers into files - but those would be out of the HTML and coupled with their directives.&lt;/p&gt;
+
+&lt;p&gt;If I get some dev time tonight, I’ll revisit requirements. Now that I have a small pattern grid to play with, I see some base features that I’ll need next. Plus, now that I have everything compartmentalized, the layout animations should be easy to add in.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 29 Oct 2014 00:00:00 -0500</pubDate>
+        <link>http://slatron.github.io/angular/directives/refactoring/2014/10/29/directive-refactoring.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/angular/directives/refactoring/2014/10/29/directive-refactoring.html</guid>
+        
+        
+        <category>angular</category>
+        
+        <category>directives</category>
+        
+        <category>refactoring</category>
+        
+      </item>
+    
+      <item>
+        <title>Conquering the DB?</title>
+        <description>&lt;p&gt;I’m a little bit further along with the database progress. Mongo turned out to be much easier to install than couch, even though it’s more of a full “enterprise” solution. With mongo, I could simply download the binary files and be ready to go.&lt;/p&gt;
+
+&lt;p&gt;Couch was a completely different story. The main download is provided through an Apache mirror. Since I’m using a new laptop from work to explore this code, I don’t have permissions to install those .dmg given files through the finder. I had to use brew or macports to install.&lt;/p&gt;
+
+&lt;p&gt;That got deep into new macine setup territory as I had to install macports first, then couch, then xcode, then xcode command line tools, then set up the base couch application locally.&lt;/p&gt;
+
+&lt;p&gt;As of last night, I got everything up and running on couch. I went through the getting started portion of the online documentation. First, setting up some “tables” with curl commands, then through their GUI interface “Futon” (get it?).&lt;/p&gt;
+
+&lt;p&gt;I like what I see so far from these no-SQL databases. As I said last post, I’ve never been comfortable with database setup and maintainance. Now I can use my native language javascript to perform CRUD operations on persistant JSON. I’ll report back when I have some set up from within Crosstronica. I expect to get the color pallete form and storage set up next.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 24 Oct 2014 00:00:00 -0500</pubDate>
+        <link>http://slatron.github.io/angular/database/couch/2014/10/24/database-exploration-2.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/angular/database/couch/2014/10/24/database-exploration-2.html</guid>
+        
+        
+        <category>angular</category>
+        
+        <category>database</category>
+        
+        <category>couch</category>
+        
+      </item>
+    
+      <item>
+        <title>Entering the DB foray</title>
+        <description>&lt;p&gt;I haven’t added anything in a few days. Carin and I got to go on a short vacation to Geneva, IL. Mom and Dad came into town with GG to watch Zoey for the night. It was great to get away for a bit and recharge.&lt;/p&gt;
+
+&lt;p&gt;I’m now trying to figure out the persistant storage issue. I’m not much of a database guy. I have some experience with MySQL + PHP, but only enough to set some basic CMS’s by with Codeigniter. Since I only need basic json files to run crosstronica, I’m looking at no-sql options. Mongo seems a bit much for what I need, so I’ll try and set up Couch DB next. I’ll report back when I have more.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Oct 2014 00:00:00 -0500</pubDate>
+        <link>http://slatron.github.io/angular/database/2014/10/20/database-exploration.html</link>
+        <guid isPermaLink="true">http://slatron.github.io/angular/database/2014/10/20/database-exploration.html</guid>
+        
+        
+        <category>angular</category>
+        
+        <category>database</category>
+        
+      </item>
+    
+  </channel>
+</rss>

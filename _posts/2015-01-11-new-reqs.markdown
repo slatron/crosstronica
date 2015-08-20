@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "Next Steps for 2015"
+date:   2015-01-11
+categories: Requirements
+desc: Going through what needs to be done before initial deployment.
+---
+
+That UI investegation went a little too well. As I began using my own application more, I ended up going back to actual crosstitching for a while. It made sense with the time of the year. I ended up finishing all three band members before the holiday.
+
+I also used Crosstronica to augment several characters on a Disney pattern I bought to make for Zoey. It was created before Frozen, so I left out some characters she's never heard of, like Oliver. Crosstronica worked great to set up a series of individual 16 x 32 characters. It was the same process I went through on Photoshop to create this pattern for my best friend David:
+
+<div code-showhide headline="Davids Friends">
+
+  <div class="image-plus-caption">
+    <img src="/ms_assets/images/2015-01-11/villians-crosstitch.jpg">
+  </div>
+
+</div>
+
+The application has grown to the point where I need to get the database nailed down. I'm still running off a local Couch DB. This is fine locally, but I really want to get some full MEAN stack experience through this. I spent some time last month working through some Express and Mongo tutorials. I have an express workflow set up in me current Slatronica code. I have heroku and mongoLab accounts ready, just got to set some new goals.
+
+My current overall epic goal is getting the aplication running online against a database. I'll need to go through some steps to get there.
+
+- Move the local application data from couch to mongo.
+- Migrate that local mongo data to mongolab
+- Update the application to use the public mongolab DB
+- Deploy the express application to heroku
+
+I'm not sure how often my blog schedule will be around this. It really depends on how lazy I get.

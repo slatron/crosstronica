@@ -1,0 +1,13 @@
+# Site settings
+title: Crosstronica Dev Blog
+description: >
+  This is the development blog of Mike Slater as
+  he builds a cross-stitch pattern app on a MEAN stack. Seriously
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://slatron.github.io"
+twitter_username: slatron
+github_username:  slatron
+paginate: 5
+
+# Build settings
+markdown: kramdown
