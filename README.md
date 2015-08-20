@@ -6,6 +6,8 @@
 
 This is a cross stitch pattern creation app. I am writing this as a development experiment to explore MEAN stack application development.
 
+[Also to make and augment cross stitch patterns like these](http://slatron.github.io/crosstronica/ms_assets/images/diz.png)
+
 You can view the online app at [Heroku](https://crosstronica.herokuapp.com). Use guest / guest to login.
 
 ### Running Locally
